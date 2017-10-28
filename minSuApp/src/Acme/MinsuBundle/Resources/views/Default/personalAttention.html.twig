@@ -1,0 +1,63 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %}
+  {{ parent() }}
+  <script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+  <script src="{{ asset('bundles/msk/public/js/personalAttention.js') }}"></script>
+{% endblock %}
+
+{% block stylesheet %} {{ parent() }}
+  <link href="{{ asset('bundles/msk/public/css/personalAttention.css') }}" rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
+
+{% block content%}
+  <div class="content">
+    <div class="content-dis">
+      <table class="content-table">
+        <thead>
+        <tr>
+          <th>用户名字</th>
+          <th>我的关注</th>
+          <th>粉丝</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in data %}
+        <tr>
+          <td>{{ data.nickname }}</td>
+          <td><a href="{{ path('myPersonalAttention_', {'memberId': data.member_id, 'personalPage': page}) }}">详情</a></td>
+          <td><a href="{{ path('myPersonalFans_', {'memberId': data.member_id, 'personalPage': page}) }}">详情</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="page-dis">
+      <div class="meneame">
+        <a href="{{ path('personalAttention_', {'page': 1}) }}">首页</a>
+        {% if totalPage >= 7 %}
+          {% if page <= 4 %}
+            {% for i in 1..7 %}
+              <a href="{{ path('personalAttention_', {'page': i}) }}">{{ i }}</a>
+            {% endfor %}
+          {% elseif page > (totalPage - 4) %}
+            {% for k in (totalPage-7)..(totalPage) %}
+              <a href="{{ path('personalAttention_', {'page': k}) }}">{{ k }}</a>
+            {% endfor %}
+          {% else %}
+            {% for j in (page-3)..(page+3) %}
+              <a href="{{ path('personalAttention_', {'page': j}) }}">{{ j }}</a>
+            {% endfor %}
+          {% endif %}
+        {% else %}
+          {% if totalPage != 0 %}
+            {% for m in 1..totalPage %}
+              <a href="{{ path('personalAttention_', {'page': m}) }}">{{ m }}</a>
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+        <a href="{{ path('personalAttention_', {'page': totalPage}) }}">尾页</a>
+      </div>
+    </div>
+  </div>
+{% endblock%}

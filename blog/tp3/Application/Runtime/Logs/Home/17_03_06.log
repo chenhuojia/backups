@@ -1,0 +1,249 @@
+[ 2017-03-06T17:18:17+08:00 ] 140.205.201.19 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.047619s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.044679s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.044754s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0250s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0247s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0251s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0251s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0251s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0256s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0248s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0250s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0250s ]
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0250s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0251s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000136s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.049283s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 31 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 106 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.558258s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.558310s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000176s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000206s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.034737s ]
+INFO: [ app_end ] --END-- [ RunTime:0.034844s ]
+
+[ 2017-03-06T17:18:22+08:00 ] 140.205.201.19 /bolg/tp3/Public/picture/s1.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000433s ]
+
+[ 2017-03-06T17:18:26+08:00 ] 140.205.201.19 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.052489s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.047620s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.047694s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0252s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0251s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0252s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0250s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0251s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0253s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0248s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0250s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0249s ]
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0253s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0251s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.062194s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.062302s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 31 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 106 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.463784s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.463858s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000311s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.052421s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000609s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000643s ]
+
+[ 2017-03-06T18:58:40+08:00 ] 58.62.254.226 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000363s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000459s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000516s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0260s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0259s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0261s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0259s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0261s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0259s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0257s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0258s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0256s ]
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0259s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0259s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000098s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000157s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 31 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 106 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.495985s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.496055s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000265s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000293s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000652s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000737s ]
+
+[ 2017-03-06T18:58:41+08:00 ] 58.62.254.226 /bolg/tp3/Public/picture/s1.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000519s ]
+
+[ 2017-03-06T18:58:58+08:00 ] 58.62.254.226 /index.php/Category/index/id/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.044548s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.043922s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.043995s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0264s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0261s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0263s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0261s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0261s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` WHERE `cate_id` = 1 LIMIT 1   [ RunTime:0.0262s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0262s ]
+SQL: SELECT b.art_id,b.title,b.cate_id,b.introduction,b.discuss_total,b.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d %H:%i:%s') as addtime FROM bk_article b left join bk_article_images i on b.art_id= i.art_id  WHERE b.is_show = 1 AND `cate_id` = '1' ORDER BY b.addtime desc LIMIT 0,10   [ RunTime:0.0265s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000089s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000166s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/fd93d816414af0ade2156438a8d6b092.php 第 80 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.449904s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.449968s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000279s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000308s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000758s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000849s ]
+
+[ 2017-03-06T18:58:59+08:00 ] 58.62.254.226 /Public/images/image1.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.045542s ]
+
+[ 2017-03-06T18:58:59+08:00 ] 58.62.254.226 /Public/images/image2.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000035s ]
+INFO: [ app_init ] --END-- [ RunTime:0.047560s ]
+
+[ 2017-03-06T18:59:03+08:00 ] 58.62.254.226 /index.php/Detial/detial/id/27.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.049458s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.043685s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.043769s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0250s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0251s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0251s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0250s ]
+NOTIC: [8] Undefined variable: count /web/www/blog/tp3/Application/Home/Controller/DetialController.class.php 第 14 行.
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0251s ]
+SQL: SELECT * FROM `bk_article` WHERE `art_id` = 27 LIMIT 1   [ RunTime:0.1244s ]
+SQL: SHOW COLUMNS FROM `bk_article_images` [ RunTime:0.0249s ]
+SQL: SELECT * FROM `bk_article_images` WHERE `art_id` = 27 ORDER BY type desc  [ RunTime:0.0247s ]
+NOTIC: [8] Undefined offset: 0 /web/www/blog/tp3/Application/Home/Controller/DetialController.class.php 第 17 行.
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0251s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.reply_id,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `art_id` = '27' AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,10   [ RunTime:0.0252s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.046204s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.046301s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/38fb14ef25e313e99140024c2906346f.php 第 206 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/38fb14ef25e313e99140024c2906346f.php 第 209 行.
+NOTIC: [8] Undefined variable: commentlist /web/www/blog/tp3/Application/Runtime/Cache/Home/38fb14ef25e313e99140024c2906346f.php 第 294 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.586420s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.586468s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000236s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000260s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.031816s ]
+INFO: [ app_end ] --END-- [ RunTime:0.031918s ]
+
+[ 2017-03-06T19:15:15+08:00 ] 42.156.251.193 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000433s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000481s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.046624s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0265s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0262s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0264s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0263s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0264s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0264s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0262s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0264s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0265s ]
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0264s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0263s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000123s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000209s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 31 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 106 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.587696s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.587774s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000241s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000265s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.018440s ]
+INFO: [ app_end ] --END-- [ RunTime:0.018550s ]
+
+[ 2017-03-06T19:15:17+08:00 ] 42.156.251.193 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000375s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000645s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000724s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0263s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0262s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0264s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0262s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0263s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0267s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0262s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0264s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0261s ]
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0263s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0263s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000101s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000161s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 31 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 106 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.510121s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.510185s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000268s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000291s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.037860s ]
+INFO: [ app_end ] --END-- [ RunTime:0.037963s ]
+

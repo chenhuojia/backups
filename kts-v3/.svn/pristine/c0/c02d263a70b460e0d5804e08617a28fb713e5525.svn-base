@@ -1,0 +1,135 @@
+<include file="./APP/Admin/View/Common/Public_header_v1.html"/>
+<link rel="stylesheet" href="__PUBLIC__/static/flowplayer/skin/functional.css">
+<script src="__PUBLIC__/static/flowplayer/flowplayer.min.js"></script>
+<link href="__PUBLIC__/static/start-rating/star-rating.min.css" media="all" rel="stylesheet" type="text/css"/>
+<script src="__PUBLIC__/static/start-rating/star-rating.min.js" type="text/javascript"></script>
+<style type="text/css">
+.nav-tabs img{display: none;}
+</style>
+<ol class="breadcrumb">
+    <li>{:C('CONTROL_MENU')}</li>
+    <li><a href="{:U('Admin/Coupon/couponList?all=1')}">优惠卷列表</a></li>    
+    <li>优惠卷详情</li>
+</ol>
+<!-- <div class="page-header">
+    <h1>{$book['attr']['name']}<small>{$book['attr']['author']}</small></h1>
+</div> -->
+<div class="row">
+    <div class="col-md-9" role="main">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#des" aria-controls="des" role="tab" data-toggle="tab">积分操作详情</a></li>          
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="des">
+                <div class="col-md-9">
+                	<volist name='list' id='v'>
+                    <div class="panel panel-default">
+				        	<div class="panel-body">
+				            <div class="media">
+				                <div class="media-left">
+				                    <img class="media-object" style="width:35px;height:35px;" src="{$user_coupon['imageurl']}" alt="...">
+				                </div>
+				                <div class="media-body">
+				                    <p class="media-heading">名称:{$user_coupon.name}
+				                    		<font class="text-muted small">操作时间：{$v.use_time|date="Y-m-d H:i:s",###}</font> 
+				                      		<font class="text-muted small">操作数量：{$v.use_number}</font>
+				                      		<font style='float:right;' class="text-muted small">剩余优惠卷：{$v.spare}</font></p>			                       
+				                    <div class="col-sm-10" style="padding-left: 0;">
+				                     	  操作内容： {$v.description}
+				                    </div>
+									<!-- <a style='float:right;' href="{:U('Admin/User/integralDel?i_xq_id=')}{$v.i_xq_id}">删除</a> -->
+				                </div>
+				            	</div>
+				        	</div>				        
+				    </div>
+				    </volist>
+                </div>
+                <div class="col-md-3">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                           总共优惠卷：				{$user_coupon.num}张                           
+                        </li>
+                        <hr/>
+                        
+                           <li class="list-group-item">
+                           添加优惠卷：				<form action="#" method="post">                           		
+                           		<if condition="$all_coupon neq false">
+                           			<select name="c_id" class="form-control">
+                           			<option value="9999">请选择</option>
+                           			<volist name="all_coupon" id='v'>                           				
+                           					<option value="{$v.c_id}">{$v.name}</option>
+                           			</volist>
+                           			</select>
+                           			数量：<input type="text" name="number" id="total">
+                           			<input type="button" value="充值" id="add">
+                           		<else />
+                           			数量：<input type="text" name="number" id="total">
+                           			<input type="button" value="充值" id="adds">
+                           		</if>
+                           		
+                           </form>
+                        </li>            
+                    </ul>
+                </div>               
+            </div>        
+        </div>        
+    </div>
+</div>
+    {$Page}
+<script>
+    var c_id=null;
+	$('.form-control').change(function(){
+		c_id=$(this).val();
+	})
+	$('#add').click(function(){
+		c_id=c_id?c_id:0;
+		if(c_id==null || c_id==9999){
+			alert('请选择添加的优惠卷类型!');
+		}else{
+			var object={};
+			var _this=$(this);
+			var value=_this.prev().val();
+			object['value']=value;
+			object['user_id']={$_GET['user_id']?$_GET['user_id']:0};
+			object['new_c_id']=c_id;
+			object['old_c_id']={$_GET['c_id']?$_GET['c_id']:0};
+			if(value!="" ||value!=null){
+				$.ajax({
+					url:"{:U('Admin/Coupon/couponAdd')}",
+					type:'POST',
+					data:object,
+					datatype:"json",
+					success:function(data){	
+						console.log(data);
+						 if(data>0){
+							window.location.href="{:U('Admin/Coupon/couponDet?user_id='.$_GET['user_id'].'&c_id=')}"+c_id;
+						} 
+					}
+				})
+			}
+		}
+	})
+	
+	$('#adds').click(function(){
+			var object={};
+			var _this=$(this);
+			var value=_this.prev().val();
+			object['value']=value;
+			object['c_id']={$_GET['c_id']?$_GET['c_id']:0};
+			if(value!="" ||value!=null){
+				$.ajax({
+					url:"{:U('Admin/Coupon/couponsAdd')}",
+					type:'POST',
+					data:object,
+					datatype:"json",
+					success:function(data){	
+						 if(data>0){
+							window.location.href="{:U('Admin/Coupon/couponDet?c_id=')}"+object['c_id'];
+						} 
+					}
+				})
+			}
+	})
+	
+</script>
+<include file="./APP/Admin/View/Common/Public_footer_v1.html"/>

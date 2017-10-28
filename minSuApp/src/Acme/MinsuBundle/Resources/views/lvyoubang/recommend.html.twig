@@ -1,0 +1,104 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$(".stateBtn").click(function(){
+		$("[name='State']").val($(this).attr("val"));
+		$("form").submit();
+	})
+
+
+	$(".sureBtn").click(function(){
+		var id=$(this).attr('val-id');
+
+		$.ajax({
+			type:"POST",
+			data:"&rec_id="+id,
+			dataType: "json", 
+			url:"{{ path('del_lvyoubang_rec_') }}",
+			success:function(msg){
+				if (msg === '1'){
+					alert("成功！");
+					}
+			location.reload();
+			}
+		});
+	});
+
+	$(".hsort").blur(function(){
+		var id =$(this).attr("id-val");
+		var val =$(this).val();
+
+		$.ajax({
+			type:"POST",
+			data:"&id="+id+"&val="+val,
+			url:"{{ path('ajax_change_lvyoubang_rec_state_') }}",
+			success:function(msg){
+				if (msg === '1'){
+					location.reload();
+					}
+				}
+			});
+		
+		})
+})
+</script>
+{% endblock %}
+
+{% block content%}<section class="alert">
+	<form method="post" action="">
+		<input type ="hidden" name ="State">
+	 	 <button type="button" val='1' class="green stateBtn">民宿</button>
+	 	 <button type="button" val='2' class="green stateBtn">景点</button>
+	 	 <button type="button" val='3' class="green stateBtn">义工</button>
+	 	 <button type="button" val='4' class="green stateBtn">导游</button>
+	 	 <button type="button" val='5' class="green stateBtn">驴友团</button>
+	 	  <button type="button" val='6' class="green stateBtn">全部</button>
+	 	 <button type="button" onclick="location='{{ path('addllvyoubangrec_') }}'" class="blue">新 增</button>
+	</form>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>驴友帮推荐</h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+					<th>排序</th>
+						<th>#</th>
+						<th>名称</th>
+						<th>类型</th>
+						<th>添加时间</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+					<tbody>
+					{% for v in data %}
+						<tr>
+						<td style="padding-left: 50px;"><input  id-val="{{v.id}}" class='hsort' maxlength="9" style="width: 45px;height: 30px;padding: 5px;" type="text" value="{{v.sort}}"></td> 
+						 	<td >{{v.for_id}}</td>
+							<td>{{v.title}}</td>
+							<td>{% if v.type ==1 %}民宿{% elseif v.type==2 %}景点{% elseif v.type==3 %}义工{% elseif v.type==4 %}导游{% elseif v.type==5 %}驴友团{% endif %}</td>
+							<td>{{v.addtime}}</td>
+								<td>
+							<button type='button' class="red sureBtn" val-id="{{v.id}}" >确认删除</button>
+							</td>
+						</tr>
+					{% endfor %}
+			
+
+					</tbody>
+				</table>
+		</div>
+	</section>
+</section>
+
+{% endblock%}

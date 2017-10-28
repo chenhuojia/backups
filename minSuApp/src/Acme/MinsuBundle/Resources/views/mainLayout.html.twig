@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+{% block session %}
+{% set login = app.session.get('login') %}
+{% set adminName = app.session.get('adminName') %}
+{% if login != true and adminName is empty %}
+<script>
+    self.location.href = "{{ path('login_') }}";die();
+</script>
+{% endif %}
+{% endblock %}
+<title>士加堡民宿管理后台</title>
+<!--//彈框-->
+<!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>	
+    <style type="text/css">
+    .clear {
+      zoom: 1;
+      display: block;
+    }
+    </style>
+<![endif]-->
+{% block stylesheet %}
+<link href="{{ asset('bundles/msk/public/css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all"/>
+<link rel="stylesheet" href="{{ asset('bundles/msk/public/css/style.css') }}" media="all" />
+<!--[if IE]><link rel="stylesheet" href="{{ asset('bundles/msk/public/css/ie.css') }}" media="all" /><![endif]-->
+<!--[if lt IE 9]><link rel="stylesheet" href="{{ asset('bundles/msk/public/css/lt-ie-9.css') }}" media="all" /><![endif]-->
+<style type="text/css">
+nav ul li a{
+padding-top: 10px;
+text-align: center;}
+.memu_title{vertical-align: super;}
+.li_2meu{cursor: pointer;
+}
+.li_2meu a{    text-decoration: none;}
+</style>
+<link href="{{ asset('bundles/msk/public/css/NewFile.css') }}" rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
+{% block javascript %}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+{# <script src="{{ asset('bundles/msk/public/js/jquery.wysiwyg.js') }}"></script>#}
+{# <script src="{{ asset('bundles/msk/public/js/js/custom.js') }}"></script>#}
+{# <script src="{{ asset('bundles/msk/public/js/cycle.js') }}"></script>#}
+{# <script src="{{ asset('bundles/msk/public/js/jquery.checkbox.min.js') }}"></script>#}
+{# <script src="{{ asset('bundles/msk/public/js/flot.js') }}"></script>#}
+{# <script src="{{ asset('bundles/msk/public/js/flot.resize.js') }}"></script>#}
+{# <script src="{{ asset('bundles/msk/public/js/flot-time.js') }}"></script>#}
+{# <script src="{{ asset('bundles/msk/public/js/flot-pie.js') }}"></script>#}
+{# <script src="{{ asset('bundles/msk/public/js/flot-graphs.js') }}"></script>#}
+{# <script src="{{ asset('bundles/msk/public/js/cycle.js') }}"></script>#}
+{# <script src="{{ asset('bundles/msk/public/js/jquery.tablesorter.min.js') }}"></script>#}
+<script type="text/javascript" src="{{ asset('bundles/msk/public/js/bootstrap.js') }}"></script>
+
+
+<!--//彈框-->
+<script type="text/javascript" src="{{ asset('bundles/msk/public/js/jquery.modal.js') }}"></script>
+
+<script>
+	$(document).ready(function () {
+		$('.memu_ul a').each(function () {
+			if (this.href == window.location.href) {
+				if ($(this).parent().parent().attr('class') == 'submenu') {
+					$(this).parent().parent().parent().addClass('section');
+				} else {
+					$(this).parent().addClass("section");
+				}
+			}
+		});
+	});
+</script>
+
+	<script>
+		$(document).ready(function () {
+
+			if ($('.submenu').parent().attr('class') == 'section') {
+				$('.submenu').attr('style','display:block');
+			} else {
+				$('.submenu').attr('style','display:none');
+			}
+
+			
+
+// 			$('.memu_ul').find('li:eq(6)').on('click',function(){
+			$('.li_2meu').on('click',function(){
+				$(this).children('ul .submenu').toggle();
+			});
+			$('.submenu').find('li').on('click',function(e){
+				e.stopPropagation();
+			});
+
+
+		});
+	</script>
+
+{% endblock %}
+</head>
+<body>
+
+<div class="testing">
+<header class="main">
+	<h1><strong>士加堡</strong> 民宿管理系统</h1>
+</header>
+<section class="user">
+	<div class="profile-img">
+		<p><img src="{{ asset('bundles/msk/public/images/uiface2.png') }}" alt="" height="40" width="40" /> Welcome back
+			{{ app.session.get('adminName') }}</p>
+		<p>登陆次数：{{ app.session.get('loginNum') }}</p>
+        <p>上次登陆时间：{{ app.session.get('lastLoginTime')|date("Y:m:d H:i:s") }}</p>
+	</div>
+	<div class="buttons">
+		<button class="ico-font">&#9206;</button>
+
+		<span class="button blue"><a href="login">退出</a></span>
+	</div>
+</section>
+</div>
+<nav>
+	<ul class="memu_ul">
+		<li class="li_2meu"><a ><span class="icon">&#9998;</span> <span class="memu_title">商城商品管理</span></a>		
+			<ul class="submenu">
+ 				<li><a href="{{ path('_mall_goods_list')}}">商品列表</a></li>
+ 				<li><a href="{{ path('goodsCategoryList_')}}">商品分类</a></li> 				
+			</ul>
+		</li>
+		<li class="li_2meu"><a ><span class="icon">&#9998;</span> <span class="memu_title">商城订单管理</span></a>		
+			<ul class="submenu">
+ 				<li><a href="{{ path('_mall_order_list') }}">订单列表</a></li>
+ 				<li><a href="{{ path('_mall_delivery_list',{type:1})}}">未发货单</a></li>
+ 				<li><a href="{{ path('_mall_delivery_list',{type:2})}}">已发货单</a></li>
+ 				<li><a href="{{ path('_mallreturnorderlist')}}">退货单</a></li>
+ 				<li><a href="{{ path('_mall_order_log_list')}}">订单日志</a></li>
+			</ul>
+		</li>
+		<li class="li_2meu"><a ><span class="icon">&#9998;</span> <span class="memu_title">商城店铺管理</span></a>
+			<ul class="submenu">
+ 				<li><a href="{{ path('_shop_apply_list') }}">店主认证</a></li>
+ 				<li><a href="{{ path('shopList_') }}">店铺列表</a></li>
+ 				<li><a href="{{path('shopcategory_')}}">全部店铺分类</a></li>
+			</ul>
+		</li>
+	
+		<li><a href="{{ path('_order_list') }}"><span class="icon">&#128711;</span> <span class="memu_title">订单管理</span></a></li>
+		<li><a href="{{ path('_walet_list_index') }}"><span class="icon">&#128334;</span> <span class="memu_title">提现申请</span></a></li>	
+		<li>
+			<a href="homestay"><span class="icon">&#128196;</span> <span class="memu_title">民宿管理</span></a>
+{# 			<ul class="submenu">#}
+{# 				<li><a href="page-new.html">Create page</a></li>#}
+{# 				<li><a href="page-timeline.html">View pages</a></li>#}
+{# 			</ul>	#}
+		</li>
+		
+		<li>
+			<a href="{{ path('ownerApprove_') }}"><span class="icon">&#59160;</span> <span class="memu_title">房东认证</span> 
+{# 			<span class="pip">12</span>#}
+			</a>
+
+		</li>
+		<li class="li_2meu"><a ><span class="icon">&#9998;</span> <span class="memu_title">驴友帮管理</span></a>
+			<ul class="submenu">
+ 				<li><a href="{{ path('group_post') }}">义工列表</a></li>
+ 				<li><a href="{{ path('admin_dao_you') }}">导游列表</a></li>
+ 				<li><a href="{{ path('lvyoubangrec_') }}">驴友帮推荐</a></li>
+			</ul>
+		</li>
+		<li>
+			<a href="travelManner"><span class="icon">&#127748;</span> <span class="memu_title">游记管理 </span>
+{# 			<span class="pip">7</span>#}
+			</a>
+{# 			<ul class="submenu">#}
+{# 				<li><a href="files-upload">Upload file</a></li>#}
+{# 				<li><a href="files">View files</a></li>#}
+{# 			</ul>#}
+		</li>
+			<li class="li_2meu"><a ><span class="icon">&#9998;</span> <span class="memu_title">预定设置</span></a>
+			<ul class="submenu">
+				<li><a href="{{ path('upload_') }}">首页广告图</a></li>
+				<li><a href="{{ path('travel_') }}">游记广告图</a></li>
+				<li><a href="{{ path('squareAdvertise_') }}">广场广告图</a></li>
+				<li><a href="{{ path('entry_') }}">入口广告图</a></li>
+ 				<li><a href="{{ path('reconmmend_') }}">推荐民宿/景点</a></li>
+				<li><a href="coupon">优惠券</a></li>
+				<li><a href="hotCity">热门城市</a></li>
+				<li><a href="homestayType">民宿类型</a></li>
+				<li><a href="roomserver">房间设施</a></li>
+				<li><a href="{{ path('group_') }}">社区小组</a></li>
+			</ul>
+			</li>
+	
+	{#}	<li><a href="points"><span class="icon">&#128202;</span><span class="memu_title"> 积分系统</span></a></li>{#}
+		<li class="li_2meu"><a ><span class="icon">&#128202;</span> <span class="memu_title">积分系统</span></a>
+			<ul class="submenu">
+				<li><a href="{{ path('points_') }}">积分记录</a></li>
+				<li><a href="{{ path('points_goods') }}">积分商品</a></li>
+			 	 <li><a href="{{ path('points_goodsorder_list') }}">积分兑换记录</a></li>
+			</ul>
+			</li>
+		
+		<li><a href="member"><span class="icon">&#128101;</span> <span class="memu_title">用户管理</span> 
+{# 		<span class="pip">3</span>#}
+		</a></li>
+		<li>
+			<a href="{{ path('systemMsg_') }}"><span class="icon">&#9881;</span> <span class="memu_title">系统信息</span></a>
+{# 			<ul class="submenu">#}
+{# 				<li><a href="icon-fonts.html">Icon fonts</a></li>#}
+{# 			</ul>#}
+		</li>
+		<li><a href="{{ path('feedbackMsg_') }}"><span class="icon">&#10146;</span><span class="memu_title">反馈信息</span></a></li>
+		</li>
+			<li class="li_2meu"><a ><span class="icon">&#9914;</span> <span class="memu_title">导游管理</span></a>
+			<ul class="submenu">
+				<li><a href="{{ path('guideList_') }}">导游列表</a></li>
+			</ul>
+		</li>
+		</li>
+			<li class="li_2meu"><a ><span class="icon">&#9673;</span> <span class="memu_title">团游管理</span></a>
+			<ul class="submenu">
+				<li><a href="{{ path('travelAgencyList_') }}">旅行社</a></li>
+				<li><a href="{{ path('tourDataList_') }}">团游</a></li>
+				<li><a href="{{ path('_tour_route_list') }}">路线</a></li>
+				<li><a href="{{ path('_tour_order_list') }}">团游订单</a></li>
+				<li><a href="{{ path('_tour_order_log_list')}}">订单日志</a></li>
+			</ul>
+		</li>
+		</li>
+			<li class="li_2meu"><a ><span class="icon">&#9673;</span> <span class="memu_title">野团游管理</span></a>
+			<ul class="submenu">
+			    <li><a href="{{ path('_group_tour_list') }}">野团游</a></li>
+				<li><a href="{{ path('addGroupTour_') }}">添加野团游</a></li>
+			</ul>
+		</li>
+	</ul>
+</nav>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>

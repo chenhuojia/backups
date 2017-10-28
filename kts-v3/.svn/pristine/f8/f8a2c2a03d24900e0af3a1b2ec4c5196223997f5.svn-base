@@ -1,0 +1,723 @@
+<?php
+namespace Book\Logic;
+/**
+ * 分类逻辑定义
+ * Class CatsLogic
+ * @package Home\Logic
+ */
+use Think\Model;
+use Common\Geo\Geohash;
+class BookLogic  extends Model{
+
+    /**
+     * 更改图书统计数
+     * **/
+    public function changeBookCount($book_id,$book_number,$type=1,$inc=1){
+        $where=array('book_id'=>$book_id);
+        $data=M('book_add')->where( $where)->find();
+        if($data){
+            if($data['isdelete']==0){
+                M('book_add')->where( $where)->save(array('share_num'=>0,'sell_num'=>0,'collect_num'=>0,'click_num'=>0,'comment_num'=>0,'isdelete'=>1));
+            }
+            switch ($type){
+                case 1:
+                    $result=M('book_add')->where(array('book_number'=>$book_number))->setInc('share_num');
+                    break;
+                case 2:
+                    $result=M('book_add')->where( $where)->setInc('sell_num');
+                    break;
+                case 3:
+                    if ($inc){
+                        $result=M('book_add')->where($where)->setInc('collect_num');
+                    }else{
+                        if ($data['collect_num']>0){
+                            $result=M('book_add')->where($where)->setDec('collect_num');
+                        }else{
+                            $result=1;
+                        }
+                    } 
+                    break;
+                case 4:
+                    if ($inc){
+                        $result=M('book_add')->where($where)->setInc('click_num');
+                    }else{
+                        if ($data['click_num']>0){
+                            $result=M('book_add')->where($where)->setDec('click_num');
+                        }else{
+                            $result=1;
+                        }
+                    } 
+                    break;
+                case 5:
+                    if ($inc){
+                        $result=M('book_add')->where($where)->setInc('comment_num');
+                    }else{
+                        if ($data['comment_num']>0){
+                            $result=M('book_add')->where($where)->setDec('comment_num');
+                        }else{
+                            $result=1;
+                        }
+                    }
+                    break;
+                default:
+                    return false;
+                    break;
+            }
+        }else{
+            switch ($type){
+                    case 1:
+                        $result=M('book_add')->add(array('book_id'=>$book_id,'book_number'=>$book_number,'share_num'=>1));
+                        break;
+                    case 2:
+                        $result=M('book_add')->add(array('book_id'=>$book_id,'book_number'=>$book_number,'sell_num'=>1));
+                        break;
+                    case 3:
+                        if ($inc){
+                            $result=M('book_add')->add(array('book_id'=>$book_id,'book_number'=>$book_number,'collect_num'=>1));
+                        }else{
+                            $result=1;
+                        }
+                        break;
+                    case 4:
+                        if ($inc){
+                            $result=M('book_add')->add(array('book_id'=>$book_id,'book_number'=>$book_number,'click_num'=>1));
+                        }else{
+                            $result=1;
+                        }
+                        break;
+                    case 5:
+                        if ($inc){
+                            $result=M('book_add')->add(array('book_id'=>$book_id,'book_number'=>$book_number,'comment_num'=>1));
+                        }else{
+                            $result=1;
+                        }
+                        break;
+                    default:
+                        return false;
+                        break;
+                }
+        }
+        if($result)  return true;
+        return false;
+    }
+
+    /**
+     * 所有书详情
+     * **/
+    public function getBookDet($book_id){
+        $url=C('QINIU_IMG_PATH');       
+        $img=array();
+        $data=M('book')->alias('b')
+            ->join('left join kts_book_attr a on b.book_id = a.book_id')
+            ->join('left join kts_book_tag t on b.book_id = t.book_id')
+            ->where(array('b.book_id'=>$book_id,'b.isdelete'=>0))
+            ->field('b.book_id,b.type,b.name as book_name,b.book_number,b.user_id,b.shop_id,b.author,a.translator,b.price,
+                b.cover_img,a.cover_explain,a.press,a.publish_price,a.address,t.one,t.two,t.three,a.cate_name,
+                a.longitude,a.latitude,a.other,a.copyright')
+            ->find();
+        $tags=array();
+        if (!empty($data['one'])){ $tags[]=$data['one'];}
+        if (!empty($data['two'])){ $tags[]=$data['two'];}
+        if (!empty($data['three'])){ $tags[]=$data['three'];}            
+        if (!empty($data['cover_explain'])){
+            if ($data['cover_explain'] =='gg'){
+                $img[]=$url.$data['cover_img'];
+            }else{
+                $img[]=$url.$data['cover_img'].'='.$data['cover_explain'];
+            }   
+        }else{
+            $img[]=$url.$data['cover_img'];
+        }         
+        if (!empty($data['copyright'])) $img[]=$url.$data['copyright'];   
+        if (!empty($data['other'])){
+            $other=explode(';',$data['other']);
+            foreach ($other as $k=>$v){
+                if (!empty($v)){
+                    $img[]=$url.$v;
+                }
+            } 
+        } 
+        $data['image']=$img;
+        $book_number=isset($data['book_number'])?$data['book_number']:0;
+        $other=self::findOtherBook($book_number,$data['type']);
+        $user_id=session('user_id');
+        $data['is_collect']=0;
+        if ($user_id){
+            $collect=M('collect')->where(array('book_id'=>$book_id,'user_id'=>$user_id))->find();
+            if ($collect){
+                $data['is_collect']=1;
+            }else{
+                $data['is_collect']=0;
+            }
+        } 
+        $discuss=0;
+        if ($data['type']==1){
+            $form['total']=M('book_inventory')->where(array('book_id'=>$book_id))->getField('inventory');
+            $shop=M('shop')->field('shop_id,shop_name,on_book,comment_num')->find($data['shop_id']);
+            $from['from_id']=$shop['shop_id'];
+            $from['from_name']=$shop['shop_name'];
+            $from['from_logo']=\User\Util\Util::getShopLogoUrl($data['shop_id'],C('SHOP_PATH'),C('WEB_PATH'));          
+            $shipping=M()->query('select * from kts_shop_shipping where shop_id = '.$data['shop_id'].' and enabled =1 limit 1');
+            if ($shipping){
+                $from['from_desc']=$shipping[0]['deliver_time'];
+            }
+            $discuss=$shop['comment_num'];
+        }elseif ($data['type']==0){
+            $old=M('book_old')->field('description,sell_time,user_id,user_name,shipping_price')->where(array('book_id'=>$book_id))->find();
+            $user=getUserAvater($old['user_id']);  
+            $from['from_id']=$old['user_id'];
+            $from['from_name']=$user['name'];
+            $from['from_logo']=$user['avatar'];
+            $tags[]=$old['description'];            
+        }elseif ($data['type']==2){
+            //$share=M('book_share')->field('share_time,user_id,user_name')->where(array('book_id'=>$book_id))->find();
+            $user=getUserAvater($data['user_id']);
+            $from['from_id']=$data['user_id'];
+            $from['from_name']=$user['name'];
+            $from['from_logo']=$user['avatar'];            
+        }elseif ($data['type']==3){            
+            $size=M('book_ebook')->where(array('book_id'=>$book_id))->getField('size');           
+        }
+        $avg=self::getBookCommentAvg($data['book_id']);               
+        return self::returnTmpl($img, $tags, $data, $from, $other,$discuss,$avg);
+    }
+   
+    /***
+     * 回复模板
+     * @param unknown $img
+     * @param unknown $tags
+     * @param unknown $data
+     * @param unknown $from
+     * @param unknown $other
+     * @param unknown $discuss
+     * @param number $avg
+     * @return multitype:unknown number Ambigous <number, unknown> multitype:unknown Ambigous <string, unknown>**/   
+    private function returnTmpl($img,$tags,$data,$from,$other,$discuss,$avg=4){
+        return array(
+            'type'=>$data['type'],
+            'is_collect'=>$data['is_collect'],
+            'images'=>$img,
+            'tags'=>$tags,
+            'from'=>array(
+                'from_id'=>$from['from_id'],
+                'from_name'=>$from['from_name'],
+                'from_logo'=>$from['from_logo'],
+                'from_desc'=>isset($from['from_desc'])?$from['from_desc']:'',
+            ),
+            'book_name'=>$data['book_name'],
+            'book_number'=>$data['book_number']?$data['book_number']:0,
+            'author'=>$data['author'],
+            'translator'=>$data['translator'],
+            'press'=>$data['press'],
+            'category'=>$data['cate_name'],
+            'price'=>$data['publish_price'],
+            'sell_price'=>isset($data['price'])?$data['price']:0,
+            'address'=>$data['address'],
+            'longtiude'=>$data['longitude'],
+            'latitude'=>$data['latitude'],
+            'other'=>$other,
+            'discuss'=>$discuss,
+            'avg'=>$avg,
+            'total'=>isset($from['total'])?$from['total']:$from['total'],
+            
+        );
+    }
+    
+    /**
+     * 统计书评评分
+     * @param unknown $book_number
+     * ***/
+    public function getBookCommentAvg($book_id){
+        $avg=M('book_comment')->where(array('book_id'=>$book_id,'fid'=>0,'is_show'=>1))->avg('grade');
+        if (empty($avg)){
+            $avg=0;
+        }else{
+            $avg=round($avg);
+        } 
+        return $avg;
+    }
+    
+ 
+    /**
+     * 查询相关书
+     * **/
+    private static function findOtherBook($book_number,$type){
+        if ($book_number<0) return 0;
+        switch ($type){
+            case 1:
+                $share=M('book_share')->where(array('book_number'=>$book_number,'is_show'=>1))->find();                
+                $old=M('book_old')->where(array('book_number'=>$book_number))->find();
+                $new=1;
+                $dian=M('book_ebook')->where(array('book_number'=>$book_number,'is_show'=>1))->find();
+                //$share=M('book_share')->where(array('book_number'=>$book_number,'is_show'=>1))->find();
+                break;
+            case 2:
+                $old=M('book_old')->where(array('book_number'=>$book_number))->find();
+                $new=M('book')->where(array('book_number'=>$book_number,'type'=>1,'isdelete'=>0))->find();
+                $share=1;
+                $dian=M('book_ebook')->where(array('book_number'=>$book_number,'is_show'=>1))->find();
+            case 3:
+                $share=M('book_share')->where(array('book_number'=>$book_number,'is_show'=>1))->find();
+                $new=M('book')->where(array('book_number'=>$book_number,'type'=>1,'isdelete'=>0))->find();
+                $dian=1;
+                $old=M('book_old')->where(array('book_number'=>$book_number))->find();
+                break;
+            case 0:
+                $share=M('book_share')->where(array('book_number'=>$book_number,'is_show'=>1))->find();
+                $new=M('book')->where(array('book_number'=>$book_number,'type'=>1,'isdelete'=>0))->find();
+                $dian=M('book_ebook')->where(array('book_number'=>$book_number,'is_show'=>1))->find();
+                $old=1;
+                break;
+            default:
+                return 0;
+                break;
+        }
+        $data['hava_share']=$share?1:0;
+        $data['hava_new']=$new?1:0;
+        $data['hava_old']=$old?1:0;
+        $data['hava_dian']=1;
+        return $data;
+    }
+    
+    /**
+     * 其他人出售
+     * **/
+    private static function otherSell($book_number,$user_id){
+        $count=M('book_add')->where(array('book_number'=>$book_number))->getField('sell_num');
+        if ($count>1){
+            $other['count']=$count;
+            $other['user']=M('book_old')->field('user_id')->where(array('book_number'=>$book_number,'user_id'=>array('neq',$user_id)))->limit(0,3)->order('sell_id desc')->select();
+            foreach ($other['user'] as $k=>$v){
+                $other['user'][$k]['avatar']= getUserAvater($v['user_id'])['avatar'];
+            }
+            return $other;
+        }
+        return array();
+    }
+    
+    /**
+     * 其他人分享
+     * **/
+    private static function otherShare($book_number,$user_id){
+        $count=M('book_add')->where(array('book_number'=>$book_number))->getField('share_num');
+        if ($count>1){
+            $other['count']=$count;
+            $other['user']=M('book_share')->field('user_id')->where(array('book_number'=>$book_number,'user_id'=>array('neq',$user_id)))->limit(0,3)->order('share_id desc')->select();
+            foreach ($other['user'] as $k=>$v){
+                $other['user'][$k]['avatar']=getUserAvater($v['user_id'])['avatar'];;                
+            }
+            return $other;
+        }
+        return array();
+    }
+    
+    /**
+     * 其他书店
+     * **/
+    private static function otherShop($book_number,$shop_id){
+        $count=M('shop_books')->where(array('book_number'=>$book_number))->count();
+        if ($count>1){
+            $other['count']=$count;
+            $other['shop']=M('shop_books')->field('shop_id')->where(array('book_number'=>$book_number,'user_id'=>array('neq',$shop_id)))->limit(0,3)->order('addtime desc')->select();            
+            foreach ($other['shop'] as $k=>$v){
+                $other['shop'][$k]['shop_logo']= \User\Util\Util::getShopLogoUrl($v['shop_id'],C('SHOP_PATH'),C('WEB_PATH'));
+            }
+            return $other;
+        }
+        return array();
+    }
+    
+    /**
+     * 评论列表
+     * **/
+    public static function getBookDiscuss($book_id,$skip=0,$take=10){
+        $data=M('book_comment')->alias('b')  
+        ->where(array('b.book_id'=>$book_id,'b.fid'=>0,'b.is_show'=>1))
+        ->field('b.comment_id,b.user_id,b.username,b.grade,b.content,b.sums,b.likes,b.comment_time')
+        ->order('b.comment_time desc')
+        ->limit($skip,$take)
+        ->select();
+        $user_id=session('user_id');
+        if ($data){
+            foreach ($data as $k =>$v){
+                $data[$k]['is_click']=0;
+                $data[$k]['comment_time']=date("m月d H:i",$v['comment_time']);
+                $user=getUserAvater($v['user_id']);
+                $data[$k]['user_avatar']=$user['avatar'];
+                $data[$k]['username']=$user['name']; 
+                if ($user_id){
+                    $click=M('book_comment_click')->where(array('comment_id'=>$v['comment_id'],'user_id'=>$user_id,'is_click'=>1))->find();
+                    if ($click){
+                        $data[$k]['is_click']=1;
+                    }
+                }  
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * 判断评论类型
+     * **/
+    public function checkBookType($book_id,$user_id,$user_name,$book,$content,$grade){
+        $arr=array(
+            'type'=>$book['type'],
+            'book_id'=>$book_id,
+            'user_id'=>$user_id,
+            'username'=>$user_name,
+            'comment_time'=>$_SERVER['REQUEST_TIME'],
+            'content'=>$content,
+            'book_name'=>$book['name'],
+            'book_number'=>$book['book_number'],
+            'author'=>$book['author'],
+            'image'=>$book['cover_img'],
+            'grade'=>$grade,
+        );
+        if ($book['type']!=2){
+            $where=array('o.user_id'=>$user_id,'o.order_status'=>array('egt',5),'g.book_id'=>$book_id);
+            switch ($book['type']){
+                case 1:
+                    $where['o.payee_shop']=$book['shop_id'];
+                    $arr['shop_id']=$book['shop_id'];
+                    break;
+                case 0:
+                    $where['o.payee']=$book['user_id'];
+                    break;
+            }
+            $order=M('order')->alias('o')
+            ->join('left join kts_order_goods g on o.order_id =g.order_id')
+            ->where($where)
+            ->field('o.order_id')
+            ->find();
+            if ($order){
+                $ord=array(
+                    'book_id'=>$book_id,
+                    'order_id'=>$order['order_id'],
+                    'user_id'=>$user_id,
+                    'username'=>$user_name,
+                    'ip_address'=>get_client_ip(),
+                    'goods_rank'=>$grade,
+                    'content'=>$content,
+                );
+                M('order_comment')->add($ord);
+                $arr['order_id']=$order['order_id'];
+            }else{
+                return 300;
+            }
+        }
+        return $arr;
+    }
+    
+    /**
+     * 更新浏览记录
+     * **/
+    public function changeBookLikes($book_id){
+       $user_id=session('user_id');
+       if ($user_id){
+           $data=M('book_view')->where(array('book_id'=>$book_id,'user_id'=>$user_id))->find();
+           if ($data){
+               M('book_view')->where(array('book_id'=>$book_id,'user_id'=>$user_id))->save(array('likes'=>$data['likes']+1,'read_time'=>$_SERVER['REQUEST_TIME']));
+           }else{
+               M('book_view')->add(array('book_id'=>$book_id,'likes'=>1,'user_id'=>$user_id,'read_time'=>$_SERVER['REQUEST_TIME']));
+           }  
+       } 
+       $data=M('book_likes')->where(array('book_id'=>$book_id))->find();
+       if ($data){
+           M('book_likes')->where(array('book_id'=>$book_id))->setInc('likes');
+       }else{
+           M('book_likes')->add(array('book_id'=>$book_id,'likes'=>1));
+       } 
+    }
+    
+    /**
+     * 评论详情
+     * **/
+    public static function getBookDiscussDet($comment_id,$skip=0,$take=10){
+        $data=M('book_comment')->alias('b')
+        ->where(array('b.comment_id'=>$comment_id,'b.is_show'=>1))
+        ->field('b.comment_id,b.user_id,b.username,b.grade,b.content,b.likes,b.comment_time')
+        ->find();
+        $user_id=session('user_id');
+        $data['is_click']=0;
+        if ($data){
+            $data['comment_time']=date("m月d H:i",$data['comment_time']);
+            $data['user_avatar']= getUserAvater($data['user_id'])['avatar'];
+            if ($user_id){
+                $click=M('book_comment_click')->where(array('comment_id'=>$comment_id,'user_id'=>$user_id,'is_click'=>1))->find();
+                if ($click){
+                    $data['is_click']=1;
+                }
+            }
+            $data['child']=M('book_comment_reply')->where(array('comment_id'=>$comment_id,'fid'=>0,'is_show'=>1))
+                                ->field('reply_id,user_id,content,comment_time')
+                                ->limit($skip,$take)
+                                ->order('comment_time desc')
+                                ->select();
+            if ($data['child']){
+                foreach ($data['child'] as $k=>$v){
+                    $user=getUserAvater($v['user_id']);
+                    $data['child'][$k]['user_avatar']=$user['avatar'];
+                    $data['child'][$k]['username']=$user['name'];
+                    $data['child'][$k]['comment_time']=date("m月d H:i",$v['comment_time']);
+                    
+                }
+            }
+        }
+        return $data;
+    }
+    
+    
+    /**
+     * 评论详情
+     * **/
+    public static function getBookDiscussDet1($comment_id,$skip=0,$take=10){
+        $data=M('book_comment')->alias('b')
+        ->where(array('b.comment_id'=>$comment_id,'b.is_show'=>1))
+        ->field('b.comment_id,b.user_id,b.username,b.grade,b.content,b.likes,b.comment_time')
+        ->find();
+        $user_id=session('user_id');
+        $data['is_click']=0;
+        if ($data){
+            $data['comment_time']=date("m月d H:i",$data['comment_time']);
+            $data['user_avatar']= getUserAvater($data['user_id'])['avatar'];
+            if ($user_id){
+                $click=M('book_comment_click')->where(array('comment_id'=>$comment_id,'user_id'=>$user_id,'is_click'=>1))->find();
+                if ($click){
+                    $data['is_click']=1;
+                }
+            }
+            $data['child']=M('book_comment_reply')->where(array('comment_id'=>$comment_id,'fid'=>0,'is_show'=>1))
+                ->field('reply_id,comment_id,user_id,content,comment_time,likes')
+                ->limit($skip,$take)
+                ->order('comment_time desc')
+                ->select();
+            if ($data['child']){
+                foreach ($data['child'] as $k=>$v){
+                    $data['child'][$k]['is_click']=0;
+                    if ($user_id){
+                        $click=M('book_reply_like')->where(array('reply_id'=>$reply_id,'user_id'=>$user_id))->find();
+                        if ($click){
+                            $data['child'][$k]['is_click']=1;
+                        }
+                    }
+                    $data['child'][$k]['user_avatar']=getUserAvater($v['user_id'])['avatar'];
+                    $data['child'][$k]['comment_time']=date("m月d H:i",$v['comment_time']);
+                    $data['child'][$k]['child']=M('book_comment_reply')->where(array('fid'=>$v['reply_id'],'is_show'=>1))
+                                                    ->field('comment_id,user_id,content,comment_time')
+                                                    ->order('comment_time desc')
+                                                    ->select();
+                    if (!empty($data['child'][$k]['child'])){
+                        foreach ($data['child'][$k]['child'] as $kk=>$vv){
+                            $data['child'][$k]['child'][$kk]['user_avatar']=getUserAvater($vv['user_id'])['avatar'];
+                            $data['child'][$k]['child'][$kk]['comment_time']=date("m月d H:i",$vv['comment_time']);
+                        }
+                    }                    
+                }
+            }
+        }
+        return $data;
+    }
+    
+    /**
+     * 修改书
+     * @param json data
+     * @return boolean
+     */
+    public function saveEditBook($data,$book_id,$type,$totype=2){        
+        $bookMode=M('book');
+        $bookMode->startTrans();
+        $book=self::checkCommon($data);
+        if ($book['code']==300) return array('code'=>300,'msg'=>$book['msg']); 
+        $d=1;
+        if ($totype==0 && $type==2){                       
+            $shipping_price=isset($data['shipping_price'])?$data['shipping_price']:0;
+            $degree=isset($data['extent'])?$data['extent']:'';
+            $old=array(
+                'book_id'=>$book_id,
+                'book_number'=>$data['book_number'],
+                'book_name'=>$data['book_name'],
+                'cover_img'=>$book['data']['cover_img'],
+                'author'=>$book['data']['author'],
+                'user_id'=>session('user_id'),
+                'user_name'=>'',
+                'sell_time'=>$_SERVER['REQUEST_TIME'],
+                'description'=>$degree,
+                'shipping_price'=>$shipping_price);
+           $a=M('book_old')->add($old);           
+           $d=M('book_share')->where(array('book_id'=>$book_id))->setField('is_show',0);
+        }else{
+            if ($type==0){
+                $shipping_price=isset($data['shipping_price'])?$data['shipping_price']:0;
+                $degree=isset($data['extent'])?$data['extent']:'';
+                if (empty($data['author'])) return array('code'=>300,'msg'=>'作者必填');
+                $old=array(
+                    'description'=>$degree,
+                    'shipping_price'=>$data['shipping_price'],
+                    'book_number'=>$shipping_price,
+                    'book_name'=>$book['data']['book_name'],
+                    'author'=>$book['data']['author'],
+                    'cover_img'=>$book['data']['cover_img'],
+                );
+                $a=M('book_old')->where(array('book_id'=>$book_id))->save($old);
+            }
+            elseif ($type==2){
+                $share=array(
+                    'book_number'=>$data['book_number'],
+                    'book_name'=>$data['book_name'],
+                    'author'=>$data['author'],
+                    'cover_img'=>$book['data']['cover_img'],
+                );
+               $a=M('book_share')->where(array('book_id'=>$book_id))->save($share);
+            }
+        }               
+        
+        $book_=$bookMode->where(array('book_id'=>$book_id))->save($book['data']);
+        $b=self::saveCommon($data,$book_id,$book['data']['cover_explain'],$totype); 
+        if ($a && $b && $book_ && $d){
+            $bookMode->commit();
+            return array('code'=>200,'msg'=>'success');
+        }
+        $bookMode->rollback();
+        return array('code'=>300,'msg'=>'fail');
+    }
+    
+    
+    private function  checkCommon($data,$totype=2){
+        $copyright=$data['copyright'];
+        $book_number=$data['book_number'];
+        $book_name= $data['book_name'];
+        $price=$data['price'];
+        $press=$data['press'];
+        $cate_id=$data['cate_id'];
+        $author=$data['author'];
+        $degree=isset($data['extent'])?$data['extent']:0;
+        $shipping_price=isset($data['shipping_price'])?$data['shipping_price']:0;
+        if (!$cover=$data['cover_img']) return array('code'=>300,'msg'=>'请上传封面');
+        if ($book_name =="" || $book_name ==null){ return array('code'=>300,'msg'=>'请填写书名');}
+        if (!$copyright=$data['copyright']) return array('code'=>300,'msg'=>'请上传版权');
+        //if ($book_number =="" || $book_number ==null){ return array('code'=>300,'msg'=>'请填写书号');}
+        //if ($author=="" || $author ==null){ return array('code'=>300,'msg'=>'请填写作者');}
+        //if (!$press) return array('code'=>300,'msg'=>'请上传出版社');
+        if (!$cate_id) return array('code'=>300,'msg'=>'请选择分类');
+       // if (empty($degree)) $this->myApiPrint(300,'请选择新旧程度');
+        /* $inventory=isset($data['inventory'])?$data['inventory']:0;
+        if (empty($inventory)){ return array('code'=>300, 'msg'=>'请输入库存');}; */
+        $price=isset($data['sell_price'])?$data['sell_price']:0;
+        //if (empty($price)){ return array('code'=>300, 'msg'=>'请输入售价');};
+        $cover=explode('=',$cover);
+        $book=array(
+            'name'=>$book_name,
+            'author'=>$author,
+            'book_number'=>$book_number,
+            'price'=>$price,
+            'cover_img'=>$cover[0],
+            'cover_explain'=>isset($cover[1])?$cover[1]:'gg',
+            'time'=>$_SERVER['REQUEST_TIME'],
+            'category_path'=>$cate_id,
+            'press'=>$press,
+        );
+        if ($totype==0){$book['type']=0;}
+        return array('code'=>200,'data'=>$book);
+    }
+    
+    private function saveCommon($data,$book_id,$cover_explain,$type=1){
+        if (isset($data['tag']) && !empty($data['tag'])){
+            $tag=explode('>',$data['tag']);
+            $t=array(
+                'one'=>$tag[0],
+                'two'=>isset($tag[1])?$tag[1]:'',
+                'three'=>isset($tag[2])?$tag[2]:'',
+            );
+            $id=M('book_tag')->where('book_id='.$book_id)->save($t);
+        }
+        $att=array(
+            'type'=>$type,
+            'press'=>$data['press'],
+            'cover_explain'=>$cover_explain,
+            'publishing_place'=>isset($data['publish_place'])?$data['publish_place']:'',
+            'publish_time'=>date('Y-m-d',strtotime($data['time']['common_era'])),
+            'lunar_calendar'=>$data['time']['lunar_calendar'],
+            'calendar'=>$data['time']['calendar'],
+            'publish_price'=>$data['price'],
+            'edition'=>isset($data['edition'])?$data['edition']:0,
+            'impression'=>isset($data['impression'])?$data['impression']:0,
+            'page'=>isset($data['page'])?$data['page']:0,
+            'words'=>isset($data['words'])?$data['words']:0,
+            'format'=>isset($data['format'])?$data['format']:0,
+            'sheet'=>isset($data['sheet'])?$data['sheet']:0,
+            'clc'=>isset($data['clc'])?$data['clc']:0,
+            'paper'=>isset($data['paper'])?$data['paper']:0,
+            'binding'=>isset($data['binding'])?$data['binding']:0,
+            'language'=>isset($data['language'])?$data['language']:0,
+            'introduce'=>isset($data['desc']['book_desc'])?$data['desc']['book_desc']:0,
+            'desc_images'=>isset($data['desc']['picture'])?$data['desc']['picture']:0,
+            'author_area'=>isset($data['author_area'])?$data['author_area']:1,
+            'author_desc'=>isset($data['author_desc'])?$data['author_desc']:0,
+            'applicable_age'=>isset($data['applicable_age'])?$data['applicable_age']:0,
+            'copyright'=>$copyright,
+            'other'=>isset($data['other'])?$data['other']:null,
+            'translator'=>isset($data['translator'])?$data['translator']:'',
+            'cate_name'=>isset($data['cate_name'])?$data['cate_name']:'',                              
+            );         
+        if (isset($data['desc']['video']) && !empty($data['desc']['video_cover'])){
+           $att['desc_video']=$data['desc']['video_cover'].';'.$data['desc']['video'];
+        }
+        if (isset($data['video']) && !empty($data['video'])){
+            $att['video']=$data['video']['cover'].';'.$data['video']['url'];
+        }
+        if (isset($data['address']) && !empty($data['address'])){
+            $att['address']=$data['address'];
+            $att['longitude']=$data['longitude'];
+            $att['latitude']=$data['latitude'];
+            $att['geohash']=addGeohash($data['longitude'],$data['latitude']);
+        }
+        if (isset($data['catalog']) && !empty($data['catalog'])){
+            $att['catalog']=$data['catalog'];
+        }
+       
+       return  M('book_attr')->where(array('book_id'=>$book_id))->save($att);
+    }
+    //添加书架与上架书籍
+    public function addBookshelfBook($user_id,$book_id,$type,$addr,$lon,$lat,$press='未知')
+    {
+        $shelfAddr = M('bookshelf')->field('shelf_id')->where(array('user_id'=>$user_id,'longitude'=>$lon,'latitude'=>$lat,'type'=>$type))->find();
+        if(empty($shelfAddr)){
+            $geohash=self::addGeohash($lon,$lat);
+            $shelf_id = M('bookshelf')->add(array('user_id'=>$user_id,'longitude'=>$lon,'latitude'=>$lat,'geohash'=>$geohash,'addr'=>$addr,'type'=>$type,'addtime'=>time()));
+            if(empty($shelf_id)) return 0;
+        }else{
+            $shelf_id = $shelfAddr['shelf_id'];
+        }
+        $book = M('book')->where(array('user_id'=>$user_id,'book_id'=>$book_id))->find();
+        if(empty($book)) { return 0;}
+        $shelfBook = M('bookshelf_book')->where(array('user_id'=>$user_id,'book_id'=>$book_id))->count(1);
+        if(empty($shelfBook)){
+             M('bookshelf_book')->add(array('user_id'=>$user_id,'book_id'=>$book_id,'shelf_id'=>$shelf_id,'type'=>$book['type'],'book_name'=>$book['name'],'author'=>$book['author'],'press'=>$press,'price'=>$book['price'],'cover_img'=>$book['type'],'addtime'=>time()));
+              M('bookshelf')->where(array('shelf_id'=>$shelf_id))->setInc('book_sums',1); // 书本数加1
+             return 1;
+        }else{
+             return 0;
+        }
+        
+    }
+
+     /**
+     * 根据经纬度得出的值
+     * @param [type] $longitude 经度
+     * @param [type] $latitude  纬度
+     */
+    public function addGeohash($longitude,$latitude)
+    {   
+     import("Common.Vendor.geohash");
+     $geohash = new Geohash();
+     //得到这点的hash值
+     $hash = $geohash->encode($latitude, $longitude);
+     return $hash;
+    }
+    
+
+
+}
+
+
+

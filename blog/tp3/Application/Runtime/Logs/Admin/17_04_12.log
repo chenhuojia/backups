@@ -1,0 +1,108 @@
+[ 2017-04-12T22:01:33+08:00 ] 123.125.71.116 /Admin.php/Category/articleList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.042644s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.048620s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.048699s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0266s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0267s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_category` LIMIT 1   [ RunTime:0.0271s ]
+SQL: SELECT * FROM `bk_category` ORDER BY sort desc LIMIT 0,10   [ RunTime:0.0265s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000081s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000149s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.282546s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.282608s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000208s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000231s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000617s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000687s ]
+
+[ 2017-04-12T22:01:34+08:00 ] 123.125.71.117 /Admin.php/System/Login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.044417s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.046513s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.046572s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000076s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000156s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.318713s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.318792s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000202s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000235s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.049734s ]
+INFO: [ app_end ] --END-- [ RunTime:0.049808s ]
+
+[ 2017-04-12T22:03:41+08:00 ] 123.125.71.88 /Admin.php/Blog/article/p/2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.047859s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.046657s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.046746s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0244s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0242s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0239s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 10,10   [ RunTime:0.1945s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000079s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000134s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.486644s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.486714s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000233s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000265s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000619s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000704s ]
+
+[ 2017-04-12T22:03:43+08:00 ] 220.181.108.166 /Admin.php/System/Login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000307s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000444s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000500s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000061s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000124s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.298661s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.298721s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000154s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000176s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.047537s ]
+INFO: [ app_end ] --END-- [ RunTime:0.047594s ]
+
+[ 2017-04-12T22:08:16+08:00 ] 123.125.71.60 /Admin.php/System/Login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.047612s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.045660s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.045731s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000078s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000165s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.335678s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.335738s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000154s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000177s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.047634s ]
+INFO: [ app_end ] --END-- [ RunTime:0.047690s ]
+

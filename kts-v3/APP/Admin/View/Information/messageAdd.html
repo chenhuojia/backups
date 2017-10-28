@@ -1,0 +1,180 @@
+<include file="./APP/Admin/View/Common/Public_header_v1.html"/>
+<link href='__PUBLIC__/static/autocomplete/jquery.autocomplete.css' rel='stylesheet'>
+<script src="__PUBLIC__/static/autocomplete/jquery.autocomplete.js"></script>
+<script>
+    
+</script>
+
+<style type="text/css">
+    .form-horizontal{width:850px;}
+    .form-horizontal>.form-group{border-top: 1px solid #ccc;padding-top:20px;margin-left:15px;margin-right:0px;}
+    .form-horizontal>.form-group:first-child{border-top:none;}
+    .form-group>.col-sm-2{width: 110px;}
+    .form-group>.col-sm-10{width: 700px;}
+</style>
+<ol class="breadcrumb">
+    <li>{:C('CONTROL_MENU')}</li>
+    <li>消息管理</li>
+    <li class="active"><a href="{:U('Admin/Information/messageList')}"> 消息列表</a></li>
+    <li>编辑消息</li>
+</ol>
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="javascript:void(0);">消息详情</a></li>
+</ul>
+<form action="{:U('Admin/Information/messageAdd')}" class="form-horizontal" method="post" enctype="multipart/form-data">
+    
+	<div class="form-group">
+        <label for="type" class="col-sm-2 control-label">类型</label>
+        <div class="col-sm-10">
+            <select name="type" id="type" class="form-control"  >
+               <option value="1" >新书上架</option>
+               <option value="2" >公告</option>
+               <option value="3" >消息回复</option>
+            </select>     
+        </div>
+    </div> 
+    <div class="form-group">
+      <label class="col-sm-2 col-md-2 control-label" for="name">相关联：</label>
+      <div class="col-sm-10 col-md-5">
+         <input type="text" class="form-control" id="name"
+                 value="<?php echo isset($tplData['name']) ? $tplData['name'] : '' ?>">
+         <input type="hidden" name="rid"
+               value="<?php echo isset($tplData['rid']) ? $tplData['rid'] : '' ?>">
+      </div>
+    </div>
+    <!-- <div class="form-group">
+        <label for="content" class="col-sm-2 control-label">相关性</label>
+         <div class="col-sm-10">
+            <input class="form-control" type="text" id="title" autocomplete="off" value="" name="title" datatype="s" nullmsg="请输入标题" errormsg="请填写正确的标题" />
+            <div for="tea_name" class="Validform_checktip">请输入标题</div>
+        </div>
+    </div> --> 
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">标题</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" id="title" autocomplete="off" value="" name="title" datatype="s" nullmsg="请输入标题" errormsg="请填写正确的标题" />
+            <div for="tea_name" class="Validform_checktip">请输入标题</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">跳转地址</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" id="jumpurl" name="jumpurl" />         
+        </div>
+    </div>
+    <div class="form-group">
+        <div class= "col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">添加</button>
+        </div>
+    </div>
+</form>
+<link href="__PUBLIC__/static/Validform/css/style.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/static/Validform/Validform_v5.3.2_min.js"></script>
+
+<script type="text/javascript" language="javascript">
+    
+
+
+    // function display()
+    // {   
+    //     var type = $("#type").val();
+    //     //alert(type);
+    //     var submitData= {type : type};
+    //     $.ajax({
+    //         url:"{:U('Admin/Information/messageRele')}",
+    //         data : submitData,
+    //         success : function(result)
+    //         {   
+                
+    //              $("#list").html('');  
+
+    //              var json = eval(result); //数组   
+    //              console.log(json);   
+    //              $.each(json, function (index, item) {  
+    //                  //循环获取数据    
+    //                  var name = json[index].name;  
+    //                  var rid = json[index].rid;  
+    //                  var sex = json[index].type;  
+    //                  $("#list").html($("#list").html() + "<br>" + name + " - " + rid + " - " + type + "<br/>");  
+    //              });  
+                
+
+
+
+    //         }
+    //      });
+    // }
+    
+    $(function () {
+        var tp= "";
+        $("#type").change(function(){
+            tp=$(this).val();
+            //alert(tp);
+            var url = "{:U('Admin/Information/messageRele')}"+ "&type="+tp;
+            $("#name").focus().autocomplete(url, {
+            // $("#name").focus().autocomplete("<?php echo U('Admin/Information/ajaxSearchbyname')?>", {
+                formatItem: function (row, i, max) {
+                    console.log(row);
+                    var obj = eval("(" + row + ")"); //转换成js对象
+                    return obj.name;
+                },
+                formatResult: function (row) {
+                    console.log(row);
+                    var obj = eval("(" + row + ")"); //转换成js对象
+                    return obj.name;
+                }
+            }).result(function (event, item) {
+                $('[name="rid"]').val(JSON.parse(item).rid);
+            });
+
+            $('#cancel').click(function (e) {
+                e.preventDefault();
+                window.location.reload();
+            });
+              
+        })
+        var tp=$("#type").val();
+        //alert(tp);
+        var url = "{:U('Admin/Information/messageRele')}"+ "&type="+tp;
+        $("#name").focus().autocomplete(url, {
+        // $("#name").focus().autocomplete("<?php echo U('Admin/Information/ajaxSearchbyname')?>", {
+            formatItem: function (row, i, max) {
+                console.log(row);
+                var obj = eval("(" + row + ")"); //转换成js对象
+                return obj.name;
+            },
+            formatResult: function (row) {
+                console.log(row);
+                var obj = eval("(" + row + ")"); //转换成js对象
+                return obj.name;
+            }
+        }).result(function (event, item) {
+            $('[name="rid"]').val(JSON.parse(item).rid);
+        });
+
+        $('#cancel').click(function (e) {
+            e.preventDefault();
+            window.location.reload();
+        });
+    });
+
+    $(function(){
+        $(".form-horizontal").Validform({
+            tiptype:function(msg,o,cssctl){
+                if(!o.obj.is("form")){
+                    var objtip=o.obj.nextAll(".Validform_checktip");
+                    cssctl(objtip,o.type);
+                    objtip.text(msg);
+                }
+            },
+            beforeCheck:function(curform){
+                if(!confirm('确定提交本次操作吗？'))
+                {
+                    return false;
+                }
+            }
+        });
+
+    });
+</script>
+<include file="./APP/Admin/View/Common/Public_footer_v1.html"/>

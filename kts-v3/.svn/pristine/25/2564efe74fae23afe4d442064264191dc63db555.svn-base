@@ -1,0 +1,7 @@
+<?php
+return array(
+    'LOAD_EXT_CONFIG'=>array('Nologin'=>'nologinUrl'),
+    
+    'index_pic'=>'?imageView2/1/w/160/h/160',
+    'index_discuss_pic'=>'?imageView2/1/w/80/h/80',
+);

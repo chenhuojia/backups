@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>注册</title>
+    <link href="__PUBLIC__/home/css/header.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/home/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/home/css/footer.css" rel="stylesheet" type="text/css" />
+    <script src="__PUBLIC__/static/bootstrap3/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        var InterValObj; //timer变量，控制时间
+        var count = 60; //间隔函数，1秒执行
+        var curCount;//当前剩余秒数
+        var code = ""; //验证码
+        var codeLength = 6;//验证码长度
+        function sendMessage() {
+            curCount = count;
+            var dealType; //验证方式
+            var uid=$("#uid").val();//用户uid
+            if ($("#phone").attr("checked") == true) {
+                dealType = "phone";
+            }
+            else {
+                dealType = "email";
+            }
+//产生验证码
+            for (var i = 0; i < codeLength; i++) {
+                code += parseInt(Math.random() * 9).toString();
+            }
+//设置button效果，开始计时
+            $("#btnSendCode").attr("disabled", "true");
+            $("#btnSendCode").val( + curCount + "秒再获取");
+            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+//向后台发送处理数据
+            $.ajax({
+                type: "POST", //用POST方式传输
+                dataType: "text", //数据格式:JSON
+                url: 'Login.ashx', //目标地址
+                data: "dealType=" + dealType +"&uid=" + uid + "&code=" + code,
+                error: function (XMLHttpRequest, textStatus, errorThrown) { },
+                success: function (msg){ }
+            });
+        }
+        //timer处理函数
+        function SetRemainTime() {
+            if (curCount == 0) {
+                window.clearInterval(InterValObj);//停止计时器
+                $("#btnSendCode").removeAttr("disabled");//启用按钮
+                $("#btnSendCode").val("重新发送验证码");
+                code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效
+            }
+            else {
+                curCount--;
+                $("#btnSendCode").val( + curCount + "秒再获取");
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+<div class="top">
+    <div class="top_box">
+        <div class="top_box_fl">
+            <ul>
+                <a><li><i class="ci-left1"></i><span>移动端下载</span></li></a>
+                <a><li><i class="ci-left2"></i><span>联系客服</span></li></a>
+                <a><li><i class="ci-left3"></i><span>我要开店</span></li></a>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div class="top_box_fr">
+            <a href="{:U('Home/User/reg')}">注册</a>
+            <a href="{:U('Home/User/login')}">登陆</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="min">
+    <div class="pass_min">
+        <form>
+            <div class="pass_logo"><img src="__PUBLIC__/home/images/logo.png" alt=""/></div>
+            <ul>
+                <li class="li_pass sj_li">世界上有多少种图书，都在哪？</li>
+                <li class="li_pass hy_li">欢迎来到快图书！</li>
+                <li>
+                    <div class="pass_fl">手机号码</div>
+                    <div class="pass_fr"><input class="login_input" type="text" placeholder="输入手机号码" id="phone"/></div>
+                    <div class="tishi_but">手机号码不为空</div>
+                    <div class="clear"></div>
+                </li>
+                <li>
+                    <div class="pass_fl">验证码</div>
+                    <div class="pass_fr">
+                        <input class="pass_yzm" type="text" placeholder="输入验证码"  />
+                        <input  type="button" id="btnSendCode"  type="text" class="reg_fsyzm"  value="获取验证码" onClick="sendMessage()" />
+                    </div>
+                    <div class="tishi_but">请填写正确的验证码</div>
+                    <div class="clear"></div>
+                </li>
+                <li>
+                    <div class="pass_fl">昵称</div>
+                    <div class="pass_fr"><input class="login_input" type="text" placeholder="昵称（限定7个字）" id="name" /></div>
+                    <div class="tishi_but">该昵称不为空！</div>
+                    <div class="clear"></div>
+                </li>
+                <li>
+                    <div class="pass_fl">密码</div>
+                    <div class="pass_fr"><input class="login_input" type="password" placeholder="设定登录密码" id="pwd" /></div>
+                    <div class="tishi_but">密码不能为空！</div>
+                    <div class="clear"></div>
+                </li>
+                <li>
+                    <div class="pass_fl">确认密码</div>
+                    <div class="pass_fr"><input class="login_input" type="password" placeholder="确认登录密码" id="password" /></div>
+                    <div class="tishi_but">输入的密码不一样</div>
+                    <div class="clear"></div>
+                </li>
+                <li>
+                    <div class="pass_fr"><input class="reg_checkbox" type="checkbox" id="agree" name="agree" value="1" checked/><span>我已认真阅读并接受<i>《快图书免责声明》</i></span></div>
+                    <div class="clear"></div>
+                </li>
+                <li>
+                    <input type="button" onClick="dataSubmit()" class="zc_sub" value="立即注册" />
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+
+
+<div class="footer">
+    <div class="footer_box">
+        <div class="foot_fl">
+            <div class="foot_fl_code">
+                <img src="__PUBLIC__/home/images/qrcode1.png" alt=""/><br/>扫描下载APP
+            </div>
+            <div class="foot_fl_kf">
+                <ul>
+                    <li>客服电话<br/>020-87381467</li>
+                    <li>联系邮箱<br/>3356544144@qq.com</li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="foot_fr">
+            <ul>
+                <li>
+                    <img src="__PUBLIC__/home/images/icon_wechat.png" alt=""/>
+                </li>
+                <li>
+                    <img src="__PUBLIC__/home/images/icon_qq2.png" alt=""/>
+                </li>
+                <li>
+                    <img src="__PUBLIC__/home/images/icon_weibo2.png" alt=""/>
+                </li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <p class="copyright">Copyright © 2014 广州市士加堡网络技术有限公司 sjbwangluo.com 版权所有 | 粤ICP备13089237号</p>
+    </div>
+</div>
+<script>
+    
+    $(document).ready(function(){
+          $("#phone").blur(function(){
+              var phone = $.trim($('#phone').val());
+              if(phone == ''){
+                // $('#phone').parent().siblings(".tishi_but").css({"color":"red","border":"2px solid red"});
+                // $('#phone').parent().siblings(".tishi_but").html("content");
+                $('#phone').parent().siblings(".tishi_but").html("手机号码不为空");
+                return false;
+              }
+              if(!checkMobile(phone)){
+                $('#phone').parent().siblings(".tishi_but").html('手机号码格式不正确!');
+                return false;
+              }
+
+              $.ajax({
+                cache:false,
+                type:"POST",
+                url:"{:U('Home/User/checkPhone')}",
+                dataType:"json",
+                data: {"phone":phone}, 
+                success:function(data){
+                    var json = eval(data); //数组  
+                    if(json['status']===0){
+                       $('#phone').parent().siblings(".tishi_but").html(json['msg']);
+                       return false;
+                    }else{
+                       $('#phone').parent().siblings(".tishi_but").css({"color":"green"}).html(json['msg']);
+                       return true;
+                    }
+                    
+                }
+            });//ajax
+          });//blur
+          $("#btnSendCode").blur(function(){
+           var btnSendCode = $.trim($('#btnSendCode').val());
+           if(btnSendCode == ''){
+            $('#btnSendCode').parent().siblings(".tishi_but").html("验证码不为空");
+            return false;
+           }
+          $('#btnSendCode').parent().siblings(".tishi_but").css({"color":"green"}).html("验证码格式正确");
+         });//blur
+        $("#name").blur(function(){
+              var name = $.trim($('#name').val());
+              if(name == ''){
+                $('#name').parent().siblings(".tishi_but").html("昵称不为空");
+                return false;
+              }
+              if($("#name").val().length >7){
+                $('#name').parent().siblings(".tishi_but").html('昵称限定7个字!');
+                return false;
+              }
+
+              $.ajax({
+                cache:false,
+                type:"POST",
+                url:"{:U('Home/User/checkName')}",
+                dataType:"json",
+                data: {"name":name}, 
+                success:function(data){
+                    var json = eval(data); //数组  
+                    if(json['status']==0){
+                       $('#name').parent().siblings(".tishi_but").html(json['msg']);
+                       return false;
+                    }else{
+                       $('#name').parent().siblings(".tishi_but").css({"color":"green"}).html(json['msg']);
+                       return true;
+                    }
+                    
+                }
+            });//ajax
+          });//blur
+         $("#pwd").blur(function(){
+           var pwd = $.trim($('#pwd').val());
+           if(pwd == ''){
+            $('#pwd').parent().siblings(".tishi_but").html("密码不为空");
+            return false;
+           }
+           $('#pwd').parent().siblings(".tishi_but").css({"color":"green"}).html("密码格式正确");
+         });//blur
+         $("#password").blur(function(){
+           var password = $.trim($('#password').val());
+           if( password != $.trim($('#pwd').val())){
+             $('#password').parent().siblings(".tishi_but").html("输入的密码不一样");
+             return false;
+           }
+           $('#password').parent().siblings(".tishi_but").css({"color":"green"}).html("密码格式正确");
+         });//blur
+         if($("#agree").val() < 1){
+            alert("您没有同意注册协议");
+         }
+    });//ready
+    
+    
+    function checkMobile(tel) {
+        var reg = /(^1[3|4|5|7|8][0-9]{9}$)/;
+        if (reg.test(tel)) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function dataSubmit()
+    {
+        var phone = $.trim($('#phone').val());
+        var name = $.trim($('#name').val());
+        var password = $.trim($('#password').val());
+        $.ajax({
+            cache:false,
+            type : 'post',
+            url:"{:U('Home/User/reg')}",
+            data: {"phone":phone,"name":name,'password':password}, 
+            dataType : 'json',
+            async: true,//
+            success : function(res){
+                if(res.status == 1){
+                    alert("成功！");
+                    window.location.href = res.url;
+                    // window.location.href = "http://www.baidu.com";
+                }else{
+                    alert("失败！");
+                    showErrorMsg(res.msg);
+                }
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                showErrorMsg('网络失败，请刷新页面后重试');
+            }
+        })
+        
+    }
+
+    
+
+
+    
+   
+</script>
+
+
+
+</body>
+</html>

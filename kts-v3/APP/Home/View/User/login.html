@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>登录</title>
+    <link href="__PUBLIC__/home/css/header.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/home/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/home/css/footer.css" rel="stylesheet" type="text/css" />
+    <script src="__PUBLIC__/static/bootstrap3/js/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="top">
+    <div class="top_box">
+        <div class="top_box_fl">
+            <ul>
+                <a><li><i class="ci-left1"></i><span>移动端下载</span></li></a>
+                <a><li><i class="ci-left2"></i><span>联系客服</span></li></a>
+                <a><li><i class="ci-left3"></i><span>我要开店</span></li></a>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div class="top_box_fr">
+            <a href="{:U('Home/User/reg')}">注册</a>
+            <a href="{:U('Home/User/login')}">登陆</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="min">
+    <div class="login_min">
+        <form>
+            <ul>
+                <li class="logo_login"><img src="__PUBLIC__/home/images/logo.png" alt=""/></li>
+                <li><input class="login_input" type="text" id="username" placeholder="输入手机号码"  /></li>
+                <li><input class="login_input" type="password" id="password" placeholder="密码"  /></li>
+                <!--  <li><input class="login_input1" type="submit" value="登录"  /></li> -->
+                <li><input class="login_input1" type="button" onClick="checkSubmit()" value="登录"></li>
+                <li class="li_wjmm">
+                    <a class="wjmm">忘记密码</a><a class="lkzc">立刻注册</a>
+                    <div class="clear"></div>
+                </li>
+                <li>
+                   <div class="qita_login"><span>其他方式登录</span></div>
+                </li>
+                <li class="login_fs">
+                    <ul>
+                        <li><img src="__PUBLIC__/home/images/icon_wechat@2x.png" alt=""/></li>
+                        <li><img src="__PUBLIC__/home/images/icon_qq@2x.png" alt=""/></li>
+                        <li><img src="__PUBLIC__/home/images/icon_weibo@2x.png" alt=""/></li>
+                        <div class="clear"></div>
+                    </ul>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+
+
+<div class="footer">
+    <div class="footer_box">
+        <div class="foot_fl">
+            <div class="foot_fl_code">
+                <img src="__PUBLIC__/home/images/qrcode1.png" alt=""/><br/>扫描下载APP
+            </div>
+            <div class="foot_fl_kf">
+                <ul>
+                    <li>客服电话<br/>020-87381467</li>
+                    <li>联系邮箱<br/>3356544144@qq.com</li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="foot_fr">
+            <ul>
+                <li>
+                    <img src="__PUBLIC__/home/images/icon_wechat.png" alt=""/>
+                </li>
+                <li>
+                   <!--  <img src="__PUBLIC__/home/images/icon_qq2.png" alt=""/> -->
+                   <a href="{:U('Home/Index/login',array('type'=>'qq'))}">腾讯QQ用户登录</a>
+                </li>
+                <li>
+                    <img src="__PUBLIC__/home/images/icon_weibo2.png" alt=""/>
+                </li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <p class="copyright">Copyright © 2014 广州市士加堡网络技术有限公司 sjbwangluo.com 版权所有 | 粤ICP备13089237号</p>
+    </div>
+</div>
+<script>
+    
+
+    function checkSubmit()
+    {
+        var username = $.trim($('#username').val());
+        var password = $.trim($('#password').val());
+        if(username == ''){
+            showErrorMsg('用户名不能为空!');
+            return false;
+        }
+        if(!checkMobile(username)){
+            showErrorMsg('账号格式不匹配!');
+            return false;
+        }
+        if(password == ''){
+            showErrorMsg('密码不能为空!');
+            return false;
+        }
+
+        $.ajax({
+            cache:false,
+            type : 'post',
+            url:"{:U('Home/User/login')}",
+            data: {"phone":username,'password':password}, 
+            dataType : 'json',
+            async: true,//
+            success : function(res){
+                if(res.status == 1){
+                    alert("成功！");
+                    window.location.href = res.url;
+                    // window.location.href = "http://www.baidu.com";
+                }else{
+                    alert("失败！");
+                    showErrorMsg(res.msg);
+                }
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                showErrorMsg('网络失败，请刷新页面后重试');
+            }
+        })
+        
+    }
+    
+    function checkMobile(tel) {
+        var reg = /(^1[3|4|5|7|8][0-9]{9}$)/;
+        if (reg.test(tel)) {
+            return true;
+        }else{
+            return false;
+        };
+    }
+    
+    
+    function showErrorMsg(msg){
+        alert(msg);
+    }
+</script>
+
+
+
+</body>
+</html>

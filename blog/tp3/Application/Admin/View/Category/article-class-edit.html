@@ -1,0 +1,41 @@
+<title>分类编辑</title>
+</head>
+<body>
+<div class="pd-20">
+  <form class="Huiform" action="" method="post" id="form-article-class">
+    上级栏目： <span class="select-box" style="width:150px">
+    <select class="select" id="sel_Sub" name="parent_id" >
+      <option value="0" selected>顶级分类</option>    
+      <volist name='list' id='v'>
+      	  <if condition="$data['parent_id'] == $v['cate_id']">      	 	      	 	 
+      	 	<option value="{{$v.cate_id}}" selected>{{$v.name}} / {{$v.english}}</option> 
+      	 	<else />
+      	 	<option value="{{$v.cate_id}}">{{$v.name}} / {{$v.english}}</option>     		      	       	 
+      	 </if>       	 
+      	 
+      </volist>
+    </select>
+    </span>
+    <input type="hidden" id="hid_ccid" value="">
+    排序：
+    <input class="input-text text-c" style="width:50px" type="text" value="{{$data['sort']}}" placeholder="排序" name="sort" id="class-rank">
+     中文分类名：
+    <input class="input-text" style="width:170px" type="text" value="{{$data['name']}}" placeholder="输入分类" name="name" id="class-val">
+       英文分类名：
+    <input class="input-text" style="width:170px" type="text" value="{{$data['english']}}" placeholder="输入分类" name="english" id="class-val">
+    <div class="text-c mt-20">
+      <button type="button" class="btn btn-success radius" id="" name="" onClick="save(this);"><i class="icon-save"></i> 保存</button>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+	function save(obj){
+		var name=$('#class-val').val();
+		if(name.length > 0){
+			$('#form-article-class').submit();
+			return true;
+		}
+		return false;
+	}
+</script>

@@ -1,0 +1,59 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	
+})
+</script>
+{% endblock %}
+
+{% block content%}<section class="alert">
+		  {#}<button type="button"  onclick="location='{{ path('AddPointsGoods_') }}'" class="green stateBtn">新  增</button>{#}
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>积分商品兑换记录</h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>名称</th>
+						<th>需兑换积分</th>
+						<th>帐号</th>
+						<th>收货人</th>
+						<th>电话</th>
+						<th>地址</th>
+						<th>下单时间</th>
+					</tr>
+				</thead>
+					<tbody>
+				{% for v in plist %}
+						<tr>
+						 	<td style="padding-left: 50px;">{{ v.id }}</td>
+						 	<td>{{ v.goods_name }}</td>
+							<td>{{ v.goods_points }}</td>
+							<td>{{ v.account }}</td>
+							<td>{{ v.buyer_name }}</td>
+							<td>{{ v.phone }}</td>
+							<td>{{ v.addr }}</td>
+							<td>{{ v.newAddTime }}</td>
+						</tr>
+					{% endfor %}
+			
+
+					</tbody>
+				</table>
+		</div>
+	</section>
+</section>
+
+{% endblock%}

@@ -1,0 +1,77 @@
+<include file="./APP/Admin/View/Common/Public_header_v1.html"/>
+
+<style type="text/css">
+    .form-horizontal{width:850px;}
+    .form-horizontal>.form-group{border-top: 1px solid #ccc;padding-top:20px;margin-left:15px;margin-right:0px;}
+    .form-horizontal>.form-group:first-child{border-top:none;}
+    .form-group>.col-sm-2{width: 110px;}
+    .form-group>.col-sm-10{width: 700px;}
+</style>
+<ol class="breadcrumb">
+    <li>{:C('CONTROL_MENU')}</li>
+    <li>消息管理</li>
+    <li class="active"><a href="{:U('Admin/Information/messageList')}"> 消息列表</a></li>
+    <li>编辑消息</li>
+</ol>
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="javascript:void(0);">消息详情</a></li>
+</ul>
+<form action="{:U('Admin/Information/messageEdit?message_id='.$list['message_id'])}" class="form-horizontal" method="post" enctype="multipart/form-data">
+    
+	 <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">标题</label>
+        <div class="col-sm-10">
+            {$list.title}
+            <!-- <div for="tea_name" class="Validform_checktip">请输入昵称</div> -->
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">类型</label>
+        <div class="col-sm-10">
+            <if condition="$list.type eq 1"> 新书上架
+                    <elseif condition="$list.type eq 2"/>公告
+                    <else /> 消息回复
+            </if>
+            <!-- <div for="tea_name" class="Validform_checktip">请输入昵称</div> -->
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">创建时间</label>
+        <div class="col-sm-10">
+            {$list.addtime|date='Y-m-d',###}
+            <!-- <div for="tea_name" class="Validform_checktip">请输入昵称</div> -->
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">说明</label>
+        <div class="col-sm-10">
+            {$list.description}
+            <!-- <div for="tea_name" class="Validform_checktip">请输入昵称</div> -->
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">状态</label>
+        <div class="col-sm-10">
+            <if condition="$list.state eq 0"> 未发送
+                    <elseif condition="$list.state eq 1"/>已发送
+                    <else /> 已经删除
+            </if>
+            <!-- <div for="tea_name" class="Validform_checktip">请输入昵称</div> -->
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">点击次数</label>
+        <div class="col-sm-10">
+            {$list.click_time}
+            <!-- <div for="tea_name" class="Validform_checktip">请输入昵称</div> -->
+        </div>
+    </div>
+     <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">跳转地址</label>
+        <div class="col-sm-10">
+            {$list.url}
+            <!-- <div for="tea_name" class="Validform_checktip">请输入昵称</div> -->
+        </div>
+    </div>
+</form>
+<include file="./APP/Admin/View/Common/Public_footer_v1.html"/>

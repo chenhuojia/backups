@@ -1,0 +1,292 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="keywords" content="{$config['keywords']}" > 
+    <meta name="description" content="{$config['description']}" >
+    <title>首页-{$config['title']}</title>
+    <link href="__PUBLIC__/home/css/header.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<include file="./APP/Home/View/Common/header.html"/>
+<link href="__PUBLIC__/home/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/home/css/banner.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__PUBLIC__/home/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/qiehua.js"></script>
+<div class="main">
+
+    <div class="section-focus-pic" id="section-focus-pic">
+        <div class="pages1" data-scro="list">
+           
+            <ul>
+                <volist name="banner" id="b">
+                <li class="item" style="left:0px;">
+                    <a><img src="{$b.imageurl}"></a>
+                </li>
+                <!-- <li class="item">
+                    <a><img src="images/1.jpg"></a>
+
+                </li>
+                <li class="item">
+                    <a><img src="images/1.jpg"></a>
+                </li> -->
+                </volist>
+            </ul>
+           
+        </div>
+        <div class="controler" data-scro="controler">
+            <b class="down"></b>
+            <b></b>
+            <b></b>
+        </div>
+        <div class="controler2" data-scro="controler2">
+            <a href="javascript:;" class="prev"><i></i></a>
+            <a href="javascript:;" class="next"><i></i></a>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript" src="js/slide.js"></script>
+
+
+
+<div class="home_top_box">
+    <ul>
+       <volist name="recommend" id="r">
+        <li class="sink">
+            <a class="area-item"><img src="{$r.imageurl}" alt=";" class="img-ks-lazyload"/></a>
+        </li>
+        <!-- <li class="sink">
+            <a class="area-item"><img src="images/icon_img1.jpg" alt=";" class="img-ks-lazyload"/></a>
+        </li>
+        <li class="sink">
+            <a class="area-item"><img src="images/icon_img1.jpg" alt=";" class="img-ks-lazyload"/></a>
+        </li>
+        <li class="sink" style=" margin-right: 0;">
+            <a class="area-item"><img src="images/icon_img1.jpg" alt=";" class="img-ks-lazyload"/></a>
+        </li> -->
+       </volist>
+        <div class="clear"></div>
+    </ul>
+</div>
+
+<div class="min">
+  <volist name="categoryOne" id="c">
+    <div class="min_box">
+        <div class="min_box_bt">
+            <p id="wenxue">{$c.name}</p>
+            <a><span>查看全部</span><i class="more_bt"></i>
+                <div class="clear"></div>
+            </a>
+            <div class="clear"></div>
+        </div>
+        <div class="min_box_nr">
+            <div class="min_box_fl box_fl_1">
+                <ul class="min_box_ul min_box_ul1">
+                    <li class="con_fenlei1"><a href="JavaScript:;">推荐</a></li>
+                 <volist name="c['two']" id="o">
+                    <li><a href="">{$o.name}</a></li>
+                    <!-- <li><a href="JavaScript:;">小说</a></li>
+                    <li><a href="JavaScript:;">传记</a></li>
+                    <li><a href="JavaScript:;">青春文学</a></li>
+                    <li><a href="JavaScript:;">动漫</a></li> -->
+                 </volist>
+                </ul>
+            </div>
+            <div class="min_box_fr">
+                <ul class="fenlei_ul_wenxue">
+                    <li>
+                        <div class="cp_icon"><img src="__PUBLIC__/home/images/icon_cp.jpg" alt=""/><span class="index_mod_tag">二手</span></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光1</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="__PUBLIC__/home/images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                   
+                    <li>
+                        <div class="cp_icon"><img src="__PUBLIC__/home/images/icon_cp.jpg" alt=""/><span class="index_mod_tag">二手</span></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="__PUBLIC__/home/images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><span class="index_mod_tag">二手</span></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="__PUBLIC__/home/images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><span class="index_mod_tag">二手</span></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="__PUBLIC__/home/images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <div class="clear"></div>
+                </ul>
+
+
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+  </volist>
+   
+
+
+
+    <div class="min_box1">
+        <div class="hot_box">
+            <div class="hot_box_bt">
+                <span>热门书评</span>
+            </div>
+            <div class="hot_box_nr">
+                <ul>
+                  <volist name="hotCommentLists" id="h" empty="暂时没有数据">
+                    <li>
+                        <div class="hot_box_li">
+                            <div class="hot_box_li_tx"><img src="{$h.user_image}" alt=""/></div>
+                            <div class="hot_box_li_nr">
+                                <div class="hot_box_li_nr_bt">
+                                    <span>{$h.username}</span>
+                                    <em><i class="li_star_smile"></i><i class="li_star_smile"></i><i class="li_star_smile"></i><i class="li_star_smile"></i>
+                                        <i class="li_star_smile"></i><i class="li_star_grey"></i></em>
+                                    <div class="li_time">
+                                        <ul>
+                                            <li><span>写于{$h.comment_time|date='Y-m-d H:i',###}</span></li>
+                                            <li><i class="icon_comm"></i><span>{$h.sums}</span></li>
+                                            <li><i class="icon_love"></i><span>{$h.likes}</span></li>
+                                            <div class="clear"></div>
+                                        </ul>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <p class="hot_p">{$h.content}</p>
+                                    <div class="hot_book_box">
+                                        <div class="hot_book_box_fl">
+                                            <img src="{$h.book_image}" alt=""/>
+                                        </div>
+                                        <div class="hot_book_box_fr">
+                                            <p class="hot_book_bt">{$h.name}</p>
+                                            <p class="hot_book_dz">{$h.author}</p>
+                                            <a><div class="hot_book_more">查看图书</div></a>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                 </volist>
+                    <a><div class="book_more">查看更多书评</div></a>
+
+                </ul>
+            </div>
+        </div>
+        <div class="user_box">
+            <div class="hot_box_bt">
+                <span>活跃用户</span>
+            </div>
+            <div class="list_box">
+                <ul>
+                   <volist name="activeUsers" id="a">
+                    <li>
+                        <div class="list_icon">
+                            <img src="{$a.imageurl}">
+                        </div>
+                        <div class="list_mane">
+                            <span>{$a.name}</span><br /><em>本话题发帖</em><i>{$a.total_topic}</i>
+                        </div>
+                        <if condition="$a.is_follow eq 0">
+                         <div class="guanzhu_1"><em>+</em>关注</div>
+                        <else/>
+                         <div class="guanzhu_2"><em>+</em>已关注</div>
+                        </if>
+                        <div class="clear"></div>
+                    </li>
+                    <!-- <li>
+                        <div class="list_icon">
+                            <img src="images/pic_store_cover.png">
+                        </div>
+                        <div class="list_mane">
+                            <span>陌上秋草</span><br /><em>本话题发帖</em><i>20</i>
+                        </div>
+                        <div class="guanzhu_2"><em>+</em>已关注</div>
+                        <div class="clear"></div>
+                    </li>
+                    <li>
+                        <div class="list_icon">
+                            <img src="images/pic_store_cover.png">
+                        </div>
+                        <div class="list_mane">
+                            <span>陌上秋草</span><br /><em>本话题发帖</em><i>20</i>
+                        </div>
+                        <div class="guanzhu_1"><em>+</em>关注</div>
+                        <div class="clear"></div>
+                    </li> -->
+                   </volist>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    </div>
+
+    <div class="code_box">
+        <ul>
+            <li>
+                <img src="__PUBLIC__/home/images/qrcode1.png" alt=""/><br/>快图书
+            </li>
+            <li>
+                <img src="__PUBLIC__/home/images/qrcode1.png" alt=""/><br/>快图书书讯
+            </li>
+            <li>
+                <img src="__PUBLIC__/home/images/qrcode1.png" alt=""/><br/>快图书少儿阅读馆
+            </li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+
+    <div class="side_bar hide">
+        <ul>
+            <volist name="categoryOne" id="c">
+            <li class="si_bar_btn"><a href="#wenxue">{$c.name}</a></li>
+            <!-- <li><a href="#shaoer">少儿</a></li>
+            <li><a href="#jiaoyu">教育</a></li>
+            <li><a href="#shenghuo">生活</a></li>
+            <li><a href="#yishu">艺术</a></li>
+            <li><a href="#renwensk">人文<br/>社科</a></li>
+            <li><a href="#keji">科技</a></li>
+            <li><a href="#lizhi">励志<br/>成功 </a></li>
+            <li><a href="#jingguan">经管</a></li> -->
+            </volist>
+        </ul>
+        <div class="bar_top">
+            <a href="javascript:scroll(0,0)"><img src="__PUBLIC__/home/images/icon_gotop.png" alt=""/></a>
+        </div>
+    </div>
+</div>
+<include file="./APP/Home/View/Common/footer.html"/>
+
+
+</body>
+</html>
+

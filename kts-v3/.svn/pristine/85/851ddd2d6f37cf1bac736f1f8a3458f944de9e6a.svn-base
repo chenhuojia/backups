@@ -1,0 +1,689 @@
+<?php
+namespace Shop\Controller;
+use Common\Controller\ApiController;
+use User\Util\Util;
+class ShopInfoController extends ApiController{
+    
+    private $shop=array();
+    private $shop_id=null;
+    private $user_id=null;
+    
+    public function _initialize(){
+        parent::_initialize();
+        $this->CheckShop();
+    }
+        //检查是否开启店铺
+   private function CheckShop(){        
+       $user_id=session('user_id');
+       $shop=M('shop')->where(array('user_id'=>$user_id,'is_show'=>1))->find();
+       if (empty($shop)) $this->myApiPrint(300,'你还没有开通店铺');
+       $this->shop=$shop;
+       $this->shop_id=$shop['shop_id'];
+       $this->user_id=$user_id;
+    }
+    
+
+    /**
+     * 修改shoplogo
+     */
+    public function logo()
+    {
+        import('User/Util/Util');
+        $msg = \User\Util\Util::saveJpg(saveShopAvtar, 'Public/shop/');
+        $this->myApiPrint($msg['error'], $msg['message']);
+    }
+    
+    
+    /**
+     * 获取店铺的所有商品评价
+     * **/
+    public function getShopGoodsDiscuss(){
+        $shop_id=I('post.shop_id');
+        $skip=I('post.skip',0);
+        $take=I('post.take',10);
+        $data=M('book_comment')->alias('b')
+            ->where(array('b.shop_id'=>$shop_id,'b.fid'=>0,'b.is_show'=>1))
+            ->field('b.comment_id,b.user_id,b.username,b.grade,b.content,b.sums,b.likes,b.comment_time')
+            ->order('b.comment_time desc')
+            ->limit($skip,$take)
+            ->select();
+        $user_id=session('user_id');
+        if ($data){
+            foreach ($data as $k =>$v){
+                $data[$k]['is_click']=0;
+                $data[$k]['comment_time']=date("m月d H:i",$v['comment_time']);
+                $data[$k]['user_avatar']= getUserAvater($v['user_id'])['avatar'];
+                    $click=M('book_comment_click')->where(array('comment_id'=>$v['comment_id'],'user_id'=>$user_id))->find();
+                    if ($click){
+                        $data[$k]['is_click']=1;
+                    }
+                }
+            $this->myApiPrint(300,'success',$data);
+            }
+        $this->myApiPrint(202,'暂无数据');
+    }
+   
+    /**
+     * 查看店铺公告
+     * **/
+    public function seeShopNotice(){
+        $shop = D("shop");
+        $result=$shop->where(array('shop_id'=>$this->shop_id))->getField('introduction');
+        if ($result) $this->myApiPrint(200,'success',$result);
+        $this->myApiPrint(300,'fail');
+    }
+    
+    /**
+     * 新建运费模块
+     * **/
+    public function addShopShipping(){
+        $shopShipping = D("shop_shipping");
+        $user_id=session('user_id');
+        $shopShipping->where(array('shop_id'=>$this->shop_id))->setField('enabled',0);
+        if (!$shopShipping->create()){
+            $this->myApiPrint(300,$shopShipping->getError());
+        }else{
+            $b=$shopShipping->add();
+            if ($b){
+                $this->myApiPrint(200,'新建运费模块成功');
+            }
+            $this->myApiPrint(300,'fail');
+        }
+    }
+    
+    /**
+     * 删除运费模块
+     * **/
+    public function delShopShipping(){
+        $shopShipping = D("shop_shipping");
+        $shippingId=I('post.shipping_id');
+        if ($shippingId){
+            $result=$shopShipping->delete($shippingId);
+        }
+        if ($result) $this->myApiPrint(200,'删除运费模块成功');
+        $this->myApiPrint(300,'fail');
+    }
+    
+    /**
+     * 启用或者关闭运费模块
+     * **/
+    public function changeShopShipping(){
+        $shopShipping = D("shop_shipping");
+        $shippingId=I('post.shipping_id');
+        if ($shippingId){
+            $data=$shopShipping->find($shippingId);
+            if ($data['enabled']==0){
+                $shopShipping->where(array('shop_id'=>$this->shop_id))->setField('enabled',0);
+                $result=$shopShipping->where(array('shipping_id'=>$shippingId))->setField('enabled',1);
+                if ($result) $this->myApiPrint(200,'启动运费模块成功');
+            }elseif ($data['enabled']==1){
+                $result=$shopShipping->where(array('shipping_id'=>$shippingId))->setField('enabled',0);
+                if ($result) $this->myApiPrint(200,'关闭运费模块成功');
+            }
+        }
+        $this->myApiPrint(300,'fail');
+    }
+    
+    /**
+     * 设置店铺公告
+     * **/
+    public function changeShopNotice(){
+        $shop = D("shop");
+        $user_id=session('user_id');
+        $shop_notice=I('post.shop_notice');
+        if (empty($shop_notice)) $this->myApiPrint(300,'请填写店铺公告');
+        $result=$shop->where(array('shop_id'=>$this->shop_id))->setField('introduction',$shop_notice);
+        if ($result) $this->myApiPrint(200,'设置店铺公告成功');
+        $this->myApiPrint(300,'fail');
+    }
+    
+    /**
+     * 获取店铺公告
+     * **/
+    public function GetShopNotice(){
+        $shop = D("shop");   
+        $result=$shop->where(array('shop_id'=>$this->shop_id))->getField('introduction');
+        if ($result) $this->myApiPrint(200,'获取店铺公告成功');
+        $this->myApiPrint(300,'获取店铺公告失败');
+    }
+    /**
+     * 获取运费列表
+     * **/
+    public function shippingList(){
+        $data=M('shop_shipping')->where(array('shop_id'=>$this->shop_id))->field('shipping_id,shipping_name,enabled')->order('addtime desc')->select();
+        if ($data){
+            $this->myApiPrint(200,'success',$data);
+        }
+        $this->myApiPrint(202,'暂无数据');
+    }
+    
+   /**
+    * 店铺数据统计
+    * **/
+    public function shopCount(){
+        $before_yes =mktime(0,0,0,date('m'),date('d')-1,date('Y'));
+        $yes =mktime(0,0,0,date('m'),date('d'),date('Y'))-1;
+        $visit=M('shop_visit');
+        $order=M('order');
+        $income=M('shop_income');
+        $yes_visit=$visit->where(array('shop_id'=>$this->shop_id,'visit_time'=>array(array('gt',$before_yes),array('lt',$yes))))->count();
+        $today =mktime(0,0,0,date('m'),date('d'),date('Y'));
+        $tom =mktime(0,0,0,date('m'),date('d')+1,date('Y'))-1;;
+        $today_order=$order->where(array('payee_shop'=>$this->shop_id,'order_status'=>array('not in',array(2,3,4)),'add_time'=>array(array('gt',$today),array('lt',$tom))))->count();
+        $today_income=$income->where(array('shop_id'=>$this->shop_id,'add_time'=>array(array('gt',$today),array('lt',$tom))))->sum('income');
+        $all_visit=$this->shop['visit_num'];
+        $data=array(
+                'yesterday_visit'=>$yes_visit,
+                'all_visit'=>$all_visit,
+                'today_order'=>$today_order,
+                'today_income'=>$today_income,
+            );
+        $this->myApiPrint(200,'success',$data);
+    }
+    
+    
+    /**
+     * 订单管理
+     * **/
+    public function orderList(){
+        $skip=I('post.skip',0);
+        $take=I('post.take',10);
+        $type=I('post.type',1);        
+        $orderModel=D('order');
+        switch ($type){
+            case 1:
+                $where=array('o.payee_shop'=>$this->shop_id,'o.pay_status'=>array('in',array(0,1)),'o.order_status'=>array('not in',array(2,3,4)));
+                $order['btn']=array('取消订单','修改价格');
+                break;
+            case 2:
+                $where=array('o.payee_shop'=>$this->shop_id,'o.pay_status'=>2,'o.order_status'=>array('not in',array(2,3,4)),'o.shipping_status'=>0);
+                $order['btn']=array('取消订单','填写单号');
+                break;
+            case 3:
+                $where=array('o.payee_shop'=>$this->shop_id,'o.pay_status'=>2,'o.order_status'=>array('not in',array(2,3,4)),'o.shipping_status'=>1);
+                $order['btn']=array('查看物流');
+                break;
+        }
+        $order['list']=$orderModel->alias('o')
+                   ->join('left join kts_user u on o.user_id=u.user_id')                   
+                   ->where($where)
+                   ->field('o.order_id,o.order_sn,u.name as shop_name,o.anum,o.order_amount,o.invoice_no')
+                   ->order('o.order_id desc')
+                   ->limit($skip,$take)
+                   ->select();
+        if ($order['list']){           
+            foreach ($order['list'] as $k =>$v){
+                $goods = M('order_goods')->where(array('order_id'=>$v['order_id']))->field('book_id,type,book_name,goods_number,book_thumb,book_desc,publish_price,book_price,book_attr')->select();
+                foreach ($goods as $kk=>$vv){
+                    $goods[$kk]['book_thumb']=C('QINIU_IMG_PATH').$vv['book_thumb'];
+                }
+                $order['list'][$k]['goods']=$goods;
+            }
+            $this->myApiPrint(200,'success',$order);
+        }
+        $this->myApiPrint(202,'没有数据');
+    }
+
+    
+    /**
+     * 取消订单
+     * **/
+    public function  removeOrder(){
+        $order_sn=I('post.order_sn');
+        $order=M('order');
+        $data=$order->where(array('order_sn'=>$order_sn))->find();
+        if ($data){
+            if ($data['order_status']==3) $this->myApiPrint(300,'该订单已经取消了');
+            $result=$order->where(array('order_id'=>$data['order_id']))->setField('order_status',3);
+            if ($result) $this->myApiPrint(200,'success');
+        }
+        $this->myApiPrint(300,'fail');
+    }
+    
+    /**
+     * 修改价格
+     * **/
+    public function  updatePrice(){
+        $order_sn=I('post.order_sn');
+        $total=I('post.order_amount',0);
+        $order=M('order');
+        $data=$order->where(array('order_sn'=>$order_sn,'pay_status'=>0))->find();
+        if ($data){
+            $ret=bccomp($total,$data['order_amount'],2);
+            if ($ret==1) $this->myApiPrint(300,'修改价格不能相同');
+            else{
+                $result=$order->where(array('order_id'=>$data['order_id']))->setField('order_amount',$total);
+                if ($result) $this->myApiPrint(200,'success');
+            } 
+        }
+        $this->myApiPrint(300,'fail');
+    }
+    
+    
+    /**
+     * 发货
+     * **/
+    public function  delivery(){
+        $order_sn=I('post.order_sn');
+        $invoice_no=I('post.invoice_no',0);
+        $order=M('order');
+        $data=$order->alias('a')
+        ->join('left join kts_order_info o on a.order_id = o.info_id')
+        ->field('a.order_id,a.shipping_fee,o.*')
+        ->where(array('a.order_sn'=>$order_sn,'a.shipping_status'=>0))->find(); 
+        if ($data){                      
+           $arr=array(
+               'order_id'=>$data['order_id'],
+               'order_sn'=>$order_sn,
+               'consignee'=>$data['consignee'],
+               'mobile'=>$data['mobile'],
+               'province'=>$data['province'],
+               'city'=>$data['city'],
+               'district'=>$data['district'],
+               'address'=>$data['address'],
+               'shipping_price'=>$data['shipping_fee'],
+               'invoice_no'=>$invoice_no,
+               'create_time'=>$_SERVER['REQUEST_TIME'],
+           );
+          $result=M('delivery_doc')->add($arr);
+           if ($result){
+               $order->where(array('order_id'=>$data['order_id']))->save(array('shipping_status'=>1,'shipping_time'=>$_SERVER['REQUEST_TIME'],'invoice_no'=>$invoice_no,'confirm_time'=>$_SERVER['REQUEST_TIME'],'order_status'=>1));
+               $this->myApiPrint(200,'success',$result);
+           }
+        }
+        $this->myApiPrint(300,'fail');
+    }
+
+
+    /***
+     * 下架图书
+     * **/
+    public function downBook(){
+        $book_id=I('post.book_id');
+        $book=M('book');
+        $book->startTrans();
+        $a=$book->where(array('book_id'=>$book_id))->setField('isdelete',1);
+        $b=M('shop_books')->where(array('book_id'=>$book_id,'shop_id'=>$this->shop_id))->setField('is_show',1);
+        $now_on=($this->shop['on_book'] >=1)? ($this->shop['on_book']-1):0;
+        $now_under=$this->shop['under_book']+1;
+        $c=M('shop')->where(array('shop_id'=>$this->shop_id))->save(array('on_book'=>$now_on,'under_book'=>$now_under));        
+        if ($b && $c && $a){
+            $cart=M('cart')->where(array('book_id'=>$book_id))->find();
+            if ($cart){
+                $d=M('cart')->where(array('book_id'=>$book_id))->delete();
+                if ($d){
+                    $book->commit();
+                    $this->myApiPrint(200,'success');
+                }
+            }else{
+                $book->commit();
+                $this->myApiPrint(200,'success');
+            } 
+            
+        }
+        $book->rollback();
+        $this->myApiPrint(300,'fail');
+    }
+    
+    /***
+     * 删除图书
+     * **/
+    public function delBook(){
+        $book_id=I('post.book_id');
+        $book=M('book');  
+        $data=M('shop_book')->where(array('book_id'=>$book_id))->find();
+        if ($data){
+            $book->startTrans();
+            $a=$book->where(array('book_id'=>$book_id))->setField('isdelete',1);
+            $b=M('shop_books')->where(array('book_id'=>$book_id,'shop_id'=>$this->shop_id))->setField('is_show',2);
+            $c=M('shop')->where(array('shop_id'=>$this->shop_id))->setDec('book_num');
+            if ($b && $c && $a){
+                if ($data['is_show']==0){
+                    $cart=M('cart')->where(array('book_id'=>$book_id))->find();
+                    if ($cart){
+                        $d=M('cart')->where(array('book_id'=>$book_id))->delete();
+                        if ($d){
+                            $book->commit();
+                            $this->myApiPrint(200,'success');
+                        }
+                    }
+                }else{
+                    $book->commit();
+                    $this->myApiPrint(200,'success');
+                } 
+            }
+            $book->rollback();
+            $this->myApiPrint(300,'fail');
+        }
+        
+        $this->myApiPrint(300,'fail');
+    }
+    
+    
+    
+    /***
+     * 搜索图书
+     * **/
+    public function searchBook(){
+        $search=I('post.book_name',0);
+        $skip=I('post.skip');
+        $take=I('post.take');
+        $type=I('post.type',1);
+        $book=M('shop_books');
+        $where=array(
+            's.shop_id'=>$this->shop_id,
+            's.is_show'=>0,            
+        );
+        if ($type==2){
+            $where['s.is_show']=1;
+        }
+        if ($search){
+          $where['b.name']=array('like',"%$search%");  
+        }
+        $data=$book->alias('s')
+         ->join('left join kts_book b on s.book_id=b.book_id')
+         ->join('left join kts_book_inventory i on s.book_id=i.book_id')
+         ->field('s.book_id,b.name as book_name,b.cover_img,b.price,i.inventory')
+         ->where($where)
+         ->limit($skip,$take)
+         ->select();
+        if ($data)
+        {
+            foreach ($data as $k =>$v){
+                $data[$k]['cover_img']=C('QINIU_IMG_PATH').$v['cover_img'];
+            }
+            $this->myApiPrint(200,'success',$data);
+        }
+        $this->myApiPrint(202,'暂无数据');
+    }
+
+     /**
+      * 查看编辑图书
+      * ***/
+     public function editBook(){
+         $book_id=I('post.book_id');
+         $book=M('book')->alias('b')
+         ->join('left join kts_book_attr as a on b.book_id = a.book_id')
+         ->join('left join kts_book_tag t on b.book_id = t.book_id')
+         ->where(array('b.book_id'=>$book_id))
+         ->field('b.book_id,b.cover_img,a.cover_explain,a.copyright,a.other,b.type,
+                  b.name as book_name,b.author,a.translator,a.author_area,a.language,
+                  a.publishing_place,a.press,a.publish_time,a.lunar_calendar,a.calendar,
+                  b.book_number,a.clc,b.category_path as cate_id,a.cate_name,
+                  t.one,t.two,t.three,a.edition,a.impression,a.words,a.page,a.format, 
+                  a.sheet,a.paper,a.binding,a.publish_price,b.price,a.introduce,a.author_desc,                                  
+                  a.desc_video,a.desc_images,a.catalog,a.video_title,a.video,    
+                  a.applicable_age,a.address,a.longitude,a.latitude')
+                   ->find();
+         if ($book){
+             $book['tags']=array();
+             if (!empty($book['one'])){     $book['tags'][]=$book['one'];}
+             if (!empty($book['two'])){     $book['tags'][]=$book['two'];}
+             if (!empty($book['three'])){   $book['tags'][]=$book['three'];}
+             $url=C('QINIU_IMG_PATH');
+             $book['inventory']=M('book_inventory')->where(array('book_id'=>$book_id))->getField('inventory');
+             if (empty($cate_name=$book['cate_name'])){
+                 $book['cate_name']=array();
+                 $book['cate_path']=array();
+             }else{
+                 $cate_name=explode('&&',$book['cate_name']);
+                 $book['cate_name']=explode(',',$cate_name[0]);
+                 $book['cate_path']=explode(',',$cate_name[1]);
+             }
+             $book['cover_img']=$url.$book['cover_img']."={$book['cover_explain']}";
+             $book['copyright']=$book['copyright']?$url.$book['copyright']:'';             
+             $other=$book['other'];
+             if (!empty($other)){
+                 $other=explode(';',$other);
+                 foreach ($other as $k=>$v){
+                     $other[$k]=$url.$v;
+                 }
+                 $book['other']=$other;
+             }else{
+                 $book['other']=array();
+             }
+             if ($book['video']){
+                 $video=explode(';',$book['video']);
+                 $videos['video_cover']=$url.$video[0];
+                 $videos['video']=$url.$video[1];
+                 $book['video']=$videos;
+             }else{
+                $book['video']=array();
+             }
+             if (!empty($book['desc_video'])){
+                 $desc_video=explode(';',$book['desc_video']);
+                 $book['desc_video']=$desc_video[1]?$url.$desc_video[1]:'';
+                 $book['desc_video_cover']=$desc_video[0]?$url.$desc_video[0]:'';
+             }else{
+                 $book['desc_video']="";
+                 $book['desc_video_cover']="";
+             } 
+             if (!empty($book['desc_images'])){
+                 $desc_images=explode(';',$book['desc_images']);
+                 foreach ($desc_images as $k=>$v){
+                     $desc_images[$k]=$url.$v;
+                 }
+                 $book['desc_images']=$desc_images;
+             }else{
+                 $book['desc_images']=array();
+             }
+             
+            
+             $this->myApiPrint(200,'success',$book);
+         }
+         $this->myApiPrint(300,'fail');
+     }
+    
+    /**
+     * 保存编辑图书
+     * ***/
+    public function saveEditBook(){
+        $data=$_POST['data'];
+        $book_id=I('post.book_id');
+        $data=json_decode($data,true);
+        if (empty($data)) $this->myApiPrint(300,'解析错误');
+        if (M('shop_books')->where(array('book_id'=>$book_id))->find()){
+            $book=D('Book','Logic');
+            $result=$book->editNewBook($data,$book_id,$this->shop_id);
+            if ($result['code']==300) $this->myApiPrint(300,$result['msg']);
+            $this->myApiPrint(200,'success');
+        }
+        $this->myApiPrint(300,'不合法操作');
+    }
+    
+    
+    /**
+     *已完成订单 
+     * **/
+    public function finishOrder(){
+        $skip=I('post.skip');
+        $take=I('post.take');
+        $orderModel=M('order');
+        $where=' o.payee_shop = '.$this->shop_id.' and o.order_status = 6 or o.pay_status = 4';
+        $order['list']=$orderModel->alias('o') 
+                   ->join('left join kts_user u on o.user_id=u.user_id')
+                   ->where($where)
+                   ->field('o.order_id,o.order_sn,o.order_status,o.pay_status,u.name as shop_name,o.anum,o.order_amount')
+                   ->order('o.order_id desc')
+                   ->limit($skip,$take)
+                   ->select();
+        if ($order['list']){
+            foreach ($order['list'] as $k =>$v){
+                $btn=array('删除订单');
+                if ($v['order_status']==6){
+                    $btn[]="查看评价";
+                }
+                $order['list'][$k]['btn']=$btn;
+                $goods = M('order_goods')->where(array('order_id'=>$v['order_id']))->field('book_id,type,book_name,goods_number,book_thumb,book_desc,publish_price,book_price,book_attr')->select();
+                foreach ($goods as $kk=>$vv){
+                    $goods[$kk]['book_thumb']=C('QINIU_IMG_PATH').$vv['book_thumb'];
+                }
+                $order['list'][$k]['goods']=$goods;
+            }
+            $this->myApiPrint(200,'success',$order);
+        }
+        $this->myApiPrint(202,'没有数据');
+    }
+    
+    
+    /**
+     * 查看订单评价
+     * ***/
+    public function orderDiscuss(){
+        $skip=I('post.skip');
+        $take=I('post.take');
+        $order_id=I('post.order_id');
+        $data=M('book_comment')->where(array('order_id'=>$order_id,'fid'=>0,'is_show'=>1))
+        ->field('comment_id,user_id,username,comment_time,content,grade,sums,likes')
+        ->limit($skip,$take)
+        ->select();
+        if ($data){
+            foreach ($data as $k=>$v){
+                $data[$k]['user_avatar']=getUserAvater($v['user_id'])['avatar'];
+                $data[$k]['is_click']=0;
+                $click=M('book_comment_click')->where(array('comment_id'=>$v['comment_id'],'user_id'=>$this->user_id,'is_click'=>1))->find();
+                if ($click){
+                    $data[$k]['is_click']=1;
+                }
+            }
+          $this->myApiPrint(200,'success',$data);  
+        }
+        $this->myApiPrint(202,'没有数据');
+    }
+    
+    /**
+     *退款中订单
+     * **/
+    public function refundOrder(){
+        $skip=I('post.skip');
+        $take=I('post.take');
+        $orderModel=M('order');
+        $where=array('o.payee_shop'=>$this->shop_id,'o.pay_status'=>3);
+        $order['list']=$orderModel->alias('o')
+        ->join('left join kts_user u on o.user_id = u.user_id')
+        ->where($where)
+        ->field('o.order_id,o.order_sn,o.pay_status,u.name as shop_name,o.anum,o.order_amount')
+        ->order('o.order_id desc')
+        ->limit($skip,$take)
+        ->select();
+        if ($order['list']){
+            foreach ($order['list'] as $k =>$v){
+                $btn=array('拒绝退款','同意退款');
+                $order['list'][$k]['btn']=$btn;
+                $goods = M('order_goods')->where(array('order_id'=>$v['order_id']))->field('book_id,type,book_name,goods_number,book_thumb,book_desc,publish_price,book_price,book_attr')->select();
+                foreach ($goods as $kk=>$vv){
+                    $goods[$kk]['book_thumb']=C('QINIU_IMG_PATH').$vv['book_thumb'];
+                }
+                $order['list'][$k]['goods']=$goods;
+            }
+            $this->myApiPrint(200,'success',$order);
+        }
+        $this->myApiPrint(202,'没有数据');
+    }
+    
+    
+    /**
+     *退款单详情
+     * **/
+    public function refundOrderDet(){
+        $refund_id=I('post.refund_id');
+        $orderModel=M('order_refund');
+        $where=array('a.is_agree'=>2,'a.refund_id'=>$refund_id);
+        $order['list']=$orderModel->alias('a')
+        ->join('left join kts_order o on a.order_id = o.order_id')
+        ->where($where)
+        ->field('a.refund_id,o.order_id,o.order_sn,o.shipping_status,o.shop_name,o.anum,o.order_amount,a.reason')
+        ->find();
+        if ($order['list']){
+            foreach ($order['list'] as $k =>$v){
+                $goods = M('order_goods')->where(array('order_id'=>$order_id))->field('book_id,type,book_name,goods_number,book_thumb,book_desc,publish_price,book_price,book_attr')->select();
+                foreach ($goods as $kk=>$vv){
+                    $goods[$kk]['book_thumb']=C('QINIU_IMG_PATH').$vv['book_thumb'];
+                }
+                $order['list'][$k]['goods']=$goods;
+            }
+            $this->myApiPrint(200,'success',$order);
+        }
+        $this->myApiPrint(202,'没有数据');
+    }
+    
+    /**
+     * 拒绝退款
+     * ***/
+    public function rejectRefund(){
+        $reason=I('post.reason');
+        $order_id=I('post.order_id');
+        $order=M('order');
+        if (empty($reason)) $this->myApiPrint(300,'请填写拒绝原因');
+        $order->startTrans();
+        $a=$order->where(array('order_id'=>$order_id))->setField('pay_status',2);
+        $b=M('order_refund')->where(array('order_id'=>$order_id))->save(array('reply'=>$reason,'is_agree'=>0,'replytime'=>$_SERVER['REQUEST_TIME']));
+        $c=logShopOrder($order_id,'退款', '拒绝退款');
+        if ($a && $b && $c) {
+            $order->commit();
+            $this->myApiPrint(200,'success');
+        }
+        $order->rollback();
+        $this->myApiPrint(300,'fail');
+    }
+
+    /**
+     * 查看某一条订单的信息
+     */
+    public function orderDetail()
+    {   
+        $order_id=I("get.order_id",0);
+        $data = M("order")->alias('o')
+                ->join('LEFT JOIN kts_order_info as r ON o.order_id = r.info_id')
+                ->field('o.order_id,o.order_status,o.shipping_status,o.shipping_fee,o.pay_status,o.shop_name,o.order_amount,o.order_sn,o.payee,o.payee_shop,o.anum,o.add_time,r.consignee,r.province,r.city,r.street,r.address,r.mobile,r.postscript')
+                ->where(array('o.payee_shop'=>$this->shop_id,'o.order_id'=>$order_id))->find(); 
+        if ($data){
+          $data['goods'] = M('order_goods')
+               ->field('order_id,book_id,book_thumb,publish_price,book_price,book_attr')
+               ->where(array('order_id'=>$data['order_id']))->order('order_id desc')->select();
+          foreach ($data['goods'] as $k => $v) {
+             $data['goods'][$k]['book_thumb']= C("QINIU_IMG_PATH").$v['book_thumb'];
+          }
+          $data['common_status'] = "";//订单app显示上的状态
+          if($data['order_status']<=1){//订单未确认、已下单
+               $data['common_status'] = "已下单";
+          }elseif($data['order_status']==3) {//已取消订单
+               $data['common_status'] = "已取消";
+          }elseif($data['order_status']==2) {//订单无效
+               $data['common_status'] = "订单无效";
+          }elseif($data['order_status']==5) {//已完成待评价
+               $data['common_status'] = "待评价";
+          }elseif($data['order_status']==6) {//已评价
+               $data['common_status'] = "已评价";
+          }
+          if($data['pay_status']==1 && $data['order_status']==1) {//付款中
+               $data['common_status'] = "付款中";
+          }elseif($data['pay_status']==2 && $data['order_status']==1) {//已付款
+               $data['common_status'] = "已付款";
+          }elseif($data['pay_status']==3 && $data['order_status']==1) {//退款中
+               $data['common_status'] = "退款中";
+          }elseif($data['pay_status']==4 && $data['order_status']==1) {//已退款
+               $data['common_status'] = "退款成功";
+          }
+          if($data['shipping_status']==0 && $data['order_status']==1 && $data['pay_status']==2) {//未发货
+               $data['common_status'] = "未发货";
+          }elseif($data['shipping_status']==1 && $data['order_status']==1 && $data['pay_status']==2) {//发货中
+               $data['common_status'] = "发货中";
+          }elseif($data['shipping_status']==2 && $data['order_status']==1 && $data['pay_status']==2) {//已发货
+               $data['common_status'] = "交易成功";
+          }elseif($data['shipping_status']==3 && $data['order_status']==1 && $data['pay_status']==2) {//备货中
+               $data['common_status'] = "备货中";
+          }
+          unset($data['order_status']);
+          unset($data['shipping_status']);
+          unset($data['pay_status']);
+          $this->myApiPrint(200,'success',$data);
+        }else{
+            $this->myApiPrint(300,'暂无数据');
+        } 
+
+    }
+    
+    
+}
+

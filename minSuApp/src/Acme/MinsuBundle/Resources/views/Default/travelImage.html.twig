@@ -1,0 +1,252 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+{% block javascript %} {{ parent() }}
+    <script src="{{ asset('bundles/msk/public/js/pic/jssor.slider.min.js') }}"></script>
+    <script src="{{ asset('bundles/msk/public/js/pic/jquery.scrollfollow.js') }}"></script>
+    <script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('bundles/msk/public/js/pic/slidePic.js') }}"></script>
+    <script src="{{ asset('bundles/msk/public/js/advsImage.js') }}"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("input[type='file']").change(function(evt){
+                var files = evt.target.files;
+
+                for (var i = 0, f; f = files[i]; i++) {
+
+                    if (!f.type.match('image.*')) {
+                        continue;
+                    }
+
+                    var reader = new FileReader();
+                    reader.readAsDataURL(f);
+                    reader.onload = (function() {
+                        return function(e) {
+                            $(".upload-ul").prepend("<li><img src=''></li>");
+                            $(".upload-ul img").attr("src",e.target.result);//预览图片的位置
+                        };
+                    })(f);
+                }
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#imglist").change(function(){
+                $("#imglist").css("display","none");
+                $("#img-label").css('display','none');
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        function edit()
+        {
+            $(".img-dlt").toggle();
+            $(".img-rank").toggle();
+            $(".img-is-default").toggle();
+            $(".img-an").toggle();
+            $(".url-input").toggle();
+        }
+    </script>
+    <script>
+        function deleteImg(obj){
+            var src = $(obj).parent().prev().prev().prev().attr("src");
+            var trueBeTold = confirm("是否删除？");
+            if (trueBeTold) {
+                $.ajax({
+                    type: "POST",
+                    url:"{{ path('travelimgdelete_') }}",
+                    data : {imgSrc : src},
+                    dataType:"json",
+                    success:function(data){
+                        if (data == '1') {
+                            window.location.href = "{{ path('travel_') }}";
+                        } else if(data == '2') {
+                            alert('删除不成功！');
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        function setTravelDefault(obj)
+        {
+            var isDlt = $(obj).val();
+            if (isDlt == "设为默认") {
+                var trueBeTold = confirm("是否设为默认？");
+                if (trueBeTold) {
+                    var src = $(obj).parent().prev().prev().attr("src");
+                    $.ajax({
+                        type: "POST",
+                        url : "{{ path('travelsetdefault_') }}",
+                        data: {src : src},
+                        dataType: "json",
+                        success: function(data) {
+                            if (data == 1) {
+                                $(".img-is-default input").attr('value', "设为默认");
+                                $(obj).attr('value','取消默认');
+                            } else {
+                                alert('设置不成功');
+                            }
+                        }
+                    })
+                }
+            } else if(isDlt == "取消默认") {
+                var isTrue = confirm("是否取消默认？");
+                if (isTrue) {
+                    var src = $(obj).parent().prev().prev().attr("src");
+                    $.ajax({
+                        type: "POST",
+                        url : "{{ path('traveldltdefault_') }}",
+                        data: {src : src},
+                        dataType: "json",
+                        success: function(data) {
+                            if (data == 1) {
+                                $(obj).attr('value','设为默认');
+                            } else {
+                                alert('设置不成功');
+                            }
+                        }
+                    })
+                }
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        function sortchange (obj) {
+            var vl = $(obj).val();
+            var src = $(obj).parent().prev().attr("src");
+            var isTrue = confirm("是否更改？");
+            if (isTrue) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('travelsortchange_') }}",
+                    data: {sortNum : vl,src : src},
+                    dataType: "json",
+                    success: function(data) {
+                        if (data == 1) {
+                            window.location.href = "{{ path('travel_') }}";
+                        } else if(data == 2) {
+                            alert('更新不成功！');
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        function changeurl (obj) {
+            var vl = $(obj).val();
+            var uid = $(obj).attr("uid");
+            var isTrue = confirm("是否更改？");
+            if (isTrue) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('changeurl_') }}",
+                    data: {url : vl,id : uid},
+                    dataType: "json",
+                    success: function(data) {
+                        if (data == 1) {
+                            window.location.href = "{{ path('travel_') }}";
+                        } else if(data == 2) {
+                            alert('更新不成功！');
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+
+{% endblock %}
+{% block stylesheet %} {{ parent() }}
+    <link href="{{ asset('bundles/msk/public/css/advsImage.css') }}" rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
+{% block content %}
+    <div id="content">
+        <div class="upload">
+            <div class="upl-img-btn">
+                <a class="login btn" href="javascript:;">图片上传</a>
+            </div>
+            <div class="upl-img-edit">
+                <a class="editbtn" href="javascript:edit();">编辑</a>
+            </div>
+            <div class="hide-body">
+                <div class="close-window">
+                    <a href="{{ path('travel_') }}" title="关闭" class="close">×</a>
+                </div>
+                <form id="fileUpload" action="{{ path('travelimghandle_') }}" method="post" enctype="multipart/form-data">
+                    <div class="upload-layer">
+                        <ul class="upload-ul">
+                            <li>
+                                <input id="imglist" type="file" name="imageUpload" accept="image/*"/>
+                                <label for="imglist" id="img-label">选择文件
+                                </label>
+                            </li>
+                        </ul>
+                        <div class="upload-sub">
+                            <input type="submit" id="upload-btn" value="提交">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="body-color"></div>
+        </div>
+        <div id="pagecount"></div>
+        <div id="img_display">
+            <ul class="img_list_ul">
+                {% for arrs in arr.sortPath %}
+                    <li class="img_list_li">
+                        <div class="img_dlp">
+                            <div class="img-an"><p>{{ arrs.adminName }}</p></div>
+                            <img class="img_lt" src="{{ asset(arrs.imgPath) }}">
+                            <span class="img-rank">排序：<input id="img-rank-val" onblur="sortchange(this)" type="text" name="imgRank" value="{{ arrs.advs_image_sort_num }}">
+                            </span>
+                            <span class="img-is-default"><input type="button" onclick="setTravelDefault(this)" id="is-default-btn" value="{% if arrs.advs_is_default == 1 %}取消默认{% else %}设为默认{% endif %}"></span>
+                            <span class="img-dlt"><input id="dlt" type="button" onclick="deleteImg(this)" value="删除" name="imgDelete"></span>
+                            <input class="url-input" type="text" value="{{ arrs.advs_text }}" style="display:none;margin-top: 7px;" uid='{{ arrs.id }}' onblur="changeurl(this)"   placeholder="请输入广告网址">
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="page_display">
+            <div class="holder" id="page_holder">
+                <span><a href="{{ path('travel_',{page:1}) }}">首页</a></span>
+                {% if arr.totalPage !=0  %}
+                    {% for i in 1..arr.totalPage %}
+                        <span><a href="{{ path('travel_',{page:i}) }}">{{ i }}</a></span>
+                    {% endfor %}
+                {% endif %}
+                <span><a href="{{ path('travel_',{page:arr.totalPage}) }}">尾页</a></span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

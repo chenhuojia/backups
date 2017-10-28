@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>士加堡民宿</title>
+<!--//彈框-->
+<!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>	
+    <style type="text/css">
+    .clear {
+      zoom: 1;
+      display: block;
+    }
+    </style>
+<![endif]-->
+{% block stylesheet %}
+<link href="{{ asset('bundles/msk/public/css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all"/>
+<link rel="stylesheet" href="{{ asset('bundles/msk/public/css/style.css') }}" media="all" />
+	<!--[if IE]><link rel="stylesheet" href="{{ asset('bundles/msk/public/css/ie.css') }}" media="all" /><![endif]-->
+	<!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
+{% endblock %}
+{% block javascript %}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<!--//彈框 jquery.modal-->
+<script type="text/javascript" src="{{ asset('bundles/msk/public/js/jquery.modal.js') }}"></script>
+
+{% endblock %}
+</head>
+<body class="login">
+{% block body%}
+{% endblock %}
+</body>
+</html>

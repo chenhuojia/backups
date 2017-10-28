@@ -1,0 +1,294 @@
+<?php
+
+use Common\Controller\ApiController;
+
+    
+     /**
+     * @param unknown $token
+     * @param unknown $art  登录通过后，保存用户信息,仅在登录方法实用
+     */
+    function save_token($token,$art){
+        start_session($token);
+        $_SESSION=$art;
+    }
+    
+    
+    function changeCoupon($user_id,$coupon_id){
+        if($coupon_id > 0){
+            $data3['user_id'] = $user_id;
+            $data3['order_id'] = $order_id;
+            $data3['use_time'] = $_SERVER['REQUEST_TIME'];
+            $data3['user_number'] = 1;
+            $data3['spare'] = 0;
+            return M('user_coupon')->where("id = $coupon_id")->save($data3);
+        }
+        return 0;
+    }
+    
+    /**
+     * 订单操作日志
+     * 参数示例
+     * @param type $order_id  订单id
+     * @param type $action_note 操作备注
+     * @param type $status_desc 操作状态  提交订单, 付款成功, 取消, 等待收货, 完成
+     * @param type $user_id  用户id 默认为管理员
+     * @return boolean
+     */
+    function logOrder($order_id,$action_note,$status_desc,$user_id = 0)
+    {
+        $status_desc_arr = array('提交订单', '付款成功','取消订单', '等待收货', '完成','退货','申请退款','取消退款','退款成功','拒绝退款');
+        if(!in_array($status_desc, $status_desc_arr))
+          return false;    
+        $order = M('order')->where("order_id = $order_id")->find();
+        $action_info = array(
+            'order_id'        =>$order_id,
+            'action_user'     =>$user_id,
+            'order_status'    =>$order['order_status'],
+            'shipping_status' =>$order['shipping_status'],
+            'pay_status'      =>$order['pay_status'],
+            'action_note'     => $action_note,
+            'status_desc'     =>$status_desc, //''
+            'log_time'        =>time(),
+        );
+        return M('order_action')->add($action_info);
+    }
+    
+     
+     function integral_log($user_id,$title,$description,$amount,$is_inc=1,$add=1){  
+             $Integral=M('user');
+             $Integral->startTrans();
+             $data=$Integral->where(array('user_id'=>$user_id))->find();
+             if ($add){
+                $result=$Integral->where(array('user_id'=>$user_id))->setInc('integral',$amount);
+                $after = $amount+$data['integral'];
+             }else {
+                 if ($data['integral'] < $amount) return array('status'=>-1,'msg'=>'你的可用积分为'.$data['num']);
+                 $result=$Integral->where(array('user_id'=>$user_id))->setDec('integral',$amount);   
+                 $after = $data['integral']-$amount;    
+             }
+             if ($result){
+                 $arr=array(
+                     'user_id'=>$user_id,
+                     'update_time'=>time(),
+                     'amount'=>$amount,
+                     'title'=>$title,
+                     'description'=>$description,
+                     'is_inc'=>$is_inc,
+                     'before_change'=>$data['integral'],
+                     'after_change'=>$after
+                 );
+                 $data=M('integral_xq')->add($arr);            
+             }
+             if ($data){ $Integral->commit();return array('status'=>1,'msg'=>'success');}
+             else{$Integral->rollback();return array('status'=>-1,'msg'=>'false');}
+     }
+
+     function today(){
+         date_default_timezone_set("Asia/Shanghai");
+         $time=date("Y-m-d 00:00:00");
+         $deadline=date("Y-m-d 24:00:00");
+         $news=strtotime($time);
+         $dead=strtotime($deadline);
+         return array(array('gt',$news),array('lt',$dead));
+     }
+
+     function message_log($type,$title,$three_id,$url,$user_id=0){  
+        $arr=array(
+                     
+                     'type'=>$type,//消息类型 1新书上架，2系统消息
+                     'title'=>$title,//消息标题
+                     'content'=>$three_id,//ID存放
+                     'addtime'=>time(),
+                     'state'=>2,//消息状态 1未发，2已发送
+                     'click_time'=>0,//点击次数
+                     'url'=>$url,//跳转地址
+                     'user_id'=>$user_id,//发布消息的人id
+                 );
+        $data=M('message')->add($arr);    
+        if($data) return 1;
+        else return 0;
+     }
+
+
+    function add_answer($fid=0,$type=0,$three_id,$auser_id=0,$auser_name,$acontent,$atype=0){  
+        
+        $data=M("answer")->field("answer_user_id,answer_user_name,answer_content")->where(array('id'=>$fid))->find();
+        $arr=array(
+                 'fid'=>$fid,//父id
+                 'type'=>$type,//类型：0话题1书评
+                 'three_id'=>$three_id,//话题|书评id
+                 'user_id'=>$data['answer_user_id'],//发表人id
+                 'user_name'=>$data['answer_user_name'],//发表人的昵称
+                 'user_content'=>$data['answer_content'],//发表人发表的内容
+                 'answer_user_id'=>$auser_id,//回复人id
+                 'answer_user_name'=>$auser_name,//回复人昵称
+                 'answer_content'=>$acontent,//回复人发的内容
+                 'answer_time'=>time(),//回复时间
+                 'answer_type'=>$atype//回复类型:0评论,1话题2书评
+             );
+        $answer=M('answer')->add($arr);  
+        if($answer) return 1;
+        else return 0;
+     }
+   
+
+     function add_topic_comment($comment_id=0,$topic_id=0,$user_id=0,$user_name,$content)
+     {
+          $arr=array(
+                 'topic_id'=>$topic_id,//话题id
+                 'user_id'=>$user_id,//用户名字
+                 'user_name'=>$user_name,//用户名字
+                 'user_avatar'=>'',//用户头像
+                 'content'=>$content,//评论内容
+                 'addtime'=>time(),//评论时间
+                 'fid'=>$comment_id,//父类ID
+                 'is_show'=>1,//是否展示
+                 'comment_number'=>0,//评论人数
+                 'like_number'=>0//点赞人数
+             );
+        $data=M('topic_comment')->add($arr); 
+        if($comment_id==0){ M('topic')->where(array('topic_id'=>$topic_id))->setInc('discuss_number');}
+        else{ M('topic_comment')->where(array('comment_id'=>$comment_id))->setInc('comment_number');}
+        if($data) return $data;
+        else return 0;
+     }
+
+     function add_book_comment($comment_id=0,$user_id=0,$user_name,$content)
+     {   
+         $data=M('book_comment')->find($comment_id);
+         $arr=array(
+               'type'=>$data['type'],
+               'book_id'=>$data['book_id'],
+               'user_id'=>$user_id,
+               'username'=>$user_name,
+               'comment_time'=>$_SERVER['REQUEST_TIME'],
+               'content'=>$content,
+               'book_number'=>$data['book_number'],
+               'book_name'=>$data['book_name'],
+               'author'=>$data['author'],
+               'image'=>$data['image'],
+               'fid'=>$comment_id
+           );
+        $data=M('book_comment')->add($arr);
+        if($comment_id>0) M('book_comment')->where(array('comment_id'=>$comment_id))->setInc('sums');
+        if($data) return $data;
+        else return 0;
+     }
+
+     function add_topic_comment_reply($fid=0,$comment_id=0,$user_id=0,$user_name,$content)
+     {
+          $arr=array(
+                 'comment_id'=>$comment_id,//书评评论的id
+                 'user_id'=>$user_id,//用户名字
+                 'user_name'=>$user_name,//用户名字
+                 'user_avatar'=>'',//用户头像
+                 'content'=>$content,//评论内容
+                 'comment_time'=>time(),//评论时间
+                 'fid'=>$fid,//父类ID
+                 'is_show'=>1,//是否展示
+                 'comment_number'=>0,//评论人数
+                 'like_number'=>0//点赞人数
+             );
+        $data=M('book_comment_reply')->add($arr); 
+        if($fid==0){ M('book_comment')->where(array('comment_id'=>$comment_id))->setInc('sums');}
+        else{ M('book_comment_reply')->where(array('reply_id'=>$fid))->setInc('sums');}
+        if($data) return $data;
+        else return 0;
+     }
+
+     function money_log($user_id,$title,$description,$amount,$is_inc=1,$payee=0,$shop_id=0,$apply_id=0,$type=0,$add=1){  
+             $money=M('user');
+             $money->startTrans();
+             $data=$money->where(array('user_id'=>$user_id))->find();
+             if ($add){
+                $result=$money->where(array('user_id'=>$user_id))->setInc('money',$amount);
+                $after = $amount+$data['money'];
+             }else {
+                 if ($data['money'] < $amount) return array('status'=>-1,'msg'=>'你的可用积分为'.$data['money']);
+                 $result=$money->where(array('user_id'=>$user_id))->setDec('money',$amount);   
+                 $after = $data['money']-$amount;    
+             }
+             if ($result){
+                 $arr=array(
+                     'user_id'=>$user_id,
+                     'update_time'=>time(),
+                     'amount'=>$amount,
+                     'title'=>$title,
+                     'description'=>$description,
+                     'is_inc'=>$is_inc,
+                     'original_amount'=>$data['money'],
+                     'change_amount'=>$after,
+                     'payee'=>$payee,//'收/付款用户id
+                     'shop_id'=>$shop_id,//收款店铺
+                     'apply_id'=>$apply_id,//提现的id
+                     'type' =>$type
+                 );
+                 $data=M('money_xq')->add($arr);        
+             }
+             if ($data){ $money->commit();return array('status'=>1,'msg'=>'success');}
+             else{$money->rollback();return array('status'=>-1,'msg'=>'false');}
+     }
+
+     function login_integral_log($user_id){  
+         $integration=M('integration')->field('source,number')->where(array('identify'=>'login','is_deleted'=>0))->find();
+         if(empty($integration)) return 0;
+         $Integral=M('user');
+         $Integral->startTrans();
+         $daystar=strtotime("today");//今日零点的时间戳
+         $dayend=$daystar+"86400";//明日零点(今日24点）的时间戳
+         $login_log =M('user_login_log')->where(array('userid'=>$user_id,'login_time'=>array('between',array($daystar,$dayend))))->count();
+         if($login_log){
+             return 0;
+         }else{
+             $data=$Integral->where(array('user_id'=>$user_id))->find();
+             $result=$Integral->where(array('user_id'=>$user_id))->setInc('integral',$integration['number']);
+             $after = $integration['number']+$data['integral'];
+             if ($result){
+                 $arr=array(
+                     'user_id'=>$user_id,
+                     'update_time'=>time(),
+                     'amount'=>$integration['number'],
+                     'title'=>$integration['source'],
+                     'description'=>date('Y-m-d').'登录获取到积分'.$integration['number'],
+                     'is_inc'=>1,
+                     'before_change'=>$data['integral'],
+                     'after_change'=>$after
+                 );
+                 $detail=M('integral_xq')->add($arr);            
+             }
+             if ($detail){ $Integral->commit();return 1;}
+             else{$Integral->rollback();return 0;}
+         } 
+          
+   }
+
+   function bind_integral_log($user_id,$descripte,$identify){  
+         $integration=M('integration')->field('source,number')->where(array('identify'=>$identify,'is_deleted'=>0))->find();
+         if(empty($integration)) return 0;
+         $Integral=M('user');
+         $Integral->startTrans();
+         $data=$Integral->where(array('user_id'=>$user_id))->find();
+         $result=$Integral->where(array('user_id'=>$user_id))->setInc('integral',$integration['number']);
+         $after = $integration['number']+$data['integral'];
+         if ($result){
+             $arr=array(
+                 'user_id'=>$user_id,
+                 'update_time'=>time(),
+                 'amount'=>$integration['number'],
+                 'title'=>$integration['source'],
+                 'description'=>date('Y-m-d').'绑定'.$descripte.'获取到积分'.$integration['number'],
+                 'is_inc'=>1,
+                 'before_change'=>$data['integral'],
+                 'after_change'=>$after
+             );
+             $detail=M('integral_xq')->add($arr);            
+         }
+        if ($detail){ $Integral->commit();return 1;}
+        else{$Integral->rollback();return 0;}
+   }
+
+
+     
+
+     
+ ?>

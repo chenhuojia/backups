@@ -1,0 +1,33 @@
+
+#top .primary-background, .dropcap2, div .button, input[type="submit"], #submit, .info_text_header, #info_text_header .infotext, .numeric_controls a:hover, .numeric_controls .active_item, .contentSlideControlls a.activeItem, #top th, #top .related_posts .contentSlideControlls a.activeItem, #top .arrow_controls a, #main .content #searchsubmit:hover, .callout a, #info_text_header.minimized:hover{
+background-color:#f0b70c;
+}
+
+#top .primary-color, a, #cancel-comment-reply-link, .blog-tags a:hover, .relThumb a:hover strong, .flex_column h1, .flex_column h2, .flex_column h3, .flex_column h4, .flex_column h5, .flex_column h6, #top #wrap_all .tweet-text a, #top #js_sort_items a.active_sort, .callout a:hover{
+color:#f0b70c;
+}
+
+#top .primary-border, div .main_menu ul:first-child > li.current-menu-item > a, div .main_menu ul:first-child > li.current_page_item > a, div .button, input[type="submit"], #submit, #top .main_menu .menu ul, .info_text_header{
+border-color:#f0b70c;
+}
+
+h1, h2, h3, h4, h5, h6, .hero-text, blockquote, legend, #top .slideshow_caption h1{
+font-family:"HelveticaNeue", "Helvetica Neue", Helvetica, Arial;
+}
+
+
+#top .extralight-border, div #header .container, div .pagination, #top .pagination span, div .pagination a, div .gravatar img, #top div .commentlist ul, div .children .children .says, div .commentlist>.comment, div .input-text, input[type="text"], input[type="password"], input[type="email"], textarea, select, #top .main_menu .menu li, pre, code, div .numeric_controls a, div .pullquote_boxed, div .news-thumb, div .tweet-thumb a, #top .borderlist>li, .post_nav, #top .wp-caption, .slideshow,  .widget a, .widget li, .widget span, .widget div, table, td, tr, th, #footer .container, #socket .container, #top fieldset, #top .social_bookmarks, #top .social_bookmarks li, #info_text_header, .ajax-control a, .inner_column, #top .blog-meta, .inner-entry, .inner_slide{
+border-color:#e1e1e1;
+}
+
+#top .highlight-background, div .button:hover, input[type="submit"]:hover, #submit:hover, .contentSlideControlls a:hover, #top .related_posts .contentSlideControlls a:hover, #top .caption-slideshow-button:hover, #top .arrow_controls a:hover, #main .content #searchsubmit{
+background-color:#edc756;
+}
+
+a:hover, #top .widget ul li a:hover, #top .widget ul li .news-link:hover strong, #top #wrap_all .tweet-text a:hover, #js_sort_items a:hover, .ajax_slide a:hover, .ajax-control a:hover{
+color:#edc756;
+}
+
+#top .caption-slideshow-button:hover{
+border-color:#edc756;
+}

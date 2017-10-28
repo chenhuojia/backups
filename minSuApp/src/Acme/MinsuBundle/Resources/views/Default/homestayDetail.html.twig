@@ -1,0 +1,398 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/pic/jssor.slider.min.js') }}"></script>
+<script src="{{ asset('bundles/msk/public/js/pic/jquery.scrollfollow.js') }}"></script>
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script src="{{ asset('bundles/msk/public/js/pic/slidePic.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+// $('#myModal').modal(options);
+$('.listpic ul .Rpicclii').click(function(){
+// 	$('.listpic ul li img').removeClass("selectPic");
+	var id = $(this).attr("val-id");
+	var dscp =$(this).attr("dscp");
+	$("#myModal_"+id+" .listpic ul li img" ).removeClass("selectPic");
+	$(this).children("img").addClass("selectPic");
+	var src =$(this).children("img").attr("src");
+	$(this).parent("ul").parent(".listpic").siblings(".BigPic").children("img").attr("src",src);
+	$(this).parent("ul").parent(".listpic").siblings(".BigPic").children(".bigpicdscp").text(dscp);
+	$(this).parent("ul").parent(".listpic").siblings(".BigPic").children(".bigpicdscp").attr("title",dscp);
+
+var mykey =	$(this).children("img").attr("mykey");
+$(".rmbtn").attr("mykey",mykey);
+$(".span_"+id+"_num").text(parseInt(mykey)+parseInt(1));
+	})
+
+	$(".roomTbBtn").click(function(){
+		var id =$(this).attr("val-id");
+		var size =$("#myModal_"+id+" .listpic ul .Rpicclii").size();	
+		$("#myModal_"+id+" .listpic ul .Rpicclii:gt(7)").hide();
+// $("#myModal_"+id+" .listpic ul .Rpicclii:gt(7)").addClass("hideli");
+	});
+
+//向前
+$(".roomprevbtn").click(function(){
+	var id =$(this).attr("val-id");	
+	var mykey=$(this).attr('mykey');
+	var num =$(this).siblings(".Rpicclii").size();
+	var updatakey=parseInt(mykey)-parseInt(1);
+	if(updatakey<num){
+		if(mykey!=0){
+			$("#myModal_"+id+" .listpic ul li img" ).removeClass("selectPic");
+			$("#img_"+id+"_"+updatakey).addClass("selectPic");
+			if($("#img_"+id+"_"+updatakey).parent(".Rpicclii").attr("style") == "display: none;"){
+				$("#img_"+id+"_"+updatakey).parent(".Rpicclii").show();
+				var hideNum =parseInt($("#img_"+id+"_"+updatakey).attr("mykey"))+parseInt(7);
+				$("#myModal_"+id+" .listpic ul .Rpicclii:gt("+hideNum+")").hide();
+				}
+// 			style="display: none;"
+			$(".rmbtn").attr("mykey",$("#img_"+id+"_"+updatakey).attr("mykey"));
+			//页数
+			var aa =parseInt($("#img_"+id+"_"+updatakey).attr("mykey")) +parseInt(1);
+			$(".span_"+id+"_num").text(aa);
+			var src =$("#img_"+id+"_"+updatakey).attr("src");
+			var dscp =$("#img_"+id+"_"+updatakey).parent(".Rpicclii").attr("dscp");
+			$(this).parent("ul").parent(".listpic").siblings(".BigPic").children("img").attr("src",src);
+			$(this).parent("ul").parent(".listpic").siblings(".BigPic").children(".bigpicdscp").text(dscp);
+			$(this).parent("ul").parent(".listpic").siblings(".BigPic").children(".bigpicdscp").attr("title",dscp);
+//	 		$(this).siblings(".Rpicclii").children(".selectPic")	
+
+			}
+// 		$(this).attr("mykey",updatakey);
+		}
+	
+// 	var thisKey =$(this).siblings(".Rpicclii").children(".selectPic").attr("mykey");
+// 	alert(thisKey);
+})
+
+//向后
+$(".roomnextbtn").click(function(){
+	var id =$(this).attr("val-id");	
+	var mykey=$(this).attr('mykey');
+	var num =$(this).siblings(".Rpicclii").size();
+	var updatakey=parseInt(mykey)+parseInt(1);
+	if(updatakey<num){
+// 		if(mykey!=num){
+			$("#myModal_"+id+" .listpic ul li img" ).removeClass("selectPic");
+			$("#img_"+id+"_"+updatakey).addClass("selectPic");
+			if($("#img_"+id+"_"+updatakey).parent(".Rpicclii").attr("style") == "display: none;"){
+				$("#img_"+id+"_"+updatakey).parent(".Rpicclii").show();
+					var hideNum =parseInt($("#img_"+id+"_"+updatakey).attr("mykey"))-parseInt(7);
+// 					alert(hideNum);
+// 					var returnNum =parseInt(hideNum)+parseInt(1);
+					$("#myModal_"+id+" .listpic ul .Rpicclii:lt("+hideNum+")").hide();
+				}
+			$(".rmbtn").attr("mykey",$("#img_"+id+"_"+updatakey).attr("mykey"));
+			//页数
+			$(".span_"+id+"_num").text(parseInt($("#img_"+id+"_"+updatakey).attr("mykey"))+parseInt(1));
+			var src =$("#img_"+id+"_"+updatakey).attr("src");
+			var dscp =$("#img_"+id+"_"+updatakey).parent(".Rpicclii").attr("dscp");
+			$(this).parent("ul").parent(".listpic").siblings(".BigPic").children("img").attr("src",src);
+			$(this).parent("ul").parent(".listpic").siblings(".BigPic").children(".bigpicdscp").text(dscp);
+			$(this).parent("ul").parent(".listpic").siblings(".BigPic").children(".bigpicdscp").attr("title",dscp);
+			
+//	 		$(this).siblings(".Rpicclii").children(".selectPic")	
+// 			}
+// 			$(this).attr("mykey",updatakey);
+		}
+	
+// 	var thisKey =$(this).siblings(".Rpicclii").children(".selectPic").attr("mykey");
+// 	alert(thisKey);
+})
+
+
+$(".agreeBtn").click(function(){
+	var id = $(this).attr("id-val");
+	var state =$(this).attr("state-vale");
+	if(confirm("确认通过审核?")){
+		shenkefuc(id,state,'');
+		}
+	})
+
+$(".disagreeBtn").click(function(){
+		var reason =$("#HomeStayReason").val();
+		if(!reason){alert("必须填写审核不通过理由！");return false;}
+		var id = $(this).attr("id-val");
+		var state =$(this).attr("state-vale");
+		if(confirm("确认提交?")){
+			shenkefuc(id,state,reason);
+			}
+})
+function shenkefuc(id,state,reason){
+	$.ajax({
+		type:"POST",
+		data:"&id="+id+"&state="+state+"&rtest="+reason,
+		url:"{{ path('AjaxCHomeStay_') }}",
+		success:function(msg){
+			if (msg === '1'){
+				alert("操作成功!");
+				}
+			  location.reload();
+		}
+	});
+}
+
+
+
+$(".media-btn").click(function(){
+
+	var id =$(this).attr("id");
+
+	if (id == "img"){
+		$("#video-play").hide();
+		} else if (id == "video"){
+			
+
+			$("#video-play").show();
+			}
+})
+})
+</script>
+
+{% endblock %}
+{% block stylesheet %} {{ parent() }}
+{# <link href="{{ asset('bundles/msk/public/css/details_new.css') }}" rel="stylesheet" type="text/css" media="all"/>#}
+	<style type="text/css">
+		.video {
+			position: absolute;
+				right: 17%;
+		}
+		.img {
+			position: absolute;
+		
+			
+			right: 20%;
+		}
+	</style>
+{% endblock %}
+{% block content%}<section class="alert">
+	 	 <button type="button"class="green stateBtn" onclick='javascript:history.go(-1);'>返回</button>
+{# 	 	 <button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>#}
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>民宿信息</h1>
+				<button class="video media-btn" id="video">视频</button>
+				<button class="img media-btn" id="img">照片</button>
+			</hgroup>
+		</header>
+		<div class="content no-padding timeline">
+			<div class="homestay_box_left">
+			<div class="detailform"><span>民宿名字</span>：<span>{{ v.homestay_name }}</span></div>
+			<div class="detailform"><span>民宿标题</span>：<span>{{ v.homestay_title }}</span></div>
+			<div class="detailform"><span>真实名字</span>：<span>{{ v.true_name }}</span></div>
+			<div class="detailform"><span>民宿类型</span>：<span>{{ v.homestay_type_name }}</span></div>
+			<div class="detailform"><span>民宿早餐</span>：<span>{% if v.repast == 0 %}不提供{% elseif v.repast== 1 %}免费提供{% elseif v.repast ==2 %}收费早餐{% endif %}</span></div>
+			<div class="detailform"><span>提供发票</span>：<span>{% if v.invoice == 0 %}不提供{%  elseif v.invoice == 1 %}提供{% endif %}</span></div>
+			<div class="detailform"><span>入住时间</span>：<span>{{ v.check_in_time }} ~ {{ v.check_out_time }}</span></div>
+			<div class="detailform"><span>接待时间</span>：<span>{{ v.reception_time }}</span></div>
+			<div class="detailform"><span>民宿描述</span>：<span>{{ v.dscp }}</span></div>
+			<div class="detailform"><span>民宿状态</span>：<span>{% if v.state == 0 %}未审核{% elseif v.state == 1 %}通过审核{% elseif v.state ==2 %}审核不通过{% endif %}</span></div>
+			{% if v.state ==2 %}<div class="detailform"><span>审理理由</span>：<span>{{ v.refuse_reason }}</span></div>{% endif %}
+			<div class="detailform"><span>最低价格</span>：<span>{{ v.bottom_price }}</span></div>
+			<div class="detailform"><span>联系电话</span>：<span>{{ v.homestay_phone }}</span></div>
+			<div class="detailform"><span>民宿地址</span>：<span style="font-size: 14px;">{{ v.homestay_addr }}</span></div>
+			
+			</div>
+{# 			<div style="clear:both"></div> #}
+			<div id="video-play" >
+				<video width="500" height="500" controls="controls">
+					<source src="{{ asset(video) }}" type="video/mp4">
+				</video>
+			</div>
+			<div class="fl img_playPar" id="img-play" display="none">
+	    		<!--房屋轮播图-->	
+		    		<div class="desTop fl">
+		            	<!--图片轮播-->
+			            <div style="position:relative;">
+			                <div class="picmap-change">
+			        <div id="TabChangeCon_01" class="change-list">
+										<div>
+											<li style="display: none;" ><a href="#"  style="position: relative;" rel="nofollow"><video width='640px' height='480px' controls="controls"><source src="{{ asset(video) }}" type="video/mp4"></video><span class="hspicdscp"></span></a></li>
+										</div>
+					            		<div class="picbox">
+							                <ul class="piclist">
+							                	{% for a in v.image %}
+								       			<li style="display: none;" ><a href="#"  style="position: relative;" rel="nofollow"><img src="{{ asset(a) }}"  width='640px' height='480px' alt="{{ a }}"><span class="hspicdscp">{{ a }}</span></a></li>								                	
+							               		{% endfor %}
+												<a id="big_play_prev" class="home-picprev" href="#" rel="nofollow" style="cursor: url({{ asset('bundles/msk/public/images/mouseup.cur') }}), auto; background-color: rgb(255, 255, 255); opacity: 0; top: 50%; background-position: initial initial; background-repeat: initial initial;"></a>
+			                        		<a id="big_play_next" class="home-picnext" href="#" rel="nofollow" style="cursor: url({{ asset('bundles/msk/public/images/mousedown.cur') }}), auto; background-color: rgb(255, 255, 255); opacity: 0; bottom: 50%; background-position: initial initial; background-repeat: initial initial;"></a>
+					            			</ul>
+										</div>
+			                            <div class="picsmallbox">
+			    			  				<div class="picboxpic">
+					            				<ul id="picsmall" class="picsmall clearfix" >
+					            				{% for a in v.image %}
+					            					<li class="minPic"><a href="#" rel="nofollow"><img src="{{ asset(a) }}" width="90px" height="60px" alt="{{ a }}"></a></li>
+						                		{% endfor %}
+					            				</ul>
+			            	          		</div>
+
+					        				<a id="play_prev" class="play-prev" href="#" rel="nofollow"></a>
+					        				<a id="play_next" class="play-next" href="#" rel="nofollow"></a>
+				        					<div class="translucence"></div>
+				    					</div>
+			        			</div>
+{# 								<div id="TabChangeCon_02" class="change-list">#}
+{# 									<div id="mapDiv"></div>#}
+{# 								</div>	#}
+			    			</div>
+			    		</div>
+					</div>
+		       	 <!--图片轮播结束-->
+
+		        </div>
+{# 		   <div style="clear:both"></div>  #}
+
+{# 房东认证信息#}
+{% if v.ownerApproveImage %}
+<div class="box_boss">
+{% for o in v.ownerApproveImage %}
+<div class="box_main" {% if o.is_default !=0 %}style="margin-top: 48px;"{% endif %}>
+<div class="box_left">{% if o.is_default ==0 %}手持身份证证件照{% else%}房屋出租证明照{% endif %}</div>
+<div class="box_right"><img alt="" src="{{ asset(o.img_url) }}" height="480px" width="635px" ></div>
+</div>		   
+{% endfor %}
+</div>
+{% endif %}
+{# 房东认证信息#}
+  <!-- 房间信息 -->
+	<div class="roomTable">
+		<table id="myTable" border="0" >
+				<thead>
+					<tr>
+						<th class="avatar" style="padding-left: 90px;">房间标题</th>
+						<th>房间价格</th>
+						<th>单人床 / 双人床</th>
+						<th>卧室 / 厅</th>
+						<th>厨房 / 厕所 / 阳台</th>
+						<th>房间设备</th>
+					</tr>
+				</thead>
+					<tbody>
+					{% for v in room %}
+{# 					<button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>#}
+						<tr class="roomTbBtn" val-id="{{ v.id }}" data-toggle="modal" data-target="#myModal_{{ v.id }}">
+							<td class="avatar"><img src="{{ asset(v.Rimage.0.img_url) }}" alt="" height="60px" width="60px" /> {{ v.room_title }}</td>
+							<td>{{ v.room_price }}</td>
+{# 							<td>{% if v.room_bed ==0 %}单人床{% elseif v.room_bed ==1 %}双人床{% endif %}</td>#}
+							<td>{{ v.room_single_bed }} / {{ v.room_double_bed }}</td>
+							<td>{{ v.room_num }} / {{ v.room_hall }}</td>
+							<td>{{ v.room_kitchen }} / {{ v.room_toilet }} / {{ v.room_balcony }}</td>
+							<td>{% for n in v.room_server %}{{ n.server_name }} / {%else%}暂无数据{% endfor %}</td>
+						</tr>
+						{% else %}<tr><td colspan="6">该民宿暂无房间</td></tr>
+				  {% endfor %}
+					</tbody>
+				</table>   
+				</div>
+{% if yigong !=0 %}
+	<div class="roomTable">
+		<table id="myTable" border="0" >
+			 <thead>
+				<tr>
+					<th class="avatar" style="padding-left: 90px;">义工标题</th>
+					<th>义工内容</th>
+					<th>义工地址</th>
+					<th>义工图片</th>
+				</tr>
+			 </thead>
+			 <tbody>
+				{% for v in yigong %}
+					<tr class="roomTbBtn">
+						<td>{{v.title}}</td>
+						<td>{{v.content}}</td>
+						<td>{{v.address}}</td>
+						<td>
+							{% for vv in v.img %}
+								<img src='{{vv}}' height="20" width="20">
+							{% endfor %}
+						</td>
+					</tr>	
+				{% endfor %}		
+			</tbody>
+		</table>   
+	</div>
+{% endif %}
+				
+{% if v.state==0 %}				
+	<!-- 通过与不通过按钮 -->
+	<div class="box_floor">
+	<button class="green agreeBtn" id-val="{{ v.id }}"  state-vale="1">经过审核给予通过</button>
+	<button class="red " data-toggle="modal" data-target="#myModal_disagree" >不通过</button>
+	</div>
+	<!-- 通过与不通过按钮 -->			
+{% endif %}	
+</section>
+
+
+
+	</section>
+{% for v in room %}
+<!-- Modal -->
+<div class="modal fade" id="myModal_{{ v.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="flase">
+  <div class="modal-dialog" style="width: 900px;margin-top:80px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel" style="font-family: '微软雅黑';font-size: 16px;font-weight: 600;">{{ v.room_title }}</h4>
+      </div>
+      <div class="modal-body" style="text-align: center;margin-bottom: 60px;">
+      <div>
+      <div class="BigPic"><img alt="" src="{{ asset(v.Rimage.0.img_url) }}" >
+      <span class="bigpicdscp" title="{{ v.Rimage.0.img_dscp }}">{{ v.Rimage.0.img_dscp }}</span>
+      <span class="bigpicNumm" ><span class="span_{{ v.id }}_num">1</span> / {{ v.Rimage|length  }}</span>
+      </div>
+      <div class="listpic">
+      <ul>
+      <li class="rmbtn roomprevbtn"  mykey="0" val-id="{{ v.id }}"><a class="roomprevbtn" ><span class="icon">&#59229;</span></a></li>
+      {% for key,a in v.Rimage %}
+      <li class='Rpicclii'  val-id="{{ v.id }}" dscp="{{ a.img_dscp }}"><img  id="img_{{ v.id }}_{{ key }}" mykey="{{ key }}" {% if key == 0 %}class='selectPic'{% endif %} alt="" src="{{ asset(a.img_url) }}" alt="{{ a.img_dscp }}"></li>
+       {% endfor %}
+{#        <li class="Rpicclii" val-id="1" dscp="text001"><img id="img_1_2" mykey="2" class="" alt="" src="/msk/web/bundles/msk/upload/member/Room/1/456.jpg"></li>#}
+{#         <li class="Rpicclii" val-id="1" dscp="text001"><img id="img_1_3" mykey="3" class="" alt="" src="/msk/web/bundles/msk/upload/member/Room/1/456.jpg"></li>#}
+{#          <li class="Rpicclii" val-id="1" dscp="text001"><img id="img_1_4" mykey="4" class="" alt="" src="/msk/web/bundles/msk/upload/member/Room/1/456.jpg"></li>#}
+{#           <li class="Rpicclii" val-id="1" dscp="text001"><img id="img_1_5" mykey="5" class="" alt="" src="/msk/web/bundles/msk/upload/member/Room/1/456.jpg"></li>#}
+{#            <li class="Rpicclii" val-id="1" dscp="text001"><img id="img_1_6" mykey="6" class="" alt="" src="/msk/web/bundles/msk/upload/member/Room/1/456.jpg"></li>#}
+{#             <li class="Rpicclii" val-id="1" dscp="text001"><img id="img_1_7" mykey="7" class="" alt="" src="/msk/web/bundles/msk/upload/member/Room/1/456.jpg"></li>#}
+{#              <li class="Rpicclii" val-id="1" dscp="text001"><img id="img_1_8" mykey="8" class="" alt="" src="/msk/web/bundles/msk/upload/member/Room/1/123.jpg"></li>#}
+{#              <li class="Rpicclii" val-id="1" dscp="text001"><img id="img_1_9" mykey="9" class="" alt="" src="/msk/web/bundles/msk/upload/member/Room/1/789.jpg"></li>#}
+{#                 <li class="Rpicclii" val-id="1" dscp="text001"><img id="img_1_10" mykey="10" class="" alt="" src="/msk/web/bundles/msk/upload/member/Room/1/123.jpg"></li>#}
+{#              <li class="Rpicclii" val-id="1" dscp="text001"><img id="img_1_11" mykey="11" class="" alt="" src="/msk/web/bundles/msk/upload/member/Room/1/987.jpg"></li>#}
+      <li class="rmbtn roomnextbtn" mykey="0" val-id="{{ v.id }}"><a class="roomnextbtn " > <span class="icon">&#59230;</span></a></li>
+      </ul>
+      </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+{#         <button type="button" class="btn btn-primary">Save changes</button>#}
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endfor %}
+
+
+<div class="modal fade" id="myModal_disagree" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="flase">
+  <div class="modal-dialog" style="margin-top:180px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel" style="font-family: '微软雅黑';font-size: 16px;font-weight: 600;">不通过的理由</h4>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+      <textarea  name='HomeStayReason' id="HomeStayReason" rows="" cols="" style="height: 100px;"></textarea>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary disagreeBtn"  id-val="{{ v.id }}" state-vale="2" >提 交</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+{% endblock%}

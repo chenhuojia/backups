@@ -1,0 +1,125 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$(".group_select_change").val({{ ss }});
+	$(".group_select_change").change(function(){
+		$('form').submit();
+		})
+});
+
+	
+</script>
+	<script type="text/javascript">
+		function changeGroupPostState(obj) {
+			if ($.trim($(obj).html()) == '屏蔽') {
+				var state = 1;
+			} else if ($.trim($(obj).html()) == '恢复') {
+				state = 0;
+			}
+			var id = $(obj).attr('name');
+			$.ajax({
+				type: "post",
+				data: {'id': id, 'state': state},
+				url: "{{ path('changeGPS_') }}",
+				success: function (data) {
+					if (data == 1) {
+						location.reload();
+					}
+				}
+			});
+		}
+	</script>
+{% endblock %}
+{% block stylesheet %} {{ parent() }}
+	<link href="{{ asset('bundles/msk/public/css/user.css') }}" rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
+{% block content%}<section class="alert">
+<a href="{{path('adminaddyigong_')}}"><button type="button" class="red">新增</button></a>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>社区贴管理</h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th class="avatar" style="padding-left: 80px;">昵称</th>
+						<th>内容</th>
+						<th>关联民宿</th>
+						<th>点赞数</th>
+						<th>状态</th>
+						<th>评论数</th>
+						<th>发布时间</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+					<tbody>
+					{% for v in v %}
+						<tr>
+							<td class="avatar" ><img src="{{ v.avatar_url }}" alt="" height="60" width="60" /> {{ v.nickname }}</td>
+							<td>{% if v.content|length >10 %}{{ v.content |slice(0,9)}}...{% else %}{{ v.content }}{% endif %}</td>
+							<td><a href="{{path('homestayDetail_',{'hid':v.homestay_id})}}">{{ v.homestay_name }}</a></td>
+							<td>{{ v.likeNum }}</td>
+							<td>
+								{% if v.state == 0 %}<font color="green">正常</font>{% elseif v.state == 1 %}<font color="red">后台屏蔽</font>{% elseif v.state == 2 %}<font color="red">用户删除</font>{% endif %}</td>
+							<td>{{ v.discussNum }}</td>
+							
+							<td>{{ v.NewAddTime }}</td>
+							<td>
+ 		`					<button type="button" data-toggle="modal" data-target="#myModal_{{ v.id }}">贴图</button>
+							<a href="{{path('homestayDetail_',{'hid':v.homestay_id})}}"><button type="button" class="green" >详情</button></a>
+							{% if v.state == 0 %}
+								<button type="button" class="red" name="{{ v.id }}" onclick="changeGroupPostState(this)">屏蔽</button>
+							{% elseif v.state == 1 %}
+								<button type="button" class="green" name="{{ v.id }}" onclick="changeGroupPostState(this)">恢复</button>
+							{% elseif v.state == 2 %}
+								<button type="button" class="red" name="{{ v.id }}" onclick="changeGroupPostState(this)">已删除</button>
+							{% endif %}
+
+							</td>
+						</tr>
+				{% endfor %}
+					</tbody>
+				</table>
+		</div>
+	</section>
+		{% autoescape false %}
+			{{gg}}
+		{% endautoescape %}
+</section>
+ <!-- Modal -->
+  {% for v in v %}
+
+  <div class="modal fade" id="myModal_{{ v.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="flase">
+    <div class="modal-dialog">
+      <div class="modal-content" style="width: 800px;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">贴图</h4>
+        </div>
+        <div class="modal-body" style="float:left ;">
+         {% for b in v.groupPostImg %}  
+        
+          <a href="{{ b }}" target="_blank" style="padding-left:20px; line-height: 40px;"><img  style="width: 220px;height: 200px; border: 2px solid blue;cursor: pointer;" src="{{ b }}"></a>
+  		 {% endfor %}
+  
+        </div>
+        <div class="modal-footer">
+{#           <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>#}
+{#           <button type="button" class="btn btn-primary">Save changes</button>#}
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+    {% endfor %}
+{% endblock%}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Detial</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="__PUBLIC__/other/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/other/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="__PUBLIC__/other/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/other/css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+
+            <div class="col-sm-6" style="left:25%;">
+                <div class="ibox">
+                    <div class="ibox-content text-center">
+						<a href="{:U('Admin/Book/bookDet',array('book_id'=>$data['book']['book_id']))}">
+		                     <img src="{$data.book.cover_img}" style="width:50px;height:50px;">  <span style="font-size:16px;margin-left:13px;">{$data.book.name}</span>		                     
+		                     <span style="display:block; margin-left:75px;margin-top:-15px;">{$data.book.author}</span>
+						</a>
+        
+                    </div>
+					  
+                </div>
+				<volist name="data.list" id='v'>
+	                <div class="social-feed-box">
+	                    <div class="pull-right social-action dropdown">
+	                        <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+	                            <i class="fa fa-angle-down"></i>
+	                        </button>
+	                        <ul class="dropdown-menu m-t-xs">
+	                            <li><a href="#" onclick="show({$v.comment_id})">回复</a></li>
+	                        </ul>
+	                    </div>
+	                    <div class="social-avatar">
+	                        <a href="" class="pull-left">
+	                            <img alt="image" src="{$data.user_avatar}">
+	                        </a>
+	                        <div class="media-body">
+	                            <a href="#">
+	                            			{$v.username}
+	                                    </a>
+	                            <small class="text-muted">{$v.comment_time|date ="Y-m-d H:i:s",###}</small>
+	                        </div>
+	                    </div>
+	                    <div class="social-body">
+	                    	
+	                    	<h4>{$v.title}</h4>
+	                        <p>
+	                          	{$v.content}
+	                        </p>
+							<ul >
+								<volist name="v.image" id='vv'>
+									<li style='width:80px;height:80px; list-style:none;float:left'> <img src='{$vv}' style='width:80px;height:80px;'></li>
+								</volist>
+								<li style="clear:both;list-style:none;"></li>
+							</ul>
+	                        <div class="btn-group">
+	                            <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i>{$v.like_num} 赞</button>
+	                            <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i>{$v.sums}评论</button>
+	                            <!--<button class="btn btn-white btn-xs"><i class="fa fa-share"></i> 分享</button>  -->
+	                        </div>
+	                    </div>
+	                    <div class="social-footer">
+	                        <if condition="$v.child neq null">                      	
+	                        	<volist name='v.child' id='vvv'>
+	                        		<div class="social-comment">
+			                            <a href="" class="pull-left">
+			                                <img alt="image" src="{$vvv.user_avatar}">
+			                            </a>		                            
+			                            <div class="media-body">
+			                                <a href="#">{$vvv.user_name}</a> 
+			                                	{$vvv.content}
+			                 					<a style='float:right;' onclick="show({$v.comment_id})">回复</a>
+			                                <br/>
+			                         
+			                                <small class="text-muted">{$v.addtime|date="Y-m-d H:i:s",###}</small>
+			                            </div>
+			                            
+			                         </div>
+			                         
+	                        	</volist>
+	                        </if>
+	                        <style>
+	                        	#show{position:absolute;z-index:20;left:200px;top:150px;display:none;}
+	                        </style>
+	                         <div class="social-comment" id='show'>
+	                            <div class="media-body" >
+	                                <textarea class="form-control" placeholder="填写评论..." id='text' style="margin: 0px; width: 529px; height: 102px;"></textarea>
+	                            </div>
+	                            <button id='sumbits'>提交</button>
+	                            <button onclick="hide()">取消</button>
+	                        </div>
+	                        <if condition="$data.comment_id neq null">
+	                        	<div class="social-comment">
+		                            <div class="media-body" >
+		                                <textarea class="form-control" placeholder="填写评论..." id='texts' style="margin: 0px; width: 529px; height: 102px;"></textarea>
+		                            </div>
+		                            <button id='submit'>提交</button>
+	                        	</div>
+	                        </if>
+	                    </div>
+	                </div>
+                
+                </volist>
+            </div>
+        </div>
+    </div>
+    <!-- 全局js -->
+    <script src="__PUBLIC__/other/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/other/js/bootstrap.min.js?v=3.3.6"></script>
+
+	
+    <!-- 自定义js -->
+    <script src="__PUBLIC__/other/js/content.js?v=1.0.0"></script>
+
+<div class="gohome"><a class="animated bounceInUp" href="javascript:history.go(-1)" title="返回"><i class="fa fa-home"></i></a></div>;
+
+<script>
+
+	function show(id){
+		$('#show').slideDown('normal');
+		$('#sumbits').click(function(){
+			submit(id)
+		})
+	}
+
+	function hide(){
+		$('#show').slideUp('normal');
+	}
+	
+	function submit(id){
+		var content=$('#text').val();
+		if(id>0 && content){
+			$.ajax({
+				url:"{:U('Admin/BookComment/Bookreply')}",
+				type:'post',
+				data:'id='+id+'&content='+content+"&type=1",
+				datatype:'json',
+				success:function(e){
+					console.log(e);
+					if(e==1){
+						 window.history.go(0);
+					}
+				}
+			})
+		}
+	}
+	
+	$('#submit').click(function(){
+		var content=$('#texts').val();
+		var id={$data['comment_id']?$data['comment_id']:0};
+		if(id>0 && content){
+			$.ajax({
+				url:"{:U('Admin/BookComment/Bookreply')}",
+				type:'post',
+				data:'id='+id+'&content='+content+"&type=1",
+				datatype:'json',
+				success:function(e){
+					if(e==1){
+						 window.history.go(0);
+					}
+				}
+			})
+		}
+	})
+		
+	
+</script>
+    
+    
+
+</body>
+
+</html>

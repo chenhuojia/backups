@@ -1,0 +1,30 @@
+启动 redis
+[root@localhost sbin]# redis-server& 
+关闭redis
+[root@localhost sbin]# redis-cli -p 6379 shutdown  ||kill -9
+
+
+启动nginx
+[root@localhost sbin]# cd /web/webserver/nginx/sbin/nginx
+关闭nginx
+[root@localhost sbin]# cd /web/webserver/nginx/sbin/nginx -s stop
+
+
+启动svn
+[root@localhost sbin]# svnserve -d -r /www/svn/
+
+启动php
+[root@localhost]# service php-fpm start
+关闭php
+[root@localhost]# service php-fpm stop
+
+
+启动mysql
+[root@localhost]# service mysql start
+关闭mysql
+[root@localhost]# service mysql stop
+
+
+进入mysql客户端
+[root@localhost]# cd /web/webserver/mysql/bin
+./mysql -uroot -p 123456,

@@ -1,0 +1,58 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+  <script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      /*$('form').submit(function () {
+       var formData = {
+       'msg': $("input[name=msg]").val(),
+       'link': $("input[name=link]").val(),
+       'type': $("select[name=type]").val()
+       };
+       $.ajax({
+       type: "post",
+       data: formData,
+       url: "{{ path('saveSystemMsg_') }}",
+       success: function (data) {
+       alert(data);
+       }
+       });
+       });*/
+    })
+  </script>
+{% endblock %}
+
+{% block content%}<section class="alert">
+  {# 		  <button type="button" val=''onclick="javascript:history.go(-1)" class="green stateBtn">返  回</button>#}
+  </section>
+  <section class="content">
+    <section class="widget">
+      <header>
+        <span class="icon homstay-detail"><span>&#128196;</span></span>
+        <hgroup>
+          <h1>编辑消息</h1>
+        </hgroup>
+      </header>
+      <div class="content">
+        <form method="post" action="{{ path('saveEditMsg_', {'id': id}) }}">
+          <div class="field-wrap">
+            <span class="roomServerTitleSpan">消  息&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span><input type="text"  value="{{ msg }}" name='msg' style="width: 25%;" placeholder="" maxlength="10" required oninvalid="setCustomValidity('类型不能為空')" oninput="setCustomValidity('')"/>
+          </div>
+          <div class="field-wrap">
+            <span class="roomServerTitleSpan">连  接&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span><input  name='link' type="text" placeholder="" style="width: 25%;" value="{{ url }}"/>
+          </div>
+          <div class="field-wrap">
+            <span class="roomServerTitleSpan">类  型&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span><select name="type">
+              {#<option value="0">官方</option>#}
+              <option value="1">系统</option>
+            </select>
+          </div>
+          <div class="roomSerBtnDiv"><button type="submit" class="green">保  存</button> <button type="button" onclick="javascript:history.go(-1)" class="red">取  消</button></div>
+          {#<input name='adminId' type='hidden' value="">#}
+        </form>
+      </div>
+    </section>
+  </section>
+
+{% endblock%}

@@ -1,0 +1,187 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+// alert(123);
+$(".stateBtn").click(function(){
+	$("[name='isOwner']").val($(this).attr("val"));
+	$("form").submit();
+})
+})
+
+function memberStateChange(obj)
+{
+	var content = $(obj).text();
+	var account = $(obj).parent().prev().prev().prev().prev().prev().text();
+	if (content == '开 启') {
+		var state = 1;
+		var msg = '开启'
+	} else if(content == '关 闭') {
+		var state = 0;
+		var msg = '关闭'
+	}
+
+	var trueBeTold = confirm('是否' + msg + "?");
+	if (trueBeTold) {
+		$.ajax({
+			type: "POST",
+			url:"{{ path('memberStateChange_') }}",
+			data : {'state': state, 'account': account},
+			dataType:"json",
+			success:function(data) {
+				if (data == '0') {
+					$(obj).text('开 启');
+					$(obj).removeClass();
+					$(obj).addClass('green');
+					location.reload();
+				} else if(data == '1') {
+					$(obj).text('关 闭');
+					$(obj).removeClass();
+					$(obj).addClass('red');
+					location.reload();
+				}
+			}
+		})
+	}
+}
+
+function superStateChange(obj) {
+	var id = $(obj).attr('hid');
+	var state = $(obj).attr('sid');
+	if (state == 1) {
+		var sendState = 0;
+	} else {
+		sendState = 1;
+	}
+	$.ajax({
+		type: "POST",
+		url: "{{ path('superStateChange_') }}",
+		data: {'id': id, "state": sendState},
+		dataType: "json",
+		success: function (data) {
+			location.reload();
+		}
+	})
+}
+
+$(document).ready(function () {
+	$(".page-dis [href]").each(function () {
+		if (this.href == window.location.href) {
+			$(this).addClass("active");
+		}
+	})
+});
+</script>
+{% endblock %}
+
+{% block stylesheet %} {{ parent() }}
+	<link href="{{ asset('bundles/msk/public/css/user.css') }}" rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
+
+{% block content%}<section class="alert">
+	<form method="post" action="">
+	<div>
+	<input type="text" class='searchText'  name="searchText" placeholder="  搜  索">
+	<select class="searchSelect" name="searchType" ><option value="nic">昵称</option><option value="acc">帐号</option></select>
+	<input class="green searchbuttoninput" type="submit" value="搜 索">
+	
+	
+	<button type="button" val='0' class="green stateBtn" style="margin-top: -10px;">普通用户</button>
+		 <button type="button" val='1' class="green stateBtn" style="margin-top: -10px;">房东用户</button>
+		  <button type="button" val='' class="green stateBtn" style="margin-top: -10px;">全部用户</button>
+	</div>
+	
+	<input type ="hidden" name ="isOwner">
+	 	 
+{# 		  <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">#}
+{#   Launch demo modal#}
+{# </button>#}
+	</form>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>会员信息</h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th class="avatar" style="padding-left: 80px;">昵称	</th>
+{# 						<th>真实名字</th>#}
+						<th>帐号</th>
+						<th>总积分</th>
+						<th>房东用户</th>
+						<th>状态</th>
+						<th>注册时间</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+					<tbody>
+					{% for v in memberList %}
+						<tr>
+							<td class="avatar" ><img src="{{ v.avatar_url }}" alt="" height="60" width="60" /> {{ v.nickname }}</td>
+{# 							<td>{{ v.true_name }}</td>#}
+							<td>{{ v.account }}</td>
+							<td>{{ v.member_points }}</td>
+							<td>{% if v.is_owner == 0%}否{% else %}是{% endif %}</td>
+							<td>{% if v.member_state ==0  %}该帐号已关闭{% else %}正常{% endif %}</td>
+							<td>{{ v.NewAddTime }}</td>
+{# 							{{ path('homestayDetail_',{'hid':v.id}) }}#}
+							<td>
+								{% if v.member_state == 1 %}
+									<button class="red"  onclick="memberStateChange(this)">关 闭</button>
+								{% elseif v.member_state == 0 %}
+									<button class="green"  onclick="memberStateChange(this)">开 启</button>
+								{% endif %}
+								{% if v.state == 1 %}
+									<button class="red" hid="{{ v.id }}" sid="{{ v.state }}" onclick="superStateChange(this)">取消管理员</button>
+								{% else %}
+									<button class="green" hid="{{ v.id }}" sid="{{ v.state }}" onclick="superStateChange(this)">设为管理员</button>
+								{% endif %}
+							</td>
+						</tr>
+				{% endfor %}
+					</tbody>
+				</table>
+		</div>
+		<div class="page-dis">
+			<div class="meneame">
+				{% if totalPage != 0 %}
+					<a href="{{ path('member_', {'page': 1}) }}">首页</a>
+					<a href="{{ path('member_', {'page': prePage}) }}"> < </a>
+					{% if totalPage > 7 %}
+						{% if page <= 4 %}
+							{% for i in 1..7 %}
+								<a href="{{ path('member_', {'page': i}) }}">{{ i }}</a>
+							{% endfor %}
+						{% elseif page > (totalPage - 4) %}
+							{% for k in (totalPage-7)..(totalPage) %}
+								<a href="{{ path('member_', {'page': k}) }}">{{ k }}</a>
+							{% endfor %}
+						{% else %}
+							{% for j in (page-3)..(page+3) %}
+								<a href="{{ path('member_', {'page': j}) }}">{{ j }}</a>
+							{% endfor %}
+						{% endif %}
+					{% else %}
+						{% if totalPage != 0 %}
+							{% for m in 1..totalPage %}
+								<a href="{{ path('member_', {'page': m}) }}">{{ m }}</a>
+							{% endfor %}
+						{% endif %}
+					{% endif %}
+					<a href="{{ path('member_', {'page': nextPage}) }}"> > </a>
+					<a href="{{ path('member_', {'page': totalPage}) }}">尾页</a>
+				{% endif %}
+			</div>
+		</div>
+	</section>
+</section>
+
+{% endblock%}

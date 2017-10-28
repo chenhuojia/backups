@@ -1,0 +1,109 @@
+<include file="./APP/Admin/View/Common/Public_header_v1.html"/>
+<link href='__PUBLIC__/static/autocomplete/jquery.autocomplete.css' rel='stylesheet'>
+<script src="__PUBLIC__/static/autocomplete/jquery.autocomplete.js"></script>
+<style type="text/css">
+    .form-horizontal{width:850px;}
+    .form-horizontal>.form-group{border-top: 1px solid #ccc;padding-top:20px;margin-left:15px;margin-right:0px;}
+    .form-horizontal>.form-group:first-child{border-top:none;}
+    .form-group>.col-sm-2{width: 110px;}
+    .form-group>.col-sm-10{width: 700px;}
+    select.form-control{width: auto !important;}
+</style>
+<ol class="breadcrumb">
+    <li>{:C('CONTROL_MENU')}</li>
+    <li>权限管理</li>
+    <li><a href="{:U('Admin/Groups/groupsList')}">关注管理</a></li>
+    <li class="active">添加关注</li>
+</ol>
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="javascript:void(0);">添加关注</a></li>
+</ul>
+<form action="{:U('Admin/Groups/groupsAdd')}" class="form-horizontal" method="post">
+    <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">小组名：</label>
+                <div class="col-sm-8">
+                    <select name="groups_id" id="groupType" class="form-control" data-live-search="false">
+                       <!--  <option value="0">全部</option> -->
+                        <volist name="info" id="vo">
+                            <option value="{$vo.group_id}">{$vo.name}</option>
+                        </volist>
+                    </select>
+                </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2  control-label" for="name">筛选用户：</label>
+      <div class="col-sm-8 ">
+         <input type="text" class="form-control" id="name"
+                 value="<?php echo isset($tplData['name']) ? $tplData['name'] : '' ?>">
+         <input type="hidden" name="rid"
+               value="<?php echo isset($tplData['rid']) ? $tplData['rid'] : '' ?>">
+      </div>
+    </div>
+    <!-- <div class="form-group">
+        <label for="describe" class="col-sm-2 control-label">关注描述</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" value="" name="describe" id="describe" datatype="s0-15" nullmsg="填写关注描述内容！" errormsg="15字以内的关注描述" />
+            <div class="Validform_checktip">15字以内的关注描述</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="status" class="col-sm-2 control-label">是否启用</label>
+        <div class="col-sm-10">
+            <select class="form-control" name="status" id="status">
+                <option value="1" selected="selected">是</option>
+                <option value="0">否</option>
+            </select>
+        </div>
+    </div> -->
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">保存关注</button>
+        </div>
+    </div>
+</form>
+
+<link href="__PUBLIC__/static/Validform/css/style.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/static/Validform/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" language="javascript">
+     $(function (){
+        var url = "{:U('Admin/User/ajaxSearchbyname')}";
+        $("#name").focus().autocomplete(url, {
+        // $("#name").focus().autocomplete("<?php echo U('Admin/Information/ajaxSearchbyname')?>", {
+            formatItem: function (row, i, max) {
+                console.log(row);
+                var obj = eval("(" + row + ")"); //转换成js对象
+                return obj.name;
+            },
+            formatResult: function (row) {
+                console.log(row);
+                var obj = eval("(" + row + ")"); //转换成js对象
+                return obj.name;
+            }
+        }).result(function (event, item) {
+            $('[name="rid"]').val(JSON.parse(item).rid);
+        });
+
+        $('#cancel').click(function (e) {
+            e.preventDefault();
+            window.location.reload();
+        });
+    });
+    $(function(){
+        $(".form-horizontal").Validform({
+            tiptype:function(msg,o,cssctl){
+                if(!o.obj.is("form")){
+                    var objtip=o.obj.next(".Validform_checktip");
+                    cssctl(objtip,o.type);
+                    objtip.text(msg);
+                }
+            },
+            beforeCheck:function(curform){
+                if(!confirm('确定提交本次操作吗？'))
+                {
+                    return false;
+                }
+            }
+        });
+    });
+</script>
+<include file="./APP/Admin/View/Common/Public_footer_v1.html"/>

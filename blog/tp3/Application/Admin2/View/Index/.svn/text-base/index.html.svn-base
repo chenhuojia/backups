@@ -1,0 +1,98 @@
+
+
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+    <div id="wrapper">
+        <!--左侧导航开始-->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="nav-close"><i class="fa fa-times-circle"></i>
+            </div>
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                                    <span class="block m-t-xs" style="font-size:20px;">
+                                        <i class="fa fa-area-chart"></i>
+                                        <strong class="font-bold">hAdmin</strong>
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="logo-element">hAdmin
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">表单</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="{:U('Admin2/Add/demo')}">基本表单</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">博客</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+							<li><a class="J_menuItem" href="{:U('Admin2/Category/articleList')}">分类列表</a>
+                            </li>
+                            <li><a class="J_menuItem" href="{:U('Admin2/Blog/index')}">文章列表</a>
+                            </li>
+                            <li><a class="J_menuItem" href="{:U('Admin2/Blog/Det')}">文章详情</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">论坛</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="{:U('Admin2/Discuz/index')}">分类列表</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">即时通讯 <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li><a class="J_menuItem" href="chat_view.html">聊天窗口</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+	                     <a href="#">登录注册相关 <span class="fa arrow"></span></a>
+	                     <ul class="nav nav-third-level">
+	                         <li><a href="{:U('Admin2/User/login')}" target="_blank">登录页面</a>
+	                         </li>
+	                     </ul>
+	                </li>
+                    <li>
+                        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">用户管理</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="{:U('Admin2/User/userList')}">联系人</a>
+                            </li>
+                            <li><a class="J_menuItem" href="{:U('Admin2/User/userDet')}">个人资料</a>
+                            </li>                          
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--左侧导航结束-->
+        <!--右侧部分开始-->
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row J_mainContent" id="content-main">
+                <iframe id="J_iframe" width="100%" height="100%" src="{:U('Admin2/Index/indexV1')}?v=4.0" frameborder="0" data-id="{:U('Admin2/Index/indexV1')}" seamless></iframe>
+            </div>
+        <!--右侧部分结束-->
+    </div>
+
+
+
+    <!-- 自定义js -->
+    <script src="__PUBLIC__/admin2/js/hAdmin.js?v=4.1.0"></script>
+    <script type="text/javascript" src="__PUBLIC__/admin2/js/index.js"></script>
+
+    <!-- 第三方插件 -->
+    <script src="__PUBLIC__/admin2/js/plugins/pace/pace.min.js"></script>
+<div style="text-align:center;">
+<p>来源:<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+</div>
+</body>
+
+</html>

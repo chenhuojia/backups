@@ -1,0 +1,21 @@
+ {__NOLAYOUT__}
+    <link href="__PUBLIC__/admin2/css/style.css?v=4.1.0" rel="stylesheet">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="wrapper wrapper-content animated fadeInUp">
+                <ul class="notes">
+                	<volist name="data" id='v'>
+                    	<li>
+	                        <div>
+	                            <small>{$v.addtime|date="Y年m月d日  下午g:i",###} (星期{$v.week})</small>
+	                            <h4>{$v.name}</h4>
+	                            <p>{$v.content}</p>
+	                            <!--<a href="pin_board.html#"><i class="fa fa-trash-o "></i></a>-->
+	                        </div>
+                    	</li>    
+                  	</volist>                
+                </ul>
+            </div>
+        </div>
+    </div>
+

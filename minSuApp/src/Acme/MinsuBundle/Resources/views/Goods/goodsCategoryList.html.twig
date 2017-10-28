@@ -1,0 +1,105 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+{% endblock %}
+
+{% block content%}
+<section class="alert">
+	<div class="col-md-2">
+    <a href="{{ path('AddgoodsCategory_') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>新增分类</a>
+	</div>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>订单信息</h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th>分类ID</th>
+						<th>分类logo</th>
+						<th>分类名称</th>
+						<th>是否显示</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+					<tbody>
+						{% for v in data %}
+							<tr>
+								<td>{{v.cat_id}}</td>
+								<td><img src="{{v.logo}}" style="width:60px;height:60px;"></td>
+								<td>{{v.name}}</td>
+								<td>
+									{% if v.is_show==0 %}
+										<img width="20" height="20" src="{{ asset('bundles/msk/public/images/yes.png')}}"  is_show={{v.is_show}} onclick="changIsShow(this,{{v.cat_id}})">
+									{% else %}
+										<img width="20" height="20" src="{{ asset('bundles/msk/public/images/wrong.png')}}" is_show={{v.is_show}} onclick="changIsShow(this,{{v.cat_id}})">
+									{% endif%}
+								</td>
+								<td>
+		                      		<a class="btn btn-primary" href=""><i class="fa fa-pencil">编辑</i></a>
+		                      		<a class="btn btn-danger" href="javascript:delcategory({{v.cat_id}})"><i class="fa fa-trash-o">删除</i></a>
+			     				</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+		</div>
+	</section>
+</section>
+<script>
+	function changIsShow(obj,cat_id){
+		var val=$(obj).attr('is_show');
+		if(cat_id!=0){
+			if(val==0){
+			 	var vals=1;
+				var	newsrc="{{ asset('bundles/msk/public/images/yes.png')}}"
+			}if(val==1){
+				var	vals=0;
+				var	newsrc="{{ asset('bundles/msk/public/images/wrong.png')}}"
+			}
+			$.ajax({
+				url:"{{ path('_category_is_show')}}",
+				type:'post',
+				data:'cat_id='+cat_id+"&val="+vals,
+				datatype:'json',
+				success:function(e){
+					if(e==1){
+						$(obj).attr('is_show',vals);
+						$(obj).attr('src',newsrc);
+					}
+				},
+				error:function(){
+					alert('网络错误');
+				}
+			})
+		}
+	}
+	
+		function delcategory(cat_id){
+			var val=1;
+		if(cat_id!=0){	
+			$.ajax({
+				url:"{{ path('_category_is_show')}}",
+				type:'post',
+				data:'cat_id='+cat_id+"&val="+val,
+				datatype:'json',
+				success:function(e){
+					if(e==1){
+						history.go(0)
+					}
+				},
+				error:function(){
+					alert('网络错误');
+				}
+			})
+		}
+	}
+</script>
+{% endblock%}

@@ -1,0 +1,18 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+{% block javascript %}
+{{ parent() }}
+<script type="text/javascript">
+// Feature slider for graphs
+$('.cycle').cycle({
+	fx: "scrollHorz",
+	timeout: 0,
+    slideResize: 0,
+    prev:    '.left-btn', 
+    next:    '.right-btn'
+});
+</script>
+{% endblock %}
+
+{% block content%}
+
+{% endblock%}

@@ -1,0 +1,14 @@
+appdir.includes = APP,\
+		Interface,\
+		Public,\
+		StatisticClient.php,\
+		ThinkPHP,\
+		admin.php,\
+		book.php,\
+		data,\
+		index.php,\
+		listener.php,\
+		php,\
+		publisher.php,\
+		ReadMe,\
+		php_errors.log

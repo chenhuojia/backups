@@ -1,0 +1,527 @@
+[ 2017-04-13T00:46:02+08:00 ] 202.108.211.56 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000370s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.030564s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.030641s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0260s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0260s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0260s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0257s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0259s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0260s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0258s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0261s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0256s ]
+NOTIC: [2] file_get_contents(jsapi_ticket.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 49 行.
+NOTIC: [2] file_get_contents(access_token.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 71 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 78 行.
+NOTIC: [2] fopen(access_token.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 57 行.
+NOTIC: [2] fopen(jsapi_ticket.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0262s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0260s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000101s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000154s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 32 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 125 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.622117s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.622187s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.045427s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.045507s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000645s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000716s ]
+
+[ 2017-04-13T03:20:55+08:00 ] 202.108.211.56 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.050520s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000373s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000423s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0255s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0256s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0255s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0253s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0256s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0259s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0255s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0261s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0254s ]
+NOTIC: [2] file_get_contents(jsapi_ticket.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 49 行.
+NOTIC: [2] file_get_contents(access_token.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 71 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 78 行.
+NOTIC: [2] fopen(access_token.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 57 行.
+NOTIC: [2] fopen(jsapi_ticket.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0266s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0259s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000130s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000211s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 32 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 125 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.636439s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.636501s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.046385s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.046457s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000685s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000780s ]
+
+[ 2017-04-13T03:20:59+08:00 ] 202.108.211.56 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000426s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000443s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000494s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0250s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0248s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0250s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0248s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0248s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0250s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0245s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0249s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0246s ]
+NOTIC: [2] file_get_contents(jsapi_ticket.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 49 行.
+NOTIC: [2] file_get_contents(access_token.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 71 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 78 行.
+NOTIC: [2] fopen(access_token.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 57 行.
+NOTIC: [2] fopen(jsapi_ticket.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0252s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0247s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000101s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000163s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 32 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 125 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.535606s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.535676s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000232s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000255s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000558s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000627s ]
+
+[ 2017-04-13T03:21:04+08:00 ] 202.108.211.56 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000305s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000380s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000430s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0267s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0264s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0265s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0263s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0265s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0267s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0264s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0267s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0263s ]
+NOTIC: [2] file_get_contents(jsapi_ticket.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 49 行.
+NOTIC: [2] file_get_contents(access_token.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 71 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 78 行.
+NOTIC: [2] fopen(access_token.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 57 行.
+NOTIC: [2] fopen(jsapi_ticket.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0266s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0263s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000112s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000187s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 32 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 125 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.606429s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.606475s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.048334s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.048390s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000608s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000680s ]
+
+[ 2017-04-13T03:21:08+08:00 ] 202.108.211.56 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000431s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.045709s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.062542s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0268s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0264s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0266s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0265s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0266s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0267s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0267s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0265s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0265s ]
+NOTIC: [2] file_get_contents(jsapi_ticket.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 49 行.
+NOTIC: [2] file_get_contents(access_token.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 71 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 78 行.
+NOTIC: [2] fopen(access_token.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 57 行.
+NOTIC: [2] fopen(jsapi_ticket.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0295s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0263s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.045202s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.045312s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 32 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 125 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.597756s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.597797s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.047349s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.047422s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000633s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000713s ]
+
+[ 2017-04-13T03:21:12+08:00 ] 202.108.211.56 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.043505s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.024762s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.024856s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0255s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0254s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0258s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0255s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0257s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0256s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0261s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0255s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0252s ]
+NOTIC: [2] file_get_contents(jsapi_ticket.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 49 行.
+NOTIC: [2] file_get_contents(access_token.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 71 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 78 行.
+NOTIC: [2] fopen(access_token.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 57 行.
+NOTIC: [2] fopen(jsapi_ticket.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0259s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0254s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000134s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000215s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 32 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 125 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.564423s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.564492s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000296s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000330s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000621s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000692s ]
+
+[ 2017-04-13T03:21:16+08:00 ] 202.108.211.56 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000456s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.067760s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.067821s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0266s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0269s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0266s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0265s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0267s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0267s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0264s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0266s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0263s ]
+NOTIC: [2] file_get_contents(jsapi_ticket.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 49 行.
+NOTIC: [2] file_get_contents(access_token.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 71 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 78 行.
+NOTIC: [2] fopen(access_token.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 57 行.
+NOTIC: [2] fopen(jsapi_ticket.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0266s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0266s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000127s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000213s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 32 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 125 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.579148s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.579208s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000225s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000248s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000770s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000865s ]
+
+[ 2017-04-13T11:13:25+08:00 ] 111.199.25.216 /otn/resources/css/validation.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000509s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.026672s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.026760s ]
+ERR: 无法加载控制器:Otn
+
+[ 2017-04-13T14:31:24+08:00 ] 120.55.190.29 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000548s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000530s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000605s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0274s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0263s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0278s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0263s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0272s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0281s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0260s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0277s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0263s ]
+NOTIC: [2] file_get_contents(jsapi_ticket.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 49 行.
+NOTIC: [2] file_get_contents(access_token.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 71 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 78 行.
+NOTIC: [2] fopen(access_token.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 57 行.
+NOTIC: [2] fopen(jsapi_ticket.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+NOTIC: [8] Undefined index: HTTP_HOST /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 16 行.
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0276s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0273s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000101s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000153s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 32 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 125 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.555551s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.555592s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000234s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000263s ]
+
+[ 2017-04-13T15:56:00+08:00 ] 120.55.190.29 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000308s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000388s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000454s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0261s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0259s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0259s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0258s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0261s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0262s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0256s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0258s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0258s ]
+NOTIC: [2] file_get_contents(jsapi_ticket.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 49 行.
+NOTIC: [2] file_get_contents(access_token.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 71 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 78 行.
+NOTIC: [2] fopen(access_token.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 57 行.
+NOTIC: [2] fopen(jsapi_ticket.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+NOTIC: [8] Undefined index: HTTP_HOST /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 16 行.
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0263s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0260s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000107s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000171s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 32 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 125 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.464354s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.464395s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.046324s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.046396s ]
+
+[ 2017-04-13T17:47:39+08:00 ] 93.174.95.106 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.050511s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.042760s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.042819s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0261s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0259s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0260s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0260s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0260s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0261s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0258s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0261s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0259s ]
+NOTIC: [2] file_get_contents(jsapi_ticket.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 49 行.
+NOTIC: [2] file_get_contents(access_token.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 71 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 78 行.
+NOTIC: [2] fopen(access_token.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 57 行.
+NOTIC: [2] fopen(jsapi_ticket.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0261s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0262s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000116s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.045286s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 32 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 125 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.680498s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.680570s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.026337s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.026398s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.034947s ]
+INFO: [ app_end ] --END-- [ RunTime:0.035060s ]
+
+[ 2017-04-13T20:01:52+08:00 ] 115.175.128.17 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.046569s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.046721s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.046799s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0268s ]
+SQL: SELECT * FROM `bk_category` WHERE `parent_id` = 0 AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0266s ]
+SQL: SHOW COLUMNS FROM `bk_banner` [ RunTime:0.0267s ]
+SQL: SELECT * FROM `bk_banner` WHERE `show_addr` = 'index' AND `is_show` = 1 ORDER BY `addtime` desc  [ RunTime:0.0269s ]
+SQL: SHOW COLUMNS FROM `bk_article_recommend` [ RunTime:0.0268s ]
+SQL: SELECT b.art_id,a.title,a.cate_id,a.introduction,a.discuss_total,a.approve_total,i.image_url,FROM_UNIXTIME(b.addtime,'%Y-%m-%d') as addtime FROM bk_article_recommend b left join bk_article a on b.art_id= a.art_id left join bk_article_images i on b.art_id= i.art_id  WHERE a.is_show = 1 AND b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0267s ]
+SQL: SELECT b.art_id,b.title FROM bk_article_recommend b WHERE b.is_rec = 1 ORDER BY b.sort desc LIMIT 0,10   [ RunTime:0.0265s ]
+SQL: SHOW COLUMNS FROM `bk_article_hot` [ RunTime:0.0268s ]
+SQL: SELECT b.cate_id,b.art_id,b.cate_name,b.title FROM bk_article_hot b ORDER BY b.hot desc LIMIT 0,10   [ RunTime:0.0265s ]
+NOTIC: [2] file_get_contents(jsapi_ticket.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 49 行.
+NOTIC: [2] file_get_contents(access_token.php): failed to open stream: No such file or directory /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 105 行.
+NOTIC: [8] Trying to get property of non-object /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 71 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 78 行.
+NOTIC: [2] fopen(access_token.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST with value 1 is deprecated and will be removed as of libcurl 7.28.1. It is recommended to use value 2 instead /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 95 行.
+NOTIC: [2] Creating default object from empty value /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 57 行.
+NOTIC: [2] fopen(jsapi_ticket.php): failed to open stream: Permission denied /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 108 行.
+NOTIC: [2] fwrite() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 109 行.
+NOTIC: [2] fclose() expects parameter 1 to be resource, boolean given /web/www/blog/tp3/Application/Home/Util/jssdk/jssdk.php 第 110 行.
+SQL: SHOW COLUMNS FROM `bk_discuss` [ RunTime:0.0267s ]
+SQL: SELECT b.id,b.art_id,b.art_title,b.parent_id,b.grade,b.content,b.user_id,b.addtime,u.name,u.avatar FROM bk_discuss b left join bk_user u on b.user_id=u.user_id  WHERE b.is_show = 1 AND `parent_id` = 0 ORDER BY b.addtime desc LIMIT 0,5   [ RunTime:0.0264s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000122s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.047258s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 32 行.
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Application/Runtime/Cache/Home/b096bd20c19239b82739cab90f0b6b59.php 第 125 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.609788s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.609861s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000287s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000319s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.023291s ]
+INFO: [ app_end ] --END-- [ RunTime:0.023418s ]
+
+[ 2017-04-13T20:01:53+08:00 ] 115.175.128.17 /bolg/tp3/Public/picture/s1.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.043529s ]
+INFO: [ app_init ] --END-- [ RunTime:0.043931s ]
+

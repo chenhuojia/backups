@@ -1,0 +1,42 @@
+[ 2017-01-13T11:07:28+08:00 ] 127.0.0.1 /dsd/tp3/discuz.php/FAQ/Index/index.html?s=d+
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:D 
+
+[ 2017-01-13T11:07:34+08:00 ] 127.0.0.1 /dsd/tp3/discuz.php/FAQ/Index/search.php?livesearch=used&s=d
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:D
+
+[ 2017-01-13T11:07:34+08:00 ] 127.0.0.1 /dsd/tp3/discuz.php/FAQ/Index/index.html?s=d
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:D
+
+[ 2017-01-13T11:07:45+08:00 ] 127.0.0.1 /dsd/tp3/discuz.php/Index/index/search.php?livesearch=used&s=d
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:D
+
+[ 2017-01-13T11:07:45+08:00 ] 127.0.0.1 /dsd/tp3/discuz.php/Index/index/search.php?livesearch=used&s=dd
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Dd
+
+[ 2017-01-13T11:08:32+08:00 ] 127.0.0.1 /dsd/tp3/discuz.php/FAQ/Index/search.php?livesearch=used&s=d
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:D
+
+[ 2017-01-13T11:08:32+08:00 ] 127.0.0.1 /dsd/tp3/discuz.php/FAQ/Index/search.php?livesearch=used&s=dds
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Dds
+

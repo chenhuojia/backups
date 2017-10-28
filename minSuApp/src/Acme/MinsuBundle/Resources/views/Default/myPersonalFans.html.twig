@@ -1,0 +1,87 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %}
+  {{ parent() }}
+  <script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+  <script src="{{ asset('bundles/msk/public/js/myPersonalFans.js') }}"></script>
+  <script>
+    $(document).ready(function () {
+      $("#back-btn").click(function () {
+        self.location.href = "{{ path('personalAttention_', {'page': personalPage}) }}"
+      });
+    });
+  </script>
+{% endblock %}
+
+{% block stylesheet %} {{ parent() }}
+  <link href="{{ asset('bundles/msk/public/css/myPersonalFans.css') }}" rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
+
+{% block content%}
+  <div class="content">
+    <div class="content-dis">
+      <button class="btn btn-warning back-btn" id="back-btn" type="button">返回</button>
+      <table class="content-table">
+        <thead>
+        <tr>
+          <th>用户名字</th>
+          <th>自我介绍</th>
+          <th>关注时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in data %}
+          <tr>
+            <td>{{ data.nickname }}</td>
+            <td>{{ data.introduce }}</td>
+            <td>{{ data.add_time }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="page-dis">
+      <div class="meneame">
+        <a href="{{ path('myPersonalFans_', {'page': 1}) }}">首页</a>
+        {% if totalPage >= 7 %}
+          {% if page <= 4 %}
+            {% for i in 1..7 %}
+              <a href="{{ path('myPersonalFans_', {'page': i}) }}">{{ i }}</a>
+            {% endfor %}
+          {% elseif page > (totalPage - 4) %}
+            {% for k in (totalPage-7)..(totalPage) %}
+              <a href="{{ path('myPersonalFans_', {'page': k}) }}">{{ k }}</a>
+            {% endfor %}
+          {% else %}
+            {% for j in (page-3)..(page+3) %}
+              <a href="{{ path('myPersonalFans_', {'page': j}) }}">{{ j }}</a>
+            {% endfor %}
+          {% endif %}
+        {% else %}
+          {% if totalPage != 0 %}
+            {% for m in 1..totalPage %}
+              <a href="{{ path('myPersonalFans_', {'page': m}) }}">{{ m }}</a>
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+        <a href="{{ path('myPersonalFans_', {'page': totalPage}) }}">尾页</a>
+      </div>
+    </div>
+  </div>
+{% endblock%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

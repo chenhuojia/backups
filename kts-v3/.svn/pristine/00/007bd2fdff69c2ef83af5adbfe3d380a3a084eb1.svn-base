@@ -1,0 +1,1447 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>书城</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.pagination.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/fenye.js"></script>
+    <script type="text/javascript" src="js/qiehua.js"></script>
+
+
+
+</head>
+
+<body>
+<div class="top">
+    <div class="top_box">
+        <div class="top_box_fl">
+            <ul>
+                <a><li><i class="ci-left1"></i><span>移动端下载</span></li></a>
+                <a><li><i class="ci-left2"></i><span>联系客服</span></li></a>
+                <a><li><i class="ci-left3"></i><span>我要开店</span></li></a>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div class="top_box_fr">
+            <div class="nav">
+                <ul class="nav-main">
+                    <li id="li-1" class="li-1"><img src="images/pic_store_cover.png" alt=""/></li>
+                    <li id="li-2">我的订单<span></span></li>
+                    <li id="li-3">我的消息<span></span></li>
+                    <div class="clear"></div>
+                </ul>
+                <div id="box-1" class="hidden-box hidden-loc-info">
+                    <ul>
+                        <li>我的店铺</li>
+                        <li>个人中心</li>
+                        <li>我的收藏</li>
+                        <li>发布图书</li>
+                        <li>退出账号</li>
+                    </ul>
+                </div>
+                <div id="box-2" class="hidden-box hidden-loc-info box02">
+                    <ul>
+                        <li>我的订单</li>
+                        <li>我的订单</li>
+                    </ul>
+                </div>
+                <div id="box-3" class="hidden-box hidden-loc-info box03">
+                    <ul>
+                        <li>我的消息</li>
+                        <li>我的消息</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="header_center">
+    <h1 class="logo"><a><img src="images/logo.png" alt="快图书"/></a></h1>
+    <div class="slogan "><img src="images/slogan.png" alt="世界上有多少种书，都在哪~"/></div>
+    <div class="search-form">
+        <div id="search-bd" class="search-bd">
+            <ul>
+                <li class="selected">图书</li>
+                <li>作者</li>
+                <li>出版社</li>
+            </ul>
+        </div>
+        <div id="search-hd" class="search-hd">
+            <div class="search-bg"></div>
+            <input type="text" id="s1" class="search-input">
+            <input type="text" id="s2" class="search-input">
+            <input type="text" id="s3" class="search-input">
+            <span class="s1 pholder">图书</span>
+            <span class="s2 pholder">作者</span>
+            <span class="s3 pholder">出版社</span>
+            <button id="submit" class="btn-search" value="搜索">搜索</button>
+        </div>
+    </div>
+    <div class="cart_box">
+        <a>
+            <div class="cart_link">
+                <i class="cart_icon1"></i><span>购物车（0）</span>
+            </div>
+        </a>
+        <a href="share.html">
+            <div class="cart_link">
+                <i class="cart_icon2"></i><span>上传图书</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="clear"></div>
+</div>
+
+<div class="header">
+    <ul>
+        <a href="index.html"><li>首  页</li></a>
+        <a href="bookcity.html"><li class="header_bt">书  城</li></a>
+        <a><li>书  评</li></a>
+        <a><li>话  题</li></a>
+        <a><li>排  行  榜</li></a>
+        <div class="clear"></div>
+    </ul>
+</div>
+
+<div class="min1">
+    <div class="min_box">
+        <div class="min1_box_bt">
+            <span>图书分类>  文学</span>
+        </div>
+        <div class="min_box_nr">
+            <div class="min_box_fl">
+                <div class="product_sort fl">
+                    <div class="hd">图书分类</div>
+                    <div class="bd">
+                        <div class="item">
+                            <div class="title one"><a href="#">文学</a></div>
+                            <div class="list">
+                                <a href="#">文学</a>
+                                <a href="#">小说</a>
+                                <a href="#">传记</a>
+                                <a href="#">青春文学</a>
+                                <a href="#">动漫</a>
+                            </div>
+                            <div class="line"></div>
+                            <div class="subitem">
+                                <div class="inner">
+                                    <div class="tit tit1">
+                                        <div class="name"><a href="#">文学</a></div>
+                                        <ul>
+                                            <li><a href="#">随笔散文</a></li>
+                                            <li><a href="#">文集</a></li>
+                                            <li><a href="#">纪实文学</a></li>
+                                            <li><a href="#">古诗词</a></li>
+                                            <li><a href="#">现当代诗歌</a></li>
+                                            <li><a href="#">文学评论与鉴赏</a></li>
+                                            <li><a href="#">影视文学</a></li>
+                                            <li><a href="#">戏剧曲艺</a></li>
+                                            <li><a href="#">文学史</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">小说</a></div>
+                                        <ul>
+                                            <li><a href="#">侦探/悬疑/推理</a></li>
+                                            <li><a href="#">恐怖/惊悚</a></li>
+                                            <li><a href="#">情感/家庭/婚姻</a></li>
+                                            <li><a href="#">社会</a></li>
+                                            <li><a href="#">官职场</a></li>
+                                            <li><a href="#">历史</a></li>
+                                            <li><a href="#">科幻</a></li>
+                                            <li><a href="#">武侠</a></li>
+                                            <li><a href="#">玄幻</a></li>
+                                            <li><a href="#">军事</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">传记</a></div>
+                                        <ul>
+                                            <li><a href="#">财经人物</a></li>
+                                            <li><a href="#">历代帝王</a></li>
+                                            <li><a href="#">领袖首脑</a></li>
+                                            <li><a href="#">军事人物</a></li>
+                                            <li><a href="#">政治人物</a></li>
+                                            <li><a href="#">历史人物</a></li>
+                                            <li><a href="#">法律人物</a></li>
+                                            <li><a href="#">宗教人物</a></li>
+                                            <li><a href="#">哲学家</a></li>
+                                            <li><a href="#">教育家</a></li>
+                                            <li><a href="#">文学家</a></li>
+                                            <li><a href="#">人文社会学家</a></li>
+                                            <li><a href="#">艺术家</a></li>
+                                            <li><a href="#">科学家</a></li>
+                                            <li><a href="#">国学大师</a></li>
+                                            <li><a href="#">文娱明星</a></li>
+                                            <li><a href="#">体育明星</a></li>
+                                            <li><a href="#">语言文学学家</a></li>
+                                            <li><a href="#">人物合集</a></li>
+                                            <li><a href="#">建筑设计师</a></li>
+                                            <li><a href="#">传记研究与编写</a></li>
+                                            <li><a href="#">家族研究与谱系</a></li>
+                                            <li><a href="#">年谱</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">青春文学</a></div>
+                                        <ul>
+                                            <li><a href="#">古代言情</a></li>
+                                            <li><a href="#">校园</a></li>
+                                            <li><a href="#">爱情/情感</a></li>
+                                            <li><a href="#">叛逆/成长</a></li>
+                                            <li><a href="#">悬疑/惊悚</a></li>
+                                            <li><a href="#">娱乐/偶像</a></li>
+                                            <li><a href="#">爆笑/无厘头</a></li>
+                                            <li><a href="#">玄幻/科幻/新武侠</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">动漫</a></div>
+                                        <ul>
+                                            <li><a href="#">冒险战斗</a></li>
+                                            <li><a href="#">悬疑推理</a></li>
+                                            <li><a href="#">恐怖惊悚</a></li>
+                                            <li><a href="#">爆笑幽默</a></li>
+                                            <li><a href="#">爱情情感</a></li>
+                                            <li><a href="#">体育</a></li>
+                                            <li><a href="#">励志</a></li>
+                                            <li><a href="#">医疗</a></li>
+                                            <li><a href="#">料理</a></li>
+                                            <li><a href="#">音乐</a></li>
+                                            <li><a href="#">校园</a></li>
+                                            <li><a href="#">科幻</a></li>
+                                            <li><a href="#">玄幻</a></li>
+                                            <li><a href="#">战争</a></li>
+                                            <li><a href="#">讽刺</a></li>
+                                            <li><a href="#">学习教育</a></li>
+                                            <li><a href="#">作品集</a></li>
+                                            <li><a href="#">画集</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="title two"><a href="#">少儿</a></div>
+                            <div class="list">
+                                <a href="#">少儿文学</a>
+                                <a href="#">绘本</a>
+                                <a href="#">科普百科</a>
+                                <a href="#">益智游戏</a>
+                                <a href="#">玩具书</a>
+                                <a href="#">启蒙教育</a>
+                                <a href="#">动漫卡通</a>
+                                <a href="#">艺术培养</a>
+                            </div>
+                            <div class="line"></div>
+                            <div class="subitem">
+                                <div class="inner">
+                                    <div class="tit tit1">
+                                        <div class="name"><a href="#">文学</a></div>
+                                        <ul>
+                                            <li><a href="#">随笔散文</a></li>
+                                            <li><a href="#">文集</a></li>
+                                            <li><a href="#">纪实文学</a></li>
+                                            <li><a href="#">古诗词</a></li>
+                                            <li><a href="#">现当代诗歌</a></li>
+                                            <li><a href="#">文学评论与鉴赏</a></li>
+                                            <li><a href="#">影视文学</a></li>
+                                            <li><a href="#">戏剧曲艺</a></li>
+                                            <li><a href="#">文学史</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">小说</a></div>
+                                        <ul>
+                                            <li><a href="#">侦探/悬疑/推理</a></li>
+                                            <li><a href="#">恐怖/惊悚</a></li>
+                                            <li><a href="#">情感/家庭/婚姻</a></li>
+                                            <li><a href="#">社会</a></li>
+                                            <li><a href="#">官职场</a></li>
+                                            <li><a href="#">历史</a></li>
+                                            <li><a href="#">科幻</a></li>
+                                            <li><a href="#">武侠</a></li>
+                                            <li><a href="#">玄幻</a></li>
+                                            <li><a href="#">军事</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">传记</a></div>
+                                        <ul>
+                                            <li><a href="#">财经人物</a></li>
+                                            <li><a href="#">历代帝王</a></li>
+                                            <li><a href="#">领袖首脑</a></li>
+                                            <li><a href="#">军事人物</a></li>
+                                            <li><a href="#">政治人物</a></li>
+                                            <li><a href="#">历史人物</a></li>
+                                            <li><a href="#">法律人物</a></li>
+                                            <li><a href="#">宗教人物</a></li>
+                                            <li><a href="#">哲学家</a></li>
+                                            <li><a href="#">教育家</a></li>
+                                            <li><a href="#">文学家</a></li>
+                                            <li><a href="#">人文社会学家</a></li>
+                                            <li><a href="#">艺术家</a></li>
+                                            <li><a href="#">科学家</a></li>
+                                            <li><a href="#">国学大师</a></li>
+                                            <li><a href="#">文娱明星</a></li>
+                                            <li><a href="#">体育明星</a></li>
+                                            <li><a href="#">语言文学学家</a></li>
+                                            <li><a href="#">人物合集</a></li>
+                                            <li><a href="#">建筑设计师</a></li>
+                                            <li><a href="#">传记研究与编写</a></li>
+                                            <li><a href="#">家族研究与谱系</a></li>
+                                            <li><a href="#">年谱</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">青春文学</a></div>
+                                        <ul>
+                                            <li><a href="#">古代言情</a></li>
+                                            <li><a href="#">校园</a></li>
+                                            <li><a href="#">爱情/情感</a></li>
+                                            <li><a href="#">叛逆/成长</a></li>
+                                            <li><a href="#">悬疑/惊悚</a></li>
+                                            <li><a href="#">娱乐/偶像</a></li>
+                                            <li><a href="#">爆笑/无厘头</a></li>
+                                            <li><a href="#">玄幻/科幻/新武侠</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">动漫</a></div>
+                                        <ul>
+                                            <li><a href="#">冒险战斗</a></li>
+                                            <li><a href="#">悬疑推理</a></li>
+                                            <li><a href="#">恐怖惊悚</a></li>
+                                            <li><a href="#">爆笑幽默</a></li>
+                                            <li><a href="#">爱情情感</a></li>
+                                            <li><a href="#">体育</a></li>
+                                            <li><a href="#">励志</a></li>
+                                            <li><a href="#">医疗</a></li>
+                                            <li><a href="#">料理</a></li>
+                                            <li><a href="#">音乐</a></li>
+                                            <li><a href="#">校园</a></li>
+                                            <li><a href="#">科幻</a></li>
+                                            <li><a href="#">玄幻</a></li>
+                                            <li><a href="#">战争</a></li>
+                                            <li><a href="#">讽刺</a></li>
+                                            <li><a href="#">学习教育</a></li>
+                                            <li><a href="#">作品集</a></li>
+                                            <li><a href="#">画集</a></li>
+                                        </ul>
+                                    </div>
+                                </div>			</div>
+                        </div>
+
+                        <div class="item">
+                            <div class="title three"><a href="#">教育</a></div>
+                            <div class="list">
+                                <a href="#">考试</a>
+                                <a href="#">语言</a>
+                                <a href="#">字典词典</a>
+                                <a href="#">工具书</a>
+                                <a href="#">教材</a>
+                                <a href="#">中小学辅教</a>
+                            </div>
+                            <div class="line"></div>
+                            <div class="subitem">
+                                <div class="inner">
+                                    <div class="tit tit1">
+                                        <div class="name"><a href="#">文学</a></div>
+                                        <ul>
+                                            <li><a href="#">随笔散文</a></li>
+                                            <li><a href="#">文集</a></li>
+                                            <li><a href="#">纪实文学</a></li>
+                                            <li><a href="#">古诗词</a></li>
+                                            <li><a href="#">现当代诗歌</a></li>
+                                            <li><a href="#">文学评论与鉴赏</a></li>
+                                            <li><a href="#">影视文学</a></li>
+                                            <li><a href="#">戏剧曲艺</a></li>
+                                            <li><a href="#">文学史</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">小说</a></div>
+                                        <ul>
+                                            <li><a href="#">侦探/悬疑/推理</a></li>
+                                            <li><a href="#">恐怖/惊悚</a></li>
+                                            <li><a href="#">情感/家庭/婚姻</a></li>
+                                            <li><a href="#">社会</a></li>
+                                            <li><a href="#">官职场</a></li>
+                                            <li><a href="#">历史</a></li>
+                                            <li><a href="#">科幻</a></li>
+                                            <li><a href="#">武侠</a></li>
+                                            <li><a href="#">玄幻</a></li>
+                                            <li><a href="#">军事</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">传记</a></div>
+                                        <ul>
+                                            <li><a href="#">财经人物</a></li>
+                                            <li><a href="#">历代帝王</a></li>
+                                            <li><a href="#">领袖首脑</a></li>
+                                            <li><a href="#">军事人物</a></li>
+                                            <li><a href="#">政治人物</a></li>
+                                            <li><a href="#">历史人物</a></li>
+                                            <li><a href="#">法律人物</a></li>
+                                            <li><a href="#">宗教人物</a></li>
+                                            <li><a href="#">哲学家</a></li>
+                                            <li><a href="#">教育家</a></li>
+                                            <li><a href="#">文学家</a></li>
+                                            <li><a href="#">人文社会学家</a></li>
+                                            <li><a href="#">艺术家</a></li>
+                                            <li><a href="#">科学家</a></li>
+                                            <li><a href="#">国学大师</a></li>
+                                            <li><a href="#">文娱明星</a></li>
+                                            <li><a href="#">体育明星</a></li>
+                                            <li><a href="#">语言文学学家</a></li>
+                                            <li><a href="#">人物合集</a></li>
+                                            <li><a href="#">建筑设计师</a></li>
+                                            <li><a href="#">传记研究与编写</a></li>
+                                            <li><a href="#">家族研究与谱系</a></li>
+                                            <li><a href="#">年谱</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">青春文学</a></div>
+                                        <ul>
+                                            <li><a href="#">古代言情</a></li>
+                                            <li><a href="#">校园</a></li>
+                                            <li><a href="#">爱情/情感</a></li>
+                                            <li><a href="#">叛逆/成长</a></li>
+                                            <li><a href="#">悬疑/惊悚</a></li>
+                                            <li><a href="#">娱乐/偶像</a></li>
+                                            <li><a href="#">爆笑/无厘头</a></li>
+                                            <li><a href="#">玄幻/科幻/新武侠</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">动漫</a></div>
+                                        <ul>
+                                            <li><a href="#">冒险战斗</a></li>
+                                            <li><a href="#">悬疑推理</a></li>
+                                            <li><a href="#">恐怖惊悚</a></li>
+                                            <li><a href="#">爆笑幽默</a></li>
+                                            <li><a href="#">爱情情感</a></li>
+                                            <li><a href="#">体育</a></li>
+                                            <li><a href="#">励志</a></li>
+                                            <li><a href="#">医疗</a></li>
+                                            <li><a href="#">料理</a></li>
+                                            <li><a href="#">音乐</a></li>
+                                            <li><a href="#">校园</a></li>
+                                            <li><a href="#">科幻</a></li>
+                                            <li><a href="#">玄幻</a></li>
+                                            <li><a href="#">战争</a></li>
+                                            <li><a href="#">讽刺</a></li>
+                                            <li><a href="#">学习教育</a></li>
+                                            <li><a href="#">作品集</a></li>
+                                            <li><a href="#">画集</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="title four"><a href="#">生活</a></div>
+                            <div class="list">
+                                <a href="#">孕产知识</a>
+                                <a href="#">育儿·亲子</a>
+                                <a href="#">家教</a>
+                                <a href="#">健身·保健</a>
+                                <a href="#">旅游</a>
+                                <a href="#">地图</a>
+                                <a href="#">手工DIY</a>
+                                <a href="#">家居</a>
+                                <a href="#">烹饪·美食</a>
+                                <a href="#">时尚美妆</a>
+                                <a href="#">婚恋两性</a>
+                                <a href="#">体育运动</a>
+                                <a href="#">风水·占卜</a>
+                            </div>
+                            <div class="line"></div>
+                            <div class="subitem">
+                                <div class="inner">
+                                    <div class="tit tit1">
+                                        <div class="name"><a href="#">文学</a></div>
+                                        <ul>
+                                            <li><a href="#">随笔散文</a></li>
+                                            <li><a href="#">文集</a></li>
+                                            <li><a href="#">纪实文学</a></li>
+                                            <li><a href="#">古诗词</a></li>
+                                            <li><a href="#">现当代诗歌</a></li>
+                                            <li><a href="#">文学评论与鉴赏</a></li>
+                                            <li><a href="#">影视文学</a></li>
+                                            <li><a href="#">戏剧曲艺</a></li>
+                                            <li><a href="#">文学史</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">小说</a></div>
+                                        <ul>
+                                            <li><a href="#">侦探/悬疑/推理</a></li>
+                                            <li><a href="#">恐怖/惊悚</a></li>
+                                            <li><a href="#">情感/家庭/婚姻</a></li>
+                                            <li><a href="#">社会</a></li>
+                                            <li><a href="#">官职场</a></li>
+                                            <li><a href="#">历史</a></li>
+                                            <li><a href="#">科幻</a></li>
+                                            <li><a href="#">武侠</a></li>
+                                            <li><a href="#">玄幻</a></li>
+                                            <li><a href="#">军事</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">传记</a></div>
+                                        <ul>
+                                            <li><a href="#">财经人物</a></li>
+                                            <li><a href="#">历代帝王</a></li>
+                                            <li><a href="#">领袖首脑</a></li>
+                                            <li><a href="#">军事人物</a></li>
+                                            <li><a href="#">政治人物</a></li>
+                                            <li><a href="#">历史人物</a></li>
+                                            <li><a href="#">法律人物</a></li>
+                                            <li><a href="#">宗教人物</a></li>
+                                            <li><a href="#">哲学家</a></li>
+                                            <li><a href="#">教育家</a></li>
+                                            <li><a href="#">文学家</a></li>
+                                            <li><a href="#">人文社会学家</a></li>
+                                            <li><a href="#">艺术家</a></li>
+                                            <li><a href="#">科学家</a></li>
+                                            <li><a href="#">国学大师</a></li>
+                                            <li><a href="#">文娱明星</a></li>
+                                            <li><a href="#">体育明星</a></li>
+                                            <li><a href="#">语言文学学家</a></li>
+                                            <li><a href="#">人物合集</a></li>
+                                            <li><a href="#">建筑设计师</a></li>
+                                            <li><a href="#">传记研究与编写</a></li>
+                                            <li><a href="#">家族研究与谱系</a></li>
+                                            <li><a href="#">年谱</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">青春文学</a></div>
+                                        <ul>
+                                            <li><a href="#">古代言情</a></li>
+                                            <li><a href="#">校园</a></li>
+                                            <li><a href="#">爱情/情感</a></li>
+                                            <li><a href="#">叛逆/成长</a></li>
+                                            <li><a href="#">悬疑/惊悚</a></li>
+                                            <li><a href="#">娱乐/偶像</a></li>
+                                            <li><a href="#">爆笑/无厘头</a></li>
+                                            <li><a href="#">玄幻/科幻/新武侠</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">动漫</a></div>
+                                        <ul>
+                                            <li><a href="#">冒险战斗</a></li>
+                                            <li><a href="#">悬疑推理</a></li>
+                                            <li><a href="#">恐怖惊悚</a></li>
+                                            <li><a href="#">爆笑幽默</a></li>
+                                            <li><a href="#">爱情情感</a></li>
+                                            <li><a href="#">体育</a></li>
+                                            <li><a href="#">励志</a></li>
+                                            <li><a href="#">医疗</a></li>
+                                            <li><a href="#">料理</a></li>
+                                            <li><a href="#">音乐</a></li>
+                                            <li><a href="#">校园</a></li>
+                                            <li><a href="#">科幻</a></li>
+                                            <li><a href="#">玄幻</a></li>
+                                            <li><a href="#">战争</a></li>
+                                            <li><a href="#">讽刺</a></li>
+                                            <li><a href="#">学习教育</a></li>
+                                            <li><a href="#">作品集</a></li>
+                                            <li><a href="#">画集</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="title five"><a href="#">艺术</a></div>
+                            <div class="list">
+                                <a href="#">绘画</a>
+                                <a href="#">摄影</a>
+                                <a href="#">书法·篆刻</a>
+                                <a href="#">设计</a>
+                                <a href="#">音乐</a>
+                                <a href="#">鉴赏·收藏</a>
+                                <a href="#">戏剧</a>
+                                <a href="#">工艺美术</a>
+                                <a href="#">艺术类考试</a>
+                                <a href="#">影视·媒体艺术</a>
+                                <a href="#">舞蹈</a>
+                            </div>
+                            <div class="line"></div>
+                            <div class="subitem">
+                                <div class="inner">
+                                    <div class="tit tit1">
+                                        <div class="name"><a href="#">文学</a></div>
+                                        <ul>
+                                            <li><a href="#">随笔散文</a></li>
+                                            <li><a href="#">文集</a></li>
+                                            <li><a href="#">纪实文学</a></li>
+                                            <li><a href="#">古诗词</a></li>
+                                            <li><a href="#">现当代诗歌</a></li>
+                                            <li><a href="#">文学评论与鉴赏</a></li>
+                                            <li><a href="#">影视文学</a></li>
+                                            <li><a href="#">戏剧曲艺</a></li>
+                                            <li><a href="#">文学史</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">小说</a></div>
+                                        <ul>
+                                            <li><a href="#">侦探/悬疑/推理</a></li>
+                                            <li><a href="#">恐怖/惊悚</a></li>
+                                            <li><a href="#">情感/家庭/婚姻</a></li>
+                                            <li><a href="#">社会</a></li>
+                                            <li><a href="#">官职场</a></li>
+                                            <li><a href="#">历史</a></li>
+                                            <li><a href="#">科幻</a></li>
+                                            <li><a href="#">武侠</a></li>
+                                            <li><a href="#">玄幻</a></li>
+                                            <li><a href="#">军事</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">传记</a></div>
+                                        <ul>
+                                            <li><a href="#">财经人物</a></li>
+                                            <li><a href="#">历代帝王</a></li>
+                                            <li><a href="#">领袖首脑</a></li>
+                                            <li><a href="#">军事人物</a></li>
+                                            <li><a href="#">政治人物</a></li>
+                                            <li><a href="#">历史人物</a></li>
+                                            <li><a href="#">法律人物</a></li>
+                                            <li><a href="#">宗教人物</a></li>
+                                            <li><a href="#">哲学家</a></li>
+                                            <li><a href="#">教育家</a></li>
+                                            <li><a href="#">文学家</a></li>
+                                            <li><a href="#">人文社会学家</a></li>
+                                            <li><a href="#">艺术家</a></li>
+                                            <li><a href="#">科学家</a></li>
+                                            <li><a href="#">国学大师</a></li>
+                                            <li><a href="#">文娱明星</a></li>
+                                            <li><a href="#">体育明星</a></li>
+                                            <li><a href="#">语言文学学家</a></li>
+                                            <li><a href="#">人物合集</a></li>
+                                            <li><a href="#">建筑设计师</a></li>
+                                            <li><a href="#">传记研究与编写</a></li>
+                                            <li><a href="#">家族研究与谱系</a></li>
+                                            <li><a href="#">年谱</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">青春文学</a></div>
+                                        <ul>
+                                            <li><a href="#">古代言情</a></li>
+                                            <li><a href="#">校园</a></li>
+                                            <li><a href="#">爱情/情感</a></li>
+                                            <li><a href="#">叛逆/成长</a></li>
+                                            <li><a href="#">悬疑/惊悚</a></li>
+                                            <li><a href="#">娱乐/偶像</a></li>
+                                            <li><a href="#">爆笑/无厘头</a></li>
+                                            <li><a href="#">玄幻/科幻/新武侠</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">动漫</a></div>
+                                        <ul>
+                                            <li><a href="#">冒险战斗</a></li>
+                                            <li><a href="#">悬疑推理</a></li>
+                                            <li><a href="#">恐怖惊悚</a></li>
+                                            <li><a href="#">爆笑幽默</a></li>
+                                            <li><a href="#">爱情情感</a></li>
+                                            <li><a href="#">体育</a></li>
+                                            <li><a href="#">励志</a></li>
+                                            <li><a href="#">医疗</a></li>
+                                            <li><a href="#">料理</a></li>
+                                            <li><a href="#">音乐</a></li>
+                                            <li><a href="#">校园</a></li>
+                                            <li><a href="#">科幻</a></li>
+                                            <li><a href="#">玄幻</a></li>
+                                            <li><a href="#">战争</a></li>
+                                            <li><a href="#">讽刺</a></li>
+                                            <li><a href="#">学习教育</a></li>
+                                            <li><a href="#">作品集</a></li>
+                                            <li><a href="#">画集</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="title six"><a href="#">人文社科</a></div>
+                            <div class="list">
+                                <a href="#">历史</a>
+                                <a href="#">文化</a>
+                                <a href="#">古典</a>
+                                <a href="#">政治军事</a>
+                                <a href="#">法律</a>
+                                <a href="#">哲学宗教</a>
+                                <a href="#">社会科学</a>
+                                <a href="#">心理学</a>
+                            </div>
+                            <div class="line"></div>
+                            <div class="subitem">
+                                <div class="inner">
+                                    <div class="tit tit1">
+                                        <div class="name"><a href="#">文学</a></div>
+                                        <ul>
+                                            <li><a href="#">随笔散文</a></li>
+                                            <li><a href="#">文集</a></li>
+                                            <li><a href="#">纪实文学</a></li>
+                                            <li><a href="#">古诗词</a></li>
+                                            <li><a href="#">现当代诗歌</a></li>
+                                            <li><a href="#">文学评论与鉴赏</a></li>
+                                            <li><a href="#">影视文学</a></li>
+                                            <li><a href="#">戏剧曲艺</a></li>
+                                            <li><a href="#">文学史</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">小说</a></div>
+                                        <ul>
+                                            <li><a href="#">侦探/悬疑/推理</a></li>
+                                            <li><a href="#">恐怖/惊悚</a></li>
+                                            <li><a href="#">情感/家庭/婚姻</a></li>
+                                            <li><a href="#">社会</a></li>
+                                            <li><a href="#">官职场</a></li>
+                                            <li><a href="#">历史</a></li>
+                                            <li><a href="#">科幻</a></li>
+                                            <li><a href="#">武侠</a></li>
+                                            <li><a href="#">玄幻</a></li>
+                                            <li><a href="#">军事</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">传记</a></div>
+                                        <ul>
+                                            <li><a href="#">财经人物</a></li>
+                                            <li><a href="#">历代帝王</a></li>
+                                            <li><a href="#">领袖首脑</a></li>
+                                            <li><a href="#">军事人物</a></li>
+                                            <li><a href="#">政治人物</a></li>
+                                            <li><a href="#">历史人物</a></li>
+                                            <li><a href="#">法律人物</a></li>
+                                            <li><a href="#">宗教人物</a></li>
+                                            <li><a href="#">哲学家</a></li>
+                                            <li><a href="#">教育家</a></li>
+                                            <li><a href="#">文学家</a></li>
+                                            <li><a href="#">人文社会学家</a></li>
+                                            <li><a href="#">艺术家</a></li>
+                                            <li><a href="#">科学家</a></li>
+                                            <li><a href="#">国学大师</a></li>
+                                            <li><a href="#">文娱明星</a></li>
+                                            <li><a href="#">体育明星</a></li>
+                                            <li><a href="#">语言文学学家</a></li>
+                                            <li><a href="#">人物合集</a></li>
+                                            <li><a href="#">建筑设计师</a></li>
+                                            <li><a href="#">传记研究与编写</a></li>
+                                            <li><a href="#">家族研究与谱系</a></li>
+                                            <li><a href="#">年谱</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">青春文学</a></div>
+                                        <ul>
+                                            <li><a href="#">古代言情</a></li>
+                                            <li><a href="#">校园</a></li>
+                                            <li><a href="#">爱情/情感</a></li>
+                                            <li><a href="#">叛逆/成长</a></li>
+                                            <li><a href="#">悬疑/惊悚</a></li>
+                                            <li><a href="#">娱乐/偶像</a></li>
+                                            <li><a href="#">爆笑/无厘头</a></li>
+                                            <li><a href="#">玄幻/科幻/新武侠</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">动漫</a></div>
+                                        <ul>
+                                            <li><a href="#">冒险战斗</a></li>
+                                            <li><a href="#">悬疑推理</a></li>
+                                            <li><a href="#">恐怖惊悚</a></li>
+                                            <li><a href="#">爆笑幽默</a></li>
+                                            <li><a href="#">爱情情感</a></li>
+                                            <li><a href="#">体育</a></li>
+                                            <li><a href="#">励志</a></li>
+                                            <li><a href="#">医疗</a></li>
+                                            <li><a href="#">料理</a></li>
+                                            <li><a href="#">音乐</a></li>
+                                            <li><a href="#">校园</a></li>
+                                            <li><a href="#">科幻</a></li>
+                                            <li><a href="#">玄幻</a></li>
+                                            <li><a href="#">战争</a></li>
+                                            <li><a href="#">讽刺</a></li>
+                                            <li><a href="#">学习教育</a></li>
+                                            <li><a href="#">作品集</a></li>
+                                            <li><a href="#">画集</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="title seven"><a href="#">科技</a></div>
+                            <div class="list">
+                                <a href="#">科普读物</a>
+                                <a href="#">建筑</a>
+                                <a href="#">医学</a>
+                                <a href="#">计算机与网络</a>
+                                <a href="#">工业技术</a>
+                                <a href="#">自然科学</a>
+                                <a href="#">农林业</a>
+                            </div>
+                            <div class="line"></div>
+                            <div class="subitem">
+                                <div class="inner">
+                                    <div class="tit tit1">
+                                        <div class="name"><a href="#">文学</a></div>
+                                        <ul>
+                                            <li><a href="#">随笔散文</a></li>
+                                            <li><a href="#">文集</a></li>
+                                            <li><a href="#">纪实文学</a></li>
+                                            <li><a href="#">古诗词</a></li>
+                                            <li><a href="#">现当代诗歌</a></li>
+                                            <li><a href="#">文学评论与鉴赏</a></li>
+                                            <li><a href="#">影视文学</a></li>
+                                            <li><a href="#">戏剧曲艺</a></li>
+                                            <li><a href="#">文学史</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">小说</a></div>
+                                        <ul>
+                                            <li><a href="#">侦探/悬疑/推理</a></li>
+                                            <li><a href="#">恐怖/惊悚</a></li>
+                                            <li><a href="#">情感/家庭/婚姻</a></li>
+                                            <li><a href="#">社会</a></li>
+                                            <li><a href="#">官职场</a></li>
+                                            <li><a href="#">历史</a></li>
+                                            <li><a href="#">科幻</a></li>
+                                            <li><a href="#">武侠</a></li>
+                                            <li><a href="#">玄幻</a></li>
+                                            <li><a href="#">军事</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">传记</a></div>
+                                        <ul>
+                                            <li><a href="#">财经人物</a></li>
+                                            <li><a href="#">历代帝王</a></li>
+                                            <li><a href="#">领袖首脑</a></li>
+                                            <li><a href="#">军事人物</a></li>
+                                            <li><a href="#">政治人物</a></li>
+                                            <li><a href="#">历史人物</a></li>
+                                            <li><a href="#">法律人物</a></li>
+                                            <li><a href="#">宗教人物</a></li>
+                                            <li><a href="#">哲学家</a></li>
+                                            <li><a href="#">教育家</a></li>
+                                            <li><a href="#">文学家</a></li>
+                                            <li><a href="#">人文社会学家</a></li>
+                                            <li><a href="#">艺术家</a></li>
+                                            <li><a href="#">科学家</a></li>
+                                            <li><a href="#">国学大师</a></li>
+                                            <li><a href="#">文娱明星</a></li>
+                                            <li><a href="#">体育明星</a></li>
+                                            <li><a href="#">语言文学学家</a></li>
+                                            <li><a href="#">人物合集</a></li>
+                                            <li><a href="#">建筑设计师</a></li>
+                                            <li><a href="#">传记研究与编写</a></li>
+                                            <li><a href="#">家族研究与谱系</a></li>
+                                            <li><a href="#">年谱</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">青春文学</a></div>
+                                        <ul>
+                                            <li><a href="#">古代言情</a></li>
+                                            <li><a href="#">校园</a></li>
+                                            <li><a href="#">爱情/情感</a></li>
+                                            <li><a href="#">叛逆/成长</a></li>
+                                            <li><a href="#">悬疑/惊悚</a></li>
+                                            <li><a href="#">娱乐/偶像</a></li>
+                                            <li><a href="#">爆笑/无厘头</a></li>
+                                            <li><a href="#">玄幻/科幻/新武侠</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tit">
+                                        <div class="name"><a href="#">动漫</a></div>
+                                        <ul>
+                                            <li><a href="#">冒险战斗</a></li>
+                                            <li><a href="#">悬疑推理</a></li>
+                                            <li><a href="#">恐怖惊悚</a></li>
+                                            <li><a href="#">爆笑幽默</a></li>
+                                            <li><a href="#">爱情情感</a></li>
+                                            <li><a href="#">体育</a></li>
+                                            <li><a href="#">励志</a></li>
+                                            <li><a href="#">医疗</a></li>
+                                            <li><a href="#">料理</a></li>
+                                            <li><a href="#">音乐</a></li>
+                                            <li><a href="#">校园</a></li>
+                                            <li><a href="#">科幻</a></li>
+                                            <li><a href="#">玄幻</a></li>
+                                            <li><a href="#">战争</a></li>
+                                            <li><a href="#">讽刺</a></li>
+                                            <li><a href="#">学习教育</a></li>
+                                            <li><a href="#">作品集</a></li>
+                                            <li><a href="#">画集</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="title eight"><a href="#">励志·成功</a></div>
+                            <div class="list">
+                                <a href="#">励志与成功</a>
+                            </div>
+                            <div class="line"></div>
+                            <div class="subitem">
+                                <div class="inner">
+                                <div class="tit tit1">
+                                    <div class="name"><a href="#">文学</a></div>
+                                    <ul>
+                                        <li><a href="#">随笔散文</a></li>
+                                        <li><a href="#">文集</a></li>
+                                        <li><a href="#">纪实文学</a></li>
+                                        <li><a href="#">古诗词</a></li>
+                                        <li><a href="#">现当代诗歌</a></li>
+                                        <li><a href="#">文学评论与鉴赏</a></li>
+                                        <li><a href="#">影视文学</a></li>
+                                        <li><a href="#">戏剧曲艺</a></li>
+                                        <li><a href="#">文学史</a></li>
+                                    </ul>
+                                </div>
+                                <div class="tit">
+                                    <div class="name"><a href="#">小说</a></div>
+                                    <ul>
+                                        <li><a href="#">侦探/悬疑/推理</a></li>
+                                        <li><a href="#">恐怖/惊悚</a></li>
+                                        <li><a href="#">情感/家庭/婚姻</a></li>
+                                        <li><a href="#">社会</a></li>
+                                        <li><a href="#">官职场</a></li>
+                                        <li><a href="#">历史</a></li>
+                                        <li><a href="#">科幻</a></li>
+                                        <li><a href="#">武侠</a></li>
+                                        <li><a href="#">玄幻</a></li>
+                                        <li><a href="#">军事</a></li>
+                                    </ul>
+                                </div>
+                                <div class="tit">
+                                    <div class="name"><a href="#">传记</a></div>
+                                    <ul>
+                                        <li><a href="#">财经人物</a></li>
+                                        <li><a href="#">历代帝王</a></li>
+                                        <li><a href="#">领袖首脑</a></li>
+                                        <li><a href="#">军事人物</a></li>
+                                        <li><a href="#">政治人物</a></li>
+                                        <li><a href="#">历史人物</a></li>
+                                        <li><a href="#">法律人物</a></li>
+                                        <li><a href="#">宗教人物</a></li>
+                                        <li><a href="#">哲学家</a></li>
+                                        <li><a href="#">教育家</a></li>
+                                        <li><a href="#">文学家</a></li>
+                                        <li><a href="#">人文社会学家</a></li>
+                                        <li><a href="#">艺术家</a></li>
+                                        <li><a href="#">科学家</a></li>
+                                        <li><a href="#">国学大师</a></li>
+                                        <li><a href="#">文娱明星</a></li>
+                                        <li><a href="#">体育明星</a></li>
+                                        <li><a href="#">语言文学学家</a></li>
+                                        <li><a href="#">人物合集</a></li>
+                                        <li><a href="#">建筑设计师</a></li>
+                                        <li><a href="#">传记研究与编写</a></li>
+                                        <li><a href="#">家族研究与谱系</a></li>
+                                        <li><a href="#">年谱</a></li>
+                                    </ul>
+                                </div>
+                                <div class="tit">
+                                    <div class="name"><a href="#">青春文学</a></div>
+                                    <ul>
+                                        <li><a href="#">古代言情</a></li>
+                                        <li><a href="#">校园</a></li>
+                                        <li><a href="#">爱情/情感</a></li>
+                                        <li><a href="#">叛逆/成长</a></li>
+                                        <li><a href="#">悬疑/惊悚</a></li>
+                                        <li><a href="#">娱乐/偶像</a></li>
+                                        <li><a href="#">爆笑/无厘头</a></li>
+                                        <li><a href="#">玄幻/科幻/新武侠</a></li>
+                                    </ul>
+                                </div>
+                                <div class="tit">
+                                    <div class="name"><a href="#">动漫</a></div>
+                                    <ul>
+                                        <li><a href="#">冒险战斗</a></li>
+                                        <li><a href="#">悬疑推理</a></li>
+                                        <li><a href="#">恐怖惊悚</a></li>
+                                        <li><a href="#">爆笑幽默</a></li>
+                                        <li><a href="#">爱情情感</a></li>
+                                        <li><a href="#">体育</a></li>
+                                        <li><a href="#">励志</a></li>
+                                        <li><a href="#">医疗</a></li>
+                                        <li><a href="#">料理</a></li>
+                                        <li><a href="#">音乐</a></li>
+                                        <li><a href="#">校园</a></li>
+                                        <li><a href="#">科幻</a></li>
+                                        <li><a href="#">玄幻</a></li>
+                                        <li><a href="#">战争</a></li>
+                                        <li><a href="#">讽刺</a></li>
+                                        <li><a href="#">学习教育</a></li>
+                                        <li><a href="#">作品集</a></li>
+                                        <li><a href="#">画集</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="title eight"><a href="#">经管</a></div>
+                            <div class="list">
+                                <a href="#">管理</a>
+                                <a href="#">经济金融</a>
+                                <a href="#">投资理财</a>
+                                <a href="#">电子商务</a>
+                            </div>
+                            <div class="line"></div>
+                            <div class="subitem">
+                                <div class="inner">
+                                <div class="tit tit1">
+                                    <div class="name"><a href="#">文学</a></div>
+                                    <ul>
+                                        <li><a href="#">随笔散文</a></li>
+                                        <li><a href="#">文集</a></li>
+                                        <li><a href="#">纪实文学</a></li>
+                                        <li><a href="#">古诗词</a></li>
+                                        <li><a href="#">现当代诗歌</a></li>
+                                        <li><a href="#">文学评论与鉴赏</a></li>
+                                        <li><a href="#">影视文学</a></li>
+                                        <li><a href="#">戏剧曲艺</a></li>
+                                        <li><a href="#">文学史</a></li>
+                                    </ul>
+                                </div>
+                                <div class="tit">
+                                    <div class="name"><a href="#">小说</a></div>
+                                    <ul>
+                                        <li><a href="#">侦探/悬疑/推理</a></li>
+                                        <li><a href="#">恐怖/惊悚</a></li>
+                                        <li><a href="#">情感/家庭/婚姻</a></li>
+                                        <li><a href="#">社会</a></li>
+                                        <li><a href="#">官职场</a></li>
+                                        <li><a href="#">历史</a></li>
+                                        <li><a href="#">科幻</a></li>
+                                        <li><a href="#">武侠</a></li>
+                                        <li><a href="#">玄幻</a></li>
+                                        <li><a href="#">军事</a></li>
+                                    </ul>
+                                </div>
+                                <div class="tit">
+                                    <div class="name"><a href="#">传记</a></div>
+                                    <ul>
+                                        <li><a href="#">财经人物</a></li>
+                                        <li><a href="#">历代帝王</a></li>
+                                        <li><a href="#">领袖首脑</a></li>
+                                        <li><a href="#">军事人物</a></li>
+                                        <li><a href="#">政治人物</a></li>
+                                        <li><a href="#">历史人物</a></li>
+                                        <li><a href="#">法律人物</a></li>
+                                        <li><a href="#">宗教人物</a></li>
+                                        <li><a href="#">哲学家</a></li>
+                                        <li><a href="#">教育家</a></li>
+                                        <li><a href="#">文学家</a></li>
+                                        <li><a href="#">人文社会学家</a></li>
+                                        <li><a href="#">艺术家</a></li>
+                                        <li><a href="#">科学家</a></li>
+                                        <li><a href="#">国学大师</a></li>
+                                        <li><a href="#">文娱明星</a></li>
+                                        <li><a href="#">体育明星</a></li>
+                                        <li><a href="#">语言文学学家</a></li>
+                                        <li><a href="#">人物合集</a></li>
+                                        <li><a href="#">建筑设计师</a></li>
+                                        <li><a href="#">传记研究与编写</a></li>
+                                        <li><a href="#">家族研究与谱系</a></li>
+                                        <li><a href="#">年谱</a></li>
+                                    </ul>
+                                </div>
+                                <div class="tit">
+                                    <div class="name"><a href="#">青春文学</a></div>
+                                    <ul>
+                                        <li><a href="#">古代言情</a></li>
+                                        <li><a href="#">校园</a></li>
+                                        <li><a href="#">爱情/情感</a></li>
+                                        <li><a href="#">叛逆/成长</a></li>
+                                        <li><a href="#">悬疑/惊悚</a></li>
+                                        <li><a href="#">娱乐/偶像</a></li>
+                                        <li><a href="#">爆笑/无厘头</a></li>
+                                        <li><a href="#">玄幻/科幻/新武侠</a></li>
+                                    </ul>
+                                </div>
+                                <div class="tit">
+                                    <div class="name"><a href="#">动漫</a></div>
+                                    <ul>
+                                        <li><a href="#">冒险战斗</a></li>
+                                        <li><a href="#">悬疑推理</a></li>
+                                        <li><a href="#">恐怖惊悚</a></li>
+                                        <li><a href="#">爆笑幽默</a></li>
+                                        <li><a href="#">爱情情感</a></li>
+                                        <li><a href="#">体育</a></li>
+                                        <li><a href="#">励志</a></li>
+                                        <li><a href="#">医疗</a></li>
+                                        <li><a href="#">料理</a></li>
+                                        <li><a href="#">音乐</a></li>
+                                        <li><a href="#">校园</a></li>
+                                        <li><a href="#">科幻</a></li>
+                                        <li><a href="#">玄幻</a></li>
+                                        <li><a href="#">战争</a></li>
+                                        <li><a href="#">讽刺</a></li>
+                                        <li><a href="#">学习教育</a></li>
+                                        <li><a href="#">作品集</a></li>
+                                        <li><a href="#">画集</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    //产品分类
+                    $(".product_sort .bd .item").hover(function(){
+                        $(this).addClass("layer");
+                    },function(){
+                        $(this).removeClass("layer");
+                    });
+                </script>
+
+            </div>
+            <div class="min_box_fr">
+                <form>
+                    <div class="sousuo_box">
+                        <div class="sousuo_box_fl">
+                            <div class="sousuo_box_fl_fl">
+                                <div  class="shaixuan_div">
+                                    <div><a>默认</a></div>
+                                    <div><a>人气</a><span><i class="f-ico-triangle-mt "></i><i class="f-ico-triangle-mb  "></i></span></div>
+                                    <div><a>销量</a><span><i class="f-ico-triangle-mt "></i><i class="f-ico-triangle-mb  "></i></span></div>
+                                    <div><a>价格</a><span><i class="f-ico-triangle-mt "></i><i class="f-ico-triangle-mb  "></i></span></div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            <div class="sousuo_box_fl_fr">
+                                <input type="text" class="input_sx"  placeholder="0" /><i>-</i>
+                                <input type="text" class="input_sx" placeholder="不限"   />
+                                <input type="submit" class="input_sub" value="确定" />
+                                <div class="clear"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="sousuo_box_fr">
+                            <div class="selectbox">
+                                <div class="selemediv">
+                                    <div class="selemenu">全部图书<i class="sele_tb"></i></div>
+                                    <div class="citylist">
+                                        <span>全部图书</span>
+                                        <span>二手书</span>
+                                        <span>分享的书</span>
+                                        <span>新书</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                $(".selemenu").click(function(){
+                                    $(this).next().slideToggle();
+                                    $(this).parents().siblings().find(".citylist,.citylist2").slideUp();
+                                })
+                                $(".citylist span").click(function(){
+                                    var text=$(this).text();
+                                    $(this).parent().prev().html(text);
+                                    $(this).parent().prev().css("color","#666")
+                                    $(this).parent().fadeOut();
+
+                                })
+                                $(".shangquan li").click(function(){
+                                    $(".shangquan li").removeClass("active")
+                                    $(this).addClass("active")
+                                    var text1=$(this).text();
+                                    $(".sqinput").html(text1)
+                                })
+                                $(".chengshi li").click(function(){
+                                    $(".chengshi li").removeClass("active")
+                                    $(this).addClass("active")
+                                    var text2=$(this).text();
+                                    $(".csinput").html("-"+text2)
+                                    $(".citylist2").slideUp();
+                                })
+                                $(function(){
+                                    $(document).not($(".selectbox")).click(function(){
+                                        $(".citylist,.citylist2").slideUp();
+                                    })
+                                    $(".selectbox").click(function(event){
+                                        event.stopPropagation();
+                                    })
+                                })
+                            </script>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </form>
+
+                <div class="clear"></div>
+                <ul>
+                    <li>
+                        <a>
+                        <div class="cp_icon"><img src="images/icon_cp.jpg" alt=""/><span class="index_mod_tag">二手</span></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><img src="images/icon_cp.jpg" alt=""/><span class="index_mod_tag">分享</span></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><img src="images/icon_cp.jpg" alt=""/></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><img src="images/icon_cp.jpg" alt=""/></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><span class="index_mod_tag">二手</span></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><img src="images/icon_cp.jpg" alt=""/></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><img src="images/icon_cp.jpg" alt=""/></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><span class="index_mod_tag">二手</span></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><img src="images/icon_cp.jpg" alt=""/></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><span class="index_mod_tag">二手</span></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><img src="images/icon_cp.jpg" alt=""/></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><span class="index_mod_tag">二手</span></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><img src="images/icon_cp.jpg" alt=""/></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><span class="index_mod_tag">二手</span></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><img src="images/icon_cp.jpg" alt=""/></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cp_icon"><span class="index_mod_tag">二手</span></div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥76.00</span><i>定价：</i><del>¥86.00</del></p>
+                                <p class="cp_bt">那些细碎却美好的时光</p>
+                                <p class="cp_sj"><i>山亭夜宴</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="images/pic_store_cover.png" alt=""/><span>miaomiao</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <div class="clear"></div>
+                </ul>
+                <div class="fenye">
+                    <div class="wrapper">
+                        <div class="eg">
+                            <div class="M-box3"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="clear"></div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<div class="footer">
+    <div class="footer_box">
+        <div class="foot_fl">
+            <div class="foot_fl_code">
+                <img src="images/qrcode1.png" alt=""/><br/>扫描下载APP
+            </div>
+            <div class="foot_fl_kf">
+                <ul>
+                    <li>客服电话<br/>020-87381467</li>
+                    <li>联系邮箱<br/>3356544144@qq.com</li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="foot_fr">
+            <ul>
+                <li>
+                    <img src="images/icon_wechat.png" alt=""/>
+                </li>
+                <li>
+                    <img src="images/icon_qq2.png" alt=""/>
+                </li>
+                <li>
+                    <img src="images/icon_weibo2.png" alt=""/>
+                </li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <p class="copyright">Copyright © 2014 广州市士加堡网络技术有限公司 sjbwangluo.com 版权所有 | 粤ICP备13089237号</p>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

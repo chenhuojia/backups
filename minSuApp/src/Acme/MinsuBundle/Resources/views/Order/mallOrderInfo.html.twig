@@ -1,0 +1,240 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+{% block javascript %} {{ parent() }}
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	$('#shipping').click(function(){
+		$.ajax({
+			url:"{{ path('_shippingList')}}",
+			type:"post",
+			data:"shipping_code="+{{ order.info.shipping_code}}+"&shipping_name="+{{ order.info.shipping_name}},
+			datatype:"json",
+			success:function(e){
+				console.log(e)	
+			}
+		})	
+	})
+
+	$('.money_refund').click(function(){
+		$.ajax({
+			url:"{{ path('_order_refund')}}",
+			type:"post",
+			data:"order_id="+{{ order.info.order_id}}+"&shop_id="+{{ order.info.shop_id}},
+			datatype:"json",
+			success:function(e){
+				if(e){
+					tmp(e.nickname,e.bank_name,e.account_bank,e.account_name,e.apply_price,e.reason,e.time,e.is_agree);	
+				}	
+			}
+		})	
+	})
+
+	$('.refund').on('click','#chang',function(){
+			if(confirm("是否同意")){
+				$.ajax({
+					url:"{{ path('_agreerefund')}}",
+					type:"post",
+					data:"order_id="+{{ order.info.order_id}},
+					datatype:"json",
+					success:function(e){
+						if(e>0){
+							history.go(0);
+						}	
+					}
+				})	
+			}else{
+				$.ajax({
+					url:"{{ path('_unagreerefund')}}",
+					type:"post",
+					data:"order_id="+{{ order.info.order_id}},
+					datatype:"json",
+					success:function(e){
+						if(e>0){
+							history.go(0);
+						}	
+					}
+				})	
+			}		
+	})
+
+	function tmp(username,bank_name,account_bank,account_name,apply_price,reason,time,is_agree){
+		html="<div><ul>";
+		html +="<li>申请人: "+username+"</li>";
+		html +="<li>银行名称: "+bank_name+"</li>";
+		html +="<li>银行账号: "+account_bank+"</li>";
+		html +="<li>银行账户名: "+account_name+"</li>";
+		html +="<li>退款金额: "+apply_price+"</li>";
+		html +="<li>退款原因: "+reason+"</li>";
+		html +="<li>时间: "+time+"</li>";
+		if(is_agree==0){
+			html +="<li>状态: 不同意</li>";
+		}if(is_agree==1){
+			html +="<li>状态: 同意 </li>";
+		}if(is_agree==2){
+			html +="<li>状态: 未处理   "+"<time id='chang' style='cursor:pointer'>处理</time>"+"</li>";
+		}
+		html +="</ul></div>";
+		
+		$('.refund').html(html);
+	}
+	
+
+})
+</script>
+{% endblock %}
+{% block content%}<section class="alert">
+		  <button type="button" val=''onclick="javascript:history.go(-1)" class="green stateBtn">返  回</button>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>订单详情</h1>
+			</hgroup>
+		</header>
+	<div class="content">
+			<div class="field-wrap">
+	<div class="ncsc-order-info">
+    <div class="ncsc-order-details">
+      <div class="title">订单信息</div>
+      <div class="content">
+        <dl>
+          <dt>收&nbsp;&nbsp;货&nbsp;&nbsp;人：</dt>
+          <dd>{{ order.info.consignee }}&nbsp; </br> 
+          	手机号：{{ order.info.mobile }} &nbsp; </br>
+          	地址：{{ order.info.country }} {{ order.info.address }} &nbsp;</dd>         
+        </dl>
+        <dl class="line">
+          <dt>订单编号：</dt>
+          <dd>{{ order.info.order_sn }}<i class="icon-angle-down"></i>
+            <div class="more"><span class="arrow"></span>
+              <ul>
+                                <li>支付方式：<span>{% if order.info.pay_code == 1 and order.info.pay_code!= NULL%}微信{% elseif order.info.pay_code == 2 and order.info.pay_code!= NULL%}支付宝 {% else %}未支付{% endif %}</span></li>
+                              
+                              	<li>支付时间：<span>{% if  order.info.pay_time >0 %}{{ v.NewPayTime }}{% else %}Null{% endif %}</span></li>
+                              
+                                <li>下单时间：<span>{{ order.info.NewAddTime }}</span></li>
+                                
+                                <li>账号ID：<span>{{ order.info.user_id }}</span></li>
+                                <li>账号昵称：<span>{{ order.info.nickname }}</span></li>
+                                
+                                <li>店铺名：<span>{{ order.info.shop_name }}</span></li>
+                                 
+                                 
+               </ul>
+            </div>
+            </dd>
+        </dl>
+
+        
+
+        <dl>
+          <dt>商品总价：</dt>
+          <dd>{{ order.info.goods_price }}</dd>
+        </dl>
+        <dl>
+          <dt>商品总数：</dt>
+          <dd>{{ order.info.goods_num }}</dd>
+        </dl>
+        <dl>
+          <dt>快递费用：</dt>
+          <dd>{{ order.info.shipping_price }}</dd>
+        </dl>
+	
+		<dl>
+          <dt>优惠费用：</dt>
+          <dd>{{ order.info.coupon_price }}</dd>
+        </dl>
+        
+        <dl>
+          <dt>订单金额：</dt>
+          <dd><span style="font: bold 15px/20px Verdana; color: #C00;">{{ order.info.order_amount }}</span></dd>
+        </dl>
+        
+        
+      </div>
+    </div>
+      <div class="ncsc-order-condition">
+      	<dl>
+	        <dt><i class="icon-ok-circle green"></i>订单状态：</dt>
+	        <dd>
+	        	{% if order.info.order_status == 6 %}
+	        		<ul>
+				        <li>订单过时已被取消</li>
+				        <li>1. 买家尚未对该订单进行支付。</li>
+				        <li>2. 该订单过了特定支付时间，已被系统自动关闭。</li>				      
+				     <ul>
+				{% elseif order.info.order_status == 1 and order.info.pay_status == 1  %}
+					<ul>
+				        <li>订单已经提交，等待买家付款</li>
+				        <li>1. 买家尚未对该订单进行支付。</li>
+				        <li>2. 如果买家未对该笔订单进行支付操作，系统将于
+				          <time>下单时间15分种后</time>				      
+				    <ul>
+				{% elseif order.info.order_status == 2 and order.info.pay_status == 2 and order.info.shipping_status == 1 %}
+					<ul>
+				        <li>买家已经付款，等待店主发货</li>			      
+				    <ul>
+				{% elseif  order.info.order_status == 2 and order.info.pay_status == 2 and order.info.shipping_status == 2 %}
+					<ul>
+				        <li>订单已发货  &nbsp;&nbsp;&nbsp;<span id='shipping' style="font: bold 15px/20px Verdana; color: #C00;cursor:pointer;" >查看物流信息</span></li>			      
+				    <ul>
+				{% elseif order.info.order_status == 2 and order.info.pay_status == 2 and order.info.shipping_status == 3 %}
+					<ul>
+				        <li>买家已收货</li>			      
+				    <ul>
+				{% elseif  order.info.order_status == 2 and order.info.pay_status == 2 and order.info.shipping_status == 4 %}
+					<ul>
+				        <li>买家退货中 &nbsp;&nbsp;&nbsp;<time id='goods_refund' style='cursor:pointer'>查看退货信息</time></li>			      
+				    <ul>
+				{% elseif order.info.order_status == 2 and order.info.pay_status == 2 and order.info.shipping_status == 5 %}
+					<ul>
+				        <li>买家已退货  &nbsp;&nbsp;&nbsp;<time id='goods_refund' style='cursor:pointer'>查看退货信息</time></li>			      
+				    <ul>
+				{% elseif order.info.order_status == 3 %}
+					<ul>
+				        <li>买家已收货，等待买家评价</li>			      
+				    <ul>
+				{% elseif order.info.order_status == 4 %}
+					<ul>
+				        <li>买家已评价 &nbsp;&nbsp;&nbsp;<time class='' style='cursor:pointer'>查看评价</time></li>			      
+				    <ul>
+			
+
+				{% elseif order.info.pay_status == 3 %}
+					<ul>
+				        <li>退款中  &nbsp;&nbsp;&nbsp;<time class='money_refund' style='cursor:pointer'>查看退款去向</time></li>
+				        <li class="refund"></li>			      
+				    <ul>
+				{% elseif order.info.pay_status == 4 %}
+					<ul>
+				        <li>已退款   &nbsp;&nbsp;&nbsp;<time class='money_refund' style='cursor:pointer'>查看退款去向</time></li>			      
+				    	<li class="refund"></li>
+				    <ul>				
+	        	{% endif %}
+	        </dd>
+	      </dl>
+      	
+	      <dl>
+	        <dt><i class="icon-ok-circle green"></i>订单商品：</dt>
+	        {% for v in order.goods %}
+	        <dd>
+	        	<ul>	      			    
+			     	<li>id：{{v.goods_id}}</li>
+			     	<li>名称：{{v.goods_name}}</li>
+			    	<li>数量：{{v.goods_num}}</li>
+			    	<li>价格：{{v.goods_price}}</li>
+			    	<li>规格名称：{{v.spec_key}}</li>
+			    	<li>规格属性：{{v.spec_key_name}}</li>        	
+      	  		<ul> 
+	        </dd>
+	        {% endfor %}
+	      </dl>
+	      	                     
+  </div>	    				
+	</div>
+	</section>
+</section>
+{% endblock%}
+

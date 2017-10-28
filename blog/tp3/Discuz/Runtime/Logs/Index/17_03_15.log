@@ -1,0 +1,56 @@
+[ 2017-03-15T12:03:05+08:00 ] 183.232.228.22 /discuz.php/Index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000041s ]
+INFO: [ app_init ] --END-- [ RunTime:0.043538s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.049754s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.049835s ]
+SQL: SHOW COLUMNS FROM `bk_discuz_group` [ RunTime:0.0095s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `is_show` = 1 AND `parent_id` > 0  [ RunTime:0.0238s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `is_show` = 1 AND `parent_id` = 0  [ RunTime:0.0226s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `is_show` = 1 AND `parent_id` = 1  [ RunTime:0.0227s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `is_show` = 1 AND `parent_id` = 2  [ RunTime:0.0187s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `is_show` = 1 AND `parent_id` = 3  [ RunTime:0.0197s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `is_show` = 1 AND `parent_id` = 4  [ RunTime:0.0187s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000152s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000223s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Discuz/Runtime/Cache/Index/2f7e53dc05bd0d97b17984927c6586b5.php 第 79 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.645852s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.645923s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000314s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000353s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000559s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000638s ]
+
+[ 2017-03-15T12:07:00+08:00 ] 183.232.228.22 /discuz.php/Index/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000400s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.046583s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.046670s ]
+SQL: SHOW COLUMNS FROM `bk_discuz_group` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `is_show` = 1 AND `parent_id` > 0  [ RunTime:0.0237s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `is_show` = 1 AND `parent_id` = 0  [ RunTime:0.0217s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `is_show` = 1 AND `parent_id` = 1  [ RunTime:0.0272s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `is_show` = 1 AND `parent_id` = 2  [ RunTime:0.0222s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `is_show` = 1 AND `parent_id` = 3  [ RunTime:0.0193s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `is_show` = 1 AND `parent_id` = 4  [ RunTime:0.0231s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000148s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000216s ]
+NOTIC: [8] Undefined variable: Think /web/www/blog/tp3/Discuz/Runtime/Cache/Index/2f7e53dc05bd0d97b17984927c6586b5.php 第 79 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.678094s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.678167s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000260s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000289s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000751s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000852s ]
+

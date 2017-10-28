@@ -1,0 +1,29 @@
+<?php
+return array(
+    //数据库设置
+    'DB_TYPE'   => 'mysql', // 数据库类型
+    'DB_HOST'   => '127.0.0.1', // 服务器地址
+    'DB_NAME'   => 'kts', // 数据库名
+    'DB_USER'   => 'root', // 用户名
+    'DB_PWD'    => '123456', // 密码 z*5aRt5zA!9jm90d
+    'DB_PORT'   => '3306', // 端口
+    'DB_PREFIX' => 'kts_', // 数据库表前缀
+    'DB_CHARSET'=> 'utf8mb4', // 字符集
+    'USER_AUTH_ON'=>true,
+    'SMSUrl' => 'https://webapi.sms.mob.com/sms/verify',
+    'SMSappkey'=>array('1599d62448090','166100f743bba'),//第一个是安卓
+    'LOAD_EXT_CONFIG'=>'sessionConfig',
+
+    'SESSION_EXPIRE'=>31104000,//过期时间 24*3600*30*12秒
+    'redis_time_out'=>5,
+     /*默认头像文件路径*/
+    'QINIU_IMG_PATH'     =>  'http://7xqdi4.com1.z0.glb.clouddn.com/',
+    /*网站域名*/
+    'WEB_PATH'           =>  'http://121.196.230.128:8384',
+    'AVATAR_PATH'        =>  '/Public/avatar/',
+    'SHOP_PATH'          =>  '/Public/shop/',
+    /*店铺认证图片域名*/
+    'QINIU_SHOP_ING'     => 'http://oj6zg3dft.bkt.clouddn.com/',
+
+
+);

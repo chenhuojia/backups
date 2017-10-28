@@ -1,0 +1,88 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+  <script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $(".page-dis [href]").each(function () {
+        if (this.href == window.location.href) {
+          if (!isNaN($(this).html())) {
+            $(this).addClass("active");
+          }
+        }
+      })
+    });
+  </script>
+{% endblock %}
+
+{% block stylesheet %} {{ parent() }}
+  <link href="{{ asset('bundles/msk/public/css/msg.css') }}" rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
+
+{% block content%}<section class="alert">
+  <button type="button"  onclick="location='{{ path('systemMsg_') }}'" class="green stateBtn">返回</button>
+  </section>
+  <section class="content">
+    <section class="widget">
+      <header>
+        <span class="icon homstay-detail"><span>&#128196;</span></span>
+        <hgroup>
+          <h1>已查看信息会员</h1>
+        </hgroup>
+      </header>
+      <div class="content">
+        <table id="myTable" border="0" width="100">
+          <thead>
+          <tr>
+            {# 						<th>编号</th>#}
+            <th class="avatar" style="padding-left: 80px;">头像</th>
+            <th>昵称</th>
+            <th>注册时间</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for v in memberList %}
+            <tr>
+              <td class="avatar" ><img src="{{ v.avatar_url }}" alt="" height="60" width="60" /> {{ v.true_name }}</td>
+              <td>{{ v.nickname }}</td>
+              <td>{{ v.creat_date|date('Y-m-d H:i:s') }}</td>
+              {# 							{{ path('homestayDetail_',{'hid':v.id}) }}#}
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="page-dis">
+        <div class="meneame">
+          {% if totalPage != 0 %}
+            <a href="{{ path('memberHasCheck_', {'page': 1, 'id': id}) }}">首页</a>
+            <a href="{{ path('memberHasCheck_', {'page': prePage, 'id': id}) }}"> < </a>
+            {% if totalPage > 7 %}
+              {% if page <= 4 %}
+                {% for i in 1..7 %}
+                  <a href="{{ path('memberHasCheck_', {'page': i, 'id': id}) }}">{{ i }}</a>
+                {% endfor %}
+              {% elseif page > (totalPage - 4) %}
+                {% for k in (totalPage-7)..(totalPage) %}
+                  <a href="{{ path('memberHasCheck_', {'page': k, 'id': id}) }}">{{ k }}</a>
+                {% endfor %}
+              {% else %}
+                {% for j in (page-3)..(page+3) %}
+                  <a href="{{ path('memberHasCheck_', {'page': j, 'id': id}) }}">{{ j }}</a>
+                {% endfor %}
+              {% endif %}
+            {% else %}
+              {% if totalPage != 0 %}
+                {% for m in 1..totalPage %}
+                  <a href="{{ path('memberHasCheck_', {'page': m, 'id': id}) }}">{{ m }}</a>
+                {% endfor %}
+              {% endif %}
+            {% endif %}
+            <a href="{{ path('memberHasCheck_', {'page': nextPage, 'id': id}) }}"> > </a>
+            <a href="{{ path('memberHasCheck_', {'page': totalPage, 'id': id}) }}">尾页</a>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  </section>
+{% endblock%}

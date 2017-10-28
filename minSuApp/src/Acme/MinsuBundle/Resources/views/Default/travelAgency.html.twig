@@ -1,0 +1,159 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+	// alert(123);
+	$(".stateBtn").click(function(){
+		$("[name='isOwner']").val($(this).attr("val"));
+		$("form").submit();
+	})
+	})
+
+
+
+	function travelAgencyStateChange(obj) {
+		var agency_id = $(obj).attr('agency_id');
+		var state = $(obj).attr('state');
+		$.ajax({
+			type: "POST",
+			url: "{{ path('travelAgencyStateChange_') }}",
+			data: {'agency_id': agency_id, "state": state},
+			dataType: "json",
+			success: function (data) {
+				location.reload();
+			}
+		})
+	}
+
+
+	$(document).ready(function () {
+		$(".page-dis [href]").each(function () {
+			if (this.href == window.location.href) {
+				$(this).addClass("active");
+			}
+		})
+	});
+</script>
+{% endblock %}
+
+{% block stylesheet %} {{ parent() }}
+	<link href="{{ asset('bundles/msk/public/css/user.css') }}" rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
+
+{% block content%}<section class="alert">
+	<form method="post" action="">
+	<div>
+	<input type="text" class='searchText'  name="searchText" placeholder="  搜  索">
+	<select class="searchSelect" name="searchType" ><option value="nic">姓名</option><option value="acc">手机号码</option></select>
+	<input class="green searchbuttoninput" type="submit" value="搜 索">
+	     <button type="button" val='6' class="green stateBtn" style="margin-top: -10px;">已缴费</button>
+	     <button type="button" val='5' class="green stateBtn" style="margin-top: -10px;">已禁用</button>
+		 <button type="button" val='4' class="green stateBtn" style="margin-top: -10px;">已注销</button>
+	     <button type="button" val='3' class="green stateBtn" style="margin-top: -10px;">认证失败</button>
+		 <button type="button" val='2' class="green stateBtn" style="margin-top: -10px;">认证通过</button>
+	     <button type="button" val='1' class="green stateBtn" style="margin-top: -10px;">认证中</button>
+		 <button type="button" val='0' class="green stateBtn" style="margin-top: -10px;">未认证</button>
+		 <button type="button" val='' class="blue stateBtn" style="margin-top: -10px;">全部旅行社</button>
+	</div>
+	
+	<input type ="hidden" name ="isOwner">
+	 	 
+{# 		  <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">#}
+{#   Launch demo modal#}
+{# </button>#}
+	</form>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>旅行社信息</h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th class="avatar" style="padding-left: 80px;">名称	</th>
+{# 						<th>旅行社名称</th>#}
+						<th>号码</th>
+						<th>地址</th>
+						<th>团路线</th>
+						<th>状态</th>
+						<th>注册时间</th>
+						<th>审视</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+					<tbody>
+					{% for v in memberList %}
+						<tr>
+							<td class="avatar" ><img src="{{ v.agency_image }}" alt="" height="60" width="60" /> {{ v.agency_name }}</td>
+{# 							<td>{{ v.agency_name }}</td>#}
+							<td>{{ v.agency_tel }}</td>
+							<td>{{ v.agency_address }}</td>
+							<td>{{ v.sums }}</td>
+							<td>{% if v.state ==0  %}未认证{% elseif  v.state==1 %}认证中{% elseif  v.state==2 %}认证通过{% elseif  v.state==3 %}认证失败{% elseif  v.state==4 %}注销{% elseif  v.state==5 %}禁用{% elseif  v.state==6 %}缴费通过{% else %}未知{% endif %}</td>
+							<td>{{ v.NewAddTime }}</td>
+{# 							{{ path('homestayDetail_',{'hid':v.agency_id}) }}#}
+                            <td><button class="green"  onclick="location='{{ path('travelAgencyDataDetail_',{'agency_id':v.agency_id}) }}'">详情</button>
+							</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-success">更改状态</button>
+								  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+								    <span class="caret"></span>
+								    <span class="sr-only">Toggle Dropdown</span>
+								  </button>
+								  <ul class="dropdown-menu" role="menu">
+								    <li><a state="2" agency_id="{{ v.agency_id }}" onclick="travelAgencyStateChange(this)">认证通过</a></li>
+								    <li><a state="3" agency_id="{{ v.agency_id }}" onclick="travelAgencyStateChange(this)">认证失败</a></li>
+								    <li><a state="4" agency_id="{{ v.agency_id }}" onclick="travelAgencyStateChange(this)">注销</a></li>
+								    <li><a state="5" agency_id="{{ v.agency_id }}" onclick="travelAgencyStateChange(this)">禁用</a></li>
+								    <li><a state="6" agency_id="{{ v.agency_id }}" onclick="travelAgencyStateChange(this)">已经缴费</a></li>
+								  </ul>
+								</div>
+							</td>
+						</tr>
+				{% endfor %}
+					</tbody>
+				</table>
+		</div>
+		<div class="page-dis">
+			<div class="meneame">
+				{% if totalPage != 0 %}
+					<a href="{{ path('travelAgencyList_', {'page': 1}) }}">首页</a>
+					<a href="{{ path('travelAgencyList_', {'page': prePage}) }}"> < </a>
+					{% if totalPage > 7 %}
+						{% if page <= 4 %}
+							{% for i in 1..7 %}
+								<a href="{{ path('travelAgencyList_', {'page': i}) }}">{{ i }}</a>
+							{% endfor %}
+						{% elseif page > (totalPage - 4) %}
+							{% for k in (totalPage-7)..(totalPage) %}
+								<a href="{{ path('travelAgencyList_', {'page': k}) }}">{{ k }}</a>
+							{% endfor %}
+						{% else %}
+							{% for j in (page-3)..(page+3) %}
+								<a href="{{ path('travelAgencyList_', {'page': j}) }}">{{ j }}</a>
+							{% endfor %}
+						{% endif %}
+					{% else %}
+						{% if totalPage != 0 %}
+							{% for m in 1..totalPage %}
+								<a href="{{ path('travelAgencyList_', {'page': m}) }}">{{ m }}</a>
+							{% endfor %}
+						{% endif %}
+					{% endif %}
+					<a href="{{ path('travelAgencyList_', {'page': nextPage}) }}"> > </a>
+					<a href="{{ path('travelAgencyList_', {'page': totalPage}) }}">尾页</a>
+				{% endif %}
+			</div>
+		</div>
+	</section>
+</section>
+
+{% endblock%}

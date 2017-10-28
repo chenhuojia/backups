@@ -1,0 +1,205 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+{% endblock %}
+
+{% block content%}
+<section class="alert">
+	<button type="button" val=''onclick="javascript:history.go(-1)" class="green stateBtn">返  回</button>
+</section>
+<style>
+	.e{width:50px;}
+	.b{width:300px;}
+	.a{width:200px;}
+</style>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>发货单</h1>
+			</hgroup>
+		</header>
+		<div style="margin-bottom:50px;">
+			<form id="delivery-form" method="post" action="{{path('_delivery')}}">
+			<table class="table table-bordered">
+				<caption style="background:#e9e9e9;hegiht:50px;line-height:50px">基本信息</caption>
+                <tbody>
+                <tr>
+                    <td class="text-right e">订单号:</td>
+                    <td class="text-center b">{{order['info']['order_sn']}}</td>
+                    <td class="text-right e">下单时间:</td>
+                    <td class="text-center b">{{order.info.NewAddTime}}</td>
+                </tr>
+                <tr>
+                    <td class="text-right e">配送方式:</td>
+                    <td class="text-center b">{{order['info']['shipping_name']}}</td>
+                    <td class="text-right e">配送费用:</td>
+                    <td class="text-center b">{{order.info.shipping_price}}</td>
+                </tr>
+                <tr>
+                    <td class="text-right e">配送单号:</td>
+                    <td class="text-center b">                   	
+                        <input class="a" name="invoice_no" id="invoice_no" value="{% if order.delivery %} {{order['delivery'][0]['invoice_no']}} {% endif %}">
+                    </td>
+                </tr>
+                </tbody></table>
+		</div>
+		<div style="margin-bottom:50px;">
+				<table class="table table-bordered">
+					<caption style="background:#e9e9e9;hegiht:50px;line-height:50px">收货信息</caption>
+                    <tbody>
+                    <tr>
+                        <td class="text-right e">收货人:</td>
+                        <td class="text-center b">{{order.info.consignee}}</td>
+                        <td class="text-right e">地址:</td>
+                        <td class="text-center b">{{order.info.city}}{{order.info.address}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-right e">手机:</td>
+                        <td class="text-center b">{{order.info.mobile}}
+                        </td>
+                        
+                    </tr>
+                    </tbody></table>
+			</div>
+			<div style="margin-bottom:50px;">
+				<table class="table table-bordered">
+					<caption style="background:#e9e9e9;hegiht:50px;line-height:50px">商品信息</caption>                   
+                    <thead>
+                    	<th>店铺</th>
+                    	<th>商品</th>
+                    	<th>属性</th>
+                    	<th>购买数量</th>
+                    	<th>商品单价</th>
+                    	<th>选择发货</th>
+                    </thead>
+                    <tbody>
+                    	{% for v in order.goods %}
+	                    <tr>
+	                        <td>{{order.info.shop_name}}</td>
+	                        <td><a href="">{{v.goods_name}}</a></td>
+	                        <td>{{v.spec_key_name}}</td>
+	                        <td>{{v.goods_num}}</td>
+	                        <td>{{v.goods_price}}</td>
+	                        <td><input  type="checkbox" name="goods[]" value="{{v.rec_id}}" checked="checked"></td>
+	                    </tr>
+	                    {% endfor %}
+                    </tbody>
+                  </table>
+			</div>
+			<div style="margin-bottom:50px;">
+				<table class="table table-bordered">
+					<caption style="background:#e9e9e9;hegiht:50px;line-height:50px">发货信息</caption>
+                    <tbody>
+                    <tr>
+                        <td class="text-right">发货单备注:</td>
+                        <td class="text-center">
+                        	<input type="hidden" name="order_id" value="{{order.info.order_id}}">
+                        	<textarea name="note" placeholder="请输入操作备注" rows="3" id='note'> 
+                        		{% if order.delivery %} {{order['delivery'][0]['note']}} {% endif %}
+                        	</textarea>
+                        </td>
+                        <td class="text-left">
+                        	{% if order.delivery %}
+                        	<button type="button"  class=" stateBtn" onclick="javascript:update({{order.info.order_id}})" >确认修改</button>
+                        	{% else %}
+                        	<button type="button"  class="green stateBtn" onclick="javascript:dosubmit()">确认发货</button>
+                        	{% endif %}
+                        </td>
+                    </tr>                
+                    </tbody></table>
+			</div>
+			<div style="margin-bottom:50px;">
+				<table class="table table-bordered">
+					<caption style="background:#e9e9e9;hegiht:50px;line-height:50px">发货记录</caption>
+                    <thead>
+                    	<th>操作者</th>
+                    	<th>发货时间</th>
+                    	<th>发货单号</th>
+                    	<th>收货人</th>
+                    	<th>快递公司</th>
+                    	<th>备注</th>
+                    	<th>查看</th>
+                    </thead>
+                    <tbody>
+	                    {% if order.delivery %}
+		                    {% for v in  order.delivery%}
+			                    <tr>
+			                        <td>{{v.admin_name}}</td>
+			                        <td>{{v.Newcreate_time}}</td>
+			                        <td>{{v.invoice_no}}</td>
+			                        <td>{{v.consignee}}</td>
+			                        <td>{{v.shipping_name}}</td>
+			                        <td>{{v.note}}</td>
+			                        <td><a href="{{ path('_mall_delivery_info',{order_sn:order['info']['order_sn'],id:v.id})}}">查看</a></td>
+			                   	</tr>
+		                    {% endfor %}
+	                    {% endif %}
+                    </tbody></table>
+                 </form>
+			</div>						
+	</section>
+<script type="text/javascript">
+	function dosubmit(){
+		console.log($('#invoice_no').val())
+		if($('#invoice_no').val() =='' || $('#invoice_no').val() ==0){
+			 //layer.alert('请输入配送单号', {icon: 2});  
+			  alert('请输入配送单号');
+			return;
+		}
+		var a = [];
+		$('input[name*=goods]').each(function(i,o){
+			if($(o).is(':checked')){
+				a.push($(o).val());
+			}
+		});
+		if(a.length == 0){
+			//layer.alert('请选择发货商品', {icon: 2});  
+			alert('请选择发货商品');
+			return;
+		}
+		$('#delivery-form').submit();
+	}	
+	
+	function update(order_id){
+			var invoice_no=$('#invoice_no').val();
+			if($('#invoice_no').val() =='' || $('#invoice_no').val() ==0){
+			 //layer.alert('请输入配送单号', {icon: 2});  
+			  alert('请输入配送单号');
+			  return;
+			}
+			var goods=[];
+			$('input[name*=goods]').each(function(i,o){
+				if($(o).is(':checked')){
+					goods.push($(o).val());
+				}
+			});
+			if(goods.length == 0){
+			//layer.alert('请选择发货商品', {icon: 2});  
+				alert('请选择修改发货商品');
+				return;
+			}
+			var note=$('#note').val();
+			var obj={"order_id":order_id,"invoice_no":invoice_no,"note":note,"goods":goods};
+			var str =JSON.stringify(obj);
+			//console.log(str);
+			$.ajax({
+				url:"{{path('_mall_delivery_update')}}",
+				type:"post",
+				data:"data="+str,
+				datatype:"json",
+				success:function(e){
+					if(e==1){
+						$('#note').val(note);
+						$('#invoice_no').val(invoice_no);	
+					}
+				}
+				
+			})
+			
+		}
+</script>
+</section>
+{% endblock%}
+

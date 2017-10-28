@@ -1,0 +1,117 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+{% endblock %}
+
+{% block content%}
+<section class="alert">
+	<div>
+	<form method="post" action="">
+		<select class="searchSelect" name="searchType" >
+			<option value="0">请选择筛选的店铺</option>
+				{% for v in shop %}
+					<option value="{{v.shop_id}}">{{v.shop_name}}</option>
+				{% endfor%}
+		</select>
+		<input class="green searchbuttoninput" type="button" value="搜 索">
+		<a href="{{ path('AddCategory_',{shop_id:shop_id}) }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>新增分类</a>			 
+	</form>
+	</div>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>全部分类列表</h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th>分类ID</th>
+						<th>店铺id</th>
+						<th>分类名称</th>
+						<th>商品数</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+					<tbody>
+						{% for v in data %}
+							<tr>
+								<td>{{v.id}}</td>
+								<td>{{v.shop_name}}</td>
+								<td>{{v.name}}</td>
+								<td>
+									<a href="{{path('shopcategorygoods_',{shop_id:v.shop_id,cat_id:v.id})}}">{{v.goods_num}}
+								</td>
+								<td>
+		                      		<a class="btn btn-primary" href="{{path('AddCategory_',{shop_id:v.shop_id,cate_id:v.id})}}"><i class="fa fa-pencil">编辑</i></a>
+		                      		<a class="btn btn-danger" href="javascript:delcategory({{v.id}})"><i class="fa fa-trash-o">删除</i></a>
+			     				</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+		</div>
+	</section>
+</section>
+<script>
+	function changIsShow(obj,cat_id){
+		var val=$(obj).attr('is_show');
+		if(cat_id!=0){
+			if(val==0){
+			 	var vals=1;
+				var	newsrc="{{ asset('bundles/msk/public/images/yes.png')}}"
+			}if(val==1){
+				var	vals=0;
+				var	newsrc="{{ asset('bundles/msk/public/images/wrong.png')}}"
+			}
+			$.ajax({
+				url:"{{ path('_category_is_show')}}",
+				type:'post',
+				data:'cat_id='+cat_id+"&val="+vals,
+				datatype:'json',
+				success:function(e){
+					if(e==1){
+						$(obj).attr('is_show',vals);
+						$(obj).attr('src',newsrc);
+					}
+				},
+				error:function(){
+					alert('网络错误');
+				}
+			})
+		}
+	}
+	
+		function delcategory(cat_id){
+			if(cat_id!=0){	
+				$.ajax({
+					url:"{{ path('delcategory_')}}",
+					type:'post',
+					data:'id='+cat_id,
+					datatype:'json',
+					success:function(e){
+						if(e==1){
+							history.go(0)
+						}
+					},
+					error:function(){
+						alert('网络错误');
+					}
+				})
+		}
+	}
+	
+	
+	$('.searchbuttoninput').on('click',function(){
+		var shop_id=$(this).prev().val();
+		if(shop_id!=0){
+			location="{{path('shopcategory_')}}"+"?shop_id="+shop_id;
+		}
+	})
+</script>
+{% endblock%}

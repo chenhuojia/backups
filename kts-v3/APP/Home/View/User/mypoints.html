@@ -1,0 +1,144 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="keywords" content="{$config['keywords']}" > 
+    <meta name="description" content="{$config['description']}" >
+    <title>个人中心-$config['title']</title>
+    <link href="__PUBLIC__/home/css/header.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<include file="./APP/Home/View/Common/header.html"/>
+<link href="__PUBLIC__/home/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/home/css/banner.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/home/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/jquery.pagination.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/main.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/fenye.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/dianzan.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/qiehua.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/demo.js"></script>
+
+<div class="min">
+    <div class="my_box">
+        <div class="min1_box_bt">
+            <span>图书分类>  个人中心</span>
+        </div>
+        <div class="my_box_nr">
+            <include file="./APP/Home/View/Common/left.html"/>
+            <div class="min_box_fr">
+                <div class="my_fenlei">
+                    <div class="my_bt_fr"><span>我的积分</span></div>
+                    <div class="my_jifen_box">
+                        <ul class="jifen_lu">
+                            <li class="jifen_li"><a href="JavaScript:;">积分任务</a></li>
+                            <li><a href="JavaScript:;">积分兑换</a></li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                    <div class="my_jifen_min">
+                        <div class="my_jifen_min_rw">
+                            <ul class="my_jifen_min_rw_ul">
+                              <volist name="task" id="t" empty="$empty">
+                                <li>
+                                    <div class="jifen_rw">
+                                        <img src="{$t['icon']}" alt=""/>
+                                        <div class="jifen_tushu">
+                                            <h3>{$t.source}</h3>
+                                            <p>{$t.state}<em>+{$t.number}积分</em></p>
+                                        </div>
+                                        <a>去分享</a>
+                                        <div class="clear"></div>
+                                    </div>
+                                </li>
+                               </volist>
+                                <div class="clear"></div>
+                            </ul>
+                        </div>
+                        <div class="my_jifen_min_rw my_jifen_min_rw1">
+                            <ul class="my_jifen_min_rw_ul">
+                              <volist name="coupon" id="c" empty="$empty">
+                                <li class="bg_blue">
+                                    <div class="jifen_dh">
+                                        <div class="jifen_dh_fl"><span>¥{$c.money}</span><em class="blue_em">{$c.integration}积分</em><p>{$c.name}</p></div>
+                                        <div class="jifen_dh_fr">立即<br/>兑换</div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </li>
+                               </volist>
+                                <!-- <li class="bg_green">
+                                    <div class="jifen_dh">
+                                        <div class="jifen_dh_fl"><span>¥100</span><em class="green_em">100积分</em><p>请在兑换后6个月内使用</p></div>
+                                        <div class="jifen_dh_fr">立即<br/>兑换</div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </li>
+                                <li class="bg_red">
+                                    <div class="jifen_dh">
+                                        <div class="jifen_dh_fl"><span>¥150</span><em class="red_em">150积分</em><p>请在兑换后6个月内使用</p></div>
+                                        <div class="jifen_dh_fr">立即<br/>兑换</div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </li> -->
+                                <div class="clear"></div>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    window.onload = function (){
+
+        var oStar = document.getElementById("star");
+        var aLi = oStar.getElementsByTagName("li");
+        var oUl = oStar.getElementsByTagName("ul")[0];
+        var oSpan = oStar.getElementsByTagName("span")[1];
+        var oP = oStar.getElementsByTagName("p")[0];
+        var i = iScore = iStar = 0;
+
+        for (i = 1; i <= aLi.length; i++){
+            aLi[i - 1].index = i;
+
+            //鼠标移过显示分数
+            aLi[i - 1].onmouseover = function (){
+                fnPoint(this.index);
+
+            };
+
+            //鼠标离开后恢复上次评分
+            aLi[i - 1].onmouseout = function (){
+                fnPoint();
+                //关闭浮动层
+                oP.style.display = "none"
+            };
+
+            //点击后进行评分处理
+            aLi[i - 1].onclick = function (){
+                iStar = this.index;
+                oP.style.display = "none";
+            }
+        }
+
+        //评分处理
+        function fnPoint(iArg){
+            //分数赋值
+            iScore = iArg || iStar;
+            for (i = 0; i < aLi.length; i++) aLi[i].className = i < iScore ? "on" : "";
+        }
+
+    };
+</script>
+<include file="./APP/Home/View/Index/footer.html"/>
+</body>
+</html>
+

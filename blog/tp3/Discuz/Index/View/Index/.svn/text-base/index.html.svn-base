@@ -1,0 +1,83 @@
+
+
+<!-- Start of Search Wrapper -->
+<div class="search-area-wrapper">
+        <div class="search-area container">
+                <h3 class="search-header">Have a Question?</h3>
+                <p class="search-tag-line">If you have any question you can ask below or enter what you are looking for!</p>
+
+                 <form id="search-form" class="search-form clearfix" method="get" action="{:U('More/Index/full')}" autocomplete="off">
+                        <input class="search-term required" type="text" id="s" name="title" placeholder="Type your search terms here" title="* Please enter a search term!" />
+                        <input class="search-btn" type="submit" value="Search" />
+                        <div id="search-error-container"></div>
+                </form>
+        </div>
+</div>
+<!-- End of Search Wrapper -->
+<div class="copyrights">Collect from <a href="http://www.cssmoban.com/" title="模板之家">模板之家</a></div>
+
+<!-- Start of Page Container -->
+<div class="page-container">
+     <div class="container">
+         <div class="row">
+             <!-- start of page content -->
+				<div class="span8 page-content">
+			       <!-- Basic Home Page Template -->
+			                   <div class="row separator">
+			                    	<volist name='data.tag' id='v'>
+			                            <section class="span4 articles-list">
+			                                    <h3><a href="{:U('Category/Index/index',array('group_id'=>$v['group_id']))}">{$v.name}</a></h3>
+			                                    <if condition="$v['child'] neq null">
+				                                    <ul class="articles">
+				                                            	<volist name='v.child' id='vv'>
+				                                            		<li class="article-entry standard">
+				                                                    	<h4><a href="{:U('Category/CategoryChild/index',array('group_id'=>$vv['group_id']))}">{$vv.name}</a></h4>
+				                                            			<span class="article-meta">{$vv.addtime|date="d F , Y",###}</span>
+	                                                                    <span class="like-count">{$vv.post_num}post</span>
+				                                            		</li>
+				                                            	</volist> 
+				                                     </ul>
+			                                      </if> 
+			                             </section>
+									</volist>
+			                   </div>
+			           </div>
+            <!-- end of page content -->
+
+			<!-- start of sidebar -->
+			<aside class="span4 page-sidebar">
+			
+			        <section class="widget">
+			                <div class="support-widget">
+			                        <h3 class="title">Support</h3>
+			                        <p class="intro">Need more support? If you did not found an answer, contact us for further help.</p>
+			                </div>
+			        </section>
+			
+			        <section class="widget">
+			                <div class="quick-links-widget">
+			                        <h3 class="title">Quick Links</h3>
+			                        <ul id="menu-quick-links" class="menu clearfix">
+			                                <li><a href="index-2.html">Home</a></li>
+			                                <li><a href="articles-list.html">Articles List</a></li>
+			                                <li><a href="faq.html">FAQs</a></li>
+			                                <li><a href="contact.html">Contact</a></li>
+			                        </ul>
+			                </div>
+			        </section>
+			
+			        <section class="widget">
+			                <h3 class="title">Tags</h3>
+			                <div class="tagcloud">
+			                		<volist name='data.tags' id='v'>
+			                			 <a href="{:U('Category/CategoryChild/index',array('group_id'=>$v['group_id']))}" class="btn btn-mini">{$v.name}</a>
+			                		</volist>
+			                </div>
+			        </section>
+			
+			</aside>
+			<!-- end of sidebar -->
+                </div>
+        </div>
+</div>
+<!-- End of Page Container -->

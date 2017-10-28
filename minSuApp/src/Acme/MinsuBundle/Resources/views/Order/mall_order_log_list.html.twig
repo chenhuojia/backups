@@ -1,0 +1,118 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+	$(".page-dis [href]").each(function () {
+		if (this.href == window.location.href) {
+			$(this).addClass("active");
+		}
+	})
+});
+</script>
+<style>
+	.input-sm{margin-top:20px;}
+</style>
+{% endblock %}
+{% block stylesheet %} {{ parent() }}
+	<link href="{{ asset('bundles/msk/public/css/user.css') }}" rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
+{% block content%}
+<section class="alert">
+	<div>
+		<form method="get" action="">	
+			<input type="text" class='searchText'  name="searchText" placeholder=" 搜  索">
+				<select class="searchSelect" name="searchType" >
+					<option value="999">搜索类型</option>
+					<option value="order_sn">订单号</option>
+					<option value="user_name">用户名</option>
+				</select>				
+			<input class="green searchbuttoninput" type="submit" value="筛选">
+			<button class="green" type="button" onclick="location='{{ path('_mall_order_log_list')}}'" style="margin:0;float:left;margin-top:-5px;">全部日志</button>
+		</form>	
+	</div>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>订单日志</h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th>订单编号</th>											
+						<th>操作</th>												
+						<th>操作人</th>
+						<th>操作时间</th>
+						<th>查看</th>
+					</tr>
+				</thead>
+					<tbody>
+						{% for v in oList %}
+							<tr>
+								<td>{{ v.order_sn }}</td>
+								<td>{{ v.action_note }}</td>
+								<td>{{ v.action_user_name }}</td>
+								<td>{{ v.NewAddTime }}</td>
+								<td><a href="{{ path('_mall_order_detail',{order_sn:v.order_sn}) }}" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="查看详情"><i class="fa fa-eye">查看详情</i></a></td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+		</div>
+	</section>
+	{% autoescape false %}
+			{{page}}
+	{% endautoescape %}
+</section>
+<script type="text/javascript">
+
+	function agree(obj,order_id){
+		$.ajax({
+			url:"{{ path('_agreerefund')}}",
+			type:"post",
+			data:"order_id="+order_id,
+			datatype:"json",
+			success:function(e){
+				if(e>0){
+					history.go(0)
+				}	
+			}
+		})
+	}
+
+	function unagree(obj,order_id){
+		$.ajax({
+			url:"{{ path('_unagreerefund')}}",
+			type:"post",
+			data:"order_id="+order_id,
+			datatype:"json",
+			success:function(e){
+				if(e>0){
+					history.go(0)
+				}	
+			}
+		})
+	}
+	
+	function del(order_id){
+		$.ajax({
+			url:"{{ path('_delmallorder')}}",
+			type:"post",
+			data:"order_id="+order_id,
+			datatype:"json",
+			success:function(e){
+				if(e>0){
+					history.go(0)
+				}	
+			}
+		})
+	}
+	
+</script>
+{% endblock%}

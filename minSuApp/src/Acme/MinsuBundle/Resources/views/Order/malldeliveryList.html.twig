@@ -1,0 +1,142 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+	$(".page-dis [href]").each(function () {
+		if (this.href == window.location.href) {
+			$(this).addClass("active");
+		}
+	})
+});
+</script>
+<style>
+	.input-sm{margin-top:20px;}
+</style>
+{% endblock %}
+{% block stylesheet %} {{ parent() }}
+	<link href="{{ asset('bundles/msk/public/css/user.css') }}" rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
+{% block content%}
+<section class="alert">
+	<div>
+		<form method="get" action="">	
+			<input type="text" class='searchText'  name="searchText" placeholder="  搜  索">
+				<select class="searchSelect" name="searchType" >
+					<option value="order_sn">订单号</option>
+					<option value="shipping_name">物流名称</option>
+					<option value="consignee">收货人</option>
+				</select>
+			<input class="green searchbuttoninput" type="button" value="筛选">
+			<button class="green" type="button" onclick="location='{{ path('_mall_delivery_list',{type:type})}}'" style="margin:0;float:left;margin-top:-5px;">全部订单</button>
+		</form>	
+	</div>
+	
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>货单信息</h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th>订单编号</th>											
+						<th>下单时间</th>												
+						<th>收货人</th>
+						<th>联系电话</th>
+						<th>所选物流</th>
+						<th>物流费用</th>
+						<th>支付时间</th>
+						<th>订单总价</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+					<tbody>
+					{% for v in oList %}
+						<tr>
+						 	<td style="padding-left: 50px;">{{ v.order_sn }}</td>	
+						 	<td>{{ v.NewAddTime }}</td>																			
+							<td>{{ v.consignee }}</td>
+							<td> {{ v.mobile }}</td>
+							<td>{{ v.shipping_name }}</td>
+							<td><font style="font: bold 12px/20px Verdana; color: #C00;">{{ v.shipping_price }}</font></td>
+							<td>{% if v.pay_time==0%}0 {% else %}{{ v.NewPayTime }}{% endif %}</td>
+							<td>{{ v.order_amount }}</td>	 
+							<td>								
+								{% if type==1 %}
+									<button class="green"  onclick="location='{{ path('_mall_delivery_info',{order_sn:v.order_sn}) }}'">去发货</button>
+								{% else %}
+									<button class="blue"  onclick="location='{{ path('_mall_delivery_info',{order_sn:v.order_sn}) }}'">查看发货信息</button>
+								{% endif %}
+								<button class="green"  onclick="del({{v.order_id}})">删除</button>
+							</td>
+						</tr>
+				{% endfor %}
+					</tbody>
+				</table>
+		</div>
+	</section>
+	{% autoescape false %}
+			{{page}}
+	{% endautoescape %}
+</section>
+<script type="text/javascript">
+
+	function agree(obj,order_id){
+		$.ajax({
+			url:"{{ path('_agreerefund')}}",
+			type:"post",
+			data:"order_id="+order_id,
+			datatype:"json",
+			success:function(e){
+				if(e>0){
+					history.go(0)
+				}	
+			}
+		})
+	}
+
+	function unagree(obj,order_id){
+		$.ajax({
+			url:"{{ path('_unagreerefund')}}",
+			type:"post",
+			data:"order_id="+order_id,
+			datatype:"json",
+			success:function(e){
+				if(e>0){
+					history.go(0)
+				}	
+			}
+		})
+	}
+	
+	function del(order_id){
+		$.ajax({
+			url:"{{ path('_delmallorder')}}",
+			type:"post",
+			data:"order_id="+order_id,
+			datatype:"json",
+			success:function(e){
+				if(e>0){
+					history.go(0)
+				}	
+			}
+		})
+	}
+	
+	$('.searchbuttoninput').click(function(){
+		var condition=$(this).siblings('.searchSelect').val();
+		var value=$(this).siblings('.searchText').val();
+		  if(value.length>0){
+		  	location="{{path('_mall_delivery_list')}}?"+'condition='+condition+"&value="+value+"&type="+{{type}};
+		  }
+	
+	})
+</script>
+{% endblock%}

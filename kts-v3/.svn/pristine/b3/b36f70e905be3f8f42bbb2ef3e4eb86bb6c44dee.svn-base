@@ -1,0 +1,35 @@
+[21-Feb-2017 14:18:18 PRC] PHP Fatal error:  Uncaught Error: Access to undeclared static property: Home\Controller\IndexController::$redis_avtar_DB in E:\Zendstudio\kts\Interface\Home\Controller\IndexController.class.php:28
+Stack trace:
+#0 [internal function]: Home\Controller\IndexController->index()
+#1 E:\Zendstudio\kts\ThinkPHP\Mode\Api\App.class.php(114): ReflectionMethod->invoke(Object(Home\Controller\IndexController))
+#2 E:\Zendstudio\kts\ThinkPHP\Mode\Api\App.class.php(141): Think\App::exec()
+#3 E:\Zendstudio\kts\ThinkPHP\Library\Think\Think.class.php(120): Think\App::run()
+#4 E:\Zendstudio\kts\ThinkPHP\ThinkPHP.php(97): Think\Think::start()
+#5 E:\Zendstudio\kts\index.php(9): require('E:\\Zendstudio\\k...')
+#6 {main}
+  thrown in E:\Zendstudio\kts\Interface\Home\Controller\IndexController.class.php on line 28
+[21-Feb-2017 14:18:55 PRC] PHP Notice:  Undefined index: version in E:\Zendstudio\kts\Interface\Common\Common\function.php on line 14
+[21-Feb-2017 14:18:55 PRC] PHP Notice:  Undefined index: redis in E:\Zendstudio\kts\Interface\Common\Common\function.php on line 18
+[21-Feb-2017 14:18:55 PRC] PHP Fatal error:  Uncaught Error: Call to a member function select() on null in E:\Zendstudio\kts\Interface\Common\Common\function.php:18
+Stack trace:
+#0 E:\Zendstudio\kts\Interface\Home\Controller\IndexController.class.php(28): GetRedisConn(1)
+#1 [internal function]: Home\Controller\IndexController->index()
+#2 E:\Zendstudio\kts\ThinkPHP\Mode\Api\App.class.php(114): ReflectionMethod->invoke(Object(Home\Controller\IndexController))
+#3 E:\Zendstudio\kts\ThinkPHP\Mode\Api\App.class.php(141): Think\App::exec()
+#4 E:\Zendstudio\kts\ThinkPHP\Library\Think\Think.class.php(120): Think\App::run()
+#5 E:\Zendstudio\kts\ThinkPHP\ThinkPHP.php(97): Think\Think::start()
+#6 E:\Zendstudio\kts\index.php(9): require('E:\\Zendstudio\\k...')
+#7 {main}
+  thrown in E:\Zendstudio\kts\Interface\Common\Common\function.php on line 18
+[21-Feb-2017 14:21:06 PRC] PHP Notice:  Undefined index: version in E:\Zendstudio\kts\Interface\Common\Common\function.php on line 14
+[21-Feb-2017 14:21:06 PRC] PHP Notice:  Undefined index: redis in E:\Zendstudio\kts\Interface\Common\Common\function.php on line 15
+[21-Feb-2017 14:21:06 PRC] PHP Fatal error:  Uncaught Error: Call to a member function multi() on null in E:\Zendstudio\kts\Interface\Home\Controller\IndexController.class.php:27
+Stack trace:
+#0 [internal function]: Home\Controller\IndexController->index()
+#1 E:\Zendstudio\kts\ThinkPHP\Mode\Api\App.class.php(114): ReflectionMethod->invoke(Object(Home\Controller\IndexController))
+#2 E:\Zendstudio\kts\ThinkPHP\Mode\Api\App.class.php(141): Think\App::exec()
+#3 E:\Zendstudio\kts\ThinkPHP\Library\Think\Think.class.php(120): Think\App::run()
+#4 E:\Zendstudio\kts\ThinkPHP\ThinkPHP.php(97): Think\Think::start()
+#5 E:\Zendstudio\kts\index.php(9): require('E:\\Zendstudio\\k...')
+#6 {main}
+  thrown in E:\Zendstudio\kts\Interface\Home\Controller\IndexController.class.php on line 27

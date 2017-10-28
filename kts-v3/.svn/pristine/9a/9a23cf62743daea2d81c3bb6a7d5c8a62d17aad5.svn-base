@@ -1,0 +1,173 @@
+<?php
+namespace Read\Model;
+use Think\Model;
+use User\Util\Util;
+/**
+ * ModelName
+ */
+class TopicModel extends Model{
+   
+    // 自动验证
+    protected $_validate=array(
+        array('tag_id','require','请选择相关话题栏目！'), // 验证字段必填
+        array('title','require','标题必须填写！'), // 验证字段必填
+        array('content','require','内容必须填写！'), // 验证字段必填
+     );
+   // 自动完成
+    protected $_auto=array(
+        array('addtime','time',1,'function'), // 对date字段在新增的时候写入当前时间戳
+        array('updtime','time',1,'function'), // 对date字段在新增的时候写入当前时间戳
+    );
+    
+    /**
+     * 所有的话题
+     * @param  [array] $map        [查询的值]
+     * @param  [string] $orderlist [排序的值]
+     * @param  [int] $skip         [跳过多少条]
+     * @param  [int] $take         [获取多少条]
+     * @return [array]             [数组]
+     */
+    public function getAllData($map,$orderlist,$skip,$take)
+    {
+        $result=$this
+            ->alias('t')
+            ->where($map)
+            ->field('t.topic_id,t.tag_id,t.user_id,t.title,t.addtime,t.content,t.imageurl,t.videourl,t.discuss_number')
+            ->order($orderlist)
+            ->limit($skip,$take)
+            ->select();
+        foreach ($result as $key => $value) {
+          $userMes = \User\Util\Util::GetUserAvatrAndNick($value['user_id']);
+          $result[$key]['user_name'] = $userMes['name'];
+          $result[$key]['user_avatar'] = $userMes['avatar'];
+          if(empty($result[$key]['imageurl'])){
+            $result[$key]['imageurl'] ="";
+          }else{
+             $image_arr= explode(';', $result[$key]['imageurl']);
+             //查询图片
+             if(is_array($image_arr)) $result[$key]['imageurl'] = C('QINIU_IMG_PATH').$image_arr[0];
+          }
+          $result[$key]['addtime'] = friend_date($result[$key]['addtime']);
+        }
+        return $result;
+    }
+
+
+    /**
+     * 某话题详情
+     * @param  [array] $map        [查询的值]
+     * @return [array]             [数组]
+     */
+    public function getOneDetail($map)
+    {
+
+        $result=$this
+            ->alias('t')
+            ->where($map)
+            ->field('t.topic_id,t.tag_id,t.user_id,t.title,t.addtime,t.content,t.imageurl,t.videourl,t.discuss_number')
+            ->find();
+        if(!empty($result)){
+              $result['is_follow'] = 0;
+              $result['is_collect'] = 0;
+              $userMes = \User\Util\Util::GetUserAvatrAndNick($result['user_id']);
+              $result['user_name'] = $userMes['name'];
+              $result['user_avatar'] = $userMes['avatar'];
+              //查询某话题下某用户已经关注
+              $user_id = session('user_id')?session('user_id'):0;//判断用户是否登录
+              $followmap =array('user_id' =>$user_id,'follow_user'=>$result['user_id']);
+              $is_follow = D('TopicFollow')->getOne($followmap);
+              if($is_follow) $result['is_follow'] = 1;
+              $is_collect = M('collect')->where(array('user_id' =>$user_id,'topic_id'=>$result['topic_id'],'type'=>2))->find();
+              if($is_collect) $result['is_collect'] = 1;
+              if(empty($result['imageurl'])){
+                 $result['image_arr'] =array();
+              }else{
+                $image_arr= explode(';', $result['imageurl']);
+                //查询图片
+                foreach ($image_arr as $k => $v) {
+                      if($image_arr[$k]!=null){
+                        $result['image_arr'][] = C('QINIU_IMG_PATH').$image_arr[$k];
+                      }
+                }
+              }
+            unset($result['imageurl']);
+            $result['addtime'] = friend_date($result['addtime']);
+          }
+        return $result;
+    }
+
+
+    /**
+     * 根据查询获取某值
+     * @param  [string] $map  查询的数据
+     * @param  [string] $value  匹配的值
+     * @return [string]  相关的值
+     */
+    public function getValue($map,$value)
+    {
+        $result=$this
+               ->where($map)
+               ->getField($value);
+        return $result;
+    }
+
+    /**
+     * 添加数据
+     */
+    public function addData($data){
+        // 对data数据进行验证
+        if(!$data=$this->create($data)){
+            // 验证不通过返回错误
+            $returndata['status'] = 0;
+            $returndata['data'] = $this->getError();
+            return $returndata;
+        }else{
+            // 验证通过
+            $result=$this->add($data);
+            $returndata['status'] = 1;
+            $returndata['data'] = $result;
+            return $returndata;
+        }
+    }
+   /**
+     * 修改数据
+     */
+    public function editData($map,$data){
+        // 对data数据进行验证
+        if(!$data=$this->create($data)){
+            // 验证不通过返回错误
+            return false;
+        }else{
+            // 验证通过
+            $result=$this
+                ->where(array($map))
+                ->save($data);
+            return $result;
+        }
+    }
+
+    /**
+     * 数据加1
+     */
+    public function setIncTopicPara($map,$para){
+        // 对data数据进行验证
+        if(!$data=$this->create($map)){
+            // 验证不通过返回错误
+            return false;
+        }else{
+            // 验证通过
+            $result=$this
+                ->where(array($map))
+                ->setInc($para);
+            return $result;
+        }
+    }
+
+
+
+
+
+    
+
+
+}

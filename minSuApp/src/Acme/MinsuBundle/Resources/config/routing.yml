@@ -1,0 +1,184 @@
+upload:
+    resource: "@AcmeMinsuBundle/Admin/advsImageController.php"
+    type:     annotation
+    prefix:
+travel:
+    resource: "@AcmeMinsuBundle/Admin/TravelImageController.php"
+    type:     annotation
+    prefix:
+index:
+    path: /
+    defaults: {_controller:AcmeMinsuBundle:Login:index}
+twig_captcha:
+    resource: "@AcmeMinsuBundle/Admin/CaptchaController.php"
+    type:     annotation
+    prefix:
+login:
+    resource: "@AcmeMinsuBundle/Admin/LoginController.php"
+    type:     annotation
+    prefix: 
+api_homestay:    
+    resource: "@AcmeMinsuBundle/Api/apiHomestayController.php"
+    type:     annotation
+    prefix: 
+ajax_HomeStay-Start-ByWinson:    
+    resource: "@AcmeMinsuBundle/Admin/AjaxController.php"
+    type:     annotation
+    prefix:     
+apivalid:
+   resource: "@AcmeMinsuBundle/Api/apiLoginController.php"
+   type:     annotation
+   prefix:
+apiregister:
+   resource: "@AcmeMinsuBundle/Api/apiLoginController.php"
+   type:     annotation
+   prefix:
+squareAdvertise:
+    resource: "@AcmeMinsuBundle/Admin/SquareAdvertiseImageController.php"
+    type:     annotation
+    prefix:
+apihomestaydetail:
+   resource: "@AcmeMinsuBundle/Api/apiHomestayDetailController.php"
+   type:     annotation
+   prefix:
+apiroomdetail:
+   resource: "@AcmeMinsuBundle/Api/apiRoomDetailController.php"
+   type:     annotation
+   prefix:
+apiadvsindeximg:
+   resource: "@AcmeMinsuBundle/Api/apiAdvsIndexController.php"
+   type:     annotation
+   prefix:
+apiUploadTravelNote:
+   resource: "@AcmeMinsuBundle/Api/apiTravelNoteController.php"
+   type:     annotation
+   prefix:
+apiPersonalCollect:
+   resource: "@AcmeMinsuBundle/Api/apiPersonalMsgController.php"
+   type:     annotation
+   prefix:
+personalAttention:
+   resource: "@AcmeMinsuBundle/Admin/PersonalAttentionController.php"
+   type:     annotation
+   prefix:
+grouppost:  
+   resource: "@AcmeMinsuBundle/Admin/GrouppostController.php"
+   type:     annotation
+   prefix:
+entry:
+   resource: "@AcmeMinsuBundle/Admin/EntryImageController.php"
+   type:     annotation
+   prefix:
+systemMsg:
+   resource: "@AcmeMinsuBundle/Admin/MsgController.php"
+   type:     annotation
+   prefix:
+feedbackMsg:
+   resource: "@AcmeMinsuBundle/Admin/FeedbackMsgController.php"
+   type:     annotation
+   prefix:
+apiUFBMsg:
+   resource: "@AcmeMinsuBundle/Api/apiFeedbackMsgController.php"
+   type:     annotation
+   prefix:
+addTravelNote:
+   resource: "@AcmeMinsuBundle/Admin/DefaultController.php"
+   type:     annotation
+   prefix:
+api_order_con:
+   resource: "@AcmeMinsuBundle/Api/apiOrderController.php"
+   type:     annotation
+   prefix:
+order_con_list:
+   resource: "@AcmeMinsuBundle/Admin/OrderController.php"
+   type:     annotation
+   prefix:   
+api_wallet_index:
+   resource: "@AcmeMinsuBundle/Api/apiWalletController.php"
+   type:     annotation
+   prefix: 
+wallet_index:
+   resource: "@AcmeMinsuBundle/Admin/WalletController.php"
+   type:     annotation
+   prefix:  
+api_tour:
+   resource: "@AcmeMinsuBundle/Api/apiTourController.php"
+   type:     annotation
+   prefix: 
+api_tour_order:
+   resource: "@AcmeMinsuBundle/Api/apiTourOrderController.php"
+   type:     annotation
+   prefix: 
+tour_order:
+   resource: "@AcmeMinsuBundle/Admin/TourOrderController.php"
+   type:     annotation
+   prefix:
+api_guide:
+   resource: "@AcmeMinsuBundle/Api/apiGuideController.php"
+   type:     annotation
+   prefix:  
+api_member:
+   resource: "@AcmeMinsuBundle/Api/apiMemberController.php"
+   type:     annotation
+   prefix:
+mall_goods_list:
+   resource: "@AcmeMinsuBundle/Admin/MallGoodsController.php"
+   type:     annotation
+   prefix:  
+api_group_tour:
+   resource: "@AcmeMinsuBundle/Api/apiGroupTourController.php"
+   type:     annotation
+   prefix:  
+api_malls:
+   resource: "@AcmeMinsuBundle/Api/apiMallsController.php"
+   type:     annotation
+   prefix:  
+api_mall_order:
+   resource: "@AcmeMinsuBundle/Api/apiMallOrderController.php"
+   type:     annotation
+   prefix:  
+
+
+api_shop:
+   resource: "@AcmeMinsuBundle/Api/apiShopController.php"
+   type:     annotation
+   prefix: 
+   
+api_time_change:
+   resource: "@AcmeMinsuBundle/Api/apiTimeChangeController.php"
+   type:     annotation
+   prefix: 
+
+
+api_add:
+   resource: "@AcmeMinsuBundle/Api/apiAddController.php"
+   type:     annotation
+   prefix:  
+
+tour_index:
+   resource: "@AcmeMinsuBundle/Admin/TourController.php"
+   type:     annotation
+   prefix:
+
+guide_index:
+   resource: "@AcmeMinsuBundle/Admin/GuideController.php"
+   type:     annotation
+   prefix:
+
+group_tour:
+   resource: "@AcmeMinsuBundle/Admin/GroupTourController.php"
+   type:     annotation
+   prefix: 
+   
+tour_pal:
+   resource: "@AcmeMinsuBundle/Api/apiTourPalController.php"
+   type:     annotation
+   prefix: 
+shop:
+   resource: "@AcmeMinsuBundle/Admin/ShopController.php"
+   type:     annotation
+   prefix:   
+check_pay_status:
+   resource: "@AcmeMinsuBundle/Admin/checkPayStatusController.php"
+   type:     annotation
+   prefix:  

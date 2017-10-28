@@ -1,0 +1,114 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$(".delHotCit").click(function(){
+		var id=$(this).attr('val-id');
+		$.ajax({
+			type:"POST",
+			data:"&gId="+id,
+			dataType: "json", 
+			url:"{{ path('deleteGroup_') }}",
+			success:function(msg){
+				if (msg === '1'){
+					alert("成功删除！");
+					}
+				  location.reload();
+			}
+		});
+	});
+
+
+	$(".SmallImg").mouseover(function(){
+// alert(123);
+		})
+	
+})
+
+$(document).ready(function () {
+	$(".page-dis [href]").each(function () {
+		if (this.href == window.location.href) {
+			$(this).addClass("active");
+		}
+	})
+});
+</script>
+{% endblock %}
+{% block stylesheet %} {{ parent() }}
+	<link href="{{ asset('bundles/msk/public/css/group.css') }}" rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
+{% block content%}<section class="alert">
+		  <button type="button"  onclick="location='{{ path('AddGroup_') }}'" class="green stateBtn">新  增</button>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>社区小组</h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th>排序</th>
+						<th>组名</th>
+						<th>海报</th>
+						<th>关注人数</th>
+						<th>总贴数</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+					<tbody>
+					{% for v in gdata %}
+						<tr>
+						 	<td style="padding-left: 50px;">{{ v.sort }}</td>
+							<td>{{ v.groupName }}</td>
+							<td><img  class='SmallImg' style="width: 66px; height:44px" src="{{ path }}{{ v.img }}"></td>
+							<td>{{ v.followNum }}</td>
+							<td>{{ v.postNum }}</td>
+							<td><button type='button'  val-id="{{ v.id }}"  class="green" onclick="location='{{ path('AddGroup_',{groupId:v.id}) }}'" >编辑</button><button type='button' class="red delHotCit"  val-id="{{ v.id }}" >删除</button></td>
+						</tr>
+					{% endfor %}
+			
+
+					</tbody>
+				</table>
+		</div>
+		<div class="page-dis">
+			<div class="meneame">
+				<a href="{{ path('homestay_', {'page': 1}) }}">首页</a>
+				<a href="{{ path('homestay_', {'page': prePage}) }}"> < </a>
+				{% if totalPage >= 7 %}
+					{% if page <= 4 %}
+						{% for i in 1..7 %}
+							<a href="{{ path('homestay_', {'page': i}) }}">{{ i }}</a>
+						{% endfor %}
+					{% elseif page > (totalPage - 4) %}
+						{% for k in (totalPage-7)..(totalPage) %}
+							<a href="{{ path('homestay_', {'page': k}) }}">{{ k }}</a>
+						{% endfor %}
+					{% else %}
+						{% for j in (page-3)..(page+3) %}
+							<a href="{{ path('homestay_', {'page': j}) }}">{{ j }}</a>
+						{% endfor %}
+					{% endif %}
+				{% else %}
+					{% if totalPage != 0 %}
+						{% for m in 1..totalPage %}
+							<a href="{{ path('homestay_', {'page': m}) }}">{{ m }}</a>
+						{% endfor %}
+					{% endif %}
+				{% endif %}
+				<a href="{{ path('homestay_', {'page': nextPage}) }}"> > </a>
+				<a href="{{ path('homestay_', {'page': totalPage}) }}">尾页</a>
+			</div>
+		</div>
+	</section>
+</section>
+
+{% endblock%}

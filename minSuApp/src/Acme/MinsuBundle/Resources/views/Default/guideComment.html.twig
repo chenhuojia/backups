@@ -1,0 +1,178 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/pic/jssor.slider.min.js') }}"></script>
+<script src="{{ asset('bundles/msk/public/js/pic/jquery.scrollfollow.js') }}"></script>
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script src="{{ asset('bundles/msk/public/js/pic/slidePic.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+// $('#myModal').modal(options);
+$('.listpic ul .Rpicclii').click(function(){
+// 	$('.listpic ul li img').removeClass("selectPic");
+	var id = $(this).attr("val-id");
+	var dscp =$(this).attr("dscp");
+	$("#myModal_"+id+" .listpic ul li img" ).removeClass("selectPic");
+	$(this).children("img").addClass("selectPic");
+	var src =$(this).children("img").attr("src");
+	$(this).parent("ul").parent(".listpic").siblings(".BigPic").children("img").attr("src",src);
+	$(this).parent("ul").parent(".listpic").siblings(".BigPic").children(".bigpicdscp").text(dscp);
+	$(this).parent("ul").parent(".listpic").siblings(".BigPic").children(".bigpicdscp").attr("title",dscp);
+
+var mykey =	$(this).children("img").attr("mykey");
+$(".rmbtn").attr("mykey",mykey);
+$(".span_"+id+"_num").text(parseInt(mykey)+parseInt(1));
+	})
+
+	$(".roomTbBtn").click(function(){
+		var id =$(this).attr("val-id");
+		var size =$("#myModal_"+id+" .listpic ul .Rpicclii").size();	
+		$("#myModal_"+id+" .listpic ul .Rpicclii:gt(7)").hide();
+// $("#myModal_"+id+" .listpic ul .Rpicclii:gt(7)").addClass("hideli");
+	});
+
+//向前
+$(".roomprevbtn").click(function(){
+	var id =$(this).attr("val-id");	
+	var mykey=$(this).attr('mykey');
+	var num =$(this).siblings(".Rpicclii").size();
+	var updatakey=parseInt(mykey)-parseInt(1);
+	if(updatakey<num){
+		if(mykey!=0){
+			$("#myModal_"+id+" .listpic ul li img" ).removeClass("selectPic");
+			$("#img_"+id+"_"+updatakey).addClass("selectPic");
+			if($("#img_"+id+"_"+updatakey).parent(".Rpicclii").attr("style") == "display: none;"){
+				$("#img_"+id+"_"+updatakey).parent(".Rpicclii").show();
+				var hideNum =parseInt($("#img_"+id+"_"+updatakey).attr("mykey"))+parseInt(7);
+				$("#myModal_"+id+" .listpic ul .Rpicclii:gt("+hideNum+")").hide();
+				}
+// 			style="display: none;"
+			$(".rmbtn").attr("mykey",$("#img_"+id+"_"+updatakey).attr("mykey"));
+			//页数
+			var aa =parseInt($("#img_"+id+"_"+updatakey).attr("mykey")) +parseInt(1);
+			$(".span_"+id+"_num").text(aa);
+			var src =$("#img_"+id+"_"+updatakey).attr("src");
+			var dscp =$("#img_"+id+"_"+updatakey).parent(".Rpicclii").attr("dscp");
+			$(this).parent("ul").parent(".listpic").siblings(".BigPic").children("img").attr("src",src);
+			$(this).parent("ul").parent(".listpic").siblings(".BigPic").children(".bigpicdscp").text(dscp);
+			$(this).parent("ul").parent(".listpic").siblings(".BigPic").children(".bigpicdscp").attr("title",dscp);
+//	 		$(this).siblings(".Rpicclii").children(".selectPic")	
+
+			}
+// 		$(this).attr("mykey",updatakey);
+		}
+	
+// 	var thisKey =$(this).siblings(".Rpicclii").children(".selectPic").attr("mykey");
+// 	alert(thisKey);
+})
+
+//向后
+$(".roomnextbtn").click(function(){
+	var id =$(this).attr("val-id");	
+	var mykey=$(this).attr('mykey');
+	var num =$(this).siblings(".Rpicclii").size();
+	var updatakey=parseInt(mykey)+parseInt(1);
+	if(updatakey<num){
+// 		if(mykey!=num){
+			$("#myModal_"+id+" .listpic ul li img" ).removeClass("selectPic");
+			$("#img_"+id+"_"+updatakey).addClass("selectPic");
+			if($("#img_"+id+"_"+updatakey).parent(".Rpicclii").attr("style") == "display: none;"){
+				$("#img_"+id+"_"+updatakey).parent(".Rpicclii").show();
+					var hideNum =parseInt($("#img_"+id+"_"+updatakey).attr("mykey"))-parseInt(7);
+// 					alert(hideNum);
+// 					var returnNum =parseInt(hideNum)+parseInt(1);
+					$("#myModal_"+id+" .listpic ul .Rpicclii:lt("+hideNum+")").hide();
+				}
+			$(".rmbtn").attr("mykey",$("#img_"+id+"_"+updatakey).attr("mykey"));
+			//页数
+			$(".span_"+id+"_num").text(parseInt($("#img_"+id+"_"+updatakey).attr("mykey"))+parseInt(1));
+			var src =$("#img_"+id+"_"+updatakey).attr("src");
+			var dscp =$("#img_"+id+"_"+updatakey).parent(".Rpicclii").attr("dscp");
+			$(this).parent("ul").parent(".listpic").siblings(".BigPic").children("img").attr("src",src);
+			$(this).parent("ul").parent(".listpic").siblings(".BigPic").children(".bigpicdscp").text(dscp);
+			$(this).parent("ul").parent(".listpic").siblings(".BigPic").children(".bigpicdscp").attr("title",dscp);
+			
+//	 		$(this).siblings(".Rpicclii").children(".selectPic")	
+// 			}
+// 			$(this).attr("mykey",updatakey);
+		}
+	
+// 	var thisKey =$(this).siblings(".Rpicclii").children(".selectPic").attr("mykey");
+// 	alert(thisKey);
+})
+
+
+
+
+
+$(".media-btn").click(function(){
+
+	var id =$(this).attr("id");
+
+	if (id == "img"){
+		$("#video-play").hide();
+		} else if (id == "video"){
+			
+
+			$("#video-play").show();
+			}
+})
+})
+</script>
+
+{% endblock %}
+{% block stylesheet %} {{ parent() }}
+{# <link href="{{ asset('bundles/msk/public/css/details_new.css') }}" rel="stylesheet" type="text/css" media="all"/>#}
+	<style type="text/css">
+		.video {
+			position: absolute;
+				right: 15%;
+		}
+		.img {
+			position: absolute;
+		
+			
+			right: 20%;
+		}
+	</style>
+{% endblock %}
+{% block content%}<section class="alert">
+	 	 <button type="button"class="green stateBtn" onclick='javascript:history.go(-1);'>返回</button>
+{# 	 	 <button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>#}
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>导游相关评论展示</h1>
+				
+			</hgroup>
+		</header>
+		<div class="content no-padding timeline">
+	        
+			<ul class="list-group" style="width:70%;margin:auto;">
+			  {% for v in comment %}
+				<li class="list-group-item">
+                       <div class="media">
+			                <a class="pull-left" href="#">
+			                    <img class="media-object" src="{{ v.imageurl }}" alt="" height="50" width="50"
+			                         alt="">
+			                </a>
+			                <div class="media-body">
+			                    <h4 class="media-heading"><span style="color:red; font-size:14.5px; margin-right:6px;">{{ v.username }}</span>   {{ v.NewAddTime }}   &emsp;&emsp;&emsp;&emsp;<span class="badge">{{ v.service_quality }}</span>星 &emsp;&emsp;&emsp;&emsp;<span class="label label-success"">{% if v.kind ==0  %}{% else %}消费评论{% endif %}</span>
+			                    </h4>  
+			                    {{ v.content }}
+			                    <a href="{{ path('guideDataCommentDel_',{'guide_id':v.guide_id,'comment_id':v.comment_id}) }}" class="btn btn-danger" role="button">删除</a> 
+			                </div>
+			            </div>
+				</li>
+			 {% endfor %}
+			</ul>
+
+        </div>
+		  
+	</section>
+</section>
+
+{% endblock%}

@@ -1,0 +1,145 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+// alert(12321321); 
+$(".stateBtn").click(function(){
+	$("[name='is_checked']").val($(this).attr("val"));
+	$("form").submit();
+})
+
+$(".agreeBtn").click(function(){
+	var id = $(this).attr("id-val");
+	var state =$(this).attr("state-vale");
+	if(confirm("确认通过审核?")){
+		shenkefuc(id,state,'');
+		}
+	})
+
+$(".disagreeBtn").click(function(){
+		var reason =$("#HomeStayReason").val();
+		if(!reason){alert("必须填写审核不通过理由！");return false;}
+		var id = $(this).attr("id-val");
+		var state =$(this).attr("state-vale");
+		if(confirm("确认提交?")){
+			if(id){
+			shenkefuc(id,state,reason);}
+			}
+})
+function shenkefuc(id,state,reason){
+	$.ajax({
+		type:"POST",
+		data:"&id="+id+"&state="+state+"&rtest="+reason,
+		url:"{{ path('_agree_shop_apply') }}",
+		success:function(msg){
+			console.log(msg)
+			if (msg === '1'){
+				alert("操作成功!");
+				}
+			  location.reload();
+		}
+	});
+}
+
+$(".showReason").click(function(){
+	var id= $(this).attr("id-val");
+	$(".disagreeBtn").attr("id-val",id);
+	});
+})
+</script>
+{% endblock %}
+{# onclick="location='{{ path('AjaxCHomeStay_',{'hid':v.id}) }}'"#}
+{% block content%}<section class="alert">
+	<form method="post" action="">
+	<input type ="hidden" name ="is_checked">
+	 	 <button type="button" val='1' class="green stateBtn">已通过审核</button>
+	 	 <button type="button" val='0' class="green stateBtn">审核不通过</button>
+		 <button type="button" val='2' class="green stateBtn">未审核</button>
+		 <button type="button" val='3' class="green stateBtn">全部店铺</button>
+	</form>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>店主认证</h1>
+{# 				<h2 style="font-family: '微软雅黑';font-size: 12px;color: #ccc;">注:带<font color="red">&nbsp;*&nbsp;</font>是房东用户</h2>#}
+			</hgroup>
+{# 			<aside>#}
+{# 				<span>#}
+{# 					<a href="#">&#9881;</a>#}
+{# 					<ul class="settings-dd">#}
+{# 						<li><label>Option a</label><input type="checkbox" /></li>#}
+{# 						<li><label>Option b</label><input type="checkbox" checked="checked" /></li>#}
+{# 						<li><label>Option c</label><input type="checkbox" /></li>#}
+{# 					</ul>#}
+{# 				</span>#}
+{# 			</aside>#}
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>  
+						<th>#</th>
+						<th>店铺名称</th>
+						<th>申请人</th>
+						<th>电话</th>
+						<th>地址</th>
+						<th>日期</th>
+						<th>回复</th>
+						<th>审核时间</th>
+						<th>审视</th>
+						<th>审核</th>
+					</tr>
+				</thead>
+					<tbody>
+							{% for v in shop %}
+								<tr>
+									<td style="padding-left: 50px;">{{v.id}}</td>
+								 	<td>{{v.shop_name}}</td>
+									<td>{{v.user_name}}</td>
+									<td>{{v.phone}}</td>
+									<td>{{v.shop_address}}</td>
+									<td>{{v.addtime|date('Y-m-d H:i:s')}}</td>
+									<td>{{v.reply}}</td>
+									<td>{%if v.addtime==0%}0{% else %} {{v.addtime|date('Y-m-d H:i:s')}}{% endif %}</td>
+									<td><button class="green"  onclick="location='{{ path('shopApplyDetail_',{apply_id:v.id}) }}'">详情</button>
+									</td>
+									<td>
+									{% if v.is_checked==2 %}
+										<button class="green agreeBtn" type='button' id-val="{{v.id}}"  state-vale="1">通过</button>
+										<button class="red showReason" data-toggle="modal" data-target="#myModal_disagree" id-val="{{v.id}}" >不通过</button>
+									{% elseif v.is_checked==0 %}
+										<font color="red">未通过审核</font>
+									{% elseif v.is_checked==1 %}
+										<font color="green">已通过审核</font>
+									{% endif %}
+								</td>
+								</tr>
+							{% endfor %}
+					</tbody>
+				</table>
+		</div>
+	</section>
+</section>
+<div class="modal fade" id="myModal_disagree" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="flase">
+  <div class="modal-dialog" style="margin-top:180px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel" style="font-family: '微软雅黑';font-size: 16px;font-weight: 600;">不通过的理由</h4>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+      <textarea  name='HomeStayReason' id="HomeStayReason" rows="" cols="" style="height: 100px;"></textarea>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary disagreeBtn"  id-val="" state-vale="0" >提 交</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+{% endblock%}

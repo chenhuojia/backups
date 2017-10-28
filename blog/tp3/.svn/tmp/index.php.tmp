@@ -1,0 +1,35 @@
+<?php
+// +----------------------------------------------------------------------
+// | ThinkPHP [ WE CAN DO IT JUST THINK ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2006-2014 http://thinkphp.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: liu21st <liu21st@gmail.com>
+// +----------------------------------------------------------------------
+
+// 应用入口文件
+
+/* $conn=new mysqli('rm-uf69ezzl87eq312z2o.mysql.rds.aliyuncs.com','root','ChenHuoJia@0907');
+var_dump($conn);exit; */
+// 检测PHP环境
+if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
+
+// 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false
+define('APP_DEBUG',True);
+// 定义应用目录
+define('APP_PATH','./Application/');
+define('BIND_MODULE','Home');
+// 引入ThinkPHP入口文件
+require './ThinkPHP/ThinkPHP.php';
+require './StatisticClient.php';
+/* StatisticClient::report(MODULE_NAME . ':' . CONTROLLER_NAME,ACTION_NAME, 1, 200, '');
+function  AppError($errno='', $errstr='', $errfile='', $errline='',$errcontext=''){
+   $msg= is_numeric($errno)?$errstr:$errno;
+   StatisticClient::report(MODULE_NAME . ':' . CONTROLLER_NAME,ACTION_NAME, 0, 5502, "文件:{$errfile}行数{$errline},详细信息：".$msg);
+    echo  '{"code":300,"message":403}';
+    exit();
+} 
+StatisticClient::report(MODULE_NAME . ':' . CONTROLLER_NAME,ACTION_NAME, 1, 200, ''); 
+// 亲^_^ 后面不需要任何代码了 就是如此简单 */

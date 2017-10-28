@@ -1,0 +1,74 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$(".delCoupon").click(function(){
+		var id=$(this).attr('val-id');
+		$.ajax({
+			type:"POST",
+			data:"&couponId="+id,
+			dataType: "json", 
+			url:"{{ path('deleteCoupon_') }}",
+			success:function(msg){
+				if (msg === '1'){
+					alert("成功删除！");
+					}
+				  location.reload();
+			}
+		});
+	});
+
+})
+</script>
+{% endblock %}
+
+{% block content%}<section class="alert">
+		  <button type="button"  onclick="location='{{ path('Addcoupon_') }}'" class="green stateBtn">新  增</button>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>优惠券</h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th>排序</th>
+						<th>面额(元)</th>
+						<th>需兑换积分</th>
+						<th>最低消费</th>
+						<th>优惠券描述</th>
+						<th>有效期</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+					<tbody>
+					{% for v in couponList %}
+						<tr>
+						 	<td style="padding-left: 50px;">{{ v.sort }}</td>
+							<td>{{ v.coupon_value }}</td>
+							<td>{{ v.convert_points }}</td>
+							<td>{{ v.min_amount }}</td>
+							<td>{{ v.coupon_dscp }}</td>
+							<td>{{ v.qouta_day }}</td>
+							<td>{% if v.state == 1 %}上线{% else %}下线{% endif %}</td>
+							<td><button type='button'  val-id="{{ v.id }}"  class="green" onclick="location='{{ path('Addcoupon_',{hotCityId:v.id}) }}'" >编辑</button><button type='button' class="red delCoupon"  val-id="{{ v.id }}" >删除</button></td>
+						</tr>
+					{% endfor %}
+			
+
+					</tbody>
+				</table>
+		</div>
+	</section>
+</section>
+
+{% endblock%}

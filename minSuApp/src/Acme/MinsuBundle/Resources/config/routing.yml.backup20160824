@@ -1,0 +1,88 @@
+upload:
+    resource: "@AcmeMinsuBundle/Controller/advsImageController.php"
+    type:     annotation
+    prefix:
+travel:
+    resource: "@AcmeMinsuBundle/Controller/TravelImageController.php"
+    type:     annotation
+    prefix:
+index:
+    resource: "@AcmeMinsuBundle/Controller/DefaultController.php"
+    type:     annotation
+    prefix:
+twig_captcha:
+    path: /
+    defaults: {_controller:AcmeMinsuBundle:Captcha:captcha}    
+login:
+    resource: "@AcmeMinsuBundle/Controller/LoginController.php"
+    type:     annotation
+    prefix: 
+api_homestay:    
+    resource: "@AcmeMinsuBundle/Controller/apiHomestayController.php"
+    type:     annotation
+    prefix: 
+ajax_HomeStay-Start-ByWinson:    
+    resource: "@AcmeMinsuBundle/Controller/AjaxController.php"
+    type:     annotation
+    prefix:     
+apivalid:
+   resource: "@AcmeMinsuBundle/Controller/apiLoginController.php"
+   type:     annotation
+   prefix:
+apiregister:
+   resource: "@AcmeMinsuBundle/Controller/apiLoginController.php"
+   type:     annotation
+   prefix:
+squareAdvertise:
+    resource: "@AcmeMinsuBundle/Controller/SquareAdvertiseImageController.php"
+    type:     annotation
+    prefix:
+apihomestaydetail:
+   resource: "@AcmeMinsuBundle/Controller/apiHomestayDetailController.php"
+   type:     annotation
+   prefix:
+apiroomdetail:
+   resource: "@AcmeMinsuBundle/Controller/apiRoomDetailController.php"
+   type:     annotation
+   prefix:
+apiadvsindeximg:
+   resource: "@AcmeMinsuBundle/Controller/apiAdvsIndexController.php"
+   type:     annotation
+   prefix:
+apiUploadTravelNote:
+   resource: "@AcmeMinsuBundle/Controller/apiTravelNoteController.php"
+   type:     annotation
+   prefix:
+apiPersonalCollect:
+   resource: "@AcmeMinsuBundle/Controller/apiPersonalMsgController.php"
+   type:     annotation
+   prefix:
+personalAttention:
+   resource: "@AcmeMinsuBundle/Controller/PersonalAttentionController.php"
+   type:     annotation
+   prefix:
+grouppost:  
+   resource: "@AcmeMinsuBundle/Controller/GrouppostController.php"
+   type:     annotation
+   prefix:
+entry:
+   resource: "@AcmeMinsuBundle/Controller/EntryImageController.php"
+   type:     annotation
+   prefix:
+systemMsg:
+   resource: "@AcmeMinsuBundle/Controller/MsgController.php"
+   type:     annotation
+   prefix:
+feedbackMsg:
+   resource: "@AcmeMinsuBundle/Controller/FeedbackMsgController.php"
+   type:     annotation
+   prefix:
+apiUFBMsg:
+   resource: "@AcmeMinsuBundle/Controller/apiFeedbackMsgController.php"
+   type:     annotation
+   prefix:
+addTravelNote:
+   resource: "@AcmeMinsuBundle/Controller/DefaultController.php"
+   type:     annotation
+   prefix:
+

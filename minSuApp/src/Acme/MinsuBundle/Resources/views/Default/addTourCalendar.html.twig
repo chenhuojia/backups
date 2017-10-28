@@ -1,0 +1,176 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script type="text/javascript" src="{{ asset('bundles/msk/public/js/jquery-1.7.1.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/msk/public/js/ajaxfileupload.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+	        $('#agency_id').change(function(){
+		        var agency_id = $("#agency_id").val();
+		        var chief_id = $("#chief_id").val();
+		        $.ajax({
+		            cache:false,
+		            type:"POST",
+		            url:"{{ path('travelAgencySelectTour_') }}",
+		            dataType:"json",
+		            data:{agency_id:agency_id},
+		            success:function(data){
+		                console.log(data);
+		                $("#tour_id").empty();
+		                var count = data.length;
+		                var i = 0;
+		                var b="";
+		                b+="<option value='0'>请选择</option>";
+		                for(i=0;i<count;i++){
+		                    b+="<option value='"+data[i].tour_id+"'>"+data[i].tour_title+"</option>";
+		                }
+		              
+		               //$("#city_id option[value='{$_GET[city_id]}']").attr("selected",true);
+		               $("#tour_id").append(b);
+		            }  
+		        });
+		        $.ajax({
+		            cache:false,
+		            type:"POST",
+		            url:"{{ path('travelAgencySelectChief_') }}",
+		            dataType:"json",
+		            data:{agency_id:agency_id},
+		            success:function(data){
+		                console.log(data);
+		                $("#chief_id").empty();
+		                var count = data.length;
+		                var i = 0;
+		                var b="";
+		                b+="<option value='0'>请选择</option>";
+		                for(i=0;i<count;i++){
+		                    b+="<option value='"+data[i].chief_id+"'>"+data[i].chief_name+"</option>";
+		                }
+		               $("#chief_id").append(b);
+		            }  
+		        });
+		    });
+    });
+
+</script>
+
+{% endblock %}
+
+{% block content%}<section class="alert">
+	<form method="post" action="{{ path('save_homestay_data') }}">
+	
+	<div  id="hidimggroup">
+	
+	</div>	
+	<input  type ="hidden" id='imgNumber'  value="0">
+	
+	<input  type ="hidden" id='imgdefauledd' name="imgdefauledd" >
+
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>新增团游</h1>
+			</hgroup>
+		</header>
+		<div style="min-height: 900px;position: relative;">
+			<table border="0" class="addhtable" >
+					<tr>
+						<td>旅行社</td>
+						<td><select name="agency_id" id="agency_id" class="form-select" style="padding: 5px;height: 35px; margin-bottom: 13px;">
+						{% for v in meb %}
+						<option value="{{ v.agency_id }}">{{v.agency_name}}</option>
+						{% endfor %}
+						</select></td>
+					</tr>
+					<tr>
+						<td>名称</td>
+						<td>
+							<select name="tour_id" id="tour_id" class="form-select" style="padding: 5px;height: 35px; margin-bottom: 13px;">
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>团长</td>
+						<td>
+							<select name="chief_id" id="chief_id" class="form-select" style="padding: 5px;height: 35px; margin-bottom: 13px;">
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>出发日期</td>
+						<td><input name="homestay_title" type="date" class="form-input"  style="padding: 5px;height: 35px;margin-bottom: 13px;" required /></td>
+					</tr>
+					
+					<tr>
+						<td>价格</td>
+						<td><input name="bottom_price" type="text" class="form-input" required/></td>
+					</tr>
+					
+					
+					<tr>
+						<td>电话</td>
+						<td><input name="homestay_phone" type="text" class="form-input" required/></td>
+					</tr>
+					
+					<tr>
+						<td>地址</td>
+						<td><input name="homestay_addr" id="homestay_addr" type="text" class="form-input" required style="width: 78%;"/>&nbsp;&nbsp;&nbsp;<button type='button'  id ='adr'  >搜 索</button></td>
+					</tr>
+					
+					<tr>
+						<td>经度</td>
+						<td><input name="longitude" id ='longitude'  type="text" class="form-input" required/></td>
+					</tr>
+					
+					<tr>
+						<td>纬度</td>
+						<td><input name="latitude" id='latitude'  type="text" class="form-input" required/></td>
+					</tr>
+					
+					<tr>
+						<td>省</td>
+						<td><input name="province"  id="province"  type="text" class="form-input"  required/></td>
+					</tr>
+					
+					<tr>
+						<td>城市</td>
+						<td><input name="city" id="city" type="text" class="form-input" required/></td>
+					</tr>
+					
+					<tr>
+						<td>区</td>
+						<td><input name="district" id="district" type="text" class="form-input" required/></td>
+					</tr>
+		
+				</table>
+				
+				 <button type='submit'  id="submitbtn" class="green" style="width: 200px;font-weight: 600;margin-left: 40px;position: absolute;left:700px;bottom: 50px;"> 保  存</button> 
+		</div>
+	</section>
+	
+	<div  id="ifdiv">
+      	<iframe name="rightMain" id="rightMain" src="{{ path('map_')}}" frameborder="no" style="height: 560px;" width="100%"  allowtransparency="true"/>  </iframe>
+  </div>
+</section>
+
+ 	
+<div  id="ifuploaddiv"> 
+
+  		<div class="uploader divmupload_0">
+ 					 <img name="img_0"  class='manyuploadImg' src="{{ asset('bundles/msk/public/none.jpg') }}"> 
+                    <input type="text" class="filename filename_0" readonly value="请选择图片" style="width: 100%;">
+                    <button type="button" name="file" class="filenamebutton green" style="position: absolute;left: 100%; width: 80%;">选择图片</button>
+                    <input type="file" size="30" name="artImage" id="uploadImage"  style=" width: 180%;">        
+                    <!-- multiple="multiple"<input type="radio" name="imradeflt" class="imradeflt">
+                    <button type="button" class='delManyimg'>X</button> -->                   
+				</div>
+		
+				
+{#}{{ path('img_load')}} http://localhost/msk2016/vendor/jqupload/  {#}
+	{#} <iframe name="rightMain"  src="http://localhost/msk2016/vendor/jqupload/" frameborder="no" style="min-height: 270px;"width="600px"  allowtransparency="true"/></iframe>{#}
+ </div> 
+	 
+		</form>
+{% endblock%}

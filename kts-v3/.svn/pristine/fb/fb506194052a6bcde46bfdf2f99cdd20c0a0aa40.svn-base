@@ -1,0 +1,182 @@
+<?php
+namespace User\Controller;
+
+use Common\Controller\ApiController;
+use User\Util\Util;
+
+class BookController extends ApiController
+{   
+    //删除分享的书
+    public function shareBookDel()
+    {  
+       $user_id=session("user_id");
+       $type =I('post.type',0);
+       $book_id = I('post.book_id',0);
+       $book=M('book');
+       $book->startTrans();
+       switch ($type) {//图书类型1普通的书 0二手书 2分享的书,3电子书'
+           case '0':
+               $bookType =M('book_old')->where(array('book_id'=>$book_id,'user_id'=>$user_id))->save(array('is_show'=>0));
+               break;
+           case '2':
+               $bookType =M('book_share')->where(array('book_id'=>$book_id,'user_id'=>$user_id))->save(array('is_show'=>0));
+               break;
+           case '3':
+               $bookType =M('book_ebook')->where(array('book_id'=>$book_id,'user_id'=>$user_id))->save(array('is_show'=>0));
+               break;
+           default:
+               $this->myApiPrint(300,'参数错误');
+               break;
+       }
+       $data = $book->where(array('book_id'=>$book_id,'user_id'=>$user_id))->save(array('isdelete'=>1));
+       if ($data && $bookType) {
+           $book->commit();
+           $this->myApiPrint(200,'删除成功');
+       } else {
+           $book->rollback();
+           $this->myApiPrint(300,'删除失败');
+       }
+       
+    }
+    //分享的书放置出售二手书
+    public function shareAddOld()
+    {
+        $user_id=session("user_id");
+        $book_id = I('post.book_id',0);
+        $degree = I('post.extent');
+        $price =I('post.price',0);
+        $shipping_price = I('post.shipping_price',0);
+        if (empty($degree)) $this->myApiPrint(300,'请选择新旧程度');
+        if (empty($price)) $this->myApiPrint(300,'请填写出售的价格');
+        $data=M('book')->where(array('book_id'=>$book_id,'type'=>2,'user_id'=>$user_id))->find();
+        if (empty($data)) $this->myApiPrint(300,'找不到分享的书');
+        if (M('book_old')->where(array('book_id'=>$book_id,'user_id'=>$user_id))->find()){
+                  $this->myApiPrint(300,'这本图书你已经上传过了，请换一本再上传吧');
+        }
+        $books=M('book');
+        $books->startTrans();
+        $last_id=$books->where(array('book_id'=>$book_id))->save(array('type'=>0,'price'=>$price));
+        if ($last_id){
+            $book_number=$data['book_number']; 
+            $book_name=$data['name'];
+            $cover_img=$data['cover_img'];
+            $author=$data['author'];
+            $a=M('book_old')->add(array('book_id'=>$book_id,'book_number'=>$book_number,'book_name'=>$book_name,'cover_img'=>$cover_img,'author'=>$author,'user_id'=>$user_id,'user_name'=>"",'sell_time'=>$_SERVER['REQUEST_TIME'],'description'=>$degree,'shipping_price'=>$shipping_price));             
+            //$c=M()->execute('update kts_book_attr set type=0 where book_id = '.$book_id);
+            if ($a){
+                $books->commit();
+                $user=M('user_xq')->where(array('user_id'=>$user_id))->getField('share_num');
+                $share_num=($user>=0)?($user-1):0;
+                M()->execute('update kts_user_xq set sell_num= sell_num+1,share_num='.$share_num.'  where user_id ='.$user_id);
+                M()->execute('delete from kts_book_share where book_id ='.$book_id);
+                $this->myApiPrint(200,'添加成功');
+            }
+        }
+        $books->rollback();
+        $this->myApiPrint(300,'添加失败');
+    }
+
+    private function  checkCommon($type,$user_id,$price=0){
+        $book=array(
+            'price'=>$price,
+            'type'=>$type,
+            'user_id'=>$user_id,
+        );
+        return $book;
+
+    }
+
+    private function addCommon($type,$book_id,$data,$user_id){
+        $att=array(
+            'type'=>$type,
+            'book_id'=>$book_id,
+            'press'=>$data['press'],
+            'publish_time'=>date('Y-m-d',strtotime($data['publish_time'])),
+            'publish_price'=>$data['publish_price'],
+            'edition'=>isset($data['edition'])?$data['edition']:0,
+            'impression'=>isset($data['impression'])?$data['impression']:0,
+            'page'=>isset($data['page'])?$data['page']:0,
+            'words'=>isset($data['words'])?$data['words']:0,
+            'format'=>isset($data['format'])?$data['format']:0,
+            'paper'=>isset($data['paper'])?$data['paper']:0,
+            'binding'=>isset($data['binding'])?$data['binding']:0,
+            'language'=>isset($data['language'])?$data['language']:0,
+            'introduce'=>isset($data['book_desc'])?$data['book_desc']:0,
+            'author_area'=>isset($data['author_area'])?$data['author_area']:1,
+            'author_desc'=>isset($data['author_desc'])?$data['author_desc']:0,
+            'applicable_age'=>isset($data['applicable_age'])?$data['applicable_age']:0,
+            'copyright'=>$data['copyright'],
+            'other'=>$data['other'],
+            'cate_name'=>$data['cate_name'],
+            ); 
+       if (isset($data['video']) && !empty($data['video'])){
+           $att['video_title']=$data['video']['title'];
+           $att['video']=$data['video']['cover'].';'.$data['video']['url'];
+        }
+        if (isset($data['address']) && !empty($data['address'])){
+            $att['address']=$data['address'];
+            $att['longitude']=$data['longitude'];
+            $att['latitude']=$data['latitude'];
+        }
+        if (isset($data['catalog']) && !empty($data['catalog'])){
+            $att['catalog']=$data['catalog'];
+        }
+        M('book_add')->add(array('book_id'=>$book_id,'book_number'=>$data['book_number']));
+        if(!empty($data['address']) && !empty($data['longitude']) && !empty($data['latitude'])) D('Book','Logic')->addBookshelfBook($user_id,$book_id,$type,$data['address'],$data['longitude'],$data['latitude'],$data['press']);
+        return  M('book_attr')->add($att);
+    }
+
+    /**
+      *我的书架
+      * **/       
+     public function myBookshelfList(){
+         $user_id=session("user_id");
+         $skip=I('get.skip',0);
+         $take=I('get.take',10);
+         $type = I('get.type',2);
+         $data=M('bookshelf')
+              ->field('shelf_id,user_id,addr,longitude,longitude,latitude,book_sums')
+              ->where(array('user_id'=>$user_id))
+              ->order(array('shelf_id'=>'desc'))
+              ->limit($skip,$take)
+              ->select();
+        foreach ($data as $k=>$v){
+             $userMes = \User\Util\Util::GetUserAvatrAndNick($v['user_id']);
+             $data[$k]['username'] = $userMes['name'];
+             $data[$k]['user_avatar'] = $userMes['avatar'];
+        }
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试',300);
+         
+     }
+
+
+     /**
+      *我的书架上的书
+      * **/       
+     public function myBookshelfBookList(){
+         $shelf_id = I('get.shelf_id',0);
+         $type = I('get.type',2);
+         $skip=I('get.skip',0);
+         $take=I('get.take',10);
+         $data=M('bookshelf_book')
+              ->field('id,user_id,book_id,shelf_id,type,book_name,author,cover_img,addtime,press,price as publish_price')
+              ->where(array('shelf_id'=>$shelf_id,'type'=>$type))
+              ->order(array('id'=>'desc'))
+              ->limit($skip,$take)
+              ->select();
+        foreach ($data as $k=>$v){
+             $userMes = \User\Util\Util::GetUserAvatrAndNick($v['user_id']);
+             $data[$k]['user_name'] = $userMes['name'];
+             $data[$k]['user_avatar'] = $userMes['avatar'];
+             $data[$k]['cover_img'] = C('QINIU_IMG_PATH').$data[$k]['cover_img'];
+        }
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试',300);
+         
+     }
+    
+}
+

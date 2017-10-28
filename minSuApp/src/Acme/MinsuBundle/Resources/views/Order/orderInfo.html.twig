@@ -1,0 +1,226 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+{% block javascript %} {{ parent() }}
+<script type="text/javascript">
+$(document).ready(function(){
+
+
+
+
+})
+</script>
+{% endblock %}
+
+{% block content%}<section class="alert">
+		  <button type="button" val=''onclick="javascript:history.go(-1)" class="green stateBtn">返  回</button>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>订单详情</h1>
+			</hgroup>
+		</header>
+	<div class="content">
+			<div class="field-wrap">
+	<div class="ncsc-order-info">
+    <div class="ncsc-order-details">
+      <div class="title">订单信息</div>
+      <div class="content">
+        <dl>
+          <dt>入&nbsp;&nbsp;住&nbsp;&nbsp;人：</dt>
+          <dd>{{ v.buyer_name }}&nbsp; {{ v.buyer_phone }} &nbsp;</dd>
+        </dl>
+      
+        <dl class="line">
+          <dt>订单编号：</dt>
+          <dd>{{ v.order_sn }}<i class="icon-angle-down"></i>
+            <div class="more"><span class="arrow"></span>
+              <ul>
+                                <li>支付方式：<span>{% if v.payment_code == 1 and v.payment_code!= NULL%}微信{% elseif v.payment_code == 0 and v.payment_code!= NULL%}支付宝 {% else %}未支付{% endif %}</span></li>
+                              
+                              	<li>支付时间：<span>{% if  v.payment_time >0 %}{{ v.NewPaymentTime }}{% else %}Null{% endif %}</span></li>
+                              
+                                <li>下单时间：<span>{{ v.NewAddTime }}</span></li>
+                                
+                                 <li>账号ID：<span>{{ v.buyer_id }}</span></li>
+                                
+                                 <li>下单账号：<span>{{ v.account }}</span></li>
+                                 
+                                 <li>账号昵称：<span>{{ v.nickname }}</span></li>
+                                                              </ul>
+            </div>
+            </dd>
+        </dl>
+
+        <dl>
+          <dt>民&nbsp;&nbsp;宿&nbsp;&nbsp;名：</dt>
+          <dd>{{ v.homestay_name }}</dd>
+        </dl>
+        
+        <dl>
+          <dt>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</dt>
+          <dd>{{ v.homestay_addr }}</dd>
+        </dl>
+        
+        
+         <dl>
+          <dt>房&nbsp;&nbsp;间&nbsp;&nbsp;名：</dt>
+          <dd>{{ v.room_name }}</dd>
+        </dl>
+        
+        <dl>
+          <dt>床&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</dt>
+          <dd>{{ v.room_bed_type }}  * {{ v.room_bed }}</dd>
+        </dl>
+        <dl>
+          <dt>退订政策：</dt>
+          <dd>{{ v.restock_text }}</dd>
+        </dl>
+        
+         <dl>
+          <dt>入住日期：</dt>
+          <dd>{{ v.Newcheckin }}</dd>
+        </dl>
+        
+        <dl>
+          <dt>离开日期：</dt>
+          <dd>{{ v.Newcheckout }}</dd>
+        </dl>
+        
+            <dl>
+          <dt>入住人数：</dt>
+          <dd>{{ v.buyer_num }}</dd>
+        </dl>
+        
+            
+        
+        
+           <dl>
+          <dt>入住晚数：</dt>
+          <dd>{{ v.buyer_day }}</dd>
+        </dl>
+             <dl>
+          <dt>房间价格：</dt>
+          <dd>{{ v.goods_amount }}</dd>
+        </dl>
+        
+        <dl>
+          <dt>红包面值：</dt>
+          <dd>{{ v.coupon_amount }}</dd>
+        </dl>
+        
+        <dl>
+          <dt>订单金额：</dt>
+          <dd><span style="font: bold 15px/20px Verdana; color: #C00;">{{ v.order_amount }}</span></dd>
+        </dl>
+        
+        
+      </div>
+    </div>
+            <div class="ncsc-order-condition">
+      <dl>
+        <dt><i class="icon-ok-circle green"></i>订单状态：</dt>
+          {% if v.order_state == 0 %}
+        <dd>订单过时已被取消</dd>
+      </dl>
+      <ul>
+        <li>1. 买家尚未对该订单进行支付。</li>
+        <li>2. 该订单过了特定支付时间，已被系统自动关闭。</li>
+          {% endif %}
+        
+        {% if v.order_state == 10 %}
+        <dd>订单已经提交，等待买家付款</dd>
+      </dl>
+      <ul>
+        <li>1. 买家尚未对该订单进行支付。</li>
+        <li>2. 如果买家未对该笔订单进行支付操作，系统将于
+          <time>下单时间15分种后</time>
+          自动关闭该订单。</li>
+          {% endif %}
+          
+      {% if v.order_state == 20 %}
+        <dd>订单已被房东取消</dd>
+      </dl>
+      <ul>
+        <li>1. 房东已取消该订单。</li>
+     
+          {% endif %}
+          
+        {% if v.order_state == 30 %}
+        <dd>订单已被用户取消</dd>
+      </dl>
+      <ul>
+        <li>1. 用户已取消该订单。</li>
+        <li>2. 如用户已支付订单，需走退款流程。</li>
+     
+          {% endif %}   
+          
+          
+    {% if v.order_state == 40 and v.evaluation_state ==0 and v.finnshed_time==0%}
+        <dd>订单已经被确认，房客还未评价</dd>
+      </dl>
+      <ul>
+        <li>1. 房客确认了订单。</li>
+        <li>2. 房客已经入住了民宿。</li>
+        <li>3. 房客未对民宿评价。</li>
+     
+          {% endif %}     
+         
+          
+             {% if v.order_state == 50 %}
+        <dd>订单已经支付成功，等待房客入住</dd>
+      </dl>
+      <ul>
+        <li>1. 该房客已经成功支付了订单。</li>
+     
+          {% endif %}      
+          
+          
+          
+      
+          
+          
+     {% if v.order_state == 40  and v.evaluation_state ==1 and v.finnshed_time==0 %}
+        <dd>订单已经被确认，房客已作出评价</dd>
+      </dl>
+      <ul>
+        <li>1. 房客确认了订单。</li>
+        <li>2. 房客已经入住了民宿。</li>
+        <li>3. 房客已对民宿评价。</li>
+          {% endif %}   
+          
+             
+          
+   {% if v.order_state == 40  and v.evaluation_state ==2%}
+        <dd>订单已经被确认，房客没有评价，评价已过期</dd>
+      </dl>
+      <ul>
+        <li>1. 房客确认了订单。</li>
+        <li>2. 房客已经入住了民宿。</li>
+        <li>3. 房客未对民宿评价，评价已过期。</li>
+     
+          {% endif %}    
+          
+    {% if v.order_state == 40  and v.evaluation_state ==1 and v.finnshed_time>0%}
+        <dd>订单已经完成，房客已作出评价</dd>
+      </dl>
+      <ul>
+        <li>1. 房客确认了订单。</li>
+        <li>2. 房客已经入住了民宿。</li>
+        <li>3. 房客已对民宿评价。</li>  
+        <li>4. 该订单已完成，完成日期时间为：<time>{{ v.NewfinnshedTime }}</time>。</li>
+          {% endif %}        
+                         
+          
+      </ul>
+    </div>
+                  </div>
+		
+	
+			</div>			
+	</div>
+	</section>
+</section>
+{% endblock%}
+

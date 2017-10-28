@@ -1,0 +1,233 @@
+﻿<script type="text/javascript" src="__PUBLIC__/admin/lib/My97DatePicker/WdatePicker.js"></script> 
+<title>文章管理</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="iconfont">&#xf012b;</i> 首页 <span class="c-gray en">&gt;</span> 用户中心 <span class="c-gray en">&gt;</span> 用户管理 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="icon-refresh"></i></a></nav>
+<div class="pd-20">
+  <div class="text-c"> 日期范围：
+    <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')}'})" id="datemin" class="input-text Wdate" style="width:120px;">
+    -
+    <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}'})" id="datemax" class="input-text Wdate" style="width:120px;">
+    <input type="text" class="input-text" style="width:250px" placeholder="输入标题、分类名称" id="searchName" name="">
+    <button type="submit" class="btn btn-success" id="search" name="">
+    <i class="icon-search"></i> 搜用户</button>
+  </div>
+  <div class="cl pd-5 bg-1 bk-gray mt-20">
+   	<span class="l">
+	   <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+	   		<i class="icon-trash"></i> 批量删除
+	   </a> 
+	   <a href="{{:U('Admin/Blog/add')}}"  class="btn btn-primary radius">
+	  	<i class="icon-plus"></i> 添加文章
+	   </a>
+  	</span>
+  </div>
+  <table class="table table-border table-bordered table-hover table-bg table-sort">
+    <thead>
+      <tr class="text-c">
+        <th width="25"><input type="checkbox" name="" value="0" id='checkedAll'></th>
+        <th >ID</th>
+        <th >标题</th>
+        <th >分类名称</th>
+        <th >评论数</th>
+        <th >点赞数</th>
+        <th >发表时间</th>
+        <th >状态</th>
+        <th >操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <volist name='list' id='v'>
+      		<tr class="text-c">
+		        <td><input type="checkbox" value="{{$v.art_id}}" name="" class='checkbox'></td>
+		        <td>{{$v['art_id']}}</td>
+		        <!--<td><u style="cursor:pointer" class="text-primary" onclick="user_show('10001','360','','张三','{{:U('Admin/User/userShow')}}')">张三</u></td>-->
+		        <td>{{$v['title']}}</td>
+		        <td>{{$v.name}} / {{$v.english}}</td>
+		        <td>{{$v.discuss_total}}</td>
+		        <td>{{$v.approve_total}}</td>
+		        <td>{{$v['addtime']|date='Y-m-d H:i:s',###}}</td>
+		        <td class="user-status"><eq name="v['is_show']" value='1'><span class="label label-success radius">已启用</span><else/> <span class="label label-fail radius">已关闭</span></eq></td>
+		        <td class="f-14 user-manage">
+		        	<eq name="v['is_show']" value='1'>
+		        		<a style="text-decoration:none" onClick="article_stop(this,{{$v['art_id']}})" href="javascript:;" title="停用">
+			        		<i class="icon-hand-down"></i>
+			        	</a>
+		        	<else/>
+		        		<a style="text-decoration:none" onClick="article_start(this,{{$v['art_id']}})" href="javascript:;" title="启用">
+			        		<i class="icon-hand-up"></i>
+			        	</a> 
+		        	</eq>
+			        <a title="编辑" href="javascript:;" onclick="user_edit('4','1024','700','编辑','{{:U('Admin/Blog/edit',array('art_id'=>$v['art_id']))}}')" class="ml-5" style="text-decoration:none">
+			        	<i class="icon-edit"></i>
+			        </a> 		         
+			        <a title="删除" href="javascript:;" onclick="article_del(this,'1')" class="ml-5" style="text-decoration:none">
+			        	<i class="icon-trash"></i>
+			        </a>
+			        <a title="查看" href="https://www.chenhuojia.xin/index.php/Detial/detial/id/{{$v['art_id']}}"  class="ml-5" style="text-decoration:none">
+			        	<i class="icon-eye-open"></i>
+			        </a>
+		        </td>
+      		</tr>
+      </volist>
+    </tbody>
+  </table>
+</div>
+<div class="green-black">{{$page}}<div/>
+<script>
+	function article_stop(obj,art_id){
+		var _this=$(obj);
+		if(art_id <=0 ){
+			return false;
+		}else{
+			$.ajax({
+				url:"{{:U('Admin/Ajax/stopArticle')}}",
+				type:'post',
+				datatype:'json',
+				data:'art_id='+art_id,
+				success:function(e){					
+					_this.parent().prev().html('<span class="label label-fail radius">已关闭</span>');
+					_this.find('i').attr('class','icon-hand-up');
+					_this.attr('onClick',"article_start(this,{{$v['art_id']}})")
+					alert('停用成功');					
+				}
+			})
+		}
+	}
+	
+	function article_start(obj,art_id){
+		var _this=$(obj);
+		if(art_id <=0 ){
+			return false;
+		}else{
+			$.ajax({
+				url:"{{:U('Admin/Ajax/startArticle')}}",
+				type:'post',
+				datatype:'json',
+				data:'art_id='+art_id,
+				success:function(e){					
+					_this.parent().prev().html('<span class="label label-success radius">已启用</span>');
+					console.log(_this.find('i').attr('class','icon-hand-down'));
+					_this.attr('onClick',"article_stop(this,{{$v['art_id']}})")
+					alert('启用成功');
+					
+				}
+			})
+		}
+	}
+	
+	function article_del(obj,art_id){
+		var _this=$(obj);
+		if(art_id <=0 ){
+			return false;
+		}else{
+			$.ajax({
+				url:"{{:U('Admin/Ajax/delArticle')}}",
+				type:'post',
+				datatype:'json',
+				data:'art_id='+art_id,
+				success:function(e){
+					if(e==0){
+						alert('删除失败');
+					}if(e==1){
+						_this.parent().parent().remove();
+						alert('删除成功');
+					}
+				}
+			})
+		}
+	}
+	
+	var arr=new Array();
+	$("#checkedAll").click(function() {
+		var checked=$(this).val();
+		if(checked==0){
+			$(this).val(1);
+			$(".checkbox").each(function() {
+				$(this).attr("checked", true);
+				var result=arr.indexOf($(this).val());
+				if(result == -1){
+					arr.push($(this).val());
+				}
+			});
+		}else { // 取消全选
+			$(this).val(0);
+			arr=[];
+			$(".checkbox").each(function() {
+				$(this).attr("checked", false);
+			});
+		} 
+	});
+	
+	$(".checkbox").click(function(){
+		var val=$(this).val();
+		var result=arr.indexOf(val);
+		var state=$(this).attr('checked');
+		if(state=='checked'){
+			if(result > -1){
+				arr.splice(result,1)
+			}
+			$(this).attr("checked", false);
+		}else{
+			arr.push(val);
+			$(this).attr('checked',true);
+		}
+	})
+	/*批量删除*/
+	function datadel(){
+		layer.confirm('确认要删除吗？',function(index){
+			if(arr.length == 0){
+				layer.msg('请选择删除的文章!',1);
+				return false;
+			}else{
+				var obj = JSON.stringify(arr);
+				$.ajax({
+					url:"{{:U('Ajax/delAllArtile')}}",
+					type:'post',
+					dataType: "json",
+					data:'data='+obj,
+					success:function(e){
+						if(e > 0){
+							layer.msg('删除文章成功!',1);
+							location.reload();   
+						}else{
+							layer.msg('删除文章失败!',1);
+						}
+					}
+				});
+				
+
+				
+			}
+		});
+	}
+	
+	var datemin=0;
+	var datemax=0;
+	$('#datemin').focus(function(){
+		datemin=$(this).val();
+		console.log(datemin);
+	});
+	
+	$('#datemax').focus(function(){
+		datemax=$(this).val();
+		console.log(datemax);
+	});
+	
+	$('#search').on('click',function(){
+		var searchName=$('#searchName').val();
+		if(searchName.length == 0){
+			searchName='0';
+		}
+		if(datemin.length !=0){
+			searchName += '&&datamin='+datemin;
+		}
+		if(datemax.length !=0){
+			searchName += '&&datamax='+datemax;
+		}
+		window.location.href="{{:U('Blog/article')}}?searchName="+searchName;
+		console.log(searchName.length);
+	})
+  
+	
+</script>

@@ -1,0 +1,23 @@
+<?php
+namespace User\Model;
+use Think\Model;
+/**
+ * ModelName
+ */
+class BooklistDiscussApproveModel extends Model{
+   
+    // 自动验证
+    protected $_validate=array(     
+      array('discuss_id','require','请填写评论id',1),
+     );
+   // 自动完成
+    protected $_auto=array(
+        array('addtime','time',3,'function'),
+        array('user_id','checkuser',3,'callback'),
+    );
+    
+   protected function checkuser(){
+       return session('user_id');
+   }
+
+}

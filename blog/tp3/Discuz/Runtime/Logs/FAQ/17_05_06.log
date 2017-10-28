@@ -1,0 +1,136 @@
+[ 2017-05-06T15:04:43+08:00 ] 113.109.40.110 /discuz.php/FAQ/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.022530s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.023942s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.024037s ]
+SQL: SHOW COLUMNS FROM `bk_message_wall` [ RunTime:0.0007s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_message_wall` WHERE `is_show` = 1 LIMIT 1   [ RunTime:0.0437s ]
+SQL: SELECT s.id,s.user_id,u.name,s.title,s.content,s.addtime FROM bk_message_wall s left join bk_user u on s.user_id=u.user_id  WHERE s.is_show = 1 ORDER BY s.id desc LIMIT 0,10   [ RunTime:0.0085s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000118s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000173s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Discuz/Runtime/Cache/FAQ/bf38d49f7ed879f73423a2d39d6de3f2.php 第 79 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.194021s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.194068s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.023307s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.023366s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.007171s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007256s ]
+
+[ 2017-05-06T15:05:10+08:00 ] 113.109.40.110 /discuz.php/FAQ/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.021675s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000393s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000457s ]
+SQL: SHOW COLUMNS FROM `bk_message_wall` [ RunTime:0.0057s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_message_wall` WHERE `is_show` = 1 LIMIT 1   [ RunTime:0.0117s ]
+SQL: SELECT s.id,s.user_id,u.name,s.title,s.content,s.addtime FROM bk_message_wall s left join bk_user u on s.user_id=u.user_id  WHERE s.is_show = 1 ORDER BY s.id desc LIMIT 0,10   [ RunTime:0.0271s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000125s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000181s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Discuz/Runtime/Cache/FAQ/bf38d49f7ed879f73423a2d39d6de3f2.php 第 79 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.228449s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.228495s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000288s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000371s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000536s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000629s ]
+
+[ 2017-05-06T15:29:30+08:00 ] 113.109.40.110 /discuz.php/FAQ/Index/privaty
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.026557s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.024632s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.024701s ]
+ERR: 非法操作:privaty
+
+[ 2017-05-06T15:29:58+08:00 ] 113.109.40.110 /discuz.php/FAQ/Index/privaty
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000572s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000409s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000468s ]
+ERR: 非法操作:privaty
+
+[ 2017-05-06T15:32:04+08:00 ] 113.109.40.110 /discuz.php/FAQ/Index/privaty
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000431s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.024711s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.024790s ]
+SQL: SHOW COLUMNS FROM `bk_privacy` [ RunTime:0.0246s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_privacy` WHERE `is_show` = 1 LIMIT 1   [ RunTime:0.0254s ]
+SQL: SELECT s.id,s.user_id,u.name,s.title,s.content,s.addtime FROM bk_privacy s left join bk_user u on s.user_id=u.user_id  WHERE s.is_show = 1 ORDER BY s.id desc LIMIT 0,10   [ RunTime:0.0243s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000047s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000130s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.101205s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.101271s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000165s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000198s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000792s ]
+INFO: [ app_end ] --END-- [ RunTime:0.024912s ]
+
+[ 2017-05-06T15:36:15+08:00 ] 113.109.40.110 /discuz.php/FAQ/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.021448s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000396s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.026512s ]
+SQL: SHOW COLUMNS FROM `bk_message_wall` [ RunTime:0.0233s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_message_wall` WHERE `is_show` = 1 LIMIT 1   [ RunTime:0.0228s ]
+SQL: SELECT s.id,s.user_id,u.name,s.title,s.content,s.addtime FROM bk_message_wall s left join bk_user u on s.user_id=u.user_id  WHERE s.is_show = 1 ORDER BY s.id desc LIMIT 0,10   [ RunTime:0.0231s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000142s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000224s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Discuz/Runtime/Cache/FAQ/bf38d49f7ed879f73423a2d39d6de3f2.php 第 79 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.192572s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.192632s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000295s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000333s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.015831s ]
+INFO: [ app_end ] --END-- [ RunTime:0.015935s ]
+
+[ 2017-05-06T15:45:41+08:00 ] 113.109.40.110 /discuz.php/FAQ/Index/privaty
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.011036s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.021544s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.021610s ]
+SQL: SHOW COLUMNS FROM `bk_privacy` [ RunTime:0.0232s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_privacy` WHERE `is_show` = 1 LIMIT 1   [ RunTime:0.0228s ]
+SQL: SELECT s.id,s.user_id,u.name,s.title,s.content,s.addtime FROM bk_privacy s left join bk_user u on s.user_id=u.user_id  WHERE s.is_show = 1 ORDER BY s.id desc LIMIT 0,10   [ RunTime:0.0228s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000039s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000104s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.061560s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.082639s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000312s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000356s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.023728s ]
+INFO: [ app_end ] --END-- [ RunTime:0.023790s ]
+

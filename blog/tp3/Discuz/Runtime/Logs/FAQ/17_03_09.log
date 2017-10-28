@@ -1,0 +1,24 @@
+[ 2017-03-09T15:06:52+08:00 ] 183.6.165.138 /discuz.php/FAQ/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000308s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000479s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000533s ]
+SQL: SHOW COLUMNS FROM `bk_message_wall` [ RunTime:0.0071s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_message_wall` WHERE `is_show` = 1 LIMIT 1   [ RunTime:0.0217s ]
+SQL: SELECT s.id,s.user_id,u.name,s.title,s.content,s.addtime FROM bk_message_wall s left join bk_user u on s.user_id=u.user_id  WHERE s.is_show = 1 ORDER BY s.id desc LIMIT 0,10   [ RunTime:0.0462s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.039186s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.039291s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Discuz/Runtime/Cache/FAQ/bf38d49f7ed879f73423a2d39d6de3f2.php 第 79 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.506800s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.506877s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000269s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000295s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000614s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000689s ]
+

@@ -1,0 +1,393 @@
+<include file="./APP/Admin/View/Common/Public_header_v1.html"/>
+<link rel="stylesheet" href="__PUBLIC__/static/flowplayer/skin/functional.css">
+<script src="__PUBLIC__/static/flowplayer/flowplayer.min.js"></script>
+<link href="__PUBLIC__/static/start-rating/star-rating.min.css" media="all" rel="stylesheet" type="text/css"/>
+<script src="__PUBLIC__/static/start-rating/star-rating.min.js" type="text/javascript"></script>
+<style type="text/css">
+.nav-tabs img{display: none;}
+</style>
+<ol class="breadcrumb">
+    <li>{:C('CONTROL_MENU')}</li>
+    <li>图书设置</li>
+    <li class="active"><a href="{:U('Admin/Book/bookList')}"> 图书列表</a></li>
+    <li>图书详情</li>
+</ol>
+<div class="page-header">
+    <h1>{$book['attr']['name']}<small>{$book['attr']['author']}</small></h1>
+</div>
+
+<div class="row">
+    <div class="col-md-9" role="main">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#des" aria-controls="des" role="tab" data-toggle="tab">图书详情</a></li>
+            <li role="presentation"><a href="#note" aria-controls="note" role="tab" data-toggle="tab">目录 </a></li>            
+            <li role="presentation"><a href="#an" id="tab_an" aria-controls="an" role="tab" data-toggle="tab">点赞 <img id="tag_img_an" src="__PUBLIC__/loading.gif"></a></li>
+            <li ><a href="{:U('Admin/BookComment/book')}&book_id={$_GET['book_id']}"> 评 论 </a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="des">
+            <style>
+                .sc{position: relative;overflow: hidden;height:550px;margin-bottom:20px;}
+                #img{width: 10000px;position: absolute;height: 100%;margin:0;padding:0;}
+        		#img li{list-style: none;width: 500px;float: left;padding-right: 0;cursor:pointer;}
+                #img img{width: 100%;}
+				.sc span{position: absolute;width:50px;background:#00E5EE;
+						opacity:0.6;border-radius:25px;
+						z-index:10;cursor:pointer;font-size:36px;height:50px;top:150px;text-align:center;}
+				#left{left:0;
+						}
+				#right{right:0;}
+        	</style>
+                <div class="col-md-9">
+                    <div class="jumbotron">
+                        <div class="sc">
+                            <if condition="$book['image'] neq null">
+                            <span id='left'>&lt;</span>                        
+                            <ul id='img'>
+                                <volist name="book['image']" id='v'>
+                                <li img_id=""><img src="{$v}" ></li>
+                                </volist>                                
+                                <p style="clear:both"></p>
+                            </ul>
+                            <span id='right'>&gt;</span>   
+                            </if> 
+                        </div>
+                        
+                    	<notempty name="book['video']">
+							<div data-ratio="0.6" class="flowplayer">
+								<video data-title="{$book['video'][0]['title']}">
+									<source type="video/flash" src="{$book['video'][0]['url']}">
+								</video>
+							</div>
+	                        <p class="text-warning"><i class="glyphicon glyphicon-warning-sign"></i> 视频支持格式为mp4、flv格式，swf格式不兼容</p>
+	                       <input type="button" id="delVideo"  class="btn btn-info" value="删除视频" vid="{$book['video'][0]['vid']}"/> 
+                    	
+                    	</notempty>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                	$('#delVideo').click(function(){
+                		var src=$(this).attr('vid');
+                			if(src!=null){
+                				$.ajax({
+                					type:"post",
+                					url:"{:U('Admin/video/videoDel')}",
+                					data:"vid="+src,
+                					datatype:"json",
+                					success:function(s){
+                						console.log(s)
+                					}
+                				})
+                			}	
+                		console.log(src);
+                	})
+                                
+                	$(function(){
+                		var length=$('#img').find('img').length;
+                		var width=$('#img').find('img').width();
+                		var height=$('#img').find('img').eq(0).height();
+                		//$('#img').css({'margin-left':'-'+width});
+                		var content=$('#img').html();
+                		$('.sc span').hide();
+                		$('.sc').width(width);
+                		$('.sc').height(height);
+                		
+                        var html="";
+                        var a=0;
+                        var t=null;
+                        function show(){
+                            if (a>=length-1) {
+                            	a=0;
+                            }
+                            else{
+                        		a++;
+                            }                            
+                           // console.log(a);
+                            $('#img').stop(true).animate({ 
+                                "left":'-'+width*a+"px",
+                                },2000,'linear')
+                        
+                        }                      
+                        t=setInterval(show,4000);
+                        $('#img').hover(
+                            function(){                            	
+                                clearInterval(t);
+                            },
+                            function(){                            	
+                            	t=setInterval(show,4000);
+                            }
+                            ) 
+						$('#left').hover(function(){
+							clearInterval(t);
+						},function(){
+							t=setInterval(show,4000);
+						})
+                            
+                        $('#left').click(function(){
+                        	if(a==0){
+                        		a=length-1;
+                        	}
+                        	a--;
+                        	if(length!=1){
+                        		$('#img').css({'left':"-"+width*a+"px"});
+                        	}
+							
+                        	
+                        })
+                        
+                        $('#right').hover(function(){
+							clearInterval(t);
+						},function(){
+							t=setInterval(show,4000);
+						})
+                            
+                        $('#right').click(function(){
+                        	if(a>=length-1){
+                        		a=0;
+                        	}
+                        	a++;
+                        	if(length!=1){
+								$('#img').css({'left':"-"+width*a+"px"});
+                        	}
+                        }) 
+                        
+                        $('.sc').hover(function(){
+                        	$('.sc span').show();
+                        },function(){
+                        	$('.sc span').hide();
+                        })
+                      	$('#img').find('li').click(function(){
+                      		window.location.href="{:U('Admin/Book/imageEdit')}"+"&book_id="+{$book['attr']['book_id']}+"&img_id="+$(this).attr('img_id');
+                      	})
+                	})
+                                                
+                </script>
+                <div class="col-md-3">
+                    <ul class="list-group">
+                    	<notempty name="book['attr']['old_book']">
+	                        <li class="list-group-item">
+                            图书类型：					{$book.attr.old_book}
+                        	</li>
+                        	<li class="list-group-item">
+                            成色：					{$book.attr.old_desc.description}
+                        	</li>
+                        	<li class="list-group-item">
+                            邮费：					{$book.attr.old_desc.shipping_price}
+                        	</li>
+						</notempty>
+						 <notempty name="book['attr']['share']">
+	                        <li class="list-group-item">
+                            图书类型：					分享书
+                        	</li>
+                        	<li class="list-group-item">
+                            其他分享人：					<volist name="book['attr']['share']" id= "v">
+                            			<a href="{:U('Admin/User/userDet',array('user_id'=>$v['user_id']))}">{$v.name }</a>   
+                            		</volist>
+                        	</li>
+						</notempty>
+						<notempty name="book['attr']['shop']">
+		                        <li class="list-group-item">
+	                            图书类型：					新书
+	                        	</li>
+	                        	<li class="list-group-item">
+	                            上架店铺：					
+	                            	<a href="{:U('Admin/User/userDet',array('user_id'=>$book['attr']['shop_id']))}">{$book['attr']['shop']['shop_name'] }</a>   	
+	                        	</li>
+                        	<else />
+	                        	<li class="list-group-item">
+	                           上传者：					<a href="{:U('Admin/User/userDet',array('user_id'=>$book['attr']['user_id']))}">{$book.attr.user_name}</a>
+	                        	</li>
+						</notempty>							
+                        <li class="list-group-item">
+                            书号：				{$book.attr.book_number}
+                        </li>
+                         <li class="list-group-item">
+                            定价：				&yen; {$book.attr.publish_price}
+                        </li>             
+                        <li class="list-group-item">
+                           类别：               	     <volist name="book.attr.category" id='v'>
+                        		{$v.name}&nbsp;&nbsp;&nbsp;
+                        	</volist>
+                      				
+                        </li>
+                        <li class="list-group-item">
+                          出版社 ：				{$book.attr.press}
+                        </li>
+                        <li class="list-group-item">
+                         出版时间：				{$book.attr.publish_time|date="Y-m-d",###}
+                        </li> 
+                        <li class="list-group-item">
+                         页数：				{$book.attr.page}
+                        </li>
+                        <li class="list-group-item">
+                         字数：				{$book.attr.words}
+                        </li>
+                        <li class="list-group-item">
+                        语种：				{$book.attr.language}
+                        </li>                                                                                             
+                        <li class="list-group-item">
+                    作者 :                ({$book['attr']['author_area']}){$book['attr']['author']}                           
+                        </li>
+                        <li class="list-group-item">
+                        作者简介：				{$book.attr.author_desc}
+                        </li> 
+                         <li class="list-group-item">
+                        定位：				{$book.attr.address}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge">{$book.attr.comment}</span>
+                            评论数
+                        </li>
+                         <li class="list-group-item">
+                         适用年龄                  			<span class="badge">{$book.attr.applicable_age}</span>                          
+                        </li>                                           
+                    </ul>
+                </div>
+
+            </div>
+	            <div role="tabpanel" class="tab-pane fade" id="note" >
+		            <div style="margin:10px 20px 30px 0px;">
+	             		   <P>简介：</P><p style="text-indent: 2em;">{$book.attr.introduce}</p>		  
+	        		</div>
+	                <div class="col-md-12" >
+						 <p>目录：</p><p style="text-indent: 2em;">{$book['attr']['description']}</p>
+	                </div>
+	            </div>
+	            <div role="tabpanel" class="tab-pane fade" id="an"></div>
+	            <div role="tabpanel" class="tab-pane fade" id="eval"></div>          
+        </div>
+        
+    </div>
+</div>
+<script type="text/javascript">
+  	var loadObj = "<p class=\"text-center\"><img src=\"__PUBLIC__/loading.gif\"> loading...</p>";
+    var quUrl = "{:U('Admin/Attr/questionList?book_id='.$book['attr']['book_id'].'&type='.$book['attr']['type'])}";
+    var evalUrl = "{:U('Admin/Attr/commentList?book_id='.$book['attr']['book_id'])}";
+    function loadFAQ()
+    {
+        //问题
+        $.getJSON(quUrl,function(data){
+            var showHtmL = "<div class=\"panel-group\" role=\"tablist\" aria-multiselectable=\"true\">";
+            var template = $('#templateCLICK').html();
+            if(data.attr.length == 0){
+                $('#an').html('暂无点赞');
+            }
+            else{
+                $(data.attr).each(function (i, o) {
+                	 showHtmL += template.replace(/\[headImg\]/g, o.user_img).replace(/\[nickName\]/g, o.username).replace(/\[time\]/g, o.addtime)
+                     .replace(/\[user_id\]/g, o.user_id)
+                });
+                showHtmL += "</div><div class='page'>"+data.page+"</div>";
+                $('#an').html(showHtmL);
+                var as = $('.page a');
+                as.bind('click',function(){
+                    quUrl =$(this).attr('href');
+                    $("#tag_img_an").show();
+                    setTimeout(loadFAQ,1000);
+                    return false;
+                });
+            }
+                    $("#tag_img_an").hide();
+                }
+        );
+    }
+    $('#tab_an').on('shown.bs.tab', function (e) {
+        $("#tag_img_an").show();
+        setTimeout(loadFAQ,1000);
+    });
+
+    // 加载评论
+    function loadEval(){
+        $.getJSON(evalUrl,function(data){
+            var showHtmL = "<div class=\"panel-group\" role=\"tablist\" aria-multiselectable=\"true\">";
+            var template = $('#templateEVAL').html();
+            if(data.comment.length == 0){
+                $('#eval').html('暂无评论');
+            }
+            else{
+            	console.log(data);
+                 $(data.comment).each(function (i, o) {                	 
+                	 showHtmL += template.replace(/\[headImg\]/g,o.head_img).replace(/\[nickName\]/g, o.username).replace(/\[time\]/g, o.comment_time)
+                     .replace(/\[stu_id\]/g,o.user_id).replace(/\[content\]/g,o.content)
+                     .replace(/\[num\]/g,o.grade).replace(/comment_id=0/g, 'comment_id='+o.comment_id)
+                     .replace(/user_id=0/g, 'user_id='+o.user_id).replace(/\[total\]/g,o.comment_total)
+                     .replace(/\[click\]/g, o.click_total);   	
+                	
+                });
+                showHtmL += "</div><div class='page'>"+data.page+"</div>"; 
+                
+                $('#eval').html(showHtmL);
+                
+                $(".input-id").rating({ // 初始化评星插件
+                    showCaption:false,
+                    showClear:false,
+                    readonly:true
+                });
+                var as = $('.page a');
+                as.bind('click',function(){
+                    evalUrl =$(this).attr('href');
+                    $("#tag_img_eval").show();
+                    setTimeout(loadEval,1000);
+                    return false;
+                });
+            }
+            $("#tag_img_eval").hide();
+        });
+    }
+
+    $('#tab_eval').on('shown.bs.tab', function (e){
+        $("#tag_img_eval").show();
+        setTimeout(loadEval,1000);
+    }); 
+      
+    function check(arr){
+    	var showHtmL = "<div class=\"panel-group\" role=\"tablist\" aria-multiselectable=\"true\">";
+    	var template = $('#templateEVAL').html();
+    	if(arr.length!=0){
+    		check(arr);
+    	}
+   	 
+    }
+    
+</script>
+
+<script type="text/x-template" id="templateCLICK">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="media">
+                <div class="media-left">
+                    <img class="media-object" style="width:35px;height:35px;" src="[headImg]" alt="...">
+                </div>
+                <div class="media-body">
+                    <p class="media-heading">[nickName]（ID:[user_id]）<font class="text-muted small">[time]</font>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- 评论模板 -->
+<script type="text/x-template" id="templateEVAL">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="media">
+                <div class="media-left">
+                    <img class="media-object" style="width:35px;height:35px;" src="[headImg]" alt="...">
+                </div>
+                <div class="media-body">
+                    <p class="media-heading">[nickName]（ID:[stu_id]）<font class="text-muted small">[time]</font>
+                        <input class="input-id" type="number" value="[num]" class="rating" min=0 max=5 step=0.5 data-size="xs" ></p>
+                    <div class="col-sm-10" style="padding-left: 0;">
+                        [content]
+                    </div>			
+					<a href="{:U('Admin/Attr/commentDel?comment_id=0')}">删除</a>	
+					<a href="{:U('Admin/Attr/evalList?comment_id=0')}">回复</a>			
+                </div>								
+            </div>
+			<div style="">
+			<p style="margin-top:10px; float:right;"><a href="{:U('Admin/Attr/evalList?comment_id=0')}">共[total]评论&nbsp;</a>&nbsp;共[click]点赞</p>	
+			</div>
+        </div>
+    </div>
+</script>
+<include file="./APP/Admin/View/Common/Public_footer_v1.html"/>

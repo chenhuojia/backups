@@ -1,0 +1,2 @@
+<?php die('forbidden'); ?>
+{"appid":"1105947756","appkey":"y65nxizi3KGefe6i","callback":"101.201.70.63:8080/qq/example/oauth/callback.php","scope":"get_user_info","errorReport":true,"storageType":"file","host":"localhost","user":"root","password":"root","database":"test"}

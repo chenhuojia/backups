@@ -1,0 +1,120 @@
+<include file="./APP/Admin/View/Common/Public_header_v1.html"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/bt.datepicker/daterangepicker-bs3.css" />
+<script type="text/javascript" src="__PUBLIC__/static/bt.datepicker/moment.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/bt.datepicker/daterangepicker.js"></script>
+<script type="text/javascript">
+    var search_url="{:U('Admin/Information/feedback')}";
+    function search(){
+        var is_check = $("#is_check").val();
+        var searchName = $("#searchName").val();
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
+        if (is_check.length > 0)
+            search_url = search_url + "&is_check="+is_check;
+        if (searchName.length > 0)
+            search_url = search_url + "&searchName="+searchName;
+        if (startTime.length > 0)
+            search_url = search_url + "&startTime="+startTime;
+        if (endTime.length > 0)
+            search_url = search_url + "&endTime="+endTime;
+
+        window.location=search_url;
+    }
+    $(function(){
+        var sd = "{:I('get.is_check','all')}";
+        $("#is_check").val(sd);
+        $("[data-toggle='popover']").popover();
+    })
+</script>
+<ol class="breadcrumb">
+    <li>{:C('CONTROL_MENU')}</li>
+    <li>信息管理</li>
+    <li class="active"><a href="{:U('Admin/Information/feedback')}">反馈管理</a></li>
+</ol>
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="javascript:void(0);">反馈管理</a></li>
+</ul>
+<div class="tab-content">
+    <div class="form-inline" role="form">
+            <div class="input-group">
+            <label class="input-group-addon" for="is_check">反馈状态：</label>
+                <div class="input-group-btn">
+                    <select name="is_check" id="is_check" class="form-control" data-live-search="false">
+                        <option value="all">所有反馈</option>
+                        <option value="0">未处理反馈</option>
+                        <option value="1">已处理反馈</option></select></td>
+                    </select>
+                </div>
+            </div>
+        <div class="input-group">
+            <label class="input-group-addon" for="searchName">关键词：</label>
+            <input type="text" id="searchName" name="searchName" placeholder=""  class="form-control"/>
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" for="inputDate">反馈日期：</label>
+            <input type="text" readonly name="inputDate" id="inputDate" class="form-control noHand" value="" />
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#inputDate').daterangepicker({separator:' 到 '}, function(start, end, label) {
+                        var vTsplit = $('#inputDate').val();
+                        var dateArr = vTsplit.split(' 到 ');
+                        $('#inputDate').next().text('有效期从'+dateArr[0]+' 0点 到 '+dateArr[1]+' 0点结束');
+                        $("#startTime").val(dateArr[0]);
+                        $("#endTime").val(dateArr[1]);
+                    });
+                });
+            </script>
+        </div>
+        <input type="text" readonly name="startTime" id="startTime" class="form-control noHand" value="" style="display: none;"/>
+        <input type="text" readonly name="endTime" id="endTime" class="form-control noHand" value="" style="display: none;"/>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#startTime').daterangepicker({singleDatePicker: true});
+                $('#endTime').daterangepicker({singleDatePicker: true});
+            });
+        </script>
+        <button type="button" onclick="search()" class="btn btn-primary">搜索</button>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <td >反馈人信息</td>
+            <td >反馈内容</td>
+            <td >反馈日期</td>
+            <td >处理状态</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="list" id="m">
+            <tr>
+                <td><eq name="m.name" value="$m.phone">
+                    {$m.name}
+                    <else/>
+                    {$m.name}&nbsp;&nbsp;{$m.phone}
+                </eq></td>
+                <td>{$m.fd_content|mb_substr=###,0,30,'utf-8'}</td>
+                <td>{$m.fd_time|date='Y-m-d',###}</td>
+                <td><eq name="m.is_check" value="0">
+                    <a href="javascript:showYesOrNo('确定已解决反馈问题？','{:U('Admin/Information/feedbackCheck?message_id='.$m['fd_id'])}');"><span class="label label-danger"><i class="glyphicon glyphicon-remove">待处理</i></span></a>
+                    <else/>
+                    <a href="#"><span class="label label-success"><i class="glyphicon glyphicon-ok">已处理</i></span></a>
+                    </eq>
+                </td>
+                <td>
+                    <div class="btn-group">
+                       <!--  <a class="btn btn-success" href="{:U('Admin/Note/noteDet?note_id='.$s['note_id'])}">帖子详情</a> -->
+                       <!--  <a class="btn btn-warning" href="{:U('Admin/Note/noteEdit?note_id='.$s['note_id'])}">修改</a> -->
+                        <a class="btn btn-danger" href="javascript:showYesOrNo('确定要删除吗？','{:U('Admin/Information/feedbackDel?message_id='.$m['fd_id'])}')">删除</a>
+                    </div>
+                </td>
+
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+</div>
+<div class="page">{$Page}</div>
+<include file="./APP/Admin/View/Common/Public_footer_v1.html"/>

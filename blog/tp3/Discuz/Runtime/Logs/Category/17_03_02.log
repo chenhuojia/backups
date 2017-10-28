@@ -1,0 +1,24 @@
+[ 2017-03-02T15:55:57+08:00 ] 119.130.85.136 /discuz.php/Category/CategoryChild/index/group_id/17.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000387s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000431s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000496s ]
+SQL: SHOW COLUMNS FROM `bk_discuz_post` [ RunTime:0.0100s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_discuz_post` WHERE `group_id` = 17 AND `is_show` = 1 LIMIT 1   [ RunTime:0.0236s ]
+SQL: SELECT p.*,g.name FROM bk_discuz_post p left join bk_discuz_group g on p.topic_id=g.group_id  WHERE p.group_id = '17' AND p.is_show = 1 ORDER BY p.addtime desc LIMIT 0,10   [ RunTime:0.0151s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000180s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000266s ]
+NOTIC: [8] Undefined index: userInfo /web/www/blog/tp3/Discuz/Runtime/Cache/Category/647707a63ae1b0d1a51d79a62d2527f4.php 第 79 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.590352s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.590410s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.021354s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.021412s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000557s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000637s ]
+

@@ -1,0 +1,269 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+ /*	$('.a').on('change',function(){
+		var id2=$(this).val();
+		location="{{ path('_mall_goods_list')}}?cat_id="+id2;
+	
+	})
+	$('.b').on('change',function(){
+		var id2=$(this).val();
+		location="{{ path('_mall_goods_list')}}?is_on_sale="+id2;
+	
+	})
+	$('.c').on('change',function(){
+		var id2=$(this).val();
+		location="{{ path('_mall_goods_list')}}?is_new="+id2;		
+	}) */
+	
+})
+
+</script>
+{% endblock %}
+
+{% block content%}
+<section class="alert">
+	<form method="post" action="" style="margin-top:20px;">
+		<select name="cat_id" class="input-sm a" style="width:100px;margin-left:220px;float:left;margin-right:10px;">
+            	<option value="0">所有分类</option>
+                {% for v in cate %}
+                	<option value="{{v.id}}">{{v.name}}</option>
+                {% endfor %}
+				
+        </select>	
+        <select name="is_on_sale" class="input-sm b" style="width:100px;float:left;margin-right:10px;">
+                <option value="0">全部</option>
+                <option value="1">上架</option>
+        		<option value="2">下架</option>
+        </select>
+        <select name="is_new" class="input-sm c" style="width:100px;float:left;margin-right:10px;">
+            	<option value="0">全部</option>
+                <option value="1">新品</option>
+				<option value="2">推荐</option>
+        </select>
+        <input type='text' name='keyword' placeholder='搜索词' style="width:200px;float:left;margin-right:30px;"></input>
+        <button type="submit" id="button-filter search-order" style="float:left;margin:0;margin-right:10px;"><i class="fa fa-search"></i> 筛选</button>
+        <button type="button" id="button-filter search-order" style="float:left;margin:0;" onclick="add()">添加新商品</button>
+    </form>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1><a href="{{path('shopApplyDetail_',{shop_id:shop.shop_id})}}">{{shop.shop_name}}</a></h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>商品名称</th>
+						<th>分类</th>
+						<th>价格</th>
+						<th>库存</th>
+						<th>上架</th>
+						<th>推荐</th>
+						<th>新品</th>
+						<th>热卖</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+					<tbody>
+						{% for v in goods %}
+							<tr>
+							 	<td>{{v.goods_id}}</td>
+							 	<td>{{v.goods_name}}</td>
+								<td>{{v.name}}</td>
+								<td>{{v.shop_price }}</td>
+								<td>{{v.store_count}}</td>
+								<td>
+									{% if v.is_on_sale == 1 %}
+										<img width="20" height="20" src="{{ asset('bundles/msk/public/images/yes.png')}}"  on_sale={{v.is_on_sale}} onclick="changOnSale(this,{{v.goods_id}})">
+									{% else %}
+										<img width="20" height="20" src="{{ asset('bundles/msk/public/images/wrong.png')}}" on_sale={{v.is_on_sale}} onclick="changOnSale(this,{{v.goods_id}})">
+									{% endif %}									
+								</td>
+								<td>
+									{% if v.is_recommend == 1 %}
+										<img width="20" height="20" src="{{ asset('bundles/msk/public/images/yes.png')}}"  recommend={{v.is_recommend}} onclick="changRecommend(this,{{v.goods_id}})">
+									{% else %}
+										<img width="20" height="20" src="{{ asset('bundles/msk/public/images/wrong.png')}}" recommend={{v.is_recommend}} onclick="changRecommend(this,{{v.goods_id}})">
+									{% endif %}		
+								</td>
+								<td>
+									{% if v.is_new == 1 %}
+										<img width="20" height="20" src="{{ asset('bundles/msk/public/images/yes.png')}}" is_new={{v.is_new}} onclick="changIsNew(this,{{v.goods_id}})">
+									{% else %}
+										<img width="20" height="20" src="{{ asset('bundles/msk/public/images/wrong.png')}}" is_new={{v.is_new}} onclick="changIsNew(this,{{v.goods_id}})">
+									{% endif %}		
+								</td>
+								<td>
+									{% if v.is_hot == 1 %}
+										<img width="20" height="20" src="{{ asset('bundles/msk/public/images/yes.png')}}" is_hot={{v.is_hot}} onclick="changIsHot(this,{{v.goods_id}})">
+									{% else %}
+										<img width="20" height="20" src="{{ asset('bundles/msk/public/images/wrong.png')}}" is_hot={{v.is_hot}} onclick="changIsHot(this,{{v.goods_id}})">
+									{% endif %}		
+								</td> 
+								<td><button class="green"  onclick="location='{{ path('_order_detail',{goods_id:v.goods_id})}}'">详情</button></td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+		</div>
+		
+					<div class="page-dis">
+			<div class="meneame">
+				<a href="{{ path('_mall_goods_list', {'page': 1}) }}">首页</a>
+				<a href="{{ path('_mall_goods_list', {'page': prePage}) }}"> < </a>
+				{% if totalPage >= 7 %}
+					{% if page <= 4 %}
+						{% for i in 1..7 %}
+							<a href="{{ path('_mall_goods_list', {'page': i}) }}">{{ i }}</a>
+						{% endfor %}
+					{% elseif page > (totalPage - 4) %}
+						{% for k in (totalPage-7)..(totalPage) %}
+							<a href="{{ path('_mall_goods_list', {'page': k}) }}">{{ k }}</a>
+						{% endfor %}
+					{% else %}
+						{% for j in (page-3)..(page+3) %}
+							<a href="{{ path('_mall_goods_list', {'page': j}) }}">{{ j }}</a>
+						{% endfor %}
+					{% endif %}
+				{% else %}
+					{% if totalPage != 0 %}
+						{% for m in 1..totalPage %}
+							<a href="{{ path('_mall_goods_list', {'page': m}) }}">{{ m }}</a>
+						{% endfor %}
+					{% endif %}
+				{% endif %}
+				<a href="{{ path('_mall_goods_list', {'page': nextPage}) }}"> > </a>
+				<a href="{{ path('_mall_goods_list', {'page': totalPage}) }}">尾页</a>
+			</div>
+		</div>
+	</section>
+</section>
+<script>
+
+	function add(){
+		location="{{path('_add_goods')}}";
+	}
+	
+	function changOnSale(obj,goods_id){
+		var val=$(obj).attr('on_sale');
+		if(goods_id!=0){
+			if(val==0){
+				var	vals=1;
+				var	newsrc="{{ asset('bundles/msk/public/images/yes.png')}}"
+			}if(val==1){
+				var	vals=0;
+				var	newsrc="{{ asset('bundles/msk/public/images/wrong.png')}}"
+			}
+			$.ajax({
+				url:"{{ path('_change_on_sale')}}",
+				type:'post',
+				data:'goods_id='+goods_id+"&val="+vals,
+				datatype:'json',
+				success:function(e){
+					if(e==1){
+						$(obj).attr('on_sale',vals);
+						$(obj).attr('src',newsrc);
+					}
+				},
+				error:function(){
+					alert('网络错误');
+				}
+			})
+		}
+	}
+
+
+	function changIsNew(obj,goods_id){
+		var val=$(obj).attr('is_new');
+		if(goods_id!=0){
+			if(val==0){
+			 	var vals=1;
+				var	newsrc="{{ asset('bundles/msk/public/images/yes.png')}}"
+			}if(val==1){
+				var	vals=0;
+				var	newsrc="{{ asset('bundles/msk/public/images/wrong.png')}}"
+			}
+			$.ajax({
+				url:"{{ path('_change_is_new')}}",
+				type:'post',
+				data:'goods_id='+goods_id+"&val="+vals,
+				datatype:'json',
+				success:function(e){
+					if(e==1){
+						$(obj).attr('is_new',vals);
+						$(obj).attr('src',newsrc);
+					}
+				},
+				error:function(){
+					alert('网络错误');
+				}
+			})
+		}
+	}
+	
+	function changRecommend(obj,goods_id){
+		var val=$(obj).attr('recommend');
+		if(goods_id!=0){
+			if(val==0){
+				vals=1;
+				newsrc="{{ asset('bundles/msk/public/images/yes.png')}}"
+			}if(val==1){
+				vals=0;
+				newsrc="{{ asset('bundles/msk/public/images/wrong.png')}}"
+			}
+			$.ajax({
+				url:"{{ path('_change_recommend')}}",
+				type:'post',
+				data:'goods_id='+goods_id+"&val="+vals,
+				datatype:'json',
+				success:function(e){
+					if(e==1){
+						$(obj).attr('recommend',vals);
+						$(obj).attr('src',newsrc);
+					}
+				},
+				error:function(){
+					alert('网络错误');
+				}
+			})
+		}
+	}
+	
+	function changIsHot(obj,goods_id){
+		var val=$(obj).attr('is_hot');
+		if(goods_id!=0){
+			if(val==0){
+			var	vals=1;
+			var	newsrc="{{ asset('bundles/msk/public/images/yes.png')}}"
+			}if(val==1){
+			var	vals=0;
+			var	newsrc="{{ asset('bundles/msk/public/images/wrong.png')}}"
+			}
+			$.ajax({
+				url:"{{ path('_change_is_hot')}}",
+				type:'post',
+				data:'goods_id='+goods_id+"&val="+vals,
+				datatype:'json',
+				success:function(e){
+					if(e==1){
+						$(obj).attr('is_hot',vals);
+						$(obj).attr('src',newsrc);
+					}
+				},
+				error:function(){
+					alert('网络错误');
+				}
+			})
+		}
+	}
+</script>
+{% endblock%}

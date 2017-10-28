@@ -1,0 +1,545 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2016-6-3
+ * Time: 13:26
+ */
+namespace Acme\MinsuBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="msk_travel_note")
+ */
+class TravelNote{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     *
+     * @var integer $id
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="integer", name="member_id")
+     */
+    protected $member_id;
+
+    /**
+     * @ORM\Column(type="string", name="travel_title")
+     */
+    protected $travel_title;
+
+    /**
+     * @ORM\Column(type="string", name="travel_content")
+     */
+    protected $travel_content;
+
+    /**
+     * @ORM\Column(type="string", name="addr")
+     */
+    protected $addr;
+
+    /**
+     * @ORM\Column(type="string", name="recommend_homestay")
+     */
+    protected $recommend_homestay;
+
+    /**
+     * @ORM\Column(type="boolean", name="state")
+     */
+    protected $state;
+
+    /**
+     * @ORM\Column(type="integer", name="addtime")
+     */
+    protected $addtime;
+
+    /**
+     * @ORM\Column(type="string", name="upload_ip")
+     */
+    protected $upload_ip;
+
+    /**
+     * @ORM\Column(type="float", name="longitude")
+     */
+    protected $longitude;
+
+    /**
+     * @ORM\Column(type="string", name="province")
+     */
+    protected $province;
+
+    /**
+     * @ORM\Column(type="integer", name="article_click")
+     */
+    protected $article_click=0;
+    
+    /**
+     * @ORM\Column(type="integer", name="pay_money")
+     */
+    protected $pay_money;
+
+    /**
+     * @ORM\Column(type="string", name="city")
+     */
+    protected $city;
+
+    /**
+     * @ORM\Column(type="string", name="district")
+     */
+    protected $district;
+    
+    /**
+     * @ORM\Column(type="integer", name="mark_travel_id")
+     */
+    protected $mark_travel_id;
+
+    /**
+     * @ORM\Column(type="integer", name="homestay_id")
+     */
+    protected $homestay_id;
+
+    
+    /**
+     * @return the $homestay_id
+     */
+    public function getHomestay_id()
+    {
+        return $this->homestay_id;
+    }
+    
+    /**
+     * @param field_type $homestay_id
+     */
+    public function setHomestay_id($homestay_id)
+    {
+        $this->homestay_id = $homestay_id;
+    }
+    
+    /**
+     * @return the $article_click
+     */
+    public function getArticle_click()
+    {
+        return $this->article_click;
+    }
+
+    /**
+     * @param mixed $article_click
+     */
+    public function setArticle_click($article_click)
+    {
+        $this->article_click = $article_click;
+    }
+
+ /**
+     * @return mixed
+     */
+    public function getDistrict()
+    {
+        return $this->district;
+    }
+
+    /**
+     * @param mixed $district
+     */
+    public function setDistrict($district)
+    {
+        $this->district = $district;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticleClick()
+    {
+        return $this->article_click;
+    }
+
+    /**
+     * @param mixed $article_click
+     */
+    public function setArticleClick($article_click)
+    {
+        $this->article_click = $article_click;
+    }
+
+    /**
+     * @ORM\Column(type="float", name="latitude")
+     */
+    protected $latitude;
+
+    /**
+     * @return mixed
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @param mixed $longitude
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProvince()
+    {
+        return $this->province;
+    }
+
+    /**
+     * @param mixed $province
+     */
+    public function setProvince($province)
+    {
+        $this->province = $province;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param mixed $latitude
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUploadIp()
+    {
+        return $this->upload_ip;
+    }
+
+    /**
+     * @param mixed $upload_ip
+     */
+    public function setUploadIp($upload_ip)
+    {
+        $this->upload_ip = $upload_ip;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMemberId()
+    {
+        return $this->member_id;
+    }
+
+    /**
+     * @param mixed $member_id
+     */
+    public function setMemberId($member_id)
+    {
+        $this->member_id = $member_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTravelTitle()
+    {
+        return $this->travel_title;
+    }
+
+    /**
+     * @param mixed $travel_title
+     */
+    public function setTravelTitle($travel_title)
+    {
+        $this->travel_title = $travel_title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTravelContent()
+    {
+        return $this->travel_content;
+    }
+
+    /**
+     * @param mixed $travel_content
+     */
+    public function setTravelContent($travel_content)
+    {
+        $this->travel_content = $travel_content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddr()
+    {
+        return $this->addr;
+    }
+
+    /**
+     * @param mixed $addr
+     */
+    public function setAddr($addr)
+    {
+        $this->addr = $addr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecommendHomestay()
+    {
+        return $this->recommend_homestay;
+    }
+
+    /**
+     * @param mixed $recommend_homestay
+     */
+    public function setRecommendHomestay($recommend_homestay)
+    {
+        $this->recommend_homestay = $recommend_homestay;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param mixed $state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddtime()
+    {
+        return $this->addtime;
+    }
+
+    /**
+     * @param mixed $addtime
+     */
+    public function setAddtime($addtime)
+    {
+        $this->addtime = $addtime;
+    }
+
+    /**
+     * member_id
+     * @return unkown
+     */
+    public function getMember_id(){
+        return $this->member_id;
+    }
+
+    /**
+     * member_id
+     * @param unkown $member_id
+     * @return TravelNote{
+     */
+    public function setMember_id($member_id){
+        $this->member_id = $member_id;
+        return $this;
+    }
+
+    /**
+     * travel_title
+     * @return unkown
+     */
+    public function getTravel_title(){
+        return $this->travel_title;
+    }
+
+    /**
+     * travel_title
+     * @param unkown $travel_title
+     * @return TravelNote{
+     */
+    public function setTravel_title($travel_title){
+        $this->travel_title = $travel_title;
+        return $this;
+    }
+
+    /**
+     * travel_content
+     * @return unkown
+     */
+    public function getTravel_content(){
+        return $this->travel_content;
+    }
+
+    /**
+     * travel_content
+     * @param unkown $travel_content
+     * @return TravelNote{
+     */
+    public function setTravel_content($travel_content){
+        $this->travel_content = $travel_content;
+        return $this;
+    }
+
+    /**
+     * recommend_homestay
+     * @return unkown
+     */
+    public function getRecommend_homestay(){
+        return $this->recommend_homestay;
+    }
+
+    /**
+     * recommend_homestay
+     * @param unkown $recommend_homestay
+     * @return TravelNote{
+     */
+    public function setRecommend_homestay($recommend_homestay){
+        $this->recommend_homestay = $recommend_homestay;
+        return $this;
+    }
+
+    /**
+     * upload_ip
+     * @return unkown
+     */
+    public function getUpload_ip(){
+        return $this->upload_ip;
+    }
+
+    /**
+     * upload_ip
+     * @param unkown $upload_ip
+     * @return TravelNote{
+     */
+    public function setUpload_ip($upload_ip){
+        $this->upload_ip = $upload_ip;
+        return $this;
+    }
+
+    /**
+     * pay_money
+     * @return unkown
+     */
+    public function getPay_money(){
+        return $this->pay_money;
+    }
+
+    /**
+     * pay_money
+     * @param unkown $pay_money
+     * @return TravelNote{
+     */
+    public function setPay_money($pay_money){
+        $this->pay_money = $pay_money;
+        return $this;
+    }
+
+    
+    /**
+     * @return int
+     */
+    public function getMark_travel_id()
+    {
+        return $this->mark_travel_id;
+    }
+    
+    /**
+     * @param int $mark_travel_id
+     */
+    public function setMark_travel_id($mark_travel_id)
+    {
+        $this->mark_travel_id = $mark_travel_id;
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

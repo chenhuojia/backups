@@ -1,0 +1,130 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+{% block javascript %} {{ parent() }}
+<script type="text/javascript" src="{{ asset('bundles/msk/public/js/jquery-1.7.1.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/msk/public/js/ajaxfileupload.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#hotCS").change(function(){
+			$.ajax({
+				type:"POST",
+				data:"areaId="+$(this).val(),
+				url:"{{ path('AjaxGetAreaCity_') }}",
+				success:function(msg){
+					$("#hostCC").empty();
+					for (var i=0; i<msg.length;i++){
+						$("#hostCC").append("<option value='"+msg[i].area_id+"'>"+msg[i].area_name+"</option>");
+						}
+				}
+			});
+		})
+
+	$("[name='artImage']").live("change",function(){
+
+		  var filepath=$("#uploadImage").val();
+		  var extStart=filepath.lastIndexOf(".");
+		  var ext=filepath.substring(extStart,filepath.length).toUpperCase();
+		  if(ext!=".BMP"&&ext!=".PNG"&&ext!=".GIF"&&ext!=".JPG"&&ext!=".JPEG"){
+		  alert("图片限于bmp,png,gif,jpeg,jpg格式");
+		  return false;
+		  }else{
+//		 		alert(1);
+				$.ajaxFileUpload({
+					url:'{{ path('uploadgroupImg_') }}',
+					secureuri:false,
+					fileElementId:'uploadImage',
+					//fileElementId:type,
+					dataType: 'json',
+					success: function(data){
+					  var name=data.fileName;
+	 				  var accName=data.accName;
+					  var url='/msk/web/bundles/msk/upload/admin/'+accName+'/'+name;
+					  $("[name='img']").attr('width','65%');
+		 			  $("[name='img']").attr('height','65%');
+					  $("[name='img']").attr('src',url);
+					  $("#hiddenImgName").val(name);
+					  $(".filename").val(name)
+					}
+				})
+			  }
+		  		
+
+		});
+
+	$(".filenamebutton").click(function(){$("#uploadImage").click();})
+
+	$("#saveHotCity").click(function(){
+		if($("#hiddenImgName").val()){
+			$("form").submit();
+			}else{
+				alert("请上传海报！");
+				}
+		})
+
+{% if v!='' %}
+$("[name='img']").attr('width','65%');
+$("[name='img']").attr('height','65%');
+{% endif %}
+
+})
+</script>
+{% endblock %}
+
+{% block content%}<section class="alert">
+{# 		  <button type="button" val=''onclick="javascript:history.go(-1)" class="green stateBtn">返  回</button>#}
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>新增社区小组</h1>
+			</hgroup>
+		</header>
+	<div class="content">
+	<form method="post" action="{% if v!='' %}{{ path('EditSaveGroup_') }}{% else %}{{ path("SaveGroup_") }}{% endif %}">
+	<input id='hiddenImgName' type="hidden"  value='{% if v!='' %}{{ v.img }}{% endif %}' name="hiddenImgName">
+			<div class="field-wrap">
+				<span class="roomServerTitleSpan">城 市&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>
+				<input  name='groupName' type="text"  style="width: 25%;" value="{% if v != ''%}{{ v.groupName }}{% endif %}" placeholder="请输入小组名称"  maxlength="10"/>
+			</div>
+			
+			<div class="field-wrap">
+				<span style="position: absolute;" class="roomServerTitleSpan">介 绍&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>
+				<textarea  name="groupDscp" rows="" cols="" style="margin: 0px 0px 20px; width: 500px; height: 97px;margin-left: 110px;">{% if v != ''%}{{ v.dscp }}{% endif %}</textarea>
+			</div>
+			<br><br>
+		<p class="base-infor "style="font-family: '微软雅黑'; width: 50%;"> 上传小组海报</p>	
+		<div class="upload-pic" style="width: 50%;">
+                <img name="img" src="{% if v!='' %}{{ v.img_url }}{% else %}{{ asset('bundles/msk/public/none.jpg') }}{% endif %}"> 
+        </div>	
+        <br>
+{#         align="center"#}
+                <div class="uploader white">
+                    <input type="text" class="filename" readonly value="{% if v!='' %}{{ v.img }}{% else %}请选择图片{% endif %}">
+                    <button type="button" name="file" class="filenamebutton green" >选择图片</button>
+                    <input  style="width: 50%;" type="file" size="30" name="artImage" id="uploadImage">
+				</div>
+        <br>
+        
+        <div class="field-wrap">
+				<span class="roomServerTitleSpan">关注人数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>
+				<input  name='followNum' type="text"  style="width: 25%;" value="{% if v != ''%}{{ v.followNum }}{% else %}0{% endif %}"   maxlength="10"/>
+			</div>
+			
+			<div class="field-wrap">
+				<span class="roomServerTitleSpan">贴总数量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>
+				<input  name='postNum' type="text"  style="width: 25%;" value="{% if v != ''%}{{ v.postNum }}{% else %}0{% endif %}"    maxlength="10"/>
+			</div>
+			
+		<div class="field-wrap">
+				<span class="roomServerTitleSpan">排   &nbsp;&nbsp;&nbsp;&nbsp; 序&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>&nbsp;
+				<input  name='groupSort' type="text"  style="width: 25%;" value="{% if v != ''%}{{ v.sort }}{%else%}0{% endif %}"  maxlength="10"/>
+		</div>
+		<div class="roomSerBtnDiv"><button type="button" id='saveHotCity' class="green">保  存</button> <button type="button" onclick="javascript:history.go(-1)" class="red">取  消</button></div>	
+	{% if v!='' %}<input name='gId' type='hidden' value="{{ v.id }}">{% endif %}
+	</form>
+	</div>
+	</section>
+</section>
+{% endblock%}
+

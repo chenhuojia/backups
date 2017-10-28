@@ -1,0 +1,65 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+// alert(123);
+$(".stateBtn").click(function(){
+	$("[name='isOwner']").val($(this).attr("val"));
+	$("form").submit();
+})
+})
+</script>
+{% endblock %}
+
+{% block content%}<section class="alert">
+{# 	<form method="post" action="">#}
+{# 	<input type ="hidden" name ="isOwner">#}
+	 	 <button type="button" onclick="location='{{ path('add_points_') }}'"  class="green stateBtn">系 统 赠 分</button>
+{# 		 <button type="button" val='1' class="green stateBtn">新增积分</button>#}
+{# 		  <button type="button" val='' class="green stateBtn">全部积分</button>#}
+{# 	</form>#}
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>积分信息</h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th>操作时间</th>
+						<th>帐号</th>
+						<th>昵称</th>
+						<th>积分</th>
+						<th>消分</th>
+						<th>事件</th>
+						
+{# 						<th>操作</th>#}
+					</tr>
+				</thead>
+					<tbody>
+					{% for v in pList %}
+						<tr>
+							<td style="padding-left: 50px;">{{ v.NewAddTime }}</td>
+							<td>{{ v.account }}</td>
+							<td>{{ v.nickname }}</td>
+							<td><span style="color: green;font-family:'微软雅黑';font-size: 14px;">{{ v.pl_points }}</span></td>
+							<td><span class="pointscss">{{ v.pl_eng }}</span></td>
+							<td>{{ v.pl_desc }}</td>
+							
+{# 							<td><button class="green"  onclick="location=''">作 废</button></td>#}
+						</tr>
+				{% endfor %}
+					</tbody>
+				</table>
+		</div>
+	</section>
+</section>
+
+{% endblock%}

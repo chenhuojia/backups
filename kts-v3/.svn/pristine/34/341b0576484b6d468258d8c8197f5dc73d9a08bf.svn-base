@@ -1,0 +1,309 @@
+<?php
+namespace Order\Controller;
+
+use Think\Controller;
+use Common\Controller\ApiController;
+use Order\Vendor\alipay\Alipayment;
+use Think\Exception;
+
+
+
+
+
+class PaymentController extends ApiController
+{   
+    
+    /***
+     * 支付
+     ***/    
+    public function doPayment(){ 
+      $user_id=session('user_id');
+      $user_name=session('name');
+      $order_sn=I('post.order_sn');
+      $paytype=I('post.paytype',1);
+      switch ($paytype){
+          case 1:
+              $payWd=I('post.pay_wd');
+              if (empty($payWd)) $this->myApiPrint(300,'请输入支付密码');             
+              $data=self::use_money($user_id,$payWd,$user_name,$order_sn);
+              break;
+      } 
+    }
+ 
+    /**
+     * 使用余额支付
+     * **/
+    private function use_money($user_id,$pay_wd,$user_name,$order_sn){
+        $userModel=D('user');
+        $user=$userModel->find($user_id);
+        if (empty($user['pay_pwd'])) $this->myApiPrint(300,'你还没有设置支付密码',$user);
+        $log=M('money')->where(array('user_id'=>$user_id))->find();
+        if ($user['pay_pwd'] != $pay_wd){
+            if ($error=session($user_id.'_pay_wd_error')){
+                session($user_id.'_pay_wd_error',$error+1);
+            }else{
+                session($user_id.'_pay_wd_error',1);
+            }
+            
+            if ($error >= 5){
+                if ($log){
+                    M('money')->where(array('user_id'=>$user_id))->save(array('state'=>0,'frozen_time'=>$_SERVER['REQUEST_TIME']));
+                }else{
+                    M('money')->add(array('user_id'=>$user_id,'state'=>0,'frozen_time'=>$_SERVER['REQUEST_TIME']));
+                } 
+                $this->myApiPrint(300,'支付密码错误5次,账号已冻结');
+            }
+            $this->myApiPrint(300,'支付密码不对');
+        }
+        if ($log && $log['state']==0){$this->myApiPrint(300,'账号已经冻结');}
+        $orderModel=M('order');
+        $order=$orderModel->where(array('order_sn'=>$order_sn))->find();
+        $ret=bccomp($user['money'],$order['order_amount'],2);
+        if ($ret == 0 || $ret == 1){
+            $userModel->startTrans();
+            $uPuser=$userModel->where(array('user_id'=>$user_id))->setDec('money',$order['order_amount']);            
+            $pay_time=$_SERVER['REQUEST_TIME'];
+            $state=update_pay_status($order_sn,$pay_time);
+            $after=bcsub($user['money'],$order['order_amount'],2);
+            $buyUser=account_log($user_id,$user_name,$order['order_id'],$order_sn,$user['money'],$after,$order['order_amount'],0);
+            if($order['payee']==0){
+                $payee=$order['payee_shop'];
+                $shop=M('shop')->where(array('shop_id'=>$payee))->field('user_id,shop_name')->find();
+                $shop_user=$shop['user_id'];
+                $SellUserMoney=$userModel->where(array('user_id'=>$shop_user))->setDec('money',$order['order_amount']);
+                update_shop_income($user_id,$payee,$order['order_amount']);
+            }else{
+                $payee=$order['payee'];
+                $SellUserMoney=$userModel->where(array('user_id'=>$payee))->setDec('money',$order['order_amount']);               
+            } 
+            $sellUser=account_log($payee,$user_name,$order['order_id'],$order_sn,$user['money'],$after,$order['order_amount'],1,3);          
+            add_goods_count($order['order_id']);
+            if ($uPuser && $buyUser && $state==200 && $SellUserMoney && $sellUser){
+                $userModel->commit();
+                $this->myApiPrint(200,'success');
+            }
+            $userModel->rollback();
+            $this->myApiPrint(300,'fail');
+        }elseif ($ret == -1){
+            $this->myApiPrint(300,'余额不足,请选择其他支付或先充值再支付');
+        } 
+        
+    }
+     
+   
+    /**
+     *支付宝签名
+     * **/
+    public function AlipaySign3(){        
+        /* $a=import('\Order\Vendor\Alipayment');
+        $this->myApiPrint($a); */
+        $order_sn=I('post.order_sn');
+        $order=M('order')->alias('o')->join('left join kts_order_goods g on o.order_id=g.order_id')
+        ->where(array('o.order_sn'=>$order_sn,'o.pay_status'=>0))
+        ->field('o.order_sn,o.order_amount,o.anum,g.book_name,g.book_desc')
+        ->find();
+        if ($order){
+            $config=require_once 'Public/alipay-php/demo/config.php';        
+            $config['sign_type'] = 'RSA';
+            $alipay = new Alipayment($config,'app');
+            $params = array(
+                'out_trade_no' => $order_sn,
+                'subject' => $order['book_name'],
+                'total_fee' => $order['order_amount'],
+                '_input_charset' => 'utf-8',
+                'sign_type' => 'RSA'
+            );
+            $paramStr = $alipay->buildSignedParametersForApp($params); //此代码可以直接给APP端提交
+            $this->myApiPrint(200,$paramStr['ordre'],$paramStr['sign']); 
+        }
+        $this->myApiPrint(300,'订单不存在');
+    }
+    
+    public function AlipaySign(){
+        $order_sn=I('post.order_sn');
+        $order=M('order')->alias('o')->join('left join kts_order_goods g on o.order_id=g.order_id')
+        ->where(array('o.order_sn'=>$order_sn,'o.pay_status'=>0))
+        ->field('o.order_sn,o.order_amount,o.anum,g.book_name,g.book_desc')
+        ->find();
+        if ($order){
+            $config=include(dirname(dirname(__FILE__)).'/Vendor/alipay/config.php');
+            $config['sign_type'] = 'RSA'; 
+            $alipay = new Alipayment($config,'app');
+            $params = array(
+                'out_trade_no' => $order_sn,
+                'subject' => $order['book_name'],
+                'total_fee' => $order['order_amount'],
+                '_input_charset' => 'utf-8',
+                'sign_type' => 'RSA'
+            );
+            $paramStr = $alipay->buildSignedParametersForApp($params); //此代码可以直接给APP端提交
+            $this->myApiPrint(200,$paramStr['ordre'],$paramStr['sign']);
+        }
+        $this->myApiPrint(300,'订单不存在');
+    }
+    
+    public function AlipaySign2(){
+        $order_sn=I('post.order_sn');
+        $order=M('order')->alias('o')->join('left join kts_order_goods g on o.order_id=g.order_id')
+        ->where(array('o.order_sn'=>$order_sn,'o.pay_status'=>0))
+        ->field('o.order_sn,o.order_amount,o.anum,g.book_name,g.book_desc')
+        ->find();
+        if ($order){
+            $config=include(dirname(dirname(__FILE__)).'/Vendor/alipay/config.php');
+            $config['sign_type'] = 'RSA';
+            $alipay = new Alipayment($config,'app');
+            $params = array(
+                'out_trade_no' => $order_sn,
+                'subject' => $order['book_name'],
+                'total_fee' => $order['order_amount'],
+                '_input_charset' => 'utf-8',
+                'sign_type' => 'RSA'
+            );
+            $paramStr = $alipay->buildSignedParametersForApp($params); //此代码可以直接给APP端提交
+            $this->myApiPrint(200,$paramStr['ordre'],$paramStr['sign']);
+        }
+        $this->myApiPrint(300,'订单不存在');
+    }
+    
+    /**
+     * 同意退款
+     * **/
+     public function agreeRefund(){         
+         $user_id=session('user_id');
+         $refund_id=I('post.refund_id');
+         $refund=M('order_refund')->find($refund_id);
+         $order=M('order')->where(array('order_id'=>$refund['order_id']))->find();  
+         if ($order['pay_name']=="余额"){
+             $a=self::returnMoney($order['order_id'],$order['order_sn'],$order['user_id'],$order['payee'],$order['payee_shop'],$order['order_amount']);
+         }elseif ($order['pay_name']=="支付宝"){
+             $a=self::alipayRefund($order['user_id'],$order['order_id'], $order['order_sn'], $order['pay_sn'], $order['order_amount'],$order['payee_shop']);
+             $this->myApiPrint($a);
+         } 
+     }
+    
+     /**
+      * 余额退款
+      * **/
+     private function returnMoney($order_id,$order_sn,$user_id,$payee,$payee_shop,$order_amount){
+         $user=M('user');
+         $user->startTrans();
+         if ($payee==0 && $payee_shop !=0){
+             $shop=M('shop')->where(array('shop_id'=>$payee_shop))->find();
+             $seller=$shop['user_id'];
+             $c=update_shop_income($user_id,$payee_shop,$order_amount,1);
+         }else{
+             $c=1;
+             $seller=$payee;
+         }
+         $userMoney=$user->where(array('user_id'=>$user_id))->find();
+         $sellerMoney=$user->where(array('user_id'=>$seller))->find();
+         $a=$user->where(array('user_id'=>$user_id))->setInc('money',$order_amount);
+         $b=$user->where(array('user_id'=>$seller))->setDec('money',$order_amount);
+         $d = M('order')->where(array('order_id'=>$order_id))->save(array('pay_status'=>4));
+         $e=logOrder($order_id,'订单退款成功','退款成功',$user_id);
+         $f=M('order_refund')->where(array('order_id'=>$order_id))->save(array('is_agree'=>1,'replytime'=>$_SERVER['REQUEST_TIME']));
+         $userafter=bcadd($userMoney['money'],$order_amount,2);
+         $sellerafter=bcsub($sellerMoney['money'],$order_amount,2);
+         $g=account_log($user_id,$userMoney['name'],$order_id,$order_sn,$userMoney['money'],$userafter,$order_amount,1,3,1);
+         $h=account_log($seller,$sellerMoney['name'],$order_id,$order_sn,$sellerMoney['money'],$sellerafter,$order_amount,0,1,1);
+         if($a && $b && $c && $d && $e && $f && $g && $h ){
+            $user->commit();
+            $this->myApiPrint(200,'success');
+         }
+            $user->rollback();
+         $this->myApiPrint(300,'false');
+        
+     }
+    
+     /**
+      * 支付宝退款
+      * **/
+     private function alipayRefund($user_id,$order_id,$order_sn,$pay_sn,$order_amount,$shop_id=0){        
+         $data=$this->ref($pay_sn,$order_amount);
+         if ($data){
+             if ($data['alipay_trade_refund_response']['code']==10000 && $data['alipay_trade_refund_response']['msg']=='Success'){
+                 $order=M('order');
+                 $order->startTrans();
+                 $a=$order->where("order_sn = '$order_sn'")->save(array('pay_status'=>4));
+                 $b=logOrder($order_id,'订单退款成功','退款成功',$user_id);
+                 $c=M('order_refund')->where(array('order_id'=>$order_id))->save(array('is_agree'=>1,'replytime'=>$_SERVER['REQUEST_TIME']));
+                 $d=1;
+                 if ($shop_id){
+                     $d=update_shop_income($user_id,$shop_id,$order_amount,1);
+                 }
+                 if ($a && $b && $c && $d){
+                     $order->commit();
+                     return 200;
+                 }
+                 $order->rollback();
+                 return 300;
+             }
+         }
+         return 300;
+         /* $ret=$alipay->argSort($data['alipay_trade_refund_response']);
+         $str=$alipay->createLinkstring($ret);
+         $a=$alipay->rsaVerify($str,$data['sing']); */
+     }
+     
+     
+     private function getOrderInfo($order_sn,$goods,$order_amount) {
+         $orderInfo["partner"]='2088022552382131';
+         $orderInfo["seller_id"]='2088022552382131';
+         $orderInfo["out_trade_no"]="$order_sn";
+         $orderInfo["subject"]=$goods['goods_name'];
+         $orderInfo["body"]=$goods['goods_dec'];
+         $orderInfo["total_fee"]=$order_amount;
+         $orderInfo["notify_url"]=urlencode("http://localhost/msk-v2/web/app_dev.php/Notify");
+         $orderInfo["service"]="mobile.securitypay.pay";
+         $orderInfo["payment_type"]=1;
+         $orderInfo["_input_charset"]="utf-8";    
+         $orderInfo["it_b_pay"]="30m";
+         $orderInfo["return_url"]="m.alipay.com";
+         $orderInfo['sign_type'] = 'RSA';
+         return $orderInfo;
+     }
+
+     
+     /**
+      * 支付宝退款
+      * @param unknown $pay_sn
+      * @param unknown $order_amount
+      * @return Ambigous <boolean, unknown>***/
+     private function ref($pay_sn,$order_amount){
+         //$pay_sn=I('post.pay_sn');
+         require_once(dirname(dirname(__FILE__)).'/Vendor/alipay/aop/AopClient.php');
+         require_once (dirname(dirname(__FILE__)).'/Vendor/alipay/aop/request/AlipayTradeRefundRequest.php');
+         $aop = new \AopClient ();
+         $aop->gatewayUrl = 'https://openapi.alipay.com/gateway.do';
+         $aop->appId = '2017010604881202';
+         $aop->rsaPrivateKeyFilePath = dirname(dirname(__FILE__)).'/Vendor/alipay/aop/rsa_private_key.pem';
+         $aop->alipayrsaPublicKey='MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB';
+         $aop->apiVersion = '1.0';
+         $aop->postCharset='UTF-8';
+         $aop->format='json';
+         $request = new \AlipayTradeRefundRequest();
+         $request->setBizContent("{" .
+             "    \"trade_no\":\"".$pay_sn."\"," .
+             "    \"refund_amount\":"."'{$order_amount}'"."," .
+             "    \"refund_reason\":\"正常退款\"," .
+             "    \"out_request_no\":\"HZ01RF001\"," .
+             "    \"operator_id\":\"OP001\"," .
+             "    \"store_id\":\"NJ_S_001\"," .
+             "    \"terminal_id\":\"NJ_T_001\"" .
+             "  }");
+         //return $request->getBizContent();
+         $result = $aop->execute($request);
+         return $result;
+         $this->myApiPrint($result['alipay_trade_refund_response']);
+     
+     }
+
+     
+     public function ret(){
+         $pay_sn=I('post.pay_sn');
+         $data= add_goods_count($pay_sn);
+         //$data=self::ref($pay_sn, 0.01);
+         $this->myApiPrint($data);
+     }
+}
+

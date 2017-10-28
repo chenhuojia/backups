@@ -1,0 +1,198 @@
+<include file="./APP/Admin/View/Common/Public_header_v1.html"/>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/static/ueditor1.4.3/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/static/ueditor1.4.3/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/static/ueditor1.4.3/lang/zh-cn/zh-cn.js"></script>
+<style type="text/css">
+    .form-horizontal{width:850px;}
+    .form-horizontal>.form-group{border-top: 1px solid #ccc;padding-top:20px;margin-left:15px;margin-right:0px;}
+    .form-horizontal>.form-group:first-child{border-top:none;}
+    .form-group>.col-sm-2{width: 110px;}
+    .form-group>.col-sm-10{width: 700px;}
+	#header{display:none;}
+	#change{cursor:pointer;}
+</style>
+<ol class="breadcrumb">
+    <li>{:C('CONTROL_MENU')}</li>
+    <li>优惠卷管理</li>
+    <li class="active"><a href="{:U('Admin/Coupon/couponList?all=1')}"> 优惠卷列表</a></li>
+    <li>编辑优惠卷</li>
+</ol>
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="javascript:void(0);">编辑优惠卷</a></li>
+</ul>
+<form action="#" class="form-horizontal" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="user_user" class="col-sm-2 control-label">头像</label>
+        <if condition="$data['imageurl'] !=null">
+        	<if condition="$data['user_id']">
+        		<div id=''><img style="width:150px;height:150px" src="{$data['imageurl']}"></div>
+        		<else/>
+        		<div id='change'><img style="width:150px;height:150px" src="{$data['imageurl']}"></div>  
+        	</if>       	
+        	<input type="text" value="{$data['imageurl']}" style="display:none" name="oldimg">
+        <else/>
+        	<if condition="$data['user_id']">
+        		<div id=''><img style="width:150px;height:150px" src="Public/Upload/User/10016.gif"></div>
+        	<else/>
+        		<div id='change'><img style="width:150px;height:150px" src="Public/Upload/User/10016.gif"></div>
+        	</if>
+        </if>
+        <div class="col-sm-10">
+            <input type="file" name="imageurl"  id="header" style="display:none"/>
+        </div>        
+    </div>
+	 <div class="form-group">
+        <label for="user_nickname" class="col-sm-2 control-label">优惠卷名称</label>
+        <div class="col-sm-10">
+        	<if condition="$data['user_id']">
+        		<input class="form-control" type="text" id="user_nickname" autocomplete="off" value="{$data.name}" name="name" disabled="disabled"/>
+        	<else />
+             <input class="form-control" type="text" id="user_nickname" autocomplete="off" value="{$data.name}" name="name" />
+        	</if>
+        </div>
+    </div>
+   	<div class="form-group">
+        <label for="user_nickname" class="col-sm-2 control-label">数量</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" id="user_nickname" autocomplete="off" value="{$data.num}" name="num" />           
+        </div>
+    </div>
+    <div class="form-group">
+      <label for="user_nickname" class="col-sm-2 control-label">优惠额度</label>
+      <div class="col-sm-10">
+      	<if condition="$data['user_id']">
+      	 	<input class="form-control" type="text" id="user_nickname" autocomplete="off" value="{$data.price}" name="price" disabled="disabled"/>           
+      	<else />
+           <input class="form-control" type="text" id="user_nickname" autocomplete="off" value="{$data.price}" name="price" />           
+      	</if>
+      </div>
+    </div>      
+    <div class="form-group">
+        <div class= "col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">保存编辑</button>
+        </div>
+    </div>
+</form>
+<link href="__PUBLIC__/static/Validform/css/style.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/static/Validform/Validform_v5.3.2_min.js"></script>
+
+<script type="text/javascript" language="javascript">
+$(function(){
+	$('#ima').bind("click",function(){
+		$('#header').click();
+		console.log(1);
+		$('#header').change(function(){
+			var file = this.files[0]; //选择上传的文件
+			var r = new FileReader();
+			r.readAsDataURL(file); //Base64
+			$(r).load(function(){
+			$('#change').html('');
+			$('#change').html('<img src="'+ this.result +'" alt="" style="width:150px;height:150px"/>');
+			});
+		});
+	})	
+}) ;
+
+$(function(){
+	$('#change').bind("click",function(){
+		$('#header').click();
+		console.log(1);
+		$('#header').change(function(){
+			var file = this.files[0]; //选择上传的文件
+			var r = new FileReader();
+			r.readAsDataURL(file); //Base64
+			$(r).load(function(){
+			$('#change').html('');
+			$('#change').html('<img src="'+ this.result +'" alt="" style="width:150px;height:150px"/>');
+			});
+		});
+	})	
+}) ;
+
+    $(function(){
+        $(".form-horizontal").Validform({
+            tiptype:function(msg,o,cssctl){
+                if(!o.obj.is("form")){
+                    var objtip=o.obj.nextAll(".Validform_checktip");
+                    cssctl(objtip,o.type);
+                    objtip.text(msg);
+                }
+            },
+            beforeCheck:function(curform){
+                if(!confirm('确定提交本次操作吗？'))
+                {
+                    return false;
+                }
+            }
+        });
+
+    });
+    
+    $(function(){
+	    var objectModel = {};
+	    var value = $('#father_id').val();
+	    var type = $("#father_id").attr('id');
+	    objectModel[type] =value;
+	    if(value !=null & value !=''){
+	    	$.ajax({
+	            cache:false,
+	            type:"POST",
+	            url:"{:U('Admin/Attr/getCity')}",
+	            dataType:"json",
+	            data:objectModel,
+	            success:function(data){
+	            	if(data.length>0){
+	                    var count = data.length;
+	                    var i = 0;
+	                    var b="<select name=\"class_id\" id=\"class_id\" class=\"form-control\">";
+	                    for(i=0;i<count;i++){
+	                        b+="<option>"+data[i].city+"</option>";
+	                    }
+	                    b +="</select>"+"<div class=\"Validform_checktip\"></div>";
+	                    b +="<div id='last'></div>";
+	                    $(".col-sm-5").html(b);
+	                    if(city){
+	                    	$("#class_id").val(city).attr("selected",true);
+	                    }   
+	            	}else{
+	            		$("#class_id").remove();
+	            	}                    
+	            }
+	        });
+	    }; 
+
+})
+
+$('#father_id').change(function(){
+    var objectModel = {};
+    var value = $(this).val();
+    var type = $(this).attr('id');
+    objectModel[type] =value;
+    if(value !=null & value !=''){
+    	$.ajax({
+            cache:false,
+            type:"POST",
+            url:"{:U('Admin/Attr/getCity')}",
+            dataType:"json",
+            data:objectModel,
+            success:function(data){
+            	if(data.length>0){
+                    var count = data.length;
+                    var i = 0;
+                    var b="<select name=\"class_id\" id=\"class_id\" class=\"form-control\">";
+                        b +="<option value=''>请选择</option>";
+                    for(i=0;i<count;i++){
+                        b+="<option>"+data[i].city+"</option>";
+                    }
+                    b +="</select>"+"<div class=\"Validform_checktip\"></div>";
+                    b +="<div id='last'></div>";
+                    $(".col-sm-5").html(b);
+            	}else{
+            		$("#class_id").remove();
+            	}                    
+            }
+        });
+    }; 
+});
+</script>
+<include file="./APP/Admin/View/Common/Public_footer_v1.html"/>

@@ -1,0 +1,5 @@
+<?php
+return array(
+    'LOAD_EXT_CONFIG'=>array('Nologin'=>'nologinUrl'),
+    'shop_logo_pic'=>'120.77.214.101:8080/Public/Shop/shop_logo.jpg'
+);

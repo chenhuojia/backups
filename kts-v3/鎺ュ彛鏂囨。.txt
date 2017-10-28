@@ -1,0 +1,823 @@
+数据表前缀 kts_
+
+书单模块
+接口名称：我建立的书单
+请求方式：post
+请求地址：User/BookList/myBookList
+请求参数：token   用户token      （可选）     string  
+          user_id 用户id         （可选）     int     
+          skip    第几条拿 默认0 （必须）     int
+          take    拿几条 默认10  （必须）     int
+数据表：BookList          
+逻辑位置：User/Model/BookList/myBookList          
+实现原理：取bk_booklist表中按照添加时间倒序的take条数据
+
+
+接口名称：新建书单
+请求方式：post
+请求地址：User/BookList/addBookList
+请求参数：token       用户token    （必须）       string
+          cover       封面         （可选）       string
+          name        书单名称     （必须）       string
+          introduct   书单描述     （可选）       string
+数据表：BookList
+逻辑位置：User/controller/BookList/addBookList         
+实现原理：使用tp框架中的自动验证实现验证数据和自动完成进行填充数据
+
+接口名称：书单介绍
+请求方式：post
+请求地址：User/BookList/bookListDesc
+请求参数：booklist_id  书单id（必须） int
+数据表：BookList
+逻辑位置：User/Model/BookList/bookListDesc        
+实现原理：通过请求参数bookList_id（主键）查找指定书单需要的内容
+
+接口名称：书单详情
+请求方式：post
+请求地址：User/BookList/bookListDet
+请求参数：booklist_id   书单id（必须）      int
+          token         用户token（可选）   string
+数据表：BookList          
+逻辑位置：User/Model/BookList/bookListDet        
+实现原理：通过请求参数bookList_id（主键）查找指定书单需要的内容   传入token可以查看是否已经收藏、分享、评论指定书单      
+
+接口名称：编辑书单
+请求方式：post
+请求地址：User/BookList/editBookList
+请求参数：token  	   用户token （必须）                                 string
+		  booklist_id  书单id     (必须)                                  int
+          type   	   修改类型   (必须)   1为封面 2为书单名 3书单描述    int
+          cover        封面      （可选）                                 string
+          name         书单名称  （可选）                                 string
+          introduct    书单描述  （可选）                                 string
+数据表：BookList           
+逻辑位置：User/Model/BookList/editBookList       
+实现原理：通过请求参数bookList_id（主键）查找到指定的书单 用type来区分 修改的字段   
+
+接口名称：删除书单
+请求方式：post
+请求地址：User/BookList/delBookList
+请求参数：token  	    用户token （必须）        string
+		  booklist_id   书单id     (必须）        int
+数据表：BookList 		  
+逻辑位置：User/Controller/BookList/delBookList      
+实现原理：通过请求参数bookList_id（主键）查找到指定的书单然后进行删除
+
+接口名称：书单图书
+请求方式：post
+请求地址：User/BookList/bookListBooks
+请求参数：booklist_id  书单id   (必须)        int
+          skip  第几条拿 默认0 （必须）       int
+          take  拿几条 默认10  （必须）       int
+数据表：bookListBooks          
+逻辑位置：User/Model/BookListBook/bookListBooks     
+实现原理：通过请求参数bookList_id（索引）查找到指定的书单图书按照添加时间倒序取出take条，并返回指定的查找字段
+
+接口名称：添加图书
+请求方式：post
+请求地址：User/BookList/addBookListBook
+请求参数：token  		用户token （必须）     string
+          booklist_id   书单id  （必须）       int
+          book_id       图书id  （必须）       json 如：[1,5,9]
+数据表：BookListBook           
+逻辑位置：User/Model/BookListBook/bookListBooks     
+实现原理：通过请求参数bookList_id（索引）查找到指定的书单如果书单不存在则返回false，如果存在则判读book_id是否为json如果是json
+                   则拼接字符book_id然后组装sql语句进行插入
+
+接口名称：移除图书
+请求方式：post
+请求地址：User/BookList/delBookListBook
+请求参数：token  		用户token （必须）       string
+          booklist_id   书单id    （必须）       int
+          book_id       图书id    （必须）       json 如：[1,5,9]
+数据表：BookListBook            
+逻辑位置：User/Model/BookListBook/delBookListBook    
+实现原理：通过请求参数bookList_id（索引）查找到指定的书单如果书单不存在则返回false，如果存在则判读book_id是否为json如果是json
+                   则拼接字符book_id然后组装sql语句进行删除
+
+接口名称：收藏||取消收藏书单
+请求方式：post
+请求地址：User/BookList/bookListCollect
+请求参数：token  		用户token （必须）       string
+          booklist_id   书单id    （必须）       int
+数据表：bookListCollect            
+逻辑位置：User/Model/BookList/bookListCollect    
+实现原理：通过请求参数bookList_id（主键）查找到用户有没有收藏该书单如果有则更改is_collect值和addtime 如果没有则插入一条新的记录
+
+接口名称：添加书单评论
+请求方式：post
+请求地址：User/BookList/addBookListDiscuss
+请求参数：token  		用户token （必须）       string
+          booklist_id   书单id    （必须）       int
+          content       评论内容  （必须）       string
+数据表：BookListDiscuss           
+逻辑位置：User/Model/BookList/bookListCollect    
+实现原理：通过请求参数bookList_id（主键）查找到该书单然后则插入一条新的评论
+
+接口名称：回复书单评论
+请求方式：post
+请求地址：User/BookList/addBookListDiscussReply
+请求参数：token  		用户token （必须）     string
+          discuss_id    书单评论id（必须）     int
+          content       回复内容  （必须）     string
+          fid           回复id    （可选）     int
+数据表：BookListDiscussReply          
+逻辑位置：User/Model/BookList/bookListCollect    
+实现原理：通过请求参数bookList_id（主键）查找到该书单然后则插入一条新的评论
+
+接口名称：书单评论点赞
+请求方式：post
+请求地址：User/BookList/addBookListDiscussApprove
+请求参数：token  		用户token （必须）     string
+          discuss_id    书单评论id（必须）     int
+数据表：BookListDiscussApprove           
+逻辑位置：User/Controller/BookList/addBookListDiscussApprove   
+实现原理：通过请求参数discuss_id（主键）查找到该书单评论判断有没有点赞过，没有则插入一条新的记录
+
+接口名称：书单评论
+请求方式：post
+请求地址：User/BookList/bookListDiscuss
+请求参数：token        用户token        （可选）        string
+		  booklist_id  书单id  			（必须）        int
+          skip         第几条拿 默认0   （必须）        int
+          take         拿几条 默认10    （必须）        int
+数据表：bookListDiscuss           
+逻辑位置：User/Controller/BookList/bookListDiscuss 
+实现原理：通过请求参数discuss_id（主键）查找到该书单的评论列表按照addtime倒序排序列出take条 token用了判断有没有点赞
+
+接口名称：回复书单评论列表
+请求方式：post
+请求地址：User/BookList/bookListDiscussReply
+请求参数：
+		  disucss_id   书单评论id  		（必须）        int
+          skip         第几条拿 默认0   （必须）        int
+          take         拿几条 默认10    （必须）        int
+数据表：bookListDiscussReply            
+逻辑位置：User/Controller/BookList/bookListDiscussReply
+实现原理：通过请求参数discuss_id（索引）查找到该回复书单的评论列表按照addtime倒序排序列出take条
+
+接口名称：书单分享
+请求方式：post
+请求地址：User/BookList/bookListShare
+请求参数：token  		用户token （必须）       string
+          booklist_id   书单id    （必须）       int
+          shareto       分享去向  （必须）       string 如：微信或微博
+数据表：bookListShare          
+逻辑位置：User/Controller/BookList/bookListShare
+实现原理：通过请求参数booklist_id（主键）查找到该回复书单并且插入一条新的数据
+
+图书模块
+
+接口名称：图书分享
+请求方式：post
+请求地址：Book/BookAction/addShareBook
+请求参数：token  		用户token （必须）       string
+          data  图书参数    （必须）       json
+数据表：book、book_share、book_attr、integration、integral_xq、user_xq          
+逻辑位置：Book/Controller/BookAction/addShareBook
+实现原理：先判断json_decode能不能解data的内容 如果能解 则判断有没有上传封面、版权、书名和选择分类 如果没有则返回上传提示否则返回book表中需要插入字段的内容
+                   然后开启book的事务，进行book表插入，再进行book_attr表的插入、和book_share表的插入如果都插入成功了则提交事务后，进行用户积分的更新否则回滚事务返回插入失败
+                   
+接口名称：添加二手书
+请求方式：post
+请求地址：Book/BookAction/addOldBook
+请求参数：token  		用户token （必须）       string
+          data  图书参数    （必须）       json
+数据表：book、book_old、book_attr、integration、integral_xq、user_xq          
+逻辑位置：Book/Controller/BookAction/addOldBook
+实现原理：先判断json_decode能不能解data的内容 如果能解 则判断有没有上传封面、版权、书名、邮费、售价、新旧程度和选择分类 如果没有则返回上传提示否则返回book表中需要插入字段的内容
+                   然后开启book的事务，进行book表插入，再进行book_attr表的插入、和book_old表的插入如果都插入成功了则提交事务后，进行用户积分的更新否则回滚事务返回插入失败
+
+接口名称：添加新书
+请求方式：post
+请求地址：Book/BookAction/addNewBook
+请求参数：token  		用户token （必须）       string
+          data  图书参数    （必须）       json
+数据表：book、shop、shop_book、book_attr         
+逻辑位置：Book/Controller/BookAction/addNewBook
+实现原理：先判断用户有没有开通店铺没有怎返回没有店铺如果再判断json_decode能不能解data的内容 如果能解 则上传数据是否全面 如果上传数据不全则返回上传提示否则返回book表中需要插入字段的内容
+                   然后开启book的事务，进行book表插入，再进行book_attr、shop_book、book_old表的插入如果都插入成功了则提交事务后，更新shop表中的上架图书字段，否则回滚事务返回插入失败
+
+接口名称：收藏|取消收藏 图书
+请求方式：post
+请求地址：Book/BookAction/collectBook
+请求参数：token  		用户token （必须）       string
+       book_id  图书id    （必须）       int
+数据表：    book_share、book、book_collect         
+逻辑位置：Book/Controller/BookAction/collectBook
+实现原理：用book_id和user_id判读是否为自己上传的图书如果是怎返回收藏失败，否则再用book_id和user_id查找book_collect 是否已经收藏了这本书有则更改is_collect和addtime字段没有怎插入一条新的数据
+
+接口名称：收藏|取消收藏 书评
+请求方式：post
+请求地址：Book/BookAction/collectBookDiscuss
+请求参数：token  		用户token （必须）       string
+       comment_id  图书评id    （必须）       int
+数据表：    book_share、book_comment、collect         
+逻辑位置：Book/Controller/BookAction/collectBookDiscuss
+实现原理：用comment_id和user_id判读是否为自己的书评如果是怎返回收藏失败，否则再用comment_id和user_id查找collect 是否已经收藏了这本书有则删除没有就插入一条新的数据
+
+接口名称：点赞书评
+请求方式：post
+请求地址：Book/BookAction/commentClick
+请求参数：token  		用户token （必须）       string
+       comment_id  图书评id    （必须）       int
+数据表：    book_comment_click、book_comment、        
+逻辑位置：Book/Controller/BookAction/commentClick
+实现原理：用comment_id和user_id判读是否为自己的书评如果是怎返回点赞失败，否则再用comment_id和user_id查找 book_comment_click 是否已经点赞了这本评论有有则返回已经点赞没有就插入一条新的数据             
+
+接口名称：点赞|取消点赞 回复点赞
+请求方式：post
+请求地址：Book/BookAction/replyClick
+请求参数：token  		用户token （必须）       string
+      reply_id  图书评回复id    （必须）       int
+数据表：    book_reply_like、book_comment_reply、        
+逻辑位置：Book/Controller/BookAction/replyClick
+实现原理：用reply_id和user_id判读是否为自己的回复如果是怎返回点赞失败，否则再用reply_id和user_id查找 book_reply_like 是否已经点赞了这本评论有则返回已经点赞没有就插入一条新的数据             
+ 
+接口名称：写书评
+请求方式：post
+请求地址：Book/BookAction/Addcomment
+请求参数：token  		用户token （必须）       string
+       book_id  图书id    （必须）       int
+       grade    评分                     （必须）                   int
+       content  内容                   （必须） string
+数据表：    order、book_comment、book      
+逻辑位置：Book/Controller/BookAction/Addcomment
+实现原理：判断上传的content、grade、有没有值和book_id存不存在这本书，如果都通过则判断图书类型 如果是新书和二手书则查找订单表有没有该用户的购买该本书的记录，没有则不能评论，book_comment再插入一条新的记录
+
+接口名称：回复书评
+请求方式：post
+请求地址：Book/BookAction/replyComment
+请求参数：token  		用户token （必须）       string
+       comment_id  图书评id    （必须）       int
+       content  内容                   （必须） string
+数据表：    book_comment_reply、book_comment     
+逻辑位置：Book/Controller/BookAction/replyComment
+实现原理：判断上传的content有没有值和comment_id存不存在这条评论，如果都通过则，book_comment_reply插入一条新的记录
+
+接口名称：最近浏览的书
+请求方式：post
+请求地址：Book/BookAction/bookView
+请求参数：token  		用户token （必须）       string
+数据表：    book_view    
+逻辑位置：Book/Controller/BookAction/bookView
+实现原理：查找该用户在book_view的所有数据
+
+接口名称：保存编辑图书
+请求方式：post
+请求地址：Book/BookAction/saveEditBook
+请求参数：token  		用户token （必须）       string
+       book_id      图书id    （必须） int
+       data         图书参数      （必须） json
+数据表：    Book、book_old、book_share、   book_attr
+逻辑位置：Book/Controller/BookAction/saveEditBook
+实现原理：判断data能不能用json_decod解出数组和book_id的图书类型如果是二手书或者新则判断有没有新旧程度、邮费、或者库存和修改book_share或book_old，再通过上传的参数修改book book_attr的数据
+
+
+接口名称：图书书籍
+请求方式：post
+请求地址：Book/Book/BookDet
+请求参数：token  		用户token （可选）       string
+       book_id      图书id    （必须） int
+数据表：    Book、book_old、book_share、   book_attr、shop
+逻辑位置：Book/Controller/Book/BookDet
+实现原理：先判断book左联book_attr是否存在book_id这本书，再判断图书的类型新书则shop，二手书则book_old，分享的书则book_share，相光的不同信息，再更新book_view，通过user_id判断是否收藏
+
+接口名称：图书详情
+请求方式：post
+请求地址：Book/Book/BooKDesc
+请求参数：
+       book_id      图书id    （必须） int
+数据表：    Book、book_tag、   book_attr、country
+逻辑位置：Book/Controller/Book/BooKDesc
+实现原理：先判断book左联book_attr、book_tag、   book_attr、country查找相关内容是否存在book_id这本书，没有则返回不存在
+ 
+ 
+接口名称：适用年龄
+请求方式：post
+请求地址：Book/Book/getAplicablAge
+数据表：   book_aplic_age
+逻辑位置：Book/Controller/Book/getAplicablAge
+实现原理：查找book_aplic_age表中的数据
+ 
+接口名称：评论列表 
+请求方式：post
+请求地址：Book/Book/BooKDiscuss
+请求参数：token  		用户token （可选）       string
+       book_id      图书id    （必须） int
+       ship         从第几条拿      （必须） int
+       take         拿几条 （必须） int
+数据表：    book、book_comment、book_comment_like
+逻辑位置：Book/Controller/Book/BooKDiscuss
+实现原理：先判断book中book_id是否已经删除，再从book_comment中查找book_id这边书的评论拿出take  用user_id进行判断是否点赞
+
+接口名称：评论回复列表 
+请求方式：post
+请求地址：Book/Book/BooKDiscussDet
+请求参数：token  		用户token （可选）       string
+       comment_id      图书评id    （必须） int
+       ship         从第几条拿      （必须） int
+       take         拿几条 （必须） int
+数据表：    book_comment_reply、book_comment_reply_like
+逻辑位置：Book/Controller/Book/BooKDiscussDet
+实现原理：从 book_comment_reply中查找comment_id这书评的回复拿出take  用user_id进行判断book_comment_reply_like是否点赞
+  
+ 接口名称：查看编辑图书
+ 请求方式：post
+请求地址：Book/Book/editBook
+请求参数：
+       book_id      图书id    （必须） int
+数据表：    book_attr、book_tag、book
+逻辑位置：Book/Controller/Book/BooKDiscuss
+实现原理：book左联book_attr和book_tag查找相关字段
+
+  接口名称：作者地区
+  请求方式：post
+请求地址：Book/Book/getAuthorArea
+数据表：    country
+逻辑位置：Book/Controller/Book/getAuthorArea
+实现原理：查找country中的所有数据
+
+ 接口名称：图书标签
+ 请求方式：post
+请求地址：Book/Book/getBookTag
+数据表：    column_tag
+逻辑位置：Book/Controller/Book/getBookTag
+实现原理：查找column_tag中的所有数据
+
+
+订单模块
+
+接口名称：将商品加入购物车
+请求方式：post
+请求地址：Cart/Cart/addCart
+请求参数：token  		用户token （必须）       string
+       book_id      图书id    （必须） int
+       goods_number    数量     （必须） int
+数据表：    cart、book、book_attr
+逻辑位置：Cart/Controller/Cart/addCart
+实现原理：用user_id判断cart中该用户的商品数不能超过20种，再判断购物车中是否有book_id商品 有判断是否自己的书不是则相加没有则新查找book和book_attr插入一条数据                     
+
+接口名称：删除购物车
+请求方式：post
+请求地址：Cart/Cart/delCart
+请求参数：token  		用户token （必须）       string
+       cart_id      购物车商品id    （必须）json
+数据表：    cart、
+逻辑位置：Cart/Controller/Cart/delCart
+实现原理：通过cart_id删除cart中的商品
+
+接口名称：购物车列表
+请求方式：post
+请求地址：Cart/Cart/cartList
+请求参数：token  		用户token （必须）       string
+	   ship         从第几条拿      （必须） int
+       take         拿几条 （必须） int
+数据表：    cart、shop
+逻辑位置：Cart/Controller/Cart/cartList
+实现原理：获取cart中user_id的商品列表拿take，判断每一商品的类型 如果是新书则查找shop获取书店信息
+
+接口名称：购物车结算
+请求方式：post
+请求地址：Cart/Cart/cart2
+请求参数：token  		用户token （必须）       string
+	   data         购物车商品的id、购买数量	（必须 ） json		 
+数据表：    cart、shop_book book book_attr
+逻辑位置：Cart/Controller/Cart/cart2
+实现原理：用data中的book_id来判断shop_book是否已经有下架商品 ，有则返回下架提示，再判断购物车是否存在商品，库存是否充足,最后计算商品总价 列出商品信息
+
+接口名称：购物车结算、
+请求方式：post
+请求地址：Cart/Cart/cart2
+请求参数：token  		用户token （必须）       string
+	   data         购物车商品的id、购买数量	（必须 ） json		 
+数据表：    cart、shop_book book book_attr
+逻辑位置：Cart/Controller/Cart/cart2
+实现原理：用data中的book_id来判断shop_book是否已经有下架商品 ，有则返回下架提示，再判断购物车是否存在商品，库存是否充足,最后计算商品总价 列出商品信息
+
+接口名称：提交订单
+请求方式：post
+请求地址：Order/Order/addOrder
+请求参数：token  		用户token （必须）       string
+	   data         购物车商品的id、购买数量	（必须 ） json		 
+数据表：    cart、shop_book book book_attr
+逻辑位置：Order/controller/Order/addOrder
+实现原理：用data中的book_id来判断shop_book是否已经有下架商品 ，有则返回下架提示，再判断购物车是否存在商品，库存是否充足,最后计算商品总价 列出商品信息,生成订单，返回订单号
+
+接口名称：立即购买
+请求方式：post
+请求地址：Order/Order/addOrder
+请求参数：token  		用户token （必须）       string
+	   book_id        商品的id	（必须 ）int
+	   goods_number   购买数量		 （必须   int
+数据表：    shop_book book book_attr order order——action shop
+逻辑位置：Order/controller/Order/addOrder
+实现原理：用book_id来判断shop_book是否已经有下架商品 ，有则返回下架提示，再判断购物车是否存在商品，库存是否充足,最后计算商品总价 列出商品信息
+
+接口名称：立即购买下单
+请求方式：post
+请求地址：Order/Order/addOrder
+请求参数：token  		用户token （必须）       string
+	   book_id        商品的id	（必须 ）int
+	   goods_number   购买数量		 （必须   int
+数据表：    shop_book book book_attr order order——action shop
+逻辑位置：Order/controller/Order/addOrder
+实现原理：用book_id来判断shop_book是否已经有下架商品 ，有则返回下架提示，再判断购物车是否存在商品，库存是否充足,最后计算商品总价 列出商品信息,生成订单，返回订单号
+ 
+接口名称：根据order_sn查收货地址
+请求方式：post
+请求地址：Order/Order/buyNowAddOrder
+请求参数：order_sn  		订单号 （必须）       string
+数据表：    order_info
+逻辑位置：Order/controller/Order/buyNowAddOrder
+实现原理：用order_sn查找该订单的收货地址
+
+接口名称：根据order_sn查订单创建时间
+请求方式：post
+请求地址：Order/Order/findOrderTime
+请求参数：order_sn  		订单号 （必须）       string
+数据表：    order
+逻辑位置：Order/controller/Order/findOrderTime
+实现原理：用order_sn查找该订单的创建时间
+
+接口名称：商品 使用余额支付
+请求方式：post
+请求地址：Order/Payment/doPayment
+请求参数：	token        用户的token（必须） string
+		order_sn  		订单号 （必须）       string
+数据表：    order user——xq
+逻辑位置：Order/controller/Payment/doPayment
+实现原理：用order_sn查找该订单判断有没有支付 然后再判断该用户可以余额是否充足 再减少用户余额增加商家余额 ，添加金钱流水 
+
+接口名称：店铺保证使用余额支付
+请求方式：post
+请求地址：Shop/ShopAction/payCashDeposit
+请求参数：	token        用户的token（必须） string
+		order_sn  		订单号 （必须）       string
+数据表：    order user——xq
+逻辑位置：Shop/controller/ShopAction/payCashDeposit
+实现原理：用order_sn查找该订单判断有没有支付 然后再判断该用户可以余额是否充足 再减少用户余额增加商家余额 ，添加金钱流水
+
+接口名称： 商品支付宝签名
+请求方式：post
+请求地址：Order/Payment/AlipaySign
+请求参数：token        用户的token（必须） string
+	   order_sn  		订单号 （必须）       string
+数据表：    order order_goods
+逻辑位置：Order/controller/Payment/AlipaySign
+实现原理：用order_sn查找该订单判断有没有支付 然后引入支付宝SDK宝 使用SDK宝中的内置方法进行订单 的签名和字段的拼接 
+
+接口名称： 店铺保证金支付宝签名
+请求方式：post
+请求地址：Order/Payment/ShopAlipaySign
+请求参数：	token        用户的token（必须） string
+		order_sn  		订单号 （必须）       string
+数据表：    shop_cash_deposit
+逻辑位置：Order/controller/Payment/ShopAlipaySign
+实现原理：用order_sn查找该订单判断有没有支付 然后引入支付宝SDK宝 使用SDK宝中的内置方法进行订单 的签名和字段的拼接     
+
+接口名称：  同意退款
+请求方式：post
+请求地址：Order/Payment/agreeRefund
+请求参数：	token        用户的token（必须） string
+		order_sn  		订单号 （必须）       string
+数据表：    order_refund,order
+逻辑位置：Order/controller/Payment/agreeRefund
+实现原理：用order_sn查找该订单的支付方式来区分退款去向，如果为余额则退回余额，如果为第三方支付则引入第三方SDK包使用sdk包内的方法退回第三方支付账号
+
+
+接口名称：  检测剩余支付时间 超时则自动失效
+请求方式：post
+请求地址：Order/Order/checkPay
+请求参数：	token        用户的token（必须） string
+		order_sn  		订单号 （必须）       string
+数据表：    order
+逻辑位置：Order/controller/Order/agreeRefund
+实现原理：用order_sn查找该订单的添加时间和剩余支付时间 ，并更新剩余支付时间，使用Linux的定时任务定时请求该接口 
+
+接口名称：  商品支付宝回调
+请求方式：post
+请求地址：Order/PayNotiy/BookAlipayNotify
+请求参数：	支付宝回调参数
+		
+数据表：    order order_action
+逻辑位置：Order/controller/PayNotiy/BookAlipayNotify
+实现原理：引入支付宝SDK包 使用SDK包中的验签方法来验证是否是支付宝回调的参数 然后再通过判断是否支付成功 更新订单状态和插入订单记录
+                                                 
+接口名称：  保证金支付宝回调
+请求方式：post
+请求地址：Order/PayNotiy/shopAlipayNotify
+请求参数：	支付宝回调参数		
+数据表：    shop_apply shop_cast——deposit
+逻辑位置：Order/controller/PayNotiy/shopAlipayNotify
+实现原理：引入支付宝SDK包 使用SDK包中的验签方法来验证是否是支付宝回调的参数 然后再通过判断是否支付成功 更新订单状态和插入订单记录   
+
+店铺模块
+
+接口名称：  开通店铺认证
+请求方式：post
+请求地址：Shop/ShopAction/addShopApply
+请求参数：token        用户的token（必须） string
+       legal,请填写法定代表人, （必须）   string
+       phone,店铺联系电话格式错误！,（必须）  string
+       shop_name',请填写店铺名称！,, （必须） string
+       shop_address,请填写店铺注册地址！,,（必须） string
+       business_license','请填写工商营业执照编号！,（必须） string
+       bl_time,'请填写工商营业执照有效期限',1),（必须） string
+       business_license_img,'请填写工商营业执照原件',（必须） string
+       pbln,'请填写出版物经营许可证编号！,（必须） string
+       pbln_time,'请填写出版物经营许可证有效期限',（必须） string
+       pbln_img,'请填写出版物经营许可证',（必须） string
+数据表：    shop_apply
+逻辑位置：Shop/controller/ShopAction/addShopApply
+实现原理：判断上传参数是否存在或为空，再查找是否已经提交了申请，插入数据和生成订单 返回订单号
+
+接口名称：  经办人认证
+请求方式：post
+请求地址：Shop/ShopAction/operatorApply
+请求参数： token        用户的token（必须） string
+	   legal,请填写法定代表人, （必须）   string
+       operator','请填写经办人姓名！' （必须）  string
+       operator_idcard_no','请填写经办人身份证号码！' （必须）    string
+       operator_phone','经办人联系电话格式错误！',   （必须）        string
+       id_card1','请上传身份证原件正面'        （必须）            string
+       id_card2','请上传身份证原件反面',      （必须）              string
+       id_card3','请上传经办人手持身份证正面',    （必须）             string
+数据表：    shop_apply 
+逻辑位置：Shop/controller/ShopAction/operatorApply
+实现原理：判断上传参数是否存在或为空，再查找是否已经提交了申请，插入数据
+
+
+接口名称：  申请更换认证资料
+请求方式：post
+请求地址：Shop/ShopAction/applyReplace
+请求参数： token        用户的token（必须） string
+	   reason,      申请原因, （必须）   string
+       
+数据表：    shop_apply shop_apply_replace
+逻辑位置：Shop/controller/ShopAction/applyReplace
+实现原理：判断有没有提交申请开通店铺，再判断有没有提交申请没有则插入数据
+
+接口名称：  查看认证资料
+请求方式：post
+请求地址：Shop/ShopAction/seeShopApply
+请求参数： token        用户的token（必须） string
+       
+数据表：    shop_apply 
+逻辑位置：Shop/controller/ShopAction/seeShopApply
+实现原理：判断有没有提交申请开通店铺，再列出申请的数据
+
+接口名称：  店家详情
+请求方式：post
+请求地址：Shop/ShopAction/shopDetail
+请求参数： token        用户的token（必须） string
+       
+数据表：    shop_apply 
+逻辑位置：Shop/controller/ShopAction/shopDetail
+实现原理：判断有没有提交申请开通店铺，判读有没有提交保证金 、返回审核状态
+
+接口名称： 获取店铺的所有商品评价
+请求方式：post
+请求地址：Shop/ShopInfo/getShopGoodsDiscuss
+请求参数： token        用户的token（必须） string
+       
+数据表：    book_comment
+逻辑位置：Shop/controller/ShopInfo/getShopGoodsDiscuss
+实现原理：构造函数判断有没有开通店铺，通过shop_id查找book_comment中的商品评价
+
+接口名称： 获取店铺的所有商品评价
+请求方式：post
+请求地址：Shop/ShopInfo/getShopGoodsDiscuss
+请求参数： token        用户的token（必须） string
+       skip         从第几条拿 （必须） string
+       take        拿几条数据（必须） string
+数据表：    book_comment shop
+逻辑位置：Shop/controller/ShopInfo/getShopGoodsDiscuss
+实现原理：构造函数判断有没有开通店铺，通过shop_id查找book_comment中的商品评价，用user_id判断有没有点赞      
+
+接口名称：查看店铺公告
+请求方式：post
+请求地址：Shop/ShopInfo/seeShopNotice
+请求参数： token        用户的token（必须） string
+数据表：    shop
+逻辑位置：Shop/controller/ShopInfo/seeShopNotice
+实现原理：构造函数判断有没有开通店铺，通过shop_id查找introduction公告 
+     
+接口名称：新建运费模块
+请求方式：post
+请求地址：Shop/ShopInfo/shop_shipping
+请求参数： token        用户的token（必须） string
+	   shipping_name','请填写模块名称！' （必须） string
+       deliver_address','请填写发货地址！'（必须） string
+       deliver_time','请填写发货时间！',（必须） string
+       pricing_mode','请选择计价方式',（必须） string
+       delivery_mode','请选择运送方式',（必须） string
+数据表：    shop shop_shipping
+逻辑位置：Shop/controller/ShopInfo/shop_shipping
+实现原理：构造函数判断有没有开通店铺，判断上传参数 插入shop_shipping记录        
+
+接口名称：删除运费模块
+请求方式：post
+请求地址：Shop/ShopInfo/delShopShipping
+请求参数： token        用户的token（必须） string
+	   shipping_id','请填写模块id' （必须） string
+
+数据表：    shop shop_shipping
+逻辑位置：Shop/controller/ShopInfo/delShopShipping
+实现原理：构造函数判断有没有开通店铺，删除shop_shipping中shipping——id数据
+
+接口名称：启用或者关闭运费模块
+请求方式：post
+请求地址：Shop/ShopInfo/delShopShipping
+请求参数： token        用户的token（必须） string
+	   shipping_id','请填写模块id' （必须） string
+
+数据表：    shop shop_shipping
+逻辑位置：Shop/controller/ShopInfo/delShopShipping
+实现原理：构造函数判断有没有开通店铺，更改shop_shipping中shipping_id enabled状态 
+
+接口名称：设置店铺公告
+请求方式：post
+请求地址：Shop/ShopInfo/changeShopNotice
+请求参数： token        用户的token（必须） string
+	   shop_notice','请填写店铺公告' （必须） string
+
+数据表：    shop 
+逻辑位置：Shop/controller/ShopInfo/changeShopNotice
+实现原理：构造函数判断有没有开通店铺，更改shop中的店铺公告字段      
+
+接口名称：获取店铺公告
+请求方式：post
+请求地址：Shop/ShopInfo/GetShopNotice
+请求参数： token        用户的token（必须） string
+
+数据表：    shop 
+逻辑位置：Shop/controller/ShopInfo/GetShopNotice
+实现原理：构造函数判断有没有开通店铺，获取shop中的店铺公告字段   
+
+接口名称：获取运费列表
+请求方式：post
+请求地址：Shop/ShopInfo/shippingList
+请求参数： token        用户的token（必须） string
+
+数据表：    shop_shipping 
+逻辑位置：Shop/controller/ShopInfo/shippingList
+实现原理：构造函数判断有没有开通店铺，获取shop_shipping中的shop_id的数据 
+
+接口名称：店铺数据统计
+请求方式：post
+请求地址：Shop/ShopInfo/shopCount
+请求参数： token        用户的token（必须） string
+
+数据表：    shop_visit order shop_income 
+逻辑位置：Shop/controller/ShopInfo/shopCount
+实现原理：构造函数判断有没有开通店铺，查找所需的店铺统计数据        
+
+接口名称：店铺订单管理
+请求方式：post
+请求地址：Shop/ShopInfo/orderList
+请求参数： token        用户的token（必须） string
+       skip       从第几条拿 （必须） string
+       take       拿几条（必须） string
+       type       订单类型    （必须） string 1为待付款 2已支付 3待发货 4已发货
+数据表：    order order_goods 
+逻辑位置：Shop/controller/ShopInfo/orderList
+实现原理：构造函数判断有没有开通店铺，用type区分查找的订单类型  从order中取出take并查处order_goods商品信息  
+
+接口名称：取消订单
+请求方式：post
+请求地址：Shop/ShopInfo/removeOrder
+请求参数： token        用户的token（必须） string
+       order_sn     订单号      （必须） string
+
+数据表：    order
+逻辑位置：Shop/controller/ShopInfo/removeOrder
+实现原理：构造函数判断有没有开通店铺，用order——sn判断是否已经取消了订单 否更新订单状态           
+
+接口名称： 修改价格
+请求方式：post
+请求地址：Shop/ShopInfo/updatePrice
+请求参数： token        用户的token（必须） string
+       order_sn     订单号      （必须） string
+       order_amount 订单价格  （必须） string
+数据表：    order
+逻辑位置：Shop/controller/ShopInfo/updatePrice
+实现原理：构造函数判断有没有开通店铺，用order——sn更新订单价格      
+
+接口名称：发货
+请求方式：post
+请求地址：Shop/ShopInfo/delivery
+请求参数： token        用户的token（必须） string
+       order_sn     订单号      （必须） string
+       invoice_no 发货单号  （必须） string
+数据表：    order delivery_doc
+逻辑位置：Shop/controller/ShopInfo/delivery
+实现原理：构造函数判断有没有开通店铺，用order——sn在order中查找在delivery——doc中插入新的数据      
+
+接口名称：下架图书
+请求方式：post
+请求地址：Shop/ShopInfo/downBook
+请求参数： token        用户的token（必须） string
+       book_id     图书id     （必须） string
+数据表：    book shop_books
+逻辑位置：Shop/controller/ShopInfo/downBook
+实现原理：构造函数判断有没有开通店铺，book_id判断shop_book是是否存在 有就更新is_show字段、book的状态，并查找购物车是否有该商品 有就删除该商品   
+
+接口名称：删除图书
+请求方式：post
+请求地址：Shop/ShopInfo/delBook
+请求参数： token        用户的token（必须） string
+       book_id     图书id     （必须） string
+数据表：    book shop_books
+逻辑位置：Shop/controller/ShopInfo/delBook
+实现原理：构造函数判断有没有开通店铺，book_id判断shop_book是是否存在 有就删除、更新 book的状态，并查找购物车是否有该商品 有就删除该商品         
+
+
+接口名称：搜索图书
+请求方式：post
+请求地址：Shop/ShopInfo/searchBook
+请求参数： token        用户的token（必须） string
+       skip       从第几条拿 （必须） string
+       take       拿几条（必须） string
+       book_name  书名 （必须） string
+数据表：    book shop_books
+逻辑位置：Shop/controller/ShopInfo/searchBook
+实现原理：构造函数判断有没有开通店铺，用shop_book左联book查询%book_name%的数据take
+
+ 接口名称：查看编辑图书
+ 请求方式：post
+请求地址：Shop/ShopInfo/editBook
+请求参数：
+       book_id      图书id    （必须） int
+数据表：    book_attr、book_tag、book
+逻辑位置：Shop/Controller/ShopInfo/editBook
+实现原理：构造函数判断有没有开通店铺，shop_book左联 book、book_attr和book_tag查找相关字段
+
+接口名称：保存编辑图书
+请求方式：post
+请求地址：Shop/ShopInfo/saveEditBook
+请求参数：token  		用户token （必须）       string
+       book_id      图书id    （必须） int
+       data         图书参数      （必须） json
+数据表：    Book、book_old、book_share、   book_attr
+逻辑位置：Shop/Controller/ShopInfo/saveEditBook
+实现原理：构造函数判断有没有开通店铺，判断data能不能用json_decod解出数组和book_id的图书类型如果是二手书或者新则判断有没有新旧程度、邮费、或者库存和修改book_share或book_old，再通过上传的参数修改book book_attr的数据
+
+接口名称：已完成订单 
+请求方式：post
+请求地址：Shop/ShopInfo/finishOrder
+请求参数： token        用户的token（必须） string
+       skip       从第几条拿 （必须） string
+       take       拿几条（必须） string
+数据表：    order order_goods
+逻辑位置：Shop/controller/ShopInfo/finishOrder
+实现原理：构造函数判断有没有开通店铺，使用shop_id查找order中完成的订单take
+
+接口名称：查看订单评价
+请求方式：post 
+请求地址：Shop/ShopInfo/orderDiscuss
+请求参数： token        用户的token（必须） string
+       skip       从第几条拿 （必须） string
+       take       拿几条（必须） string
+数据表：    book_comment
+逻辑位置：Shop/controller/ShopInfo/orderDiscuss
+实现原理：构造函数判断有没有开通店铺，先查出店铺的订单再使用order_id查找 book_comment中完成的评论take
+
+接口名称：退款中订单
+请求方式：post
+请求地址：Shop/ShopInfo/refundOrder
+请求参数： token        用户的token（必须） string
+       skip       从第几条拿 （必须） string
+       take       拿几条（必须） string
+数据表：   order
+逻辑位置：Shop/controller/ShopInfo/refundOrder
+实现原理：构造函数判断有没有开通店铺，先查出店铺的订单再使用order_id中订单状态需要退款的take
+
+接口名称：退款单详情
+请求方式：post
+请求地址：Shop/ShopInfo/refundOrderDet
+请求参数： token        用户的token（必须） string
+       refund_id   退款单id （必须） string
+数据表：    order_refund
+逻辑位置：Shop/controller/ShopInfo/refundOrderDet
+实现原理：构造函数判断有没有开通店铺，先查出店铺的订单再使用refund_id中订单状态需要退款详情 
+
+接口名称：拒绝退款
+请求方式：post
+请求地址：Shop/ShopInfo/rejectRefund
+请求参数： token        用户的token（必须） string
+       reason   退款原因  （必须） string
+       order_id 订单id  （必须） string
+数据表：    order_refund order
+逻辑位置：Shop/controller/ShopInfo/rejectRefund
+实现原理：构造函数判断有没有开通店铺，判断有没有提交原因，更新订单状态
+
+接口名称：查看某一条订单的信息
+请求方式：post
+请求地址：Shop/ShopInfo/orderDetail
+请求参数： token        用户的token（必须） string
+       order_id 订单id  （必须） string
+数据表：    order order_goods
+逻辑位置：Shop/controller/ShopInfo/orderDetail
+实现原理：构造函数判断有没有开通店铺，通过order——id查找order左联order——goods的订单数据
+            

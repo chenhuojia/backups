@@ -1,0 +1,16 @@
+<?php
+ define('APP_DEBUG',true);
+define('APP_PATH','./Interface/');
+define('APP_MODE','api');
+// error_reporting(0);
+// set_error_handler('AppError');
+// set_exception_handler('AppError');
+require 'ThinkPHP/ThinkPHP.php';
+function  AppError($errno, $errstr, $errfile, $errline){
+    if($errno==E_ERROR){
+    echo  '{"code":300,"message":403}';
+    exit();
+    }
+} 
+
+?>

@@ -1,0 +1,1292 @@
+[ 2017-04-01T00:22:51+08:00 ] 183.232.227.249 /Admin.php/Blog/edit2/art_id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000302s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000446s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000501s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0228s ]
+NOTIC: [8] Undefined index: validate /web/www/blog/tp3/ThinkPHP/Library/Think/Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto /web/www/blog/tp3/ThinkPHP/Library/Think/Model.class.php 第 1128 行.
+SQL: UPDATE `bk_article` SET `title`='liunx 源码安装 MySQL5.7 ',`cate_id`='2',`introduction`='liunx 源码安装 MySQL5.7 ',`content`='&lt;p&gt;										&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 13px; white-space: pre; background-color: rgb(255, 255, 255);&quot;&gt;&lt;span style=&quot;color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;一、安装环境准备&lt;/span&gt;&lt;br style=&quot;word-wrap: break-word; color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;/span&gt;&lt;/p&gt;&lt;table cellspacing=&quot;0&quot; class=&quot;t_table&quot; width=&quot;988&quot; style=&quot;width: 743px;&quot;&gt;&lt;tbody style=&quot;word-wrap: break-word;&quot;&gt;&lt;tr style=&quot;word-wrap: break-word; margin: 0px; padding: 0px; border: 0px;&quot; class=&quot;firstRow&quot;&gt;&lt;td style=&quot;word-wrap: break-word; margin: 0px; padding: 4px; border-color: rgb(227, 237, 245); overflow: hidden;&quot;&gt;1&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;/td&gt;&lt;td style=&quot;word-wrap: break-word; margin: 0px; padding: 4px; border-color: rgb(227, 237, 245); overflow: hidden;&quot;&gt;centos 6.5&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;&lt;br style=&quot;word-wrap: break-word; color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;br style=&quot;word-wrap: break-word; color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;span style=&quot;color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;二、下载mysql&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;color:#666666;word-wrap: break-word; font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;source_code&lt;/span&gt;&lt;br style=&quot;word-wrap: break-word; color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;/p&gt;&lt;table cellspacing=&quot;0&quot; class=&quot;t_table&quot; width=&quot;988&quot; style=&quot;width: 743px;&quot;&gt;&lt;tbody style=&quot;word-wrap: break-word;&quot;&gt;&lt;tr style=&quot;word-wrap: break-word; margin: 0px; padding: 0px; border: 0px;&quot; class=&quot;firstRow&quot;&gt;&lt;td style=&quot;word-wrap: break-word; margin: 0px; padding: 4px; border-color: rgb(227, 237, 245); overflow: hidden;&quot;&gt;1&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;2&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;3&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;4&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;5&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;/td&gt;&lt;td style=&quot;word-wrap: break-word; margin: 0px; padding: 4px; border-color: rgb(227, 237, 245); overflow: hidden;&quot;&gt;这里说一下，进入myql下载页面后选择source_code：&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;然后选择 Generic Linux (Architecture Independent), Compressed TAR Archive&amp;nbsp;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;Includes Boost Headers 这个包下载。&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;也可以用下面的地址：&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;wget&amp;nbsp;&lt;a href=&quot;http://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-boost-5.7.17.tar.gz&quot; rel=&quot;nofollow&quot; target=&quot;_blank&quot; style=&quot;word-wrap: break-word; color: rgb(51, 102, 153); outline: none;&quot;&gt;http://dev.mysql.com/get/Downloa ... boost-5.7.17.tar.gz&lt;/a&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;&lt;br style=&quot;word-wrap: break-word; color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;br style=&quot;word-wrap: break-word; color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;span style=&quot;color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;三、做一些准备工作&amp;nbsp;&lt;/span&gt;&lt;br style=&quot;word-wrap: break-word; color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;br style=&quot;word-wrap: break-word; color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;/p&gt;&lt;table cellspacing=&quot;0&quot; class=&quot;t_table&quot; width=&quot;988&quot; style=&quot;width: 743px;&quot;&gt;&lt;tbody style=&quot;word-wrap: break-word;&quot;&gt;&lt;tr style=&quot;word-wrap: break-word; margin: 0px; padding: 0px; border: 0px;&quot; class=&quot;firstRow&quot;&gt;&lt;td style=&quot;word-wrap: break-word; margin: 0px; padding: 4px; border-color: rgb(227, 237, 245); overflow: hidden;&quot;&gt;1&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;2&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;3&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;4&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;5&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;6&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;7&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;8&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;9&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;10&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;11&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;12&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;13&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;14&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;15&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;16&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;17&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;18&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;19&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;20&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;21&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;22&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;23&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;24&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;25&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;26&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;27&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;28&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;29&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;30&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;31&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;32&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;33&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;34&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;35&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;36&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;/td&gt;&lt;td style=&quot;word-wrap: break-word; margin: 0px; padding: 4px; border-color: rgb(227, 237, 245); overflow: hidden;&quot;&gt;su - root&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#关闭Linux防火墙命令&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;chkconfig iptables off&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#修改SELINUX配置&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;vim /etc/sysconfig/selinux&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#SELINUX=enforcing&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#修改为：&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#SELINUX=disabled&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;reboot&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#安装cmake mysql5.7采用cmake方式进行配置&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;yum -y update&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;yum -y install wget gcc-c++ ncurses-devel cmake make perl&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#创建用户、组 为mysql&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;groupadd mysql&amp;nbsp;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;useradd -r -g mysql mysql&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#新建数据库执行文件目录(后面会把编译好的mysql程序安装到这个目录)：&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;mkdir -p /application/mysql5.7.17&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;ln -s&amp;nbsp;&amp;nbsp;/application/mysql /application/mysql5.7.17&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#新建数据库数据文件目录：&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;mkdir -p /home/mysql&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;mkdir -p /home/mysql/data&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;mkdir -p /home/mysql/logs&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;mkdir -p /home/mysql/temp&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;# 编辑PATH搜索路径&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;vi /etc/profile +&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;# 在profile文件末尾增加两行&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;# PATH=/application/mysql/bin:/application/mysql/lib:$PATH&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;# export PATH&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;# 使PATH搜索路径立即生效：&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;source /etc/profile&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;# 编辑hosts文件，增加一行，加入本机IP和主机名（需要根据实际情况修改IP和主机名）&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;vi /etc/hosts +&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;# 192.168.3.158&amp;nbsp; &amp;nbsp; skytest&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;# ok进入下载工具目录，开始下载&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;cd /home/tools&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;wget&amp;nbsp;&lt;a href=&quot;http://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-boost-5.7.17.tar.gz&quot; rel=&quot;nofollow&quot; target=&quot;_blank&quot; style=&quot;word-wrap: break-word; color: rgb(51, 102, 153); outline: none;&quot;&gt;http://dev.mysql.com/get/Downloa ... boost-5.7.17.tar.gz&lt;/a&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;&lt;br style=&quot;word-wrap: break-word; color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;br style=&quot;word-wrap: break-word; color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;span style=&quot;color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;四、配置并安装&lt;/span&gt;&lt;br style=&quot;word-wrap: break-word; color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;/p&gt;&lt;table cellspacing=&quot;0&quot; class=&quot;t_table&quot; width=&quot;988&quot; style=&quot;width: 743px;&quot;&gt;&lt;tbody style=&quot;word-wrap: break-word;&quot;&gt;&lt;tr style=&quot;word-wrap: break-word; margin: 0px; padding: 0px; border: 0px;&quot; class=&quot;firstRow&quot;&gt;&lt;td style=&quot;word-wrap: break-word; margin: 0px; padding: 4px; border-color: rgb(227, 237, 245); overflow: hidden;&quot;&gt;1&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;2&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;3&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;4&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;5&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;6&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;7&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;8&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;9&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;10&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;11&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;12&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;13&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;14&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;15&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;16&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;17&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;18&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;19&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;20&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;21&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;22&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;23&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;24&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;25&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;26&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;27&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;28&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;29&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;30&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;31&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;32&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;33&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;34&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;35&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;36&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;37&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;38&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;39&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;40&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;41&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;42&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;43&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;44&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;45&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;46&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;47&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;48&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;49&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;50&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;51&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;52&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;53&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;54&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;55&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;56&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;57&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;58&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;59&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;60&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;61&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;62&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;63&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;64&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;65&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;66&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;67&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;68&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;69&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;70&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;71&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;72&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;73&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;74&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;75&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;76&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;77&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;78&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;79&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;80&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;81&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;82&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;83&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;84&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;85&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;86&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;87&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;88&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;89&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;90&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;91&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;/td&gt;&lt;td style=&quot;word-wrap: break-word; margin: 0px; padding: 4px; border-color: rgb(227, 237, 245); overflow: hidden;&quot;&gt;cmake \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DCMAKE_INSTALL_PREFIX=/application/mysql \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DMYSQL_UNIX_ADDR=/application/mysql.sock \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DDEFAULT_CHARSET=utf8 \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DDEFAULT_COLLATION=utf8_general_ci \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DWITH_MYISAM_STORAGE_ENGINE=1 \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DWITH_INNOBASE_STORAGE_ENGINE=1 \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DWITH_ARCHIVE_STORAGE_ENGINE=1 \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DWITH_BLACKHOLE_STORAGE_ENGINE=1 \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DWITH_MEMORY_STORAGE_ENGINE=1 \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DWITH_READLINE=1 \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DENABLED_LOCAL_INFILE=1 \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DMYSQL_DATADIR=/home/mysql/data \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DMYSQL_USER=mysql \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DMYSQL_TCP_PORT=3306 \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DENABLE_DOWNLOADS=1 \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;-DWITH_BOOST=boost/boost_1_59_0/&amp;nbsp;&amp;nbsp;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#-DWITH_BOOST=boost/boost_1_59_0/ 这一行是指定boost库的位置，&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#如果下载的不是mysql-boost-5.7.17.tar.gz 这个已经包含boost库的包，&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#那么需要在配置项中指明下载 boost 库 当然这样比较慢，所以还是建议下载完整包&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#直接cmake指定参数 -DDOWNLOAD_BOOST=1 -DWITH_BOOST=&amp;lt;directory&amp;gt; 系统会下载 boost&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#cmake结束后开始编译源码，这一步时间会较长，嗯，长的我都快睡了。&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;make&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#看一下有没有错误&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;echo $?&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#输出0，没有错误继续&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;make install&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#清除安装临时文件&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;make clean&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#修改目录拥有者&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;chown -Rf mysql:mysql /application/mysql5.7.17&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;chown -Rf mysql:mysql /home/mysql&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#创建自带的库和表&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#mysql5.7之前版本初始化配置表命令：&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#script/mysql_install_db \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#--user=mysql \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#--basedir=/application/mysql \\&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#--datadir=/home/mysql/data&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#mysql5.7已经放弃使用了，而且也没有script目录，可以使用下面这个&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;cd /application/myql&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;./bin/mysqld&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;--initialize&amp;nbsp;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;--user=mysql&amp;nbsp;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;--basedir=/application/mysql&amp;nbsp;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;--datadir=/home/mysql/data&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#初始化数据后注意文字提示，里面有root用户的初始密码&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#在/etc目录下如果存在一个my.cnf文件，建议将此文件更名为其他的名字，&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#否则该文件 会干扰源码安装的MySQL的正确配置，造成无法启动。&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#修改/etc/my.cnf操作如下：&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;mv /etc/my.cnf /etc/my.cnf.bak&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#在启动MySQL服务时，会按照一定次序搜索my.cnf，先在/etc目录下找，&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#找不到则会搜索mysql程序目录下是否有my.cnf&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;cp /application/mysql/support-files/my-default.cnf&amp;nbsp;&amp;nbsp;/etc/my.cnf&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#mysql5.7配置文件需要修改my.cnf关键配置，&amp;nbsp;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#mysql5.7之前默认配置文件中是有配置项的，不用手动修改&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;vi /etc/my.cnf&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#修改下面配置&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;[mysqld]&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;basedir =/application/mysql&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;datadir =/home/mysql/data&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;port = 3306&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;socket = /home/mysql/temp/mysql.sock&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;[client]&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;socket=/tmp/mysql.sock&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#client这个字段千万别忘了，如果没有就自己加。不然会不能登录，出现以下错误&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#ERROR 2002 (HY000): Can&amp;#39;t connect to local MySQL server through socket &amp;#39;/application/mysql5.7/mysql.sock&amp;#39; (2)&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;#使用service mysql命令启动/停止服务&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;cp /application/mysql/support-files/mysql.server /etc/init.d/mysql&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;&lt;br style=&quot;word-wrap: break-word; color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;br style=&quot;word-wrap: break-word; color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;br style=&quot;word-wrap: break-word; color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;span style=&quot;color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;五、加入开机启动&lt;/span&gt;&lt;br style=&quot;word-wrap: break-word; color: rgb(68, 68, 68); font-family: &amp;quot;Microsoft yahei&amp;quot;, ΢���ź�, Arial, Helvetica, sans-serif, ����; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;/p&gt;&lt;table cellspacing=&quot;0&quot; class=&quot;t_table&quot; width=&quot;988&quot; style=&quot;width: 743px;&quot;&gt;&lt;tbody style=&quot;word-wrap: break-word;&quot;&gt;&lt;tr style=&quot;word-wrap: break-word; margin: 0px; padding: 0px; border: 0px;&quot; class=&quot;firstRow&quot;&gt;&lt;td style=&quot;word-wrap: break-word; margin: 0px; padding: 4px; border-color: rgb(227, 237, 245); overflow: hidden;&quot;&gt;1&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;/td&gt;&lt;td style=&quot;word-wrap: break-word; margin: 0px; padding: 4px; border-color: rgb(227, 237, 245); overflow: hidden;&quot;&gt;chkconfig mysql on&lt;br style=&quot;word-wrap: break-word;&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 13px; white-space: pre; background-color: rgb(255, 255, 255);&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;',`addtime`='1490977371' WHERE `art_id` = 10 [ RunTime:0.2147s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000050s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000125s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.049059s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.049096s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.049350s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.049410s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000024s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.050548s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.047082s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.049538s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000014s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.047275s ]
+
+[ 2017-04-01T00:22:54+08:00 ] 183.232.227.249 /Admin.php/Blog/edit/art_id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000304s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000469s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000534s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0247s ]
+SQL: SELECT * FROM `bk_article` WHERE `art_id` = 10 LIMIT 1   [ RunTime:0.0494s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0250s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0245s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000083s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000146s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.232552s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.232605s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.046287s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.046348s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000555s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000635s ]
+
+[ 2017-04-01T00:23:00+08:00 ] 183.232.227.249 /Admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000339s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000421s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.044529s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0266s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0281s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0263s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 0,10   [ RunTime:0.1593s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000080s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000147s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.339765s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.339825s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000286s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000321s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000782s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000872s ]
+
+[ 2017-04-01T00:23:03+08:00 ] 183.232.227.249 /Admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000307s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000407s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000468s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0268s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0263s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000069s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000129s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.305770s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.337895s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000274s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000300s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000423s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000446s ]
+
+[ 2017-04-01T00:23:33+08:00 ] 183.232.227.249 /Admin.php/img/share/icons_0_16.png?v=91362611.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.046927s ]
+
+[ 2017-04-01T00:24:17+08:00 ] 183.232.227.249 /Admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000358s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.022610s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.022689s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0264s ]
+NOTIC: [8] Undefined index: validate /web/www/blog/tp3/ThinkPHP/Library/Think/Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto /web/www/blog/tp3/ThinkPHP/Library/Think/Model.class.php 第 1128 行.
+SQL: INSERT INTO `bk_article` (`title`,`cate_id`,`introduction`,`content`,`addtime`) VALUES ('MySQL安装-数据初始化操作时的问题处理','2','MySQL安装-数据初始化操作时的问题处理','&lt;p&gt;1、数据初始化-主机名解析错误&lt;/p&gt;&lt;p&gt;系统-Red Hat Enterprise&amp;nbsp;&lt;a href=&quot;http://lib.csdn.net/base/linux&quot; class=&quot;replace_word&quot; title=&quot;Linux知识库&quot; target=&quot;_blank&quot; style=&quot;color: rgb(223, 52, 52); text-decoration: none; font-weight: bold;&quot;&gt;Linux&lt;/a&gt;&amp;nbsp;Server release 6.6&lt;/p&gt;&lt;p&gt;软件-源码安装&lt;a href=&quot;http://lib.csdn.net/base/mysql&quot; class=&quot;replace_word&quot; title=&quot;MySQL知识库&quot; target=&quot;_blank&quot; style=&quot;color: rgb(223, 52, 52); text-decoration: none; font-weight: bold;&quot;&gt;MySQL&lt;/a&gt;-5.6.27.tar.gz&lt;/p&gt;&lt;p&gt;环境-Linux rhel6.myexample.com 2.6.32-504.el6.x86_64 #1 SMP Tue Sep 16 01:56:35 EDT 2014 x86_64 x86_64 x86_64 GNU/Linux&lt;/p&gt;&lt;p&gt;报错：WARNING&lt;/p&gt;&lt;p&gt;[root@rhel6 mysql]# scripts/mysql_install_db --user=mysql&lt;br/&gt;WARNING: The host &amp;#39;rhel6.myexample.com&amp;#39; could not be looked up with ./bin/resolveip.&lt;br/&gt;This probably means that your libc libraries are not 100 % compatible&lt;br/&gt;with this binary MySQL version. The MySQL daemon, mysqld, should work&lt;br/&gt;normally with the exception that host name resolving will not work.&lt;br/&gt;This means that you should use IP addresses instead of hostnames&lt;br/&gt;when specifying MySQL privileges !&lt;br/&gt;&lt;/p&gt;&lt;p&gt;原因：主机名解析错误。&lt;/p&gt;&lt;p&gt;解决：hosts文件中添加如下内容，ok！&lt;/p&gt;&lt;p&gt;[root@rhel6 mysql]# vi /etc/hosts&lt;/p&gt;&lt;p&gt;192.168.56.20 rhel6.myexample.com&lt;br/&gt;&lt;/p&gt;&lt;p&gt;总结：&lt;/p&gt;&lt;p&gt;因为lib库不是很兼容当前MySQL版本。在主机名解析不起作用的情况下，会引起MySQL守护进程、mysqld工作异常，因此在MySQL中授权时需要使用IP地址，而不能使用主机名。&lt;/p&gt;&lt;p&gt;（不解决该问题，依然可以正确执行scripts/mysql_install_db&lt;a href=&quot;http://lib.csdn.net/base/mysql&quot; class=&quot;replace_word&quot; title=&quot;MySQL知识库&quot; target=&quot;_blank&quot; style=&quot;color: rgb(223, 52, 52); text-decoration: none; font-weight: bold;&quot;&gt;数据库&lt;/a&gt;初始化脚本。）&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;2、数据初始化-时间戳问题&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;系统-Red Hat Enterprise Linux Server release 6.6&lt;/p&gt;&lt;p&gt;软件-源码安装mysql-5.6.27.tar.gz&lt;/p&gt;&lt;p&gt;环境-Linux rhel6.myexample.com 2.6.32-504.el6.x86_64 #1 SMP Tue Sep 16 01:56:35 EDT 2014 x86_64 x86_64 x86_64 GNU/Linux&lt;/p&gt;&lt;p&gt;报错：Warning&lt;/p&gt;&lt;p&gt;[root@rhel6 mysql]# scripts/mysql_install_db --user=mysql&lt;br/&gt;Installing MySQL system tables...2015-11-04 07:46:37 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).&lt;br/&gt;2015-11-04 07:46:37 0 [Note] ./bin/mysqld (mysqld 5.6.27) starting as process 2867 ...&lt;br/&gt;&lt;/p&gt;&lt;p&gt;原因：机器的系统时间与TIMESTAMP时间戳不匹配。&lt;/p&gt;&lt;p&gt;解决：执行mysql_install_db数据初始化脚本时添加explicit_defaults_for_timestamp选项。&lt;/p&gt;&lt;p&gt;[root@rhel6 mysql]# scripts/mysql_install_db --user=mysql --explicit_defaults_for_timestamp&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;3、数据初始化-重复安装引起多个配置文件，默认配置文件&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;系统-Red Hat Enterprise Linux Server release 6.6&lt;/p&gt;&lt;p&gt;软件-源码安装mysql-5.6.27.tar.gz&lt;/p&gt;&lt;p&gt;环境-Linux rhel6.myexample.com 2.6.32-504.el6.x86_64 #1 SMP Tue Sep 16 01:56:35 EDT 2014 x86_64 x86_64 x86_64 GNU/Linux&lt;/p&gt;&lt;p&gt;报错：Warning&lt;/p&gt;&lt;p&gt;WARNING: Found existing config file ./my.cnf on the system.&lt;br/&gt;Because this file might be in use, it was not replaced,&lt;br/&gt;but was used in bootstrap (unless you used --defaults-file)&lt;br/&gt;and when you later start the server.&lt;br/&gt;The new default config file was created as ./my-new.cnf,&lt;br/&gt;please compare it with your file and take the changes you need.&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;WARNING: Default config file /etc/my.cnf exists on the system&lt;br/&gt;This file will be read by default by the MySQL server&lt;br/&gt;If you do not want to use this, either remove it, or use the&lt;br/&gt;--defaults-file argument to mysqld_safe when starting the server&lt;br/&gt;&lt;/p&gt;&lt;p&gt;原因：&lt;/p&gt;&lt;p&gt;Warning1是因为重复安装，导致在安装目录下已经存在my.cnf文件。&lt;/p&gt;&lt;p&gt;Warning2是指默认的my.cnf配置文件在/etc/目录下。&lt;br/&gt;&lt;/p&gt;&lt;p&gt;启动Mysql server时，可指定--default-file=/path/my.cnf参数来启动mysql服务。&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;=============================================================================================================================&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;正确执行的显示：&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;[root@rhel6 mysql]# scripts/mysql_install_db --user=mysql --explicit_defaults_for_timestamp&lt;br/&gt;Installing MySQL system tables...2015-11-04 08:48:03 0 [Note] ./bin/mysqld (mysqld 5.6.27) starting as process 3147 ...&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Using atomics to ref count buffer pool pages&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: The InnoDB memory heap is disabled&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Memory barrier is not used&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Compressed tables use zlib 1.2.3&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Using CPU crc32 instructions&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Initializing buffer pool, size = 128.0M&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Completed initialization of buffer pool&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Highest supported file format is Barracuda.&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: 128 rollback segment(s) are active.&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Waiting for purge to start&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: 5.6.27 started; log sequence number 1626007&lt;br/&gt;2015-11-04 08:48:11 3147 [Note] Binlog end&lt;br/&gt;2015-11-04 08:48:11 3147 [Note] InnoDB: FTS optimize thread exiting.&lt;br/&gt;2015-11-04 08:48:11 3147 [Note] InnoDB: Starting shutdown...&lt;br/&gt;2015-11-04 08:48:12 3147 [Note] InnoDB: Shutdown completed; log sequence number 1626017&lt;br/&gt;OK&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;Filling help tables...2015-11-04 08:48:12 0 [Note] ./bin/mysqld (mysqld 5.6.27) starting as process 3171 ...&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Using atomics to ref count buffer pool pages&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: The InnoDB memory heap is disabled&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Memory barrier is not used&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Compressed tables use zlib 1.2.3&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Using CPU crc32 instructions&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Initializing buffer pool, size = 128.0M&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Completed initialization of buffer pool&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Highest supported file format is Barracuda.&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: 128 rollback segment(s) are active.&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Waiting for purge to start&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: 5.6.27 started; log sequence number 1626017&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] Binlog end&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: FTS optimize thread exiting.&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Starting shutdown...&lt;br/&gt;2015-11-04 08:48:14 3171 [Note] InnoDB: Shutdown completed; log sequence number 1626027&lt;br/&gt;OK&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;To start mysqld at boot time you have to copy&lt;br/&gt;support-files/mysql.server to the right place for your system&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !&lt;br/&gt;To do so, start the server, then issue the following commands:&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&amp;nbsp; ./bin/mysqladmin -u root password &amp;#39;new-password&amp;#39;&lt;br/&gt;&amp;nbsp; ./bin/mysqladmin -u root -h rhel6.myexample.com password &amp;#39;new-password&amp;#39;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;Alternatively you can run:&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&amp;nbsp; ./bin/mysql_secure_installation&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;which will also give you the option of removing the test&lt;br/&gt;databases and anonymous user created by default. &amp;nbsp;This is&lt;br/&gt;strongly recommended for production servers.&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;See the manual for more instructions.&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;You can start the MySQL daemon with:&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&amp;nbsp; cd . ; ./bin/mysqld_safe &amp;amp;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;You can test the MySQL daemon with mysql-test-run.pl&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&amp;nbsp; cd mysql-test ; perl mysql-test-run.pl&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;Please report any problems at http://bugs.mysql.com/&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;The latest information about MySQL is available on the web at&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&amp;nbsp; http://www.mysql.com&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;Support MySQL by buying support/licenses at http://shop.mysql.com&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;New default config file was created as ./my.cnf and&lt;br/&gt;will be used by default by the server when you start it.&lt;br/&gt;You may edit this file to change server settings&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;WARNING: Default config file /etc/my.cnf exists on the system&lt;br/&gt;This file will be read by default by the MySQL server&lt;br/&gt;If you do not want to use this, either remove it, or use the&lt;br/&gt;--defaults-file argument to mysqld_safe when starting the server&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;[root@rhel6 mysql]#&lt;br/&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 0px; margin-bottom: 1.1em; color: rgb(51, 51, 51); font-family: &amp;quot;microsoft yahei&amp;quot;; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;&lt;strong style=&quot;box-sizing: border-box;&quot;&gt;–initialize specified but the data directory has files in it. Aborting.&lt;/strong&gt;&amp;nbsp;&lt;br style=&quot;box-sizing: border-box;&quot;/&gt;2017-02-19T07:52:53.809095Z 0 [ERROR] Aborting&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 0px; margin-bottom: 1.1em; color: rgb(51, 51, 51); font-family: &amp;quot;microsoft yahei&amp;quot;; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;其中红色字体里面说明，&lt;a href=&quot;http://lib.csdn.net/base/mysql&quot; class=&quot;replace_word&quot; title=&quot;MySQL知识库&quot; target=&quot;_blank&quot; style=&quot;color: rgb(223, 52, 52); text-decoration: none; box-sizing: border-box; font-weight: bold;&quot;&gt;MySQL&lt;/a&gt;中的data目录已经有数据了&lt;/p&gt;&lt;p style=&quot;margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; font-size: 14px; font-family: tahoma, arial, 宋体; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;root@DB-02 ~]# mysql -u root&lt;br/&gt;-bash: mysql: command not found&lt;/p&gt;&lt;p style=&quot;margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; font-size: 14px; font-family: tahoma, arial, 宋体; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;&lt;br/&gt;原因:这是由于系统默认会查找/usr/bin下的命令，如果这个命令不在这个目录下，当然会找不到命令，我们需要做的就是映射一个链接到/usr/bin目录下，相当于建立一个链接文件。&lt;br/&gt;首先得知道mysql命令或mysqladmin命令的完整路径，比如mysql的路径是：/usr/local/mysql/bin/mysql，我们则可以这样执行命令：&lt;/p&gt;&lt;p style=&quot;margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; font-size: 14px; font-family: tahoma, arial, 宋体; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;# ln -s /usr/local/mysql/bin/mysql /usr/bin&lt;/p&gt;&lt;p style=&quot;margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; font-size: 14px; font-family: tahoma, arial, 宋体; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;&lt;span style=&quot;line-height: 21.6px; font-size: 12px; color: rgb(255, 0, 0);&quot;&gt;以下是补充：&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; font-size: 14px; font-family: tahoma, arial, 宋体; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;linux下，在mysql正常运行的情况下，输入mysql提示：&lt;br/&gt;mysql command not found&lt;/p&gt;&lt;p style=&quot;margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; font-size: 14px; font-family: tahoma, arial, 宋体; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;遇上-bash: mysql: command not found的情况别着急，这个是因为/usr/local/bin目录下缺失mysql导致，只需要一下方法建立软链接，即可以解决：&lt;br/&gt;把mysql安装目录，比如MYSQLPATH/bin/mysql，映射到/usr/local/bin目录下：&amp;nbsp;&lt;br/&gt;# cd /usr/local/bin&lt;br/&gt;# ln -fs /MYSQLPATH/bin/mysql mysql&lt;/p&gt;&lt;p style=&quot;margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; font-size: 14px; font-family: tahoma, arial, 宋体; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;还有其它常用命令mysqladmin、mysqldump等不可用时候都可按用此方法解决。&lt;br/&gt;注：其中MYSQLPATH是mysql的实际安装路径&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;','1490977456') [ RunTime:0.0706s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000039s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000116s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.132282s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.132348s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000177s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000200s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0422s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0267s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000068s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.197194s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.082610s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.069692s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000006s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.152125s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000519s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000591s ]
+
+[ 2017-04-01T00:24:19+08:00 ] 183.232.227.249 /Admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000334s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000501s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000565s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0261s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0256s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000070s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000132s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.171309s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.171359s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000150s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000172s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.038635s ]
+INFO: [ app_end ] --END-- [ RunTime:0.038692s ]
+
+[ 2017-04-01T11:18:30+08:00 ] 113.109.42.48 /Admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.027106s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000607s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000694s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.015116s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.015215s ]
+NOTIC: [8] Undefined index: admin /web/www/blog/tp3/Application/Runtime/Cache/Admin/b595b808c2ebeeeb0478ffc30bb4e87a.php 第 39 行.
+NOTIC: [8] Undefined index: admin /web/www/blog/tp3/Application/Runtime/Cache/Admin/b595b808c2ebeeeb0478ffc30bb4e87a.php 第 39 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.276275s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.276307s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.044396s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.044446s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000423s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000459s ]
+
+[ 2017-04-01T11:18:31+08:00 ] 113.109.42.48 /Admin.php/System/Login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: [ app_init ] --END-- [ RunTime:0.047552s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.046512s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.046570s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000083s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000167s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.296416s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.296479s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000208s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000230s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.043526s ]
+INFO: [ app_end ] --END-- [ RunTime:0.043593s ]
+
+[ 2017-04-01T11:18:32+08:00 ] 113.109.42.48 /Admin.php/System/Verify.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000300s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.022879s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.022954s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000571s ]
+INFO: [ app_end ] --END-- [ RunTime:0.046693s ]
+
+[ 2017-04-01T11:18:33+08:00 ] 113.109.42.48 /Admin.php/System/Login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000293s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000452s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000513s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.042100s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.042233s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.279910s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.279951s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000158s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000190s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.049790s ]
+INFO: [ app_end ] --END-- [ RunTime:0.049860s ]
+
+[ 2017-04-01T11:18:41+08:00 ] 113.109.42.48 /Admin.php/System/Login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000291s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.058264s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.058341s ]
+SQL: SHOW COLUMNS FROM `bk_admin` [ RunTime:0.0241s ]
+NOTIC: [8] Undefined index: validate /web/www/blog/tp3/ThinkPHP/Library/Think/Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto /web/www/blog/tp3/ThinkPHP/Library/Think/Model.class.php 第 1128 行.
+SQL: SELECT * FROM `bk_admin` WHERE `name` = 'admin' LIMIT 1   [ RunTime:0.0373s ]
+SQL: update bk_admin set last_login_time= '2017-04-01 11:18:40',login_num=login_num+1,login_ip='172.17.112.146' where id=1 [ RunTime:0.0497s ]
+
+[ 2017-04-01T11:18:43+08:00 ] 113.109.42.48 /Admin.php/Index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000031s ]
+INFO: [ app_init ] --END-- [ RunTime:0.046381s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.048583s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.048642s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000073s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000142s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.282155s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.282212s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.045278s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.045335s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000537s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000574s ]
+
+[ 2017-04-01T11:18:44+08:00 ] 113.109.42.48 /Admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.048543s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000488s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000569s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000080s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000153s ]
+NOTIC: [8] Undefined index: USERNAME /web/www/blog/tp3/Application/Runtime/Cache/Admin/69fa43b310489e974c292babf8eca7e7.php 第 108 行.
+NOTIC: [8] Undefined index: PATH /web/www/blog/tp3/Application/Runtime/Cache/Admin/69fa43b310489e974c292babf8eca7e7.php 第 136 行.
+NOTIC: [8] Undefined index: USERNAME /web/www/blog/tp3/Application/Runtime/Cache/Admin/69fa43b310489e974c292babf8eca7e7.php 第 196 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.289489s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.289584s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000160s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000187s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.046833s ]
+INFO: [ app_end ] --END-- [ RunTime:0.046902s ]
+
+[ 2017-04-01T11:18:47+08:00 ] 113.109.42.48 /Admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000295s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000349s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000401s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0238s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0237s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0233s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 0,10   [ RunTime:0.1405s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000127s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.047258s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.419886s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.419958s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000232s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000255s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000581s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000652s ]
+
+[ 2017-04-01T11:18:52+08:00 ] 113.109.42.48 /Admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000357s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.046478s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.046538s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0236s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0231s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000081s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000155s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.246566s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.246638s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000261s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000329s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000427s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000456s ]
+
+[ 2017-04-01T11:20:03+08:00 ] 113.109.42.48 /Admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000328s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000664s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000743s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0230s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0228s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0227s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 0,10   [ RunTime:0.1596s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000080s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000144s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.291034s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.291109s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000299s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000338s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000603s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000672s ]
+
+[ 2017-04-01T11:20:07+08:00 ] 113.109.42.48 /Admin.php/Blog/article/p/2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000297s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000418s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000477s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0236s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0235s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0230s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 10,10   [ RunTime:0.1874s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000081s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000147s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.306380s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.306441s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.038594s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.038651s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000655s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000737s ]
+
+[ 2017-04-01T11:20:11+08:00 ] 113.109.42.48 /Admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000334s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000357s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000408s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0231s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0227s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000069s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000128s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.209268s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.209323s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000151s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000179s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.049658s ]
+INFO: [ app_end ] --END-- [ RunTime:0.049729s ]
+
+[ 2017-04-01T11:21:23+08:00 ] 113.109.42.48 /Admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.043910s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.046657s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.046735s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0231s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0229s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0227s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 0,10   [ RunTime:0.1362s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000097s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000169s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.399335s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.399431s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000305s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000342s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.032741s ]
+INFO: [ app_end ] --END-- [ RunTime:0.032833s ]
+
+[ 2017-04-01T11:21:25+08:00 ] 113.109.42.48 /Admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.047458s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.049576s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.049642s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0236s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0235s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0233s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 0,10   [ RunTime:0.1398s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000094s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000175s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.333608s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.333682s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.048310s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.048369s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000591s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000659s ]
+
+[ 2017-04-01T11:21:31+08:00 ] 113.109.42.48 /Admin.php/Blog/article/p/2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000331s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000349s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000400s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0235s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0236s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0232s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 10,10   [ RunTime:0.1614s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000079s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000135s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.245143s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.245197s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000236s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000260s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000625s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000706s ]
+
+[ 2017-04-01T11:21:38+08:00 ] 113.109.42.48 /Admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000300s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.030949s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.031028s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0237s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0230s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000084s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000164s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.259845s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.259907s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000229s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000261s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.049720s ]
+INFO: [ app_end ] --END-- [ RunTime:0.049785s ]
+
+[ 2017-04-01T11:22:32+08:00 ] 113.109.42.48 /Admin.php/Category/articleList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.049600s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.038540s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.038598s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0236s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0236s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_category` LIMIT 1   [ RunTime:0.0233s ]
+SQL: SELECT * FROM `bk_category` ORDER BY sort desc LIMIT 0,10   [ RunTime:0.0260s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000082s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000163s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.398210s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.398278s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.040150s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.040234s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000780s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000871s ]
+
+[ 2017-04-01T11:22:35+08:00 ] 113.109.42.48 /Admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000290s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000394s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.045590s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0235s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0234s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0233s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 0,10   [ RunTime:0.1612s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000078s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000136s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.294623s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.294695s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000233s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000263s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000583s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000666s ]
+
+[ 2017-04-01T11:22:36+08:00 ] 113.109.42.48 /Admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000329s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000398s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000447s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0238s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0237s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0235s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 0,10   [ RunTime:0.1411s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000078s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000134s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.275704s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.275764s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000292s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.047410s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000553s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000624s ]
+
+[ 2017-04-01T11:22:52+08:00 ] 113.109.42.48 /Admin.php/Blog/article/p/4.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.047005s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000354s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000402s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0235s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0236s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0233s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 30,10   [ RunTime:0.1168s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000081s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000138s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.348240s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.348343s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000240s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000264s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000571s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000640s ]
+
+[ 2017-04-01T11:22:59+08:00 ] 113.109.42.48 /Admin.php/Blog/article/p/3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.045916s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000352s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000402s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0229s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0229s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0226s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 20,10   [ RunTime:0.2529s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000079s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000136s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.431061s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.431141s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.043499s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.043602s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000547s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000615s ]
+
+[ 2017-04-01T11:23:07+08:00 ] 113.109.42.48 /Admin.php/Blog/article/p/2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.032817s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.039550s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.039607s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0235s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0233s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0232s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 10,10   [ RunTime:0.1404s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.043354s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.043449s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.275820s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.317948s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000256s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000285s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000655s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000735s ]
+
+[ 2017-04-01T11:23:13+08:00 ] 113.109.42.48 /Admin.php/Blog/article/p/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000312s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.046939s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.047011s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0233s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0232s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0229s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 0,10   [ RunTime:0.1378s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000083s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000143s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.349989s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.350047s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.047323s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.047381s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000605s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000675s ]
+
+[ 2017-04-01T11:23:18+08:00 ] 113.109.42.48 /Admin.php/Blog/article/p/4.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000337s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.046614s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.046693s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0230s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0283s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0226s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 30,10   [ RunTime:0.1143s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000101s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000187s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.260583s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.260636s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.050292s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.050352s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000646s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000729s ]
+
+[ 2017-04-01T11:23:23+08:00 ] 113.109.42.48 /Admin.php/Blog/article/p/3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000318s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000440s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000494s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0228s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0227s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0224s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 20,10   [ RunTime:0.2528s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000079s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000137s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.670951s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.671018s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000248s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000278s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000597s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000668s ]
+
+[ 2017-04-01T11:23:28+08:00 ] 113.109.42.48 /Admin.php/Blog/article/p/2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.048450s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000350s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.046482s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0228s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0227s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0224s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 10,10   [ RunTime:0.1561s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000091s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000156s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.243404s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.243459s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000233s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000255s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000554s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000623s ]
+
+[ 2017-04-01T11:23:37+08:00 ] 113.109.42.48 /Admin.php/Blog/article/p/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.043834s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000450s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000504s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0229s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0225s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0225s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 0,10   [ RunTime:0.1578s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000093s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000159s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.273406s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.273463s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000234s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000257s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000528s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000598s ]
+
+[ 2017-04-01T11:23:42+08:00 ] 113.109.42.48 /Admin.php/Blog/article/p/3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.047485s ]
+INFO: [ app_init ] --END-- [ RunTime:0.047871s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000487s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.038624s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0228s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0226s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0225s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 20,10   [ RunTime:0.2102s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000088s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.045223s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.395776s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.395830s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000217s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000239s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000582s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000667s ]
+
+[ 2017-04-01T11:23:47+08:00 ] 113.109.42.48 /Admin.php/Blog/article/p/4.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000309s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000509s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000577s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0229s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0227s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0224s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 30,10   [ RunTime:0.1123s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000080s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000136s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.283516s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.328140s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000276s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000312s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.018098s ]
+INFO: [ app_end ] --END-- [ RunTime:0.018199s ]
+
+[ 2017-04-01T11:23:52+08:00 ] 113.109.42.48 /Admin.php/Blog/edit/art_id/36.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000301s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.032781s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.032867s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0229s ]
+SQL: SELECT * FROM `bk_article` WHERE `art_id` = 36 LIMIT 1   [ RunTime:0.0451s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0228s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0226s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.042143s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.042247s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.222511s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.222566s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000235s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000259s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000612s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000684s ]
+
+[ 2017-04-01T11:24:29+08:00 ] 113.109.42.48 /Admin.php/Blog/edit2/art_id/36.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000479s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000499s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.047621s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0237s ]
+NOTIC: [8] Undefined index: validate /web/www/blog/tp3/ThinkPHP/Library/Think/Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto /web/www/blog/tp3/ThinkPHP/Library/Think/Model.class.php 第 1128 行.
+SQL: UPDATE `bk_article` SET `title`='MySQL安装-数据初始化操作时的问题处理',`cate_id`='2',`introduction`='MySQL安装-数据初始化操作时的问题处理',`content`='&lt;p&gt;										&lt;/p&gt;&lt;p&gt;1、数据初始化-主机名解析错误&lt;/p&gt;&lt;p&gt;系统-Red Hat Enterprise&amp;nbsp;&lt;a href=&quot;http://lib.csdn.net/base/linux&quot; class=&quot;replace_word&quot; title=&quot;Linux知识库&quot; target=&quot;_blank&quot; style=&quot;color: rgb(223, 52, 52); text-decoration: none; font-weight: bold;&quot;&gt;Linux&lt;/a&gt;&amp;nbsp;Server release 6.6&lt;/p&gt;&lt;p&gt;软件-源码安装&lt;a href=&quot;http://lib.csdn.net/base/mysql&quot; class=&quot;replace_word&quot; title=&quot;MySQL知识库&quot; target=&quot;_blank&quot; style=&quot;color: rgb(223, 52, 52); text-decoration: none; font-weight: bold;&quot;&gt;MySQL&lt;/a&gt;-5.6.27.tar.gz&lt;/p&gt;&lt;p&gt;环境-Linux rhel6.myexample.com 2.6.32-504.el6.x86_64 #1 SMP Tue Sep 16 01:56:35 EDT 2014 x86_64 x86_64 x86_64 GNU/Linux&lt;/p&gt;&lt;p&gt;报错：WARNING&lt;/p&gt;&lt;p&gt;[root@rhel6 mysql]# scripts/mysql_install_db --user=mysql&lt;br/&gt;WARNING: The host &amp;#39;rhel6.myexample.com&amp;#39; could not be looked up with ./bin/resolveip.&lt;br/&gt;This probably means that your libc libraries are not 100 % compatible&lt;br/&gt;with this binary MySQL version. The MySQL daemon, mysqld, should work&lt;br/&gt;normally with the exception that host name resolving will not work.&lt;br/&gt;This means that you should use IP addresses instead of hostnames&lt;br/&gt;when specifying MySQL privileges !&lt;br/&gt;&lt;/p&gt;&lt;p&gt;原因：主机名解析错误。&lt;/p&gt;&lt;p&gt;解决：hosts文件中添加如下内容，ok！&lt;/p&gt;&lt;p&gt;[root@rhel6 mysql]# vi /etc/hosts&lt;/p&gt;&lt;p&gt;192.168.56.20 rhel6.myexample.com&lt;br/&gt;&lt;/p&gt;&lt;p&gt;总结：&lt;/p&gt;&lt;p&gt;因为lib库不是很兼容当前MySQL版本。在主机名解析不起作用的情况下，会引起MySQL守护进程、mysqld工作异常，因此在MySQL中授权时需要使用IP地址，而不能使用主机名。&lt;/p&gt;&lt;p&gt;（不解决该问题，依然可以正确执行scripts/mysql_install_db&lt;a href=&quot;http://lib.csdn.net/base/mysql&quot; class=&quot;replace_word&quot; title=&quot;MySQL知识库&quot; target=&quot;_blank&quot; style=&quot;color: rgb(223, 52, 52); text-decoration: none; font-weight: bold;&quot;&gt;数据库&lt;/a&gt;初始化脚本。）&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;2、数据初始化-时间戳问题&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;系统-Red Hat Enterprise Linux Server release 6.6&lt;/p&gt;&lt;p&gt;软件-源码安装mysql-5.6.27.tar.gz&lt;/p&gt;&lt;p&gt;环境-Linux rhel6.myexample.com 2.6.32-504.el6.x86_64 #1 SMP Tue Sep 16 01:56:35 EDT 2014 x86_64 x86_64 x86_64 GNU/Linux&lt;/p&gt;&lt;p&gt;报错：Warning&lt;/p&gt;&lt;p&gt;[root@rhel6 mysql]# scripts/mysql_install_db --user=mysql&lt;br/&gt;Installing MySQL system tables...2015-11-04 07:46:37 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).&lt;br/&gt;2015-11-04 07:46:37 0 [Note] ./bin/mysqld (mysqld 5.6.27) starting as process 2867 ...&lt;br/&gt;&lt;/p&gt;&lt;p&gt;原因：机器的系统时间与TIMESTAMP时间戳不匹配。&lt;/p&gt;&lt;p&gt;解决：执行mysql_install_db数据初始化脚本时添加explicit_defaults_for_timestamp选项。&lt;/p&gt;&lt;p&gt;[root@rhel6 mysql]# scripts/mysql_install_db --user=mysql --explicit_defaults_for_timestamp&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;3、数据初始化-重复安装引起多个配置文件，默认配置文件&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;系统-Red Hat Enterprise Linux Server release 6.6&lt;/p&gt;&lt;p&gt;软件-源码安装mysql-5.6.27.tar.gz&lt;/p&gt;&lt;p&gt;环境-Linux rhel6.myexample.com 2.6.32-504.el6.x86_64 #1 SMP Tue Sep 16 01:56:35 EDT 2014 x86_64 x86_64 x86_64 GNU/Linux&lt;/p&gt;&lt;p&gt;报错：Warning&lt;/p&gt;&lt;p&gt;WARNING: Found existing config file ./my.cnf on the system.&lt;br/&gt;Because this file might be in use, it was not replaced,&lt;br/&gt;but was used in bootstrap (unless you used --defaults-file)&lt;br/&gt;and when you later start the server.&lt;br/&gt;The new default config file was created as ./my-new.cnf,&lt;br/&gt;please compare it with your file and take the changes you need.&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;WARNING: Default config file /etc/my.cnf exists on the system&lt;br/&gt;This file will be read by default by the MySQL server&lt;br/&gt;If you do not want to use this, either remove it, or use the&lt;br/&gt;--defaults-file argument to mysqld_safe when starting the server&lt;br/&gt;&lt;/p&gt;&lt;p&gt;原因：&lt;/p&gt;&lt;p&gt;Warning1是因为重复安装，导致在安装目录下已经存在my.cnf文件。&lt;/p&gt;&lt;p&gt;Warning2是指默认的my.cnf配置文件在/etc/目录下。&lt;br/&gt;&lt;/p&gt;&lt;p&gt;启动Mysql server时，可指定--default-file=/path/my.cnf参数来启动mysql服务。&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;=============================================================================================================================&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;正确执行的显示：&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;[root@rhel6 mysql]# scripts/mysql_install_db --user=mysql --explicit_defaults_for_timestamp&lt;br/&gt;Installing MySQL system tables...2015-11-04 08:48:03 0 [Note] ./bin/mysqld (mysqld 5.6.27) starting as process 3147 ...&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Using atomics to ref count buffer pool pages&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: The InnoDB memory heap is disabled&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Memory barrier is not used&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Compressed tables use zlib 1.2.3&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Using CPU crc32 instructions&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Initializing buffer pool, size = 128.0M&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Completed initialization of buffer pool&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Highest supported file format is Barracuda.&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: 128 rollback segment(s) are active.&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: Waiting for purge to start&lt;br/&gt;2015-11-04 08:48:03 3147 [Note] InnoDB: 5.6.27 started; log sequence number 1626007&lt;br/&gt;2015-11-04 08:48:11 3147 [Note] Binlog end&lt;br/&gt;2015-11-04 08:48:11 3147 [Note] InnoDB: FTS optimize thread exiting.&lt;br/&gt;2015-11-04 08:48:11 3147 [Note] InnoDB: Starting shutdown...&lt;br/&gt;2015-11-04 08:48:12 3147 [Note] InnoDB: Shutdown completed; log sequence number 1626017&lt;br/&gt;OK&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;Filling help tables...2015-11-04 08:48:12 0 [Note] ./bin/mysqld (mysqld 5.6.27) starting as process 3171 ...&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Using atomics to ref count buffer pool pages&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: The InnoDB memory heap is disabled&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Memory barrier is not used&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Compressed tables use zlib 1.2.3&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Using CPU crc32 instructions&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Initializing buffer pool, size = 128.0M&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Completed initialization of buffer pool&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Highest supported file format is Barracuda.&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: 128 rollback segment(s) are active.&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Waiting for purge to start&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: 5.6.27 started; log sequence number 1626017&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] Binlog end&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: FTS optimize thread exiting.&lt;br/&gt;2015-11-04 08:48:12 3171 [Note] InnoDB: Starting shutdown...&lt;br/&gt;2015-11-04 08:48:14 3171 [Note] InnoDB: Shutdown completed; log sequence number 1626027&lt;br/&gt;OK&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;To start mysqld at boot time you have to copy&lt;br/&gt;support-files/mysql.server to the right place for your system&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !&lt;br/&gt;To do so, start the server, then issue the following commands:&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&amp;nbsp; ./bin/mysqladmin -u root password &amp;#39;new-password&amp;#39;&lt;br/&gt;&amp;nbsp; ./bin/mysqladmin -u root -h rhel6.myexample.com password &amp;#39;new-password&amp;#39;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;Alternatively you can run:&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&amp;nbsp; ./bin/mysql_secure_installation&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;which will also give you the option of removing the test&lt;br/&gt;databases and anonymous user created by default. &amp;nbsp;This is&lt;br/&gt;strongly recommended for production servers.&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;See the manual for more instructions.&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;You can start the MySQL daemon with:&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&amp;nbsp; cd . ; ./bin/mysqld_safe &amp;amp;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;You can test the MySQL daemon with mysql-test-run.pl&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&amp;nbsp; cd mysql-test ; perl mysql-test-run.pl&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;Please report any problems at http://bugs.mysql.com/&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;The latest information about MySQL is available on the web at&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&amp;nbsp; http://www.mysql.com&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;Support MySQL by buying support/licenses at http://shop.mysql.com&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;New default config file was created as ./my.cnf and&lt;br/&gt;will be used by default by the server when you start it.&lt;br/&gt;You may edit this file to change server settings&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;WARNING: Default config file /etc/my.cnf exists on the system&lt;br/&gt;This file will be read by default by the MySQL server&lt;br/&gt;If you do not want to use this, either remove it, or use the&lt;br/&gt;--defaults-file argument to mysqld_safe when starting the server&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;[root@rhel6 mysql]#&lt;br/&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 0px; margin-bottom: 1.1em; color: rgb(51, 51, 51); font-family: &amp;quot;microsoft yahei&amp;quot;; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;&lt;strong style=&quot;box-sizing: border-box;&quot;&gt;–initialize specified but the data directory has files in it. Aborting.&lt;/strong&gt;&amp;nbsp;&lt;br style=&quot;box-sizing: border-box;&quot;/&gt;2017-02-19T07:52:53.809095Z 0 [ERROR] Aborting&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 0px; margin-bottom: 1.1em; color: rgb(51, 51, 51); font-family: &amp;quot;microsoft yahei&amp;quot;; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;其中红色字体里面说明，&lt;a href=&quot;http://lib.csdn.net/base/mysql&quot; class=&quot;replace_word&quot; title=&quot;MySQL知识库&quot; target=&quot;_blank&quot; style=&quot;color: rgb(223, 52, 52); text-decoration: none; box-sizing: border-box; font-weight: bold;&quot;&gt;MySQL&lt;/a&gt;中的data目录已经有数据了&lt;/p&gt;&lt;p style=&quot;margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; font-size: 14px; font-family: tahoma, arial, 宋体; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;root@DB-02 ~]# mysql -u root&lt;br/&gt;-bash: mysql: command not found&lt;/p&gt;&lt;p style=&quot;margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; font-size: 14px; font-family: tahoma, arial, 宋体; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;&lt;br/&gt;原因:这是由于系统默认会查找/usr/bin下的命令，如果这个命令不在这个目录下，当然会找不到命令，我们需要做的就是映射一个链接到/usr/bin目录下，相当于建立一个链接文件。&lt;br/&gt;首先得知道mysql命令或mysqladmin命令的完整路径，比如mysql的路径是：/usr/local/mysql/bin/mysql，我们则可以这样执行命令：&lt;/p&gt;&lt;p style=&quot;margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; font-size: 14px; font-family: tahoma, arial, 宋体; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;# ln -s /usr/local/mysql/bin/mysql /usr/bin&lt;/p&gt;&lt;p style=&quot;margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; font-size: 14px; font-family: tahoma, arial, 宋体; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;&lt;span style=&quot;line-height: 21.6px; font-size: 12px; color: rgb(255, 0, 0);&quot;&gt;以下是补充：&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; font-size: 14px; font-family: tahoma, arial, 宋体; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;linux下，在mysql正常运行的情况下，输入mysql提示：&lt;br/&gt;mysql command not found&lt;/p&gt;&lt;p style=&quot;margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; font-size: 14px; font-family: tahoma, arial, 宋体; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;遇上-bash: mysql: command not found的情况别着急，这个是因为/usr/local/bin目录下缺失mysql导致，只需要一下方法建立软链接，即可以解决：&lt;br/&gt;把mysql安装目录，比如MYSQLPATH/bin/mysql，映射到/usr/local/bin目录下：&amp;nbsp;&lt;br/&gt;# cd /usr/local/bin&lt;br/&gt;# ln -fs /MYSQLPATH/bin/mysql mysql&lt;/p&gt;&lt;p style=&quot;margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; font-size: 14px; font-family: tahoma, arial, 宋体; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;还有其它常用命令mysqladmin、mysqldump等不可用时候都可按用此方法解决。&lt;br/&gt;注：其中MYSQLPATH是mysql的实际安装路径&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;h1 class=&quot;qitem_title&quot; id=&quot;q_title&quot; style=&quot;margin: 10px; padding: 0px; font-size: 16px; color: rgb(64, 64, 64); font-family: &amp;quot;HanHei SC&amp;quot;, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, STHeitiSC-Light, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;&lt;a href=&quot;https://q.cnblogs.com/q/69964/&quot; style=&quot;color: rgb(64, 64, 64); text-decoration-line: none;&quot;&gt;编译错误“c++: internal compiler error: Killed (program cc1plus)”&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin-right: auto; margin-left: auto; padding: 0px; overflow-x: auto; color: rgb(51, 51, 51); font-family: &amp;quot;HanHei SC&amp;quot;, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, STHeitiSC-Light, Arial, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 204);&quot;&gt;1. 创建分区文件，大小 2G&lt;/p&gt;&lt;pre style=&quot;margin-top: 10px; margin-bottom: 10px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &amp;quot;Courier New&amp;quot;; font-size: 12px; overflow: auto;&quot;&gt;dd&amp;nbsp;if=/dev/zero&amp;nbsp;of=/swapfile&amp;nbsp;bs=1k&amp;nbsp;count=2048000&lt;/pre&gt;&lt;p style=&quot;margin-right: auto; margin-left: auto; padding: 0px; overflow-x: auto; color: rgb(51, 51, 51); font-family: &amp;quot;HanHei SC&amp;quot;, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, STHeitiSC-Light, Arial, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 204);&quot;&gt;&lt;span style=&quot;line-height: 1.5;&quot;&gt;2. 生成 swap 文件系统&lt;/span&gt;&lt;/p&gt;&lt;pre style=&quot;margin-top: 10px; margin-bottom: 10px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &amp;quot;Courier New&amp;quot;; font-size: 12px; overflow: auto;&quot;&gt;mkswap&amp;nbsp;/swapfile&lt;/pre&gt;&lt;p style=&quot;margin-right: auto; margin-left: auto; padding: 0px; overflow-x: auto; color: rgb(51, 51, 51); font-family: &amp;quot;HanHei SC&amp;quot;, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, STHeitiSC-Light, Arial, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 204);&quot;&gt;&lt;span style=&quot;line-height: 1.5; background-color: initial;&quot;&gt;3. 激活 swap 文件&lt;/span&gt;&lt;/p&gt;&lt;pre style=&quot;margin-top: 10px; margin-bottom: 10px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &amp;quot;Courier New&amp;quot;; font-size: 12px; overflow: auto;&quot;&gt;swapon&amp;nbsp;/swapfile&lt;/pre&gt;&lt;p style=&quot;margin-right: auto; margin-left: auto; padding: 0px; overflow-x: auto; color: rgb(51, 51, 51); font-family: &amp;quot;HanHei SC&amp;quot;, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, STHeitiSC-Light, Arial, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 204);&quot;&gt;4.&amp;nbsp;修改 /etc/fstab 文件，新增如下内容：&lt;/p&gt;&lt;pre style=&quot;margin-top: 10px; margin-bottom: 10px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &amp;quot;Courier New&amp;quot;; font-size: 12px; overflow: auto;&quot;&gt;/swapfile&amp;nbsp;swap&amp;nbsp;swap&amp;nbsp;defaults&amp;nbsp;0&amp;nbsp;0&lt;/pre&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;',`addtime`='1491017068' WHERE `art_id` = 36 [ RunTime:0.0555s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000036s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000092s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.113665s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.113721s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000159s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000189s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000031s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.093809s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.080890s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.000298s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000015s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.081060s ]
+
+[ 2017-04-01T11:24:31+08:00 ] 113.109.42.48 /Admin.php/Blog/edit/art_id/36.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.024923s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.049549s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.049610s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0236s ]
+SQL: SELECT * FROM `bk_article` WHERE `art_id` = 36 LIMIT 1   [ RunTime:0.0466s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0236s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0232s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000069s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000118s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.216392s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.216444s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000152s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000176s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000680s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000758s ]
+
+[ 2017-04-01T11:24:40+08:00 ] 113.109.42.48 /Admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.043551s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.060575s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.060647s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0230s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0226s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.046147s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.046250s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.252721s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.252756s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.049259s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.049316s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000481s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000506s ]
+
+[ 2017-04-01T11:36:08+08:00 ] 113.109.42.48 /Admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.045053s ]
+INFO: [ app_init ] --END-- [ RunTime:0.045500s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.047644s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.047709s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0236s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0235s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0231s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 0,10   [ RunTime:0.1639s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000096s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000185s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.307203s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.307265s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000239s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000262s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000572s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000646s ]
+
+[ 2017-04-01T11:36:11+08:00 ] 113.109.42.48 /Admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.049526s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.043529s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.043588s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0228s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0223s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.042138s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.042239s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.157779s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.157808s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.049293s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.049361s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000531s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000564s ]
+
+[ 2017-04-01T11:37:01+08:00 ] 113.109.42.48 /Admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000311s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000359s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000411s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0236s ]
+NOTIC: [8] Undefined index: validate /web/www/blog/tp3/ThinkPHP/Library/Think/Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto /web/www/blog/tp3/ThinkPHP/Library/Think/Model.class.php 第 1128 行.
+SQL: INSERT INTO `bk_article` (`title`,`cate_id`,`introduction`,`content`,`addtime`) VALUES ('Linux 编译安装Boost','1','Linux 编译安装Boost','&lt;p&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;linux平台下要编译安装除gcc和gcc-c++之外，还需要两个开发库：bzip2-devel 和python-devel，因此在安装前应该先保证这两个库已经安装：&lt;/span&gt;&lt;br style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot; name=&quot;code&quot; style=&quot;white-space: pre-wrap; word-wrap: break-word; position: relative; overflow-y: hidden; overflow-x: auto; padding: 2px; border: 0px solid rgb(136, 136, 136); color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;#yum&amp;nbsp;install&amp;nbsp;gcc&amp;nbsp;gcc-c++&amp;nbsp;bzip2&amp;nbsp;bzip2-devel&amp;nbsp;bzip2-libs&amp;nbsp;Python-devel&amp;nbsp;-y&lt;/pre&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;然后是去官网下载源码包，&lt;/span&gt;&lt;a target=&quot;_blank&quot; rel=&quot;nofollow&quot; href=&quot;http://www.boost.org/users/download/&quot; style=&quot;color: rgb(51, 102, 153); text-decoration-line: none; font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;地址&lt;/a&gt;&lt;br style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;下载，解压，按照如下步骤：&lt;/span&gt;&lt;br style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot; name=&quot;code&quot; style=&quot;white-space: pre-wrap; word-wrap: break-word; position: relative; overflow-y: hidden; overflow-x: auto; padding: 2px; border: 0px solid rgb(136, 136, 136); color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;#tar&amp;nbsp;xvzf&amp;nbsp;boost_1_50_0.tar.gz&lt;/pre&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;进入boost_1_50_0目录：&lt;/span&gt;&lt;br style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot; name=&quot;code&quot; style=&quot;white-space: pre-wrap; word-wrap: break-word; position: relative; overflow-y: hidden; overflow-x: auto; padding: 2px; border: 0px solid rgb(136, 136, 136); color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;#cd&amp;nbsp;boost_1_50_0&lt;/pre&gt;&lt;p style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;然后是编译安装，boost源码包中有配置脚本，直接用就可以：&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot; name=&quot;code&quot; style=&quot;white-space: pre-wrap; word-wrap: break-word; position: relative; overflow-y: hidden; overflow-x: auto; padding: 2px; border: 0px solid rgb(136, 136, 136); color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;#sh&amp;nbsp;./bootstrap.shBuilding&amp;nbsp;Boost.Build&amp;nbsp;engine&amp;nbsp;with&amp;nbsp;toolset&amp;nbsp;gcc...&amp;nbsp;tools/build/v2/engine/bin.linuxx86_64/b2Detecting&amp;nbsp;Python&amp;nbsp;version...&amp;nbsp;2.6Detecting&amp;nbsp;Python&amp;nbsp;root...&amp;nbsp;/usrUnicode/ICU&amp;nbsp;support&amp;nbsp;for&amp;nbsp;Boost.Regex?...&amp;nbsp;not&amp;nbsp;found.Generating&amp;nbsp;Boost.Build&amp;nbsp;configuration&amp;nbsp;in&amp;nbsp;project-config.jam...Bootstrapping&amp;nbsp;is&amp;nbsp;done.&amp;nbsp;To&amp;nbsp;build,&amp;nbsp;run:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;./b2&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;To&amp;nbsp;adjust&amp;nbsp;configuration,&amp;nbsp;edit&amp;nbsp;&amp;#39;project-config.jam&amp;#39;.Further&amp;nbsp;information:&amp;nbsp;&amp;nbsp;&amp;nbsp;-&amp;nbsp;Command&amp;nbsp;line&amp;nbsp;help:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;./b2&amp;nbsp;--help&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;-&amp;nbsp;Getting&amp;nbsp;started&amp;nbsp;guide:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;http://www.boost.org/more/getting_started/unix-variants.html&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;-&amp;nbsp;Boost.Build&amp;nbsp;documentation:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;http://www.boost.org/boost-build2/doc/html/index.html&lt;/pre&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;接下来就是编译，重点关注是否编译成功：&lt;/span&gt;&lt;br style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot; name=&quot;code&quot; style=&quot;white-space: pre-wrap; word-wrap: break-word; position: relative; overflow-y: hidden; overflow-x: auto; padding: 2px; border: 0px solid rgb(136, 136, 136); color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;#./b2&lt;/pre&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;然后就是漫长的等待，如果最后出现：&lt;/span&gt;&lt;br style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot; name=&quot;code&quot; style=&quot;white-space: pre-wrap; word-wrap: break-word; position: relative; overflow-y: hidden; overflow-x: auto; padding: 2px; border: 0px solid rgb(136, 136, 136); color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;span class=&quot;typ&quot; style=&quot;color: rgb(102, 0, 102);&quot;&gt;The&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot; style=&quot;color: rgb(102, 0, 102);&quot;&gt;Boost&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; C&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot; style=&quot;color: rgb(102, 0, 102);&quot;&gt;Libraries&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; were successfully built&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;!&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;span class=&quot;typ&quot; style=&quot;color: rgb(102, 0, 102);&quot;&gt;The&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; following directory should be added to compiler include paths&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;span class=&quot;str&quot; style=&quot;color: rgb(0, 136, 0);&quot;&gt;/home/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;gang&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;BAK&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;boost_1_50_0&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;span class=&quot;typ&quot; style=&quot;color: rgb(102, 0, 102);&quot;&gt;The&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; following directory should be added to linker library paths&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;span class=&quot;str&quot; style=&quot;color: rgb(0, 136, 0);&quot;&gt;/home/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;gang&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;BAK&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;boost_1_50_0&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;stage&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;lib&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;最后，sudo ./b2 install --prefix=/usr/local&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: 宋体;&quot;&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;1、&amp;nbsp; boost中大部分库是不用编译成动态或者静态链接库。&lt;/p&gt;&lt;p&gt;2、&amp;nbsp; 只有regex,thread等几个库比较麻烦一点.要编译。&lt;/p&gt;&lt;p&gt;3、&amp;nbsp; 如果用gcc编译器-l指定动态链接库的路径,还要指定头文件的路径。&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: black;&quot;&gt;4、&amp;nbsp; &lt;/span&gt;或者链接的boost库放到.c或.cpp之后，否则链接不能通过，编译可以通过。&lt;/p&gt;&lt;p&gt;如下所示：g++ -lz -lpthread &lt;strong&gt;hh.c -lboost_filesystem -lboost_thread&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;http://blog.163.com/yungang_z/blog/static/175153133201262445539767/&lt;/p&gt;&lt;/pre&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;','1491017821') [ RunTime:0.0458s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000041s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000105s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.188342s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.188401s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000147s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000170s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0354s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0258s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000062s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.178107s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.137913s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.061912s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000013s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.199735s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000516s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000589s ]
+
+[ 2017-04-01T11:37:03+08:00 ] 113.109.42.48 /Admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.054376s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.045870s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.045955s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0229s ]
+NOTIC: [8] Undefined index: validate /web/www/blog/tp3/ThinkPHP/Library/Think/Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto /web/www/blog/tp3/ThinkPHP/Library/Think/Model.class.php 第 1128 行.
+SQL: INSERT INTO `bk_article` (`title`,`cate_id`,`introduction`,`content`,`addtime`) VALUES ('Linux 编译安装Boost','1','Linux 编译安装Boost','&lt;p&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;linux平台下要编译安装除gcc和gcc-c++之外，还需要两个开发库：bzip2-devel 和python-devel，因此在安装前应该先保证这两个库已经安装：&lt;/span&gt;&lt;br style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot; name=&quot;code&quot; style=&quot;white-space: pre-wrap; word-wrap: break-word; position: relative; overflow-y: hidden; overflow-x: auto; padding: 2px; border: 0px solid rgb(136, 136, 136); color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;#yum&amp;nbsp;install&amp;nbsp;gcc&amp;nbsp;gcc-c++&amp;nbsp;bzip2&amp;nbsp;bzip2-devel&amp;nbsp;bzip2-libs&amp;nbsp;Python-devel&amp;nbsp;-y&lt;/pre&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;然后是去官网下载源码包，&lt;/span&gt;&lt;a target=&quot;_blank&quot; rel=&quot;nofollow&quot; href=&quot;http://www.boost.org/users/download/&quot; style=&quot;color: rgb(51, 102, 153); text-decoration-line: none; font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;地址&lt;/a&gt;&lt;br style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;下载，解压，按照如下步骤：&lt;/span&gt;&lt;br style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot; name=&quot;code&quot; style=&quot;white-space: pre-wrap; word-wrap: break-word; position: relative; overflow-y: hidden; overflow-x: auto; padding: 2px; border: 0px solid rgb(136, 136, 136); color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;#tar&amp;nbsp;xvzf&amp;nbsp;boost_1_50_0.tar.gz&lt;/pre&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;进入boost_1_50_0目录：&lt;/span&gt;&lt;br style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot; name=&quot;code&quot; style=&quot;white-space: pre-wrap; word-wrap: break-word; position: relative; overflow-y: hidden; overflow-x: auto; padding: 2px; border: 0px solid rgb(136, 136, 136); color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;#cd&amp;nbsp;boost_1_50_0&lt;/pre&gt;&lt;p style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;然后是编译安装，boost源码包中有配置脚本，直接用就可以：&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot; name=&quot;code&quot; style=&quot;white-space: pre-wrap; word-wrap: break-word; position: relative; overflow-y: hidden; overflow-x: auto; padding: 2px; border: 0px solid rgb(136, 136, 136); color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;#sh&amp;nbsp;./bootstrap.shBuilding&amp;nbsp;Boost.Build&amp;nbsp;engine&amp;nbsp;with&amp;nbsp;toolset&amp;nbsp;gcc...&amp;nbsp;tools/build/v2/engine/bin.linuxx86_64/b2Detecting&amp;nbsp;Python&amp;nbsp;version...&amp;nbsp;2.6Detecting&amp;nbsp;Python&amp;nbsp;root...&amp;nbsp;/usrUnicode/ICU&amp;nbsp;support&amp;nbsp;for&amp;nbsp;Boost.Regex?...&amp;nbsp;not&amp;nbsp;found.Generating&amp;nbsp;Boost.Build&amp;nbsp;configuration&amp;nbsp;in&amp;nbsp;project-config.jam...Bootstrapping&amp;nbsp;is&amp;nbsp;done.&amp;nbsp;To&amp;nbsp;build,&amp;nbsp;run:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;./b2&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;To&amp;nbsp;adjust&amp;nbsp;configuration,&amp;nbsp;edit&amp;nbsp;&amp;#39;project-config.jam&amp;#39;.Further&amp;nbsp;information:&amp;nbsp;&amp;nbsp;&amp;nbsp;-&amp;nbsp;Command&amp;nbsp;line&amp;nbsp;help:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;./b2&amp;nbsp;--help&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;-&amp;nbsp;Getting&amp;nbsp;started&amp;nbsp;guide:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;http://www.boost.org/more/getting_started/unix-variants.html&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;-&amp;nbsp;Boost.Build&amp;nbsp;documentation:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;http://www.boost.org/boost-build2/doc/html/index.html&lt;/pre&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;接下来就是编译，重点关注是否编译成功：&lt;/span&gt;&lt;br style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot; name=&quot;code&quot; style=&quot;white-space: pre-wrap; word-wrap: break-word; position: relative; overflow-y: hidden; overflow-x: auto; padding: 2px; border: 0px solid rgb(136, 136, 136); color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;#./b2&lt;/pre&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;然后就是漫长的等待，如果最后出现：&lt;/span&gt;&lt;br style=&quot;color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;/&gt;&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot; name=&quot;code&quot; style=&quot;white-space: pre-wrap; word-wrap: break-word; position: relative; overflow-y: hidden; overflow-x: auto; padding: 2px; border: 0px solid rgb(136, 136, 136); color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);&quot;&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;span class=&quot;typ&quot; style=&quot;color: rgb(102, 0, 102);&quot;&gt;The&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot; style=&quot;color: rgb(102, 0, 102);&quot;&gt;Boost&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; C&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot; style=&quot;color: rgb(102, 0, 102);&quot;&gt;Libraries&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; were successfully built&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;!&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;span class=&quot;typ&quot; style=&quot;color: rgb(102, 0, 102);&quot;&gt;The&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; following directory should be added to compiler include paths&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;span class=&quot;str&quot; style=&quot;color: rgb(0, 136, 0);&quot;&gt;/home/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;gang&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;BAK&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;boost_1_50_0&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;span class=&quot;typ&quot; style=&quot;color: rgb(102, 0, 102);&quot;&gt;The&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; following directory should be added to linker library paths&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt; &amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;span class=&quot;str&quot; style=&quot;color: rgb(0, 136, 0);&quot;&gt;/home/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;gang&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;BAK&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;boost_1_50_0&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;stage&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: rgb(102, 102, 0);&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot; style=&quot;color: rgb(0, 0, 0);&quot;&gt;lib&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;最后，sudo ./b2 install --prefix=/usr/local&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: 宋体;&quot;&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;1、&amp;nbsp; boost中大部分库是不用编译成动态或者静态链接库。&lt;/p&gt;&lt;p&gt;2、&amp;nbsp; 只有regex,thread等几个库比较麻烦一点.要编译。&lt;/p&gt;&lt;p&gt;3、&amp;nbsp; 如果用gcc编译器-l指定动态链接库的路径,还要指定头文件的路径。&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: black;&quot;&gt;4、&amp;nbsp; &lt;/span&gt;或者链接的boost库放到.c或.cpp之后，否则链接不能通过，编译可以通过。&lt;/p&gt;&lt;p&gt;如下所示：g++ -lz -lpthread &lt;strong&gt;hh.c -lboost_filesystem -lboost_thread&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;http://blog.163.com/yungang_z/blog/static/175153133201262445539767/&lt;/p&gt;&lt;/pre&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;','1491017823') [ RunTime:0.0497s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000053s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000152s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.210660s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.210724s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000244s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000267s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0308s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0245s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.046131s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.141591s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.088539s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.056164s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000008s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.144458s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000540s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000619s ]
+
+[ 2017-04-01T11:37:06+08:00 ] 113.109.42.48 /Admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.026089s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000383s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000434s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0229s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0227s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000108s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.044266s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.261707s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.261763s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000205s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000228s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.039737s ]
+INFO: [ app_end ] --END-- [ RunTime:0.039814s ]
+
+[ 2017-04-01T11:37:10+08:00 ] 113.109.42.48 /Admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.044583s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000429s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000482s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0227s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0227s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0224s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 0,10   [ RunTime:0.1580s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000088s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.045231s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.282842s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.282909s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000224s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000249s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000647s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000720s ]
+
+[ 2017-04-01T11:37:14+08:00 ] 113.109.42.48 /Admin.php/Blog/article/p/2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000423s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000537s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.046639s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0232s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0232s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0231s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 10,10   [ RunTime:0.1847s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000083s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000154s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.352188s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.352255s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.049224s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.049297s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000609s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000676s ]
+
+[ 2017-04-01T11:37:19+08:00 ] 113.109.42.48 /Admin.php/Blog/article/p/3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000336s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.045571s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.045674s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0229s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0230s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0225s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 20,10   [ RunTime:0.3198s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000087s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000153s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.327530s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.327593s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000260s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000295s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000622s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000692s ]
+
+[ 2017-04-01T11:37:22+08:00 ] 113.109.42.48 /Admin.php/Blog/article/p/4.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000297s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000407s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000467s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0230s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0232s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0228s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 30,10   [ RunTime:0.1359s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000089s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000162s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.275892s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.275952s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000231s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000254s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.027808s ]
+INFO: [ app_end ] --END-- [ RunTime:0.027900s ]
+
+[ 2017-04-01T11:37:36+08:00 ] 113.109.42.48 /Admin.php/Ajax/delArticle.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000360s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000371s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000421s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0227s ]
+SQL: DELETE FROM `bk_article` WHERE `art_id` = 1 [ RunTime:0.0904s ]
+
+[ 2017-04-01T11:37:37+08:00 ] 113.109.42.48 /Admin.php/Ajax/delArticle.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000298s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000364s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000414s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0235s ]
+SQL: DELETE FROM `bk_article` WHERE `art_id` = 1 [ RunTime:0.0231s ]
+
+[ 2017-04-01T11:37:37+08:00 ] 113.109.42.48 /Admin.php/Ajax/delArticle.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000451s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000361s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000421s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0233s ]
+SQL: DELETE FROM `bk_article` WHERE `art_id` = 1 [ RunTime:0.0229s ]
+
+[ 2017-04-01T11:37:44+08:00 ] 113.109.42.48 /Admin.php/Index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.043434s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.049632s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.049691s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000063s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000122s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.288728s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.288796s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.046316s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.046369s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000420s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000448s ]
+
+[ 2017-04-01T11:37:45+08:00 ] 113.109.42.48 /Admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.040509s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.045632s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.045695s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000083s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000158s ]
+NOTIC: [8] Undefined index: USERNAME /web/www/blog/tp3/Application/Runtime/Cache/Admin/69fa43b310489e974c292babf8eca7e7.php 第 108 行.
+NOTIC: [8] Undefined index: PATH /web/www/blog/tp3/Application/Runtime/Cache/Admin/69fa43b310489e974c292babf8eca7e7.php 第 136 行.
+NOTIC: [8] Undefined index: USERNAME /web/www/blog/tp3/Application/Runtime/Cache/Admin/69fa43b310489e974c292babf8eca7e7.php 第 196 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.317940s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.317991s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000170s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000198s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.047656s ]
+INFO: [ app_end ] --END-- [ RunTime:0.047712s ]
+
+[ 2017-04-01T11:38:04+08:00 ] 113.109.42.48 /Admin.php/Category/articleList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000376s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000365s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000416s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0228s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0226s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_category` LIMIT 1   [ RunTime:0.0223s ]
+SQL: SELECT * FROM `bk_category` ORDER BY sort desc LIMIT 0,10   [ RunTime:0.0224s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000067s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000121s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.263982s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.264034s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.048229s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.048277s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000560s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000630s ]
+
+[ 2017-04-01T11:38:04+08:00 ] 113.109.42.48 /Admin.php/Category/articleList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.048569s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.050570s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.050632s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0232s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0232s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_category` LIMIT 1   [ RunTime:0.0230s ]
+SQL: SELECT * FROM `bk_category` ORDER BY sort desc LIMIT 0,10   [ RunTime:0.0231s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.049144s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.049230s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.290366s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.290424s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000230s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000260s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.047805s ]
+INFO: [ app_end ] --END-- [ RunTime:0.047884s ]
+
+[ 2017-04-01T11:38:21+08:00 ] 113.109.42.48 /Admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000315s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.044686s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.044761s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0230s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0230s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `bk_article` LIMIT 1   [ RunTime:0.0226s ]
+SQL: SELECT a.*,c.name,c.english FROM bk_article a left join bk_category c on a.cate_id=c.cate_id  LIMIT 0,10   [ RunTime:0.1357s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.013453s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.013550s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.293960s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.294036s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.046394s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.046458s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000580s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000657s ]
+

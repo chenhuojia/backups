@@ -1,0 +1,153 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> - 注册</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="/Public/admin2/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/Public/admin2/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/Public/admin2/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/Public/admin2/css/animate.css" rel="stylesheet">
+    <link href="/Public/admin2/css/style.css?v=4.1.0" rel="stylesheet">
+    <script src="/Public/js/jquery.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/Public/images/logo2.png"/>
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen   animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name">H+</h1>
+
+            </div>
+            <h3>欢迎注册 H+</h3>
+            <p>创建一个H+新账户</p>
+            <form class="m-t" role="form" action="">
+                <div class="form-group">
+                    <input type="text" class="form-control" name='name' id="name" placeholder="请输入用户名" required="">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name='email' id='email' placeholder="请输入邮箱" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name='password' id='pwd' placeholder="请输入密码" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id='checkpwd' name='checkpwd' placeholder="请再次输入密码" required="">
+                </div>
+                <div class="form-group text-left">
+                    <div class="checkbox i-checks">
+                        <label class="no-padding">
+                            <input type="checkbox" checked='checked' id='rad'><i></i> 我同意注册协议</label>
+                    </div>
+                </div>
+                <button type="button" id='submit' class="btn btn-primary block full-width m-b">注 册</button>
+
+                <p class="text-muted text-center"><small>已经有账户了？</small><a href="<?php echo U('Home/Login/login');?>">点此登录</a>
+                </p>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="/Public/admin2/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/Public/admin2/js/bootstrap.min.js?v=3.3.6"></script>
+    <!-- iCheck -->
+    <script src="/Public/admin2/js/plugins/iCheck/icheck.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+            
+            $('#email').blur(function(){
+            	email=$(this).val();            	
+	      	  	if(email == '' || email == undefined || email == null){
+    	  			alert('邮箱为空');
+    	  			return false;
+    	  		}
+	      	  var myreg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+	      	  	if(!myreg.test(email))
+	      		{	
+	      		 	alert('请输入有效的E_mail！');
+	      		 	$('#email').one('focus',function(){});
+	      			return false;
+	      		}
+            })
+            
+            $('#submit').click(function(){
+            	var name=$('#name').val(); 	  		
+      	  		if(name == "" || name == undefined || name == null){
+      	  			alert('用户名为空');
+      	  			return false;
+      	  			}
+	      	  	var email=$('#email').val();
+	      	    var myreg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+	      	  	if(email == "" || email == undefined || email == null){
+    	  			alert('邮箱为空');
+    	  			return false;
+    	  		}
+	      	  if(!myreg.test(email))
+	      		{
+	      		 	alert('请输入有效的E_mail！');
+	      			return false;
+	      		}
+      	  		var password=$('#pwd').val();
+      	  		if(password == "" || password == undefined || password == null){
+      	  			alert('密码为空');
+    	  				return false;
+    	  			}
+	      	  	var checkpassword=$('#checkpwd').val();
+	  	  		if(checkpassword == "" || checkpassword == undefined || checkpassword == null){
+	  	  			alert('密码为空');
+		  				return false;
+		  			}
+	  	  		if(checkpassword != password){
+			  	  		alert('两次密码不匹配');
+		  				return false;
+	  	  		}
+	  	  		var check=$('#rad').attr('checked');
+	  	  		if(check != 'checked'){
+		  	  		alert('请选择协议');
+	  				return false;
+	  	  		}
+      	  	  	$.ajax({
+      	  	  		url:"<?php echo U('Home/Login/ajaxRegistered');?>",
+      	  	  		type:'post',
+      	  	  		data:'name='+name+'&password='+password+"&checkpwd="+checkpassword+'&email='+email,
+      	  	  		datatype:'json',
+      	  	  		success:function(e){
+      	  	  			console.log(e);
+      	  	  			if(e.code==200){
+      	  	  			 self.location=document.referrer
+      	  	  			}if(e.code==300){
+      	  	  			 alert(e.msg);
+      	  	  			 return false;
+      	  	  			}
+      	  	  		}
+      	  	  	})
+            	
+            })
+            
+        });
+    </script>
+
+    
+    
+
+</body>
+
+</html>

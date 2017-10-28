@@ -1,0 +1,152 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html{width: 100%;height: 100%; margin:0;font-family:"微软雅黑";}
+		#l-map{height:500px;width:100%;}
+		#r-result{width:100%;}
+	</style>
+	<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2AFGg6DCpGbCg48f2mOFNnGLAh02ZQHU"></script>
+	<title>本地搜索的结果面板</title>
+</head>
+<body>
+	<div id="l-map"></div>
+	<div id="r-result"></div>
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("l-map");            // 创建Map实例
+	map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+	var local = new BMap.LocalSearch(map, {
+		renderOptions: {map: map, panel: "r-result"}
+	});
+
+
+	{% if adr !="" %}
+
+	local.search("{{ adr }}"); 
+	{% else %}
+     local.search("珠江新城");
+    {% endif %}
+			
+
+	  // 添加带有定位的导航控件
+	  var navigationControl = new BMap.NavigationControl({
+	    // 靠左上角位置
+	    anchor: BMAP_ANCHOR_TOP_LEFT,
+	    // LARGE类型
+	    type: BMAP_NAVIGATION_CONTROL_LARGE,
+	    // 启用显示定位
+	    enableGeolocation: true
+	  });
+	  map.addControl(navigationControl);
+
+	  map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+	  map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁
+
+
+	  
+
+
+	  map.addEventListener("click",function(e){
+
+
+
+		  var lon =window.parent.document.getElementById("longitude");
+
+			var lat011 =window.parent.document.getElementById("latitude");
+
+
+			lon.value= e.point.lng;
+
+			lat011.value= e.point.lat;
+		//	alert(e.point.lng + "," + e.point.lat);
+
+			
+		});
+
+
+
+		function getp(keytext){
+
+			// 创建地址解析器实例
+			var myGeo = new BMap.Geocoder();
+			// 将地址解析结果显示在地图上,并调整地图视野
+			myGeo.getPoint(keytext, function(point){
+				if (point) {
+					 //alert(point.lng+ "," + point.lat);
+					 
+					//	var lon =window.parent.document.getElementById("longitude");
+
+					//	var lat011 =window.parent.document.getElementById("latitude");
+
+					//	lon.value= point.lng;
+
+					//	lat011.value= point.lat;
+
+						myGeo.getLocation(point, function (rs) {   //getLocation函数用来解析地址信息，分别返回省市区街等
+							              var addComp = rs.addressComponents;
+							              province = addComp.province;//获取省份
+						                  city = addComp.city;//获取城市
+							              district = addComp.district;//区
+						             	  street = addComp.street;//街 
+
+						              
+						              var pro =window.parent.document.getElementById("province");
+
+									  var cit =window.parent.document.getElementById("city");
+
+									  var dis =window.parent.document.getElementById("district");
+
+						              pro.value = province;
+
+						              cit.value = city;
+
+						              dis.value= district;
+
+
+
+						              });
+
+				}else{
+					alert("您选择地址没有解析到结果!");
+				}
+			}, "广东省");
+
+
+
+			
+			}
+
+
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+		$(document).on("click","#r-result li",function(){
+			
+
+
+			var keytext =  $(this).find("div").find("div:eq(1)").find("span").text();
+
+
+			$("[name='homestay_addr']").val(keytext);
+			// alert(a);
+			 getp(keytext);
+			
+
+			var c =window.parent.document.getElementById("homestay_addr");
+
+			c.value= keytext;
+
+
+			});
+		
+});
+
+	
+</script>

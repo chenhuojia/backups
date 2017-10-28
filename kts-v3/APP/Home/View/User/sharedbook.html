@@ -1,0 +1,114 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="keywords" content="{$config['keywords']}" > 
+    <meta name="description" content="{$config['description']}" >
+    <title>个人中心-$config['title']</title>
+    <link href="__PUBLIC__/home/css/header.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<include file="./APP/Home/View/Common/header.html"/>
+<link href="__PUBLIC__/home/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/home/css/banner.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/home/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/jquery.pagination.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/main.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/fenye.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/dianzan.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/qiehua.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/demo.js"></script>
+<div class="min">
+    <div class="my_box">
+        <div class="min1_box_bt">
+            <span>图书分类>  个人中心</span>
+        </div>
+        <div class="my_box_nr">
+            <include file="./APP/Home/View/Common/left.html"/>
+            <div class="min_box_fr">
+                <div class="my_fenlei">
+                    <div class="my_bt_fr"><span>分享的图书</span></div>
+                    <ul class="fenlei_ul_wenxue">
+                      <volist name="data" id="b" empty="$empty">
+                        <li>
+                            <div class="cp_icon">
+                                <span class="index_mod_tag">
+                                 <if condition="$b.type eq 0">二手<elseif condition="$b.type eq 1"/>新书<else />分享的书</if>
+                                </span>
+                            </div>
+                            <div class="cp_xq_box">
+                                <div class="cp_xq_box_nr">
+                                    <p class="cp_price"><i>定价：</i><del>¥{$b.price}</del></p>
+                                    <p class="cp_bt">{$b.book_name}</p>
+                                    <p class="cp_sj"><i>{$b.author}</i><em>（英国）</em></p>
+                                    <p class="cp_zuoz"><img src="{$b['user_img']}" alt=""/><span>{$b.username}</span></p>
+                                </div>
+                            </div>
+                        </li>
+                       </volist>
+                        <div class="clear"></div>
+                    </ul>
+
+                    <div class="fenye">
+                        <div class="wrapper">
+                            <div class="eg">
+                                <!-- <div class="M-box3"></div> -->
+                                {$Page}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    window.onload = function (){
+
+        var oStar = document.getElementById("star");
+        var aLi = oStar.getElementsByTagName("li");
+        var oUl = oStar.getElementsByTagName("ul")[0];
+        var oSpan = oStar.getElementsByTagName("span")[1];
+        var oP = oStar.getElementsByTagName("p")[0];
+        var i = iScore = iStar = 0;
+
+        for (i = 1; i <= aLi.length; i++){
+            aLi[i - 1].index = i;
+
+            //鼠标移过显示分数
+            aLi[i - 1].onmouseover = function (){
+                fnPoint(this.index);
+
+            };
+
+            //鼠标离开后恢复上次评分
+            aLi[i - 1].onmouseout = function (){
+                fnPoint();
+                //关闭浮动层
+                oP.style.display = "none"
+            };
+
+            //点击后进行评分处理
+            aLi[i - 1].onclick = function (){
+                iStar = this.index;
+                oP.style.display = "none";
+            }
+        }
+
+        //评分处理
+        function fnPoint(iArg){
+            //分数赋值
+            iScore = iArg || iStar;
+            for (i = 0; i < aLi.length; i++) aLi[i].className = i < iScore ? "on" : "";
+        }
+
+    };
+</script>
+
+<include file="./APP/Home/View/Index/footer.html"/>
+</body>
+</html>

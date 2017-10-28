@@ -1,0 +1,305 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+{% block javascript %} {{ parent() }}
+    <script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2AFGg6DCpGbCg48f2mOFNnGLAh02ZQHU"></script>
+    <!--加载鼠标绘制工具-->  
+    <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>  
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />  
+    <!--加载检索信息窗口-->  
+    <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>  
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css" /
+     
+   
+{% endblock %}
+{% block stylesheet %} {{ parent() }}
+    <link href="{{ asset('bundles/msk/public/css/fileinput.min.css') }}" rel="stylesheet" type="text/css" media="all"/>
+    <style type="text/css" rel="stylesheet">
+        label {
+            display: inline-block;
+            max-width: 100%;
+            font-size: larger;
+            font-weight: 900;
+            margin: 10px 0;
+        }
+
+        #member_id,#period, {
+            width: 64.5%;
+        }
+
+        #title-ipt {
+            width: 64.5%;
+        }
+
+        #homestay-ipt {
+            width: 64.5%;
+        }
+
+        #imgInp {
+            width: 10%;
+        }
+
+        #blah {
+            display: none;
+            width: 566px;
+            height: 350px;
+        }
+
+        .upload-ul input {
+            border: 0 none;
+            display: none;
+            height: 60px;
+            margin: 0;
+            padding: 0;
+            width: 200px;
+        }
+
+        .upload-ul li img{
+            width: 566px;
+            height: 350px;
+        }
+
+        .message label {
+            padding-bottom: 0;
+            margin-bottom: 0
+        }
+
+        .message .msg-addr {
+            width: 90%;
+        }
+
+        #slt-img {
+            width: 8%;
+            background-color: #F5F5DC;
+        }
+         #allmap {width: 70%; height:500px; overflow: hidden;}  
+    #result {width:70%;font-size:12px;}  
+    </style>
+{% endblock %}
+{% block content%}<section class="alert">
+    <button type="button" id="return" class="green stateBtn">返  回</button>
+    </section>
+    <section class="content">
+        <section class="widget">
+            <header>
+                <span class="icon homstay-detail"><span>&#128196;</span></span>
+                <hgroup>
+                    <h1>新增团游</h1>
+                </hgroup>
+            </header>
+            <div class="content">
+                <form action="{{ path('GroupTourAddData_') }}" method="post" class="" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="member-select">用户名：</label>
+                        <select name="memberinfo" id="memberinfo" class="form-control">
+                            {% for v in meb %}
+                            <option value="{{ v.id }},{{ v.nickname }},{{ v.avatar }}" member_name="{{ v.nickname }}">{{ v.nickname }}-->({{ v.account }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                   <div class="form-group">
+                            <label for="exampleInputFile">封面图片：</label>
+                            <input type="file" name="file0" id="file0" multiple="multiple" /> <img src="" id="img0" style="width:500px;height:300px;display: none;">
+                            
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">团游标题：</label>
+                        <input type="text" required="required" class="form-control" name="tour_title" id="tour_title" placeholder="团游标题：">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">预定须知：</label>
+                        <textarea rows="3" cols="20" name="booking_notice" id="booking_notice">
+                          
+                        </textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">价格：</label>
+                        <input type="text" class="form-control" name="adult_price" id="adult_price" placeholder="价格">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">团期：</label>
+                        <input type="text" class="form-control" name="period" id="period" placeholder="团期">
+                    </div>
+                    <div class="form-group">
+                            <label for="exampleInputEmail1">出发地：</label>
+                            <input type="text" class="form-control" name="starting_place" id="starting_place" placeholder="出发地">
+                        </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">出发日期：</label>
+                        <input type="date" class="form-control" name="starting_time" id="starting_time" placeholder="出发日期">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">旅程与线路设置：</label>
+                        <div id="allmap" style="overflow:hidden;zoom:1;position:relative;">     
+                            <div id="map" style="height:100%;-webkit-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;">  
+                           </div>  
+                        </div>  
+                        <div id="result">       
+                            <input type="button"  value="画线" onclick="draw(BMAP_DRAWING_POLYLINE)" /> 
+                            <input type="button"  value="确认画好" onclick="getPoint()"/><br/>  
+                            <!-- <input type="button"  value="画点" onclick="draw(BMAP_DRAWING_MARKER)" />-->  
+                            <span>右键获取任意点的经纬度</span>  
+                        </div>  
+                        <div id="resultShape"></div>  
+                        <div id="shape"></div>  
+                    </div>
+                    <div class="form-group">
+                        
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">联系号码：</label>
+                            <input type="text" class="form-control" name="telphone" id="telphone" placeholder="联系号码">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">截止日期：</label>
+                            <input type="date" class="form-control" name="end_time" id="end_time" placeholder="截止日期">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">目的地：</label>
+                            <input type="text" class="form-control" name="destination" id="destination" placeholder="目的地">
+                        </div>
+                        <button type="submit" class="btn btn-default" style="width: 100px;background-color: #00a0e9;margin: 10px 0 0 30%;">提 交</button>
+                    </div>
+                    
+                    
+                </form>
+            </div>
+        </section>
+    </section>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            $("#file0").change(function(){
+                var objUrl = getObjectURL(this.files[0]) ;
+                //console.log("objUrl = "+objUrl) ;
+                if (objUrl) {
+                    
+                    $('#img0').attr('style', "display:block");
+                    $("#img0").attr("src", objUrl) ;
+                }
+            }) ;
+            //建立一個可存取到該file的url
+            function getObjectURL(file) {
+                var url = null ; 
+                if (window.createObjectURL!=undefined) { // basic
+                    url = window.createObjectURL(file) ;
+                } else if (window.URL!=undefined) { // mozilla(firefox)
+                    url = window.URL.createObjectURL(file) ;
+                } else if (window.webkitURL!=undefined) { // webkit or chrome
+                    url = window.webkitURL.createObjectURL(file) ;
+                }
+                return url ;
+            }
+
+        });
+    </script>
+    <script type="text/javascript">  
+        function $(id){  
+           return document.getElementById(id);  
+         }  
+        
+        // 百度地图API功能  
+        var map = new BMap.Map('map');  
+        var poi = new BMap.Point(113.948913,22.530844);  
+        map.centerAndZoom(poi, 16);  
+        map.enableScrollWheelZoom();    
+        var overlays = [];  
+        var overlaycomplete = function(e){  
+            overlays.push(e.overlay);   
+        };  
+        var styleOptions = {  
+            strokeColor:"red",    //边线颜色。  
+            fillColor:"red",      //填充颜色。当参数为空时，圆形将没有填充效果。  
+            strokeWeight: 3,       //边线的宽度，以像素为单位。  
+            strokeOpacity: 0.8,    //边线透明度，取值范围0 - 1。  
+            fillOpacity: 0.6,      //填充的透明度，取值范围0 - 1。  
+            strokeStyle: 'solid' //边线的样式，solid或dashed。  
+        }  
+          
+        //实例化鼠标绘制工具  
+        var drawingManager = new BMapLib.DrawingManager(map, {  
+            isOpen: false, //是否开启绘制模式  
+            //enableDrawingTool: true, //是否显示工具栏  
+            drawingToolOptions: {  
+                anchor: BMAP_ANCHOR_TOP_RIGHT, //位置  
+                offset: new BMap.Size(5, 5), //偏离值  
+            },  
+            circleOptions: styleOptions, //圆的样式  
+            polylineOptions: styleOptions, //线的样式  
+            polygonOptions: styleOptions, //多边形的样式  
+            rectangleOptions: styleOptions //矩形的样式  
+        });    
+          
+         //添加鼠标绘制工具监听事件，用于获取绘制结果  
+        drawingManager.addEventListener('overlaycomplete', overlaycomplete);  
+          
+        map.addEventListener("rightclick",function(e){  
+            if(confirm(e.point.lng + "," + e.point.lat)){ 
+                $("shape").innerHTML=$("shape").innerHTML+" <br/>("+e.point.lng+","+e.point.lat+")";  
+                }  
+            });  
+        function draw(type){  
+            drawingManager.open();   
+            drawingManager.setDrawingMode(type);  
+        }     
+              
+        function clearAll() {  
+            for(var i = 0; i < overlays.length; i++){  
+                map.removeOverlay(overlays[i]);  
+            }  
+            overlays.length = 0     
+        }  
+        function getPoint(){  
+            $("resultShape").innerHTML='';  
+            //console.log(overlays);
+            for(var i = 0; i < overlays.length; i++){  
+                var overlay=overlays[i].getPath();   
+                //console.log(overlay);
+                for(var j = 0; j < overlay.length; j++){  
+                    var grid =overlay[j]; 
+                       $("resultShape").innerHTML=$("resultShape").innerHTML+"<input type='hidden'  name='"+"detail["+j+"][longitude]"+"' value='"+grid.lng+"'>"+"<input type='hidden'  name='"+"detail["+j+"][latitude]"+"' value='"+grid.lat+"'>";
+                }  
+            }  
+        }  
+        function Editing(state){  
+            for(var i = 0; i < overlays.length; i++){  
+                state=='enable'?overlays[i].enableEditing():overlays[i].disableEditing();  
+            }  
+        }  
+           
+         function showText(){  
+            var opts = {  
+            position : new BMap.Point(113.941853,22.530777),    // 指定文本标注所在的地理位置  
+            offset   : new BMap.Size(30, 30)    //设置文本偏移量  
+           }  
+         var label = new BMap.Label("不可编辑", opts);  // 创建文本标注对象  
+            label.setStyle({  
+            color : "black",  
+             fontSize : "16px",  
+            fillColor:"red",      //填充颜色。当参数为空时，圆形将没有填充效果。  
+            });  
+          map.addOverlay(label);    
+         }  
+    </script>  
+{% endblock%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

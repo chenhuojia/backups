@@ -1,0 +1,215 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="keywords" content="{$config['keywords']}" > 
+    <meta name="description" content="{$config['description']}" >
+    <title>首页-$config['title']</title>
+    <link href="__PUBLIC__/home/css/header.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<include file="./APP/Home/View/Common/header.html"/>
+<link href="__PUBLIC__/home/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/home/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/category.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/jquery.pagination.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/main.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/fenye.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/qiehua.js"></script>
+
+
+<div class="min1">
+    <div class="min_box">
+        <div class="min1_box_bt">
+            <span>图书分类>  文学</span>
+        </div>
+        <div class="min_box_nr">
+            <div class="min_box_fl">
+                <div class="product_sort fl">
+                    <div class="hd">图书分类</div>
+                     <div class="bd">
+                      <volist name="category" id="c">
+                        <div class="item">
+                            <div class="title one"><a href="#">{$c.name}</a></div>
+                            <div class="list">
+                              <volist name="c['two']" id="o">
+                                <a href="#">{$o.name}</a>
+                              </volist>
+                            </div>
+                            <div class="line"></div>
+                            <div class="subitem">
+                                <div class="inner">
+                                   <volist name="c['two']" id="o">
+                                    <div class="tit tit1">
+                                        <div class="name"><a href="#">{$o.name}</a></div>
+                                        <ul>
+                                           <volist name="o['three']" id="t">
+                                            <li><a href="#">{$t.name}</a></li>
+                                           </volist>
+                                        </ul>
+                                    </div>
+                                   </volist>
+                                </div>
+                            </div>
+                        </div>
+                       </volist>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    //产品分类
+                    $(".product_sort .bd .item").hover(function(){
+                        $(this).addClass("layer");
+                    },function(){
+                        $(this).removeClass("layer");
+                    });
+                </script>
+
+            </div>
+            <div class="min_box_fr">
+                <form>
+                    <div class="sousuo_box">
+                        <div class="sousuo_box_fl">
+                            <div class="sousuo_box_fl_fl">
+                                <div class="tab-box">
+                                    <div class="good-list-tab">
+                                        <ul class="list-tab">
+                                            <li class="on"><a id="hot-sort-btn" href="{:U('Home/Book/index',array('order'=>1,'sort'=>'asc','type'=>1))}"><span>默认</span></a></li>
+                                            <li><a class="sort-btn pri-sort-btn" href="{:U('Home/Book/index',array('order'=>1,'sort'=>'asc','type'=>1))}"><span>人气</span></a></li>
+                                            <li><a class="sort-btn pri-sort-btn" href="{:U('Home/Book/index',array('order'=>1,'sort'=>'asc','type'=>1))}"><span>销量</span></a></li>
+                                            <li><a class="sort-btn pri-sort-btn" href="{:U('Home/Book/index',array('order'=>1,'sort'=>'asc','type'=>1))}"><span>价格</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sousuo_box_fl_fr">
+                                <input type="text" class="input_sx"  placeholder="0" /><i>-</i>
+                                <input type="text" class="input_sx" placeholder="不限"   />
+                                <input type="submit" class="input_sub" value="确定" />
+                                <div class="clear"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="sousuo_box_fr">
+                            <div class="selectbox">
+                                <div class="selemediv">
+                                    <div class="selemenu">全部图书<i class="sele_tb"></i></div>
+                                    <div class="citylist">
+                                        <span value="0">全部图书</span>
+                                        <span value="1">二手书</span>
+                                        <span value="2">分享的书</span>
+                                        <span value="3">新书1</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                $(".selemenu").click(function(){
+                                    $(this).next().slideToggle();
+                                    $(this).parents().siblings().find(".citylist,.citylist2").slideUp();
+                                })
+                                $(".citylist span").click(function(){
+                                    var text=$(this).text();
+                                    var va =$(this).attr("value");
+                                    alert(va);
+                                    
+                                    $(this).parent().prev().html(text);
+                                    $(this).parent().prev().css("color","#666")
+                                    $(this).parent().fadeOut();
+
+                                })
+                                $(".shangquan li").click(function(){
+                                    $(".shangquan li").removeClass("active")
+                                    $(this).addClass("active")
+                                    var text1=$(this).text();
+                                    $(".sqinput").html(text1)
+                                })
+                                $(".chengshi li").click(function(){
+                                    $(".chengshi li").removeClass("active")
+                                    $(this).addClass("active")
+                                    var text2=$(this).text();
+                                    $(".csinput").html("-"+text2)
+                                    $(".citylist2").slideUp();
+                                })
+                                $(function(){
+                                    $(document).not($(".selectbox")).click(function(){
+                                        $(".citylist,.citylist2").slideUp();
+                                    })
+                                    $(".selectbox").click(function(event){
+                                        event.stopPropagation();
+                                    })
+                                })
+                            </script>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </form>
+
+                <div class="clear"></div>
+                <ul>
+                   <volist name="bookList" id="b" empty="暂时没有数据">
+                    <li>
+                        <a>
+                        <div class="cp_icon"><img src="{$b['book_img']}" alt=""/>
+                           <span class="index_mod_tag">
+                            <if condition="$b.type eq 0">二手<elseif condition="$b.type eq 1"/>新书<else />分享的书</if>
+                           </span>
+                        </div>
+                        <div class="cp_xq_box">
+                            <div class="cp_xq_box_nr">
+                                <p class="cp_price"><span>¥{$b.publish_price}</span><i>定价：</i><del>¥{$b.price}</del></p>
+                                <p class="cp_bt">{$b.name}</p>
+                                <p class="cp_sj"><i>{$b.author}</i><em>（英国）</em></p>
+                                <p class="cp_zuoz"><img src="{$b['user_img']}" alt=""/><span>{$b.share_user}</span></p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    </volist>
+                    <div class="clear"></div>
+                </ul>
+                <div class="fenye">
+                    <div class="wrapper">
+                        <div class="eg">
+                            <div class="M-box3"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="clear"></div>
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+  
+    var search_url="{:U('Admin/Information/messageList')}";
+    function search(){
+        var type =$("#type").val();
+        var state = $("#state").val();
+        var searchName = $("#searchName").val();
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
+         if (type.length > 0)
+            search_url = search_url + "&type="+type;
+        if (state.length > 0)
+            search_url = search_url + "&state="+state;
+        if (searchName.length > 0)
+            search_url = search_url + "&searchName="+searchName;
+        if (startTime.length > 0)
+            search_url = search_url + "&startTime="+startTime;
+        if (endTime.length > 0)
+            search_url = search_url + "&endTime="+endTime;
+
+        window.location=search_url;
+    } 
+</script>
+
+<include file="./APP/Home/View/Index/footer.html"/>
+</body>
+</html>

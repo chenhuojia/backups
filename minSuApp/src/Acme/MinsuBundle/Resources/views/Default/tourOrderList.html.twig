@@ -1,0 +1,75 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/pic/jssor.slider.min.js') }}"></script>
+<script src="{{ asset('bundles/msk/public/js/pic/jquery.scrollfollow.js') }}"></script>
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script src="{{ asset('bundles/msk/public/js/pic/slidePic.js') }}"></script>
+
+
+{% endblock %}
+{% block stylesheet %} {{ parent() }}
+{# <link href="{{ asset('bundles/msk/public/css/details_new.css') }}" rel="stylesheet" type="text/css" media="all"/>#}
+	<style type="text/css">
+		.video {
+			position: absolute;
+				right: 15%;
+		}
+		.img {
+			position: absolute;
+		
+			
+			right: 20%;
+		}
+	</style>
+{% endblock %}
+{% block content%}<section class="alert">
+	 	 <button type="button"class="green stateBtn" onclick='javascript:history.go(-1);'>返回</button>
+{# 	 	 <button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>#}
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>团游的订单展示</h1>
+			</hgroup>
+		</header>
+		<div class="content no-padding timeline">
+	        
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th class="avatar" style="padding-left: 80px;">昵称	</th>
+						<th>收件人</th>
+						<th>号码</th>
+						<th>订单</th>
+						<th>状态</th>
+						<th>注册时间</th>
+						<th>审视</th>
+					</tr>
+				</thead>
+
+				<tbody>
+				    {% for v in enroll %}
+						<tr>
+							<td class="avatar" ><img src="{{ v.member_avatar }}" alt="" height="60" width="60" /> {{ v.member_name }}</td>
+							<td>{{ v.consignee }}</td>
+							<td>{{ v.mobile }}</td> 
+							<td>成人{{ v.adult_price }}*{{ v.adult_num }}/儿童{{ v.adult_price }}*{{ v.child_num }}</td>
+							<td>{{ v.common_status }}</td>
+							<td>2016-10-17 17:40:50</td>
+							<td><button class="green"  onclick='location="{{ path('apiTourOrderDataDetail_',{'order_sn':v.order_sn}) }}"'>详情</button>
+							</td>
+				  		</tr>
+				  	{% endfor %}
+									
+				</tbody>
+			</table>
+
+        </div>
+		  
+	</section>
+</section>
+
+{% endblock%}

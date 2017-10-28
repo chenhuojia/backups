@@ -1,0 +1,183 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+// alert(12321321); 
+$(".stateBtn").click(function(){
+	$("[name='is_checked']").val($(this).attr("val"));
+	$("form").submit();
+})
+
+$(".agreeBtn").click(function(){
+	var id = $(this).attr("id-val");
+	var state =$(this).attr("state-vale");
+	if(confirm("确认通过审核?")){
+		shenkefuc(id,state,'');
+		}
+	})
+
+$(".disagreeBtn").click(function(){
+		var reason =$("#HomeStayReason").val();
+		if(!reason){alert("必须填写审核不通过理由！");return false;}
+		var id = $(this).attr("id-val");
+		var state =$(this).attr("state-vale");
+		if(confirm("确认提交?")){
+			if(id){
+			shenkefuc(id,state,reason);}
+			}
+})
+function shenkefuc(id,state,reason){
+	$.ajax({
+		type:"POST",
+		data:"&id="+id+"&state="+state+"&rtest="+reason,
+		url:"{{ path('_agree_shop_apply') }}",
+		success:function(msg){
+			console.log(msg)
+			if (msg === '1'){
+				alert("操作成功!");
+				}
+			  location.reload();
+		}
+	});
+}
+
+$(".showReason").click(function(){
+	var id= $(this).attr("id-val");
+	$(".disagreeBtn").attr("id-val",id);
+	});
+})
+
+$(document).ready(function () {
+	
+	$(".page-dis [href]").each(function () {
+		if (this.href == window.location.href) {
+			$(this).addClass("active");
+		}
+	})
+});
+
+
+</script>
+{% endblock %}
+{% block stylesheet %} {{ parent() }}
+	<link href="{{ asset('bundles/msk/public/css/user.css') }}" rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
+{% block content%}<section class="alert">
+
+	<div>
+	<form method="post" action="">
+		<input type="text" class='searchText'  name="searchText" placeholder=" 搜  索">
+		<select class="searchSelect" name="searchType" >
+			<option value="999">请选择搜索类型</option>
+			<option value="shop_name">店铺名称</option>
+			<option value="nickname">店主</option>
+			<option value="shop_address">店铺地址</option>
+		</select>
+		<input class="green searchbuttoninput" type="submit" value="搜 索">
+	</form>
+	</div>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>店铺列表</h1>
+{# 				<h2 style="font-family: '微软雅黑';font-size: 12px;color: #ccc;">注:带<font color="red">&nbsp;*&nbsp;</font>是房东用户</h2>#}
+			</hgroup>
+{# 			<aside>#}
+{# 				<span>#}
+{# 					<a href="#">&#9881;</a>#}
+{# 					<ul class="settings-dd">#}
+{# 						<li><label>Option a</label><input type="checkbox" /></li>#}
+{# 						<li><label>Option b</label><input type="checkbox" checked="checked" /></li>#}
+{# 						<li><label>Option c</label><input type="checkbox" /></li>#}
+{# 					</ul>#}
+{# 				</span>#}
+{# 			</aside>#}
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>  
+						<th>logo</th>
+						<th>店铺名称</th>
+						<th>店主</th>
+						<th>店铺地址</th>
+						<th>开店时间</th>
+						<th>分类数</th>
+						<th>总商品数</th>
+						<th>上架商品数</th>
+						<th>下架商品数</th>
+						<th>浏览量</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+					<tbody>
+					  {% for v in shop %}
+						<tr>
+							<td class="avatar"><img src="{{v.shop_logo}}" alt="" height="60" width="60"></td>
+						 	<td><a href="{{path('shopApplyDetail_',{shop_id:v.shop_id})}}">{{v.shop_name}}</a></td>
+							<td>{{v.nickname}}</td>
+							<td>{{v.shop_address}}</td>
+							<td>{{v.createtime|date('Y-m-d H:i:s')}}</td>
+							<td><a href="{{path('shopcategory_',{shop_id:v.shop_id})}}">{{v.category_sum}}</a></td>
+							<td><a href="{{path('shopGoods_',{shop_id:v.shop_id})}}">{{v.shop_goods}}</a></td>
+							<td>{{v.on_goods}}</td>
+							<td>{{v.under_goods}}</td>
+							<td>{{v.visit_sum}}</td>
+							<td>
+							<button class="green"  onclick="location='{{ path('shopApplyDetail_',{shop_id:v.shop_id}) }}'">详情</button>
+							<button class="green"  onclick="delshop({{v.shop_id}})">删除</button>
+							</td>
+							<td>	
+							</td>
+						</tr>
+					  {% endfor %}
+					</tbody>
+				</table>
+		</div>		
+		{% autoescape false %}
+			{{gg}}
+		{% endautoescape %}
+<script>
+function delshop(shop_id){
+	if(shop_id>0){
+		$.ajax({
+			url:"{{ path('delShop_')}}",
+			type:'post',
+			data:'shop_id='+shop_id,
+			datatype:'json',
+			success:function(e){
+				if(e>0){
+					history.go(0);
+				}
+			}
+		})
+	}	
+}	
+</script>
+		
+	</section>
+</section>
+<div class="modal fade" id="myModal_disagree" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="flase">
+  <div class="modal-dialog" style="margin-top:180px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel" style="font-family: '微软雅黑';font-size: 16px;font-weight: 600;">不通过的理由</h4>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+      <textarea  name='HomeStayReason' id="HomeStayReason" rows="" cols="" style="height: 100px;"></textarea>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary disagreeBtn"  id-val="" state-vale="0" >提 交</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+</section>
+{% endblock%}

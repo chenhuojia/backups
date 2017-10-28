@@ -1,0 +1,143 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+{% endblock %}
+
+{% block content%}
+<section class="alert">
+	<button type="button" val=''onclick="javascript:history.go(-1)" class="green stateBtn">返  回</button>
+</section>
+<style>
+	.e{width:50px;}
+	.b{width:300px;}
+	.a{width:200px;}
+</style>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>发货单</h1>
+			</hgroup>
+		</header>
+		<div style="margin-bottom:50px;">
+			<form id="delivery-form" method="post" action="{{path('_delivery')}}">
+				<table class="table table-bordered">
+					<tr>
+						<td  class="text-left b">订单编号：</td>
+						<td  class="text-left">{{order.order_sn}}</td>
+					</tr>
+					<tr>
+						<td  class="text-left b">用户：</td>
+						<td  class="text-left">{{order.nickname}}</td>
+					</tr>
+					<tr>
+						<td  class="text-left b">申请日期：</td>
+						<td  class="text-left">{{order.NewAddTime}}</td>
+					</tr>
+					<tr>
+						<td  class="text-left b">店铺：</td>
+						<td  class="text-left"></td>
+					</tr>
+					<tr>
+						<td  class="text-left b">商品名称：</td>
+						<td  class="text-left"></td>
+					</tr>
+					<tr>
+						<td  class="text-left b">退换货：</td>
+						<td  class="text-left">
+							<select class="input-sm" style="width:100px;">
+								{% if order.goods_return==1 %}
+									<option value="1" selected="true">退货</option>
+									<option value="0">换货</option>
+								{% elseif order.goods_return==0 %}
+									<option value="1">退货</option>
+									<option value="0" selected="true">换货</option>
+								{% endif %}
+							</select>
+							<button class="blue">退款到用户余额</button>
+						</td>
+					</tr>
+					<tr>
+						<td  class="text-left b">退货描述：</td>
+						<td  class="text-left">
+							<textarea name="note" placeholder="请输入操作备注" rows="3">
+								{{order.instructions}}
+							</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td  class="text-left b">用户上传照片：</td>
+						<td  class="text-left">
+								<img src="">
+						</td>
+					</tr>
+					<tr>
+						<td  class="text-left b">状态：</td>
+						<td  class="text-left">
+							<select class="input-sm" style="width:100px;">
+								{% if order.is_agree==0 %}
+									<option value="2">未处理</option>
+									<option value="0" selected="true">不同意</option>
+									<option value="1">同意</option>
+								{% elseif order.is_agree==1 %}
+									<option value="2">未处理</option>
+									<option value="0">不同意</option>
+									<option value="1" selected="true">同意</option>
+								{% elseif order.is_agree==2 %}
+									<option value="2" selected="true">未处理</option>
+									<option value="0">不同意</option>
+									<option value="1">同意</option>
+								{% endif %}
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td  class="text-left b">处理备注：</td>
+						<td  class="text-left">
+							<textarea name="note" placeholder="请输入操作备注" rows="3">
+								{{order.reply}}
+							</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td  class="text-left"></td>
+						<td  class="text-right">
+							<button type="submit" class="blue">保存</button>
+						</td>
+					</tr>
+				</table>
+             </form>
+		</div>						
+	</section>
+<script type="text/javascript">
+	function dosubmit(){
+		console.log($('#invoice_no').val())
+		if($('#invoice_no').val() =='' || $('#invoice_no').val() ==0){
+			 //layer.alert('请输入配送单号', {icon: 2});  
+			  alert('请输入配送单号');
+			return;
+		}
+		var a = [];
+		$('input[name*=goods]').each(function(i,o){
+			if($(o).is(':checked')){
+				a.push($(o).val());
+			}
+		});
+		if(a.length == 0){
+			//layer.alert('请选择发货商品', {icon: 2});  
+			alert('请选择发货商品');
+			return;
+		}
+		$('#delivery-form').submit();
+	}	
+	
+	function visit(did){
+			if(did>0){
+				
+			}
+		}
+</script>
+</section>
+{% endblock%}
+

@@ -1,0 +1,148 @@
+<?php
+/**
+ * 公开接口API
+ * 城市，版本，更新等
+ *
+ */
+namespace Home\Controller;
+use Home\Util;
+use Think\Controller;
+use Common\Controller\ApiController;
+class IndexController extends Controller{
+
+    /**
+     * 获取七牛的token
+     */
+    public function getQiniuToken()
+    {
+       import('Home/Util/Util');
+       $data = \Home\Util\Util::uploadImg();
+       if ($data){
+           $this->myApiPrint(200,'获取成功',$data);
+       }else {
+           $this->myApiPrint(300,'获取失败');
+       }
+    }   
+   public function index(){
+   }
+    /**
+     * 获取七牛的token
+     */
+    public function getShopQiniuToken()
+    {
+        import('Home/Util/Util');
+        $data = \Home\Util\Util::uploadShopImg();
+        if ($data){
+            $this->myApiPrint(200,'获取成功',$data);
+        }else {
+            $this->myApiPrint(300,'获取失败');
+        }
+    }
+    
+    
+    /**
+     *国家地区表(图书筛选适用)
+     */
+    public function country()
+    {   
+        $skip = I('get.skip',0);
+        $take = I('get.take',10);
+        $data=M('country')
+                ->where(array('is_show'=>1,'is_book_set'=>1))
+                ->field('country_id,code,name_chinese,name_english')
+                ->order('sorts desc')
+                ->limit($skip,$take)
+                ->order("is_book_set DESC")
+                ->select(); 
+        $data[] = array('country_id'=>'0','code'=>'none','name_chinese'=>'其他','name_english'=>'none');
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试');
+    }
+    
+    /**
+     *图书适用年龄表
+     */
+    public function bookAplicAge()
+    {   
+        $data=M('book_aplic_age')
+                ->where(array('is_show'=>1))
+                ->field('id as age_id,name')
+                ->order('sort desc')
+                ->select();
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试');
+    }
+
+    /**
+     *退款说明
+     */
+    public function returnReason()
+    {   
+        $result= array('七天无理由退款','该订单与描述不符','付款后卖家没发货或按时发货','商品变质','其他原因' );
+        if ($result){
+            $this->myApiPrint('success',200,$result);
+        }else{
+            $this->myApiPrint('系统繁忙，请稍后再试',300);
+        } 
+
+    }
+
+    /**
+    * 规则说明表
+    * **/ 
+    public function rulesList(){
+        $type=I('get.type',1);
+        $skip=I('get.skip',0);
+        $take=I('get.take',10);
+        $data = M('rules')
+            ->where(array('is_show'=>1))
+            ->field('rules_id,type,title,content,addtime,url,click_time')
+            ->limit($skip,$take)
+            ->order('sorts desc')
+            ->select();
+        foreach ($data as $key => $value) {
+            $data[$key]['addtime']=date('m月d日 H:i:s',$value['addtime']);
+        }
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试',300);        
+    }
+
+    /**
+     *首页引导页面
+     */
+    public function getGuidePage()
+    {   
+        $data = M('guide_page')
+            ->where(array('is_show'=>1))
+            ->field('title,imageurl')
+            ->order('sorts desc')
+            ->select();
+        foreach ($data as $key => $value) {
+            $data[$key]['imageurl']=C("QINIU_IMG_PATH").$value['imageurl'];
+        }
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试',300);  
+
+    }
+
+    /**
+     *历史信息
+     */
+    public function history()
+    {   
+        $skip = I('get.skip',0);
+        $take = I('get.take',10);
+        $data=M('history')
+                ->where(array('is_show'=>1))
+                ->field('history_id,ad_year,lunar_year,calendar_name')
+                ->limit($skip,$take)
+                ->select(); 
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试');
+    }
+}

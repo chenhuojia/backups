@@ -1,0 +1,79 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$(".delHotCit").click(function(){
+		var id=$(this).attr('val-id');
+		$.ajax({
+			type:"POST",
+			data:"&goodsId="+id,
+			dataType: "json", 
+			url:"{{ path('deletePointsGoods_') }}",
+			success:function(msg){
+				if (msg === '1'){
+					alert("成功删除！");
+					}
+				  location.reload();
+			}
+		});
+	});
+
+
+	$(".SmallImg").mouseover(function(){
+// alert(123);
+		})
+	
+})
+</script>
+{% endblock %}
+
+{% block content%}<section class="alert">
+		  <button type="button"  onclick="location='{{ path('AddPointsGoods_') }}'" class="green stateBtn">新  增</button>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>积分商品</h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>排序</th>
+						<th>名称</th>
+						<th>图片</th>
+						<th>兑换积分</th>
+						<th>库存</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+					<tbody>
+				{% for v in pList %}
+						<tr>
+						 	<td style="padding-left: 50px;">{{ v.id }}</td>
+						 	<td>{{ v.sort }}</td>
+							<td>{{ v.goods_name }}</td>
+							<td><img  class='SmallImg' style="width: 66px;" src="{{ path }}{{ v.goods_images }}"></td>
+							<td>{{ v.goods_points }}</td>
+							<td>{{ v.quantity }}</td>
+							<td>{% if  v.state ==0 %}上架中{% else %}已下架{% endif %}</td>
+							<td><button type='button'  val-id="{{ v.id }}"  class="green" onclick="location='{{ path('AddPointsGoods_',{goodsId:v.id}) }}'" >编辑</button><button type='button' class="red delHotCit"  val-id="{{ v.id }}" >删除</button></td>
+						</tr>
+					{% endfor %}
+			
+
+					</tbody>
+				</table>
+		</div>
+	</section>
+</section>
+
+{% endblock%}

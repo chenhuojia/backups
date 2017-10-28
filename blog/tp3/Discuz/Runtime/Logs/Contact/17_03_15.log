@@ -1,0 +1,53 @@
+[ 2017-03-15T12:06:17+08:00 ] 183.232.228.22 /discuz.php/Contact/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: [ app_init ] --END-- [ RunTime:0.037768s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000506s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000568s ]
+SQL: SHOW COLUMNS FROM `bk_discuz_group` [ RunTime:0.0069s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `parent_id` = 0  [ RunTime:0.0208s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.045209s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.045301s ]
+NOTIC: [8] Undefined variable: Think /web/www/blog/tp3/Discuz/Runtime/Cache/Contact/f938ebb65ba4e0f997f9ac4cd4434354.php 第 79 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.456259s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.456315s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000268s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000308s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000536s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000611s ]
+
+[ 2017-03-15T12:06:38+08:00 ] 183.232.228.22 /discuz.php/Contact/Ajax/getChildren.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000358s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000573s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000647s ]
+SQL: SHOW COLUMNS FROM `bk_discuz_group` [ RunTime:0.0149s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `parent_id` = 1 AND `is_show` = 1  [ RunTime:0.0149s ]
+
+[ 2017-03-15T12:06:42+08:00 ] 183.232.228.22 /discuz.php/Contact/Ajax/getChildren.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000471s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.063366s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.063445s ]
+SQL: SHOW COLUMNS FROM `bk_discuz_group` [ RunTime:0.0075s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `parent_id` = 2 AND `is_show` = 1  [ RunTime:0.0178s ]
+
+[ 2017-03-15T12:06:45+08:00 ] 183.232.228.22 /discuz.php/Contact/Ajax/getChildren.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.047640s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.046625s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.046700s ]
+SQL: SHOW COLUMNS FROM `bk_discuz_group` [ RunTime:0.0124s ]
+SQL: SELECT * FROM `bk_discuz_group` WHERE `parent_id` = 1 AND `is_show` = 1  [ RunTime:0.0223s ]
+

@@ -1,0 +1,103 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+    <script src="{{ asset('bundles/msk/public/js/pic/jssor.slider.min.js') }}"></script>
+    <script src="{{ asset('bundles/msk/public/js/pic/jquery.scrollfollow.js') }}"></script>
+    <script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('bundles/msk/public/js/pic/slidePic.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#myModal').modal(options);
+        })
+    </script>
+{% endblock %}
+{% block stylesheet %} {{ parent() }}
+  {# <link href="{{ asset('bundles/msk/public/css/details_new.css') }}" rel="stylesheet" type="text/css" media="all"/>#}
+{% endblock %}
+{% block content%}<section class="alert">
+    <button type="button"class="green stateBtn" onclick='javascript:history.go(-1)'  >返回</button>
+{#     <button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>#}
+</section>
+  <section class="content">
+    <section class="widget">
+      <header>
+        <span class="icon homstay-detail"><span>&#128196;</span></span>
+        <hgroup>
+          <h1>游记详情</h1>
+        </hgroup>
+      </header>
+      <div class="content no-padding timeline">
+        <div class="homestay_box_left">
+          <div class="detailform"><span>作者</span>：<span>{{ travelNote.nickname }}</span></div>
+          <div class="detailform"><span>游记标题</span>：<span>{{ travelNote.travel_title }}</span></div>
+          <div class="detailform"><span>景点地址</span>：<span>{{ travelNote.addr }}</span></div>
+          <div class="detailform"><span>推荐民宿</span>：<span>{{ travelNote.recommend_homestay }}</span></div>
+          <div class="detailform"><span>添加时间</span>：<span>{{ travelNote.addtime|date("Y/m/d H:i:s") }}</span></div>
+          <div class="detailform"><span>经纬度</span>：<span>{{ travelNote.longitude }}，{{ travelNote.latitude }}</span></div>
+          <div class="detailform"><span>游记内容</span>：<p style="margin-left: 100px"></p> <div style="width:500px;height:500px;ovefloa:hidden">{% autoescape false %}{{ travelNote.travel_content}} {% endautoescape %} </div></div>
+        </div>
+        {# 			<div style="clear:both"></div> #}
+        <div class="fl img_playPar">
+          <div class="desTop fl">
+            <!--图片轮播-->
+            <div style="position:relative;">
+              <div class="picmap-change">
+                <div id="TabChangeCon_01" class="change-list">
+                  <div class="picbox">
+                    <ul class="piclist">
+                      {% for img in img %}
+                        <li style=""><a href="#" rel="nofollow"><img style="width: 100%; height: 100%" src="{{ asset(img.travel_note_image) }}" alt=""></a></li>
+                      {% endfor %}
+                    </ul>
+                    <a id="big_play_prev" class="home-picprev" href="#" rel="nofollow" style="cursor: url({{ asset('bundles/msk/public/images/mouseup.cur') }}), auto; background-color: rgb(255, 255, 255); opacity: 0; top: 50%; background-position: initial initial; background-repeat: initial initial;"></a>
+                    <a id="big_play_next" class="home-picnext" href="#" rel="nofollow" style="cursor: url({{ asset('bundles/msk/public/images/mousedown.cur') }}), auto; background-color: rgb(255, 255, 255); opacity: 0; bottom: 50%; background-position: initial initial; background-repeat: initial initial;"></a>
+                  </div>
+                  <div class="picsmallbox">
+                    <div class="picboxpic">
+                      <ul id="picsmall" class="picsmall clearfix" >
+                        {% for img in img %}
+                          <li style=""><a href="#" rel="nofollow"><img style="width: 100%; height: 100%" src="{{ asset(img.travel_note_image) }}"></a></li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+
+                    <a id="play_prev" class="play-prev" href="#" rel="nofollow"></a>
+                    <a id="play_next" class="play-next" href="#" rel="nofollow"></a>
+                    <div class="translucence"></div>
+                  </div>
+                </div>
+                {# 								<div id="TabChangeCon_02" class="change-list">#}
+                {# 									<div id="mapDiv"></div>#}
+                {# 								</div>	#}
+              </div>
+            </div>
+          </div>
+          <!--图片轮播结束-->
+
+
+        </div>
+        {# 		   <div style="clear:both"></div>  #}
+        <!-- 房间信息 -->
+      </div>
+    </section>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="flase">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+{% endblock%}

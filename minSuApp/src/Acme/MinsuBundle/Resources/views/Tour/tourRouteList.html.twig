@@ -1,0 +1,111 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+	$(".page-dis [href]").each(function () {
+		if (this.href == window.location.href) {
+			$(this).addClass("active");
+		}
+	})
+});
+</script>
+<style>
+	.input-sm{margin-top:20px;}
+</style>
+{% endblock %}
+{% block stylesheet %} {{ parent() }}
+	<link href="{{ asset('bundles/msk/public/css/user.css') }}" rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
+{% block content%}
+<section class="alert">
+	<div>
+		<form method="get" action="">	
+			<input type="text" class='searchText'  name="searchText" placeholder=" 搜  索">
+				<select class="searchSelect" name="searchType" >
+					<option value="999">搜索类型</option>
+					<option value="tour_title">标题</option>
+					<option value="agency_name">旅行社</option>
+				</select>				
+			<input class="green searchbuttoninput" type="submit" value="筛选">
+			<button class="green" type="button" onclick="location='{{ path('_tour_route_list')}}'" style="margin:0;float:left;margin-top:-5px;">全部路线</button>
+		</form>	
+	</div>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>全部路线</h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th class="avatar" style="padding-left: 80px;">名称	</th>
+						<th>旅行社</th>
+						<th>默认价格</th>
+						<th>团期</th>
+						<th>状态</th>
+						<th>添加时间</th>
+						<th>审视</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+					<tbody>
+						{% for v in oList %}
+							<tr>
+								<td class="avatar" ><img src="{{ v.tour_imgurl }}" alt="" height="60" width="60" /> {{ v.tour_title }}</td>
+	{# 							<td>{{ v.tour_title }}</td>#}
+								<td>{{ v.agency_name }}</td>
+								<td>成人{{ v.default_adult_price }}/儿童{{ v.default_child_price }}</td>
+								<td>{{ v.period }}</td>
+								<td>{% if v.state ==0  %}删除{% elseif  v.state==1 %}显示{% else %}未知{% endif %}</td>
+								<td>{{ v.addtime|date("Y-m-d H:i:s") }}</td>
+	{# 							{{ path('homestayDetail_',{'hid':v.route_id}) }}#}
+	                            <td><button class="green"  onclick="location='{{ path('tourRouteDetail_',{'route_id':v.route_id}) }}'">详情</button>
+								</td>
+								<td>
+									<div class="btn-group">
+									  <button type="button" class="btn btn-success">更改状态</button>
+									  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+									    <span class="caret"></span>
+									    <span class="sr-only">Toggle Dropdown</span>
+									  </button>
+									  <ul class="dropdown-menu" role="menu">
+									    <li><a state="0" route_id="{{ v.route_id }}" onclick="TourRouteStateChange(this)">删除</a></li>
+									    <li><a state="1" route_id="{{ v.route_id }}" onclick="TourRouteStateChange(this)">显示</a></li>
+									  </ul>
+									</div>
+								</td>
+							</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+		</div>
+	</section>
+	{% autoescape false %}
+			{{page}}
+	{% endautoescape %}
+</section>
+<script type="text/javascript">
+	
+	function TourRouteStateChange(obj) {
+	var route_id = $(obj).attr('route_id');
+	var state = $(obj).attr('state');
+	$.ajax({
+		type: "POST",
+		url: "{{ path('TourRouteStateChange_') }}",
+		data: {'route_id': route_id, "state": state},
+		dataType: "json",
+		success: function (data) {
+			location.reload();
+		}
+	})
+}
+	
+</script>
+{% endblock%}

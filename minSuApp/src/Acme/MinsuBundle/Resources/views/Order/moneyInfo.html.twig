@@ -1,0 +1,77 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+{% endblock %}
+
+{% block content%}
+<section class="alert">
+	<button type="button" val=''onclick="javascript:history.go(-1)" class="green stateBtn">返  回</button>
+</section>
+<style>
+	.e{width:50px;}
+	.b{width:300px;}
+	.a{width:200px;}
+</style>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>管理资金</h1>
+			</hgroup>
+		</header>
+		<div style="margin-bottom:50px;">
+			<form id="delivery-form" method="post" action="{{path('_delivery')}}">
+				<table class="table table-bordered">
+					<tr>
+						<td  class="text-left">金额：</td>
+						<td  class="text-left">
+							<select>
+								<option>增加</option>
+								<option>减少</option>
+							</select>
+							<input type="text" name="" value=""></input>
+						</td>
+					</tr>
+					<tr>
+						<td  class="text-left"></td>
+						<td  class="text-right">
+							<button type="submit" class="blue">提交</button>
+							
+						</td>
+					</tr>
+				</table>
+             </form>
+		</div>						
+	</section>
+<script type="text/javascript">
+	function dosubmit(){
+		console.log($('#invoice_no').val())
+		if($('#invoice_no').val() =='' || $('#invoice_no').val() ==0){
+			 //layer.alert('请输入配送单号', {icon: 2});  
+			  alert('请输入配送单号');
+			return;
+		}
+		var a = [];
+		$('input[name*=goods]').each(function(i,o){
+			if($(o).is(':checked')){
+				a.push($(o).val());
+			}
+		});
+		if(a.length == 0){
+			//layer.alert('请选择发货商品', {icon: 2});  
+			alert('请选择发货商品');
+			return;
+		}
+		$('#delivery-form').submit();
+	}	
+	
+	function visit(did){
+			if(did>0){
+				
+			}
+		}
+</script>
+</section>
+{% endblock%}
+

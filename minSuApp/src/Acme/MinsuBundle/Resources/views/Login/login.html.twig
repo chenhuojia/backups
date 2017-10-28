@@ -1,0 +1,77 @@
+{% extends 'AcmeMinsuBundle::jsCssLayout.html.twig' %}
+{% block javascript %}
+{{ parent() }}
+<script>
+	function RefreshCode(obj)
+	{
+		obj.src = obj.src + "?code=" + Math.random();
+	}
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".ajax-post").click(function(){
+		var admin_name = $("#admin_name").val();
+		var admin_password = $("#admin_password").val();
+		var captcha = $("#captcha").val();
+
+		$.ajax({
+			type:"POST",
+			url:"{{ path('validate_') }}",
+			data:{"admin_name":admin_name,"admin_password":admin_password,"captcha":captcha},
+			dataType:"json",
+			success:function(response) {
+				if (response.code == 0){
+					$('#captcha').val('');
+					$('#captcha').remove('placeholder');
+					$('#captcha').attr('placeholder','验证码不正确');
+					$('#reflesh').attr('src', "{{ path('captcha_') }}" + "?code=" + Math.random());
+				} else if(response.code == 1){
+                    self.location.href = "{{ path('index_') }}"
+				} else if(response.code == 2){
+					$('#admin_password').val('');
+					$('#admin_password').remove('placeholder');
+					$('#admin_password').attr('placeholder','密码或者账号不正确');
+					$('#reflesh').attr('src', "{{ path('captcha_') }}" + "?code=" + Math.random());
+				}
+			}
+		})
+	})
+})
+</script>
+{% endblock %}
+{% block body%}
+	<section>
+		<h1><strong>士加堡</strong> 民宿管理系统</h1>
+        <form role="form" >
+		<input type="text" required="required" name="admin_name" placeholder="帐号" class="form-control" id="admin_name"/>
+        <input type="password" name="admin_password" placeholder="密码" class="form-control" id="admin_password"/>
+        <input type="text" name="captcha" placeholder="验证码" class="form-control" id="captcha"/>
+        <img src="{{ path("captcha_") }}" id="reflesh" alt="验证码" title="看不清？点击刷新" onclick="RefreshCode(this)"/>
+        <button type="button" class="ajax-post" id="btn">登 录</button>
+        </form>
+	</section>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

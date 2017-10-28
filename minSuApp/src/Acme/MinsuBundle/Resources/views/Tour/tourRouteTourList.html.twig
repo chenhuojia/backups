@@ -1,0 +1,107 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/pic/jssor.slider.min.js') }}"></script>
+<script src="{{ asset('bundles/msk/public/js/pic/jquery.scrollfollow.js') }}"></script>
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script src="{{ asset('bundles/msk/public/js/pic/slidePic.js') }}"></script>
+<script type="text/javascript">
+	function tourStateChange(obj) {
+		var tour_id = $(obj).attr('tour_id');
+		var state = $(obj).attr('state');
+		$.ajax({
+			type: "POST",
+			url: "{{ path('tourStateChange_') }}",
+			data: {'tour_id': tour_id, "state": state},
+			dataType: "json",
+			success: function (data) {
+				location.reload();
+			}
+		})
+	}
+</script>
+
+{% endblock %}
+{% block stylesheet %} {{ parent() }}
+{# <link href="{{ asset('bundles/msk/public/css/details_new.css') }}" rel="stylesheet" type="text/css" media="all"/>#}
+	<style type="text/css">
+		.video {
+			position: absolute;
+				right: 15%;
+		}
+		.img {
+			position: absolute;
+		
+			
+			right: 20%;
+		}
+	</style>
+{% endblock %}
+{% block content%}<section class="alert">
+	 	 <button type="button"class="green stateBtn" onclick='javascript:history.go(-1);'>返回</button>
+{# 	 	 <button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>#}
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>团游的报名人名单展示</h1>
+			</hgroup>
+		</header>
+		<div class="content no-padding timeline">
+	        
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th class="avatar" style="padding-left: 80px;">名称	</th>
+						<th>旅行社名称</th>
+						<th>默认价格</th>
+						<th>期数</th>
+						<th>日历数</th>
+						<th>状态</th>
+						<th>添加时间</th>
+						<th>审视</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+
+				<tbody>
+				    {% for v in enroll %}
+						<tr>
+							<td class="avatar" ><img src="{{ v.imgurl }}" alt="" height="60" width="60" /> {{ v.tour_title }}</td>
+{# 							<td>{{ v.tour_title }}</td>#}
+							<td>{{ v.agency_name }}</td>
+							<td>成人{{ v.default_adult_price }}/儿童{{ v.default_child_price }}</td>
+							<td>{{ v.period }}</td>
+							<td><a href="{{ path('_tour_calendar_list',{'tour_id':v.tour_id}) }}">{{ v.calendar_sums }}</a></td>
+							<td>{% if v.state ==0  %}隐藏{% elseif  v.state==1 %}显示{% else %}未知{% endif %}</td>
+							<td>{{ v.NewAddTime }}</td>
+{# 							{{ path('homestayDetail_',{'hid':v.tour_id}) }}#}
+                            <td><button class="green"  onclick="location='{{ path('tourDataDetail_',{'tour_id':v.tour_id}) }}'">详情</button>
+							</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-success">更改状态</button>
+								  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+								    <span class="caret"></span>
+								    <span class="sr-only">Toggle Dropdown</span>
+								  </button>
+								  <ul class="dropdown-menu" role="menu">
+								    <li><a state="0" tour_id="{{ v.tour_id }}" onclick="tourStateChange(this)">隐藏</a></li>
+								    <li><a state="1" tour_id="{{ v.tour_id }}" onclick="tourStateChange(this)">显示</a></li>
+								  </ul>
+								</div>
+							</td>
+						</tr>
+				  	{% endfor %}
+									
+				</tbody>
+			</table>
+
+        </div>
+		  
+	</section>
+</section>
+
+{% endblock%}

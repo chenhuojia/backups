@@ -1,0 +1,222 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+// alert(12321321); 
+$(".stateBtn").click(function(){
+	$("[name='homestayState']").val($(this).attr("val"));
+	$("form").submit();
+})
+
+$(".agreeBtn").click(function(){
+	var id = $(this).attr("id-val");
+	var state =$(this).attr("state-vale");
+	if(confirm("确认通过审核?")){
+		shenkefuc(id,state,'');
+		}
+	})
+
+$(".disagreeBtn").click(function(){
+		var reason =$("#HomeStayReason").val();
+		if(!reason){alert("必须填写审核不通过理由！");return false;}
+		var id = $(this).attr("id-val");
+		var state =$(this).attr("state-vale");
+		if(confirm("确认提交?")){
+			if(id){
+			shenkefuc(id,state,reason);}
+			}
+})
+function shenkefuc(id,state,reason){
+	$.ajax({
+		type:"POST",
+		data:"&id="+id+"&state="+state+"&rtest="+reason,
+		url:"{{ path('AjaxCHomeStay_') }}",
+		success:function(msg){
+			if (msg === '1'){
+				alert("操作成功!");
+				}
+			  location.reload();
+		}
+	});
+}
+
+$(".showReason").click(function(){
+	var id= $(this).attr("id-val");
+	$(".disagreeBtn").attr("id-val",id);
+	});
+
+$(".hsort").blur(function(){
+	var id =$(this).attr("id-val");
+// 	alert(id);
+	var val =$(this).val();
+
+	$.ajax({
+		type:"POST",
+		data:"&id="+id+"&val="+val,
+		url:"{{ path('ajaxhometaysetsort_') }}",
+		success:function(msg){
+			if (msg === '1'){
+				location.reload();
+				}
+			}
+		});
+	
+	})
+})
+
+$(document).ready(function () {
+	$(".page-dis [href]").each(function () {
+		if (this.href == window.location.href) {
+			$(this).addClass("active");
+		}
+	})
+});
+
+</script>
+{% endblock %}
+{# onclick="location='{{ path('AjaxCHomeStay_',{'hid':v.id}) }}'"#}
+{% block stylesheet %} {{ parent() }}
+	<link href="{{ asset('bundles/msk/public/css/homestay.css') }}" rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
+
+{% block content%}<section class="alert">
+	<form method="post" action="">
+	<input type ="hidden" name ="homestayState">
+	 	 <button type="button" val='1' class="green stateBtn">已通过审核</button>
+	 	 <button type="button" val='2' class="green stateBtn">审核不通过</button>
+		 <button type="button" val='0' class="green stateBtn">未审核</button>
+		 <button type="button" val='' class="green stateBtn">全部民宿</button>
+	 <button type="button" onclick="location='{{ path('a_d_d_h_o_m_e_s_t_a_y') }}'" class="red">新 增</button>
+ 	{#		  <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">#}
+{#   Launch demo modal#}
+{# </button>#}
+	</form>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>民宿信息</h1>
+				<h2 style="font-family: '微软雅黑';font-size: 12px;color: #ccc;">注:带<font color="red">&nbsp;*&nbsp;</font>是房东用户</h2>
+			</hgroup>
+{# 			<aside>#}
+{# 				<span>#}
+{# 					<a href="#">&#9881;</a>#}
+{# 					<ul class="settings-dd">#}
+{# 						<li><label>Option a</label><input type="checkbox" /></li>#}
+{# 						<li><label>Option b</label><input type="checkbox" checked="checked" /></li>#}
+{# 						<li><label>Option c</label><input type="checkbox" /></li>#}
+{# 					</ul>#}
+{# 				</span>#}
+{# 			</aside>#}
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th></th>
+						<th>#</th>
+						<th>名称</th>
+						<th>昵称</th> 
+{# 						真实姓名 | #}
+						<th>类型</th>
+{# 						<th>价格</th>#}
+						<th>电话</th>
+						<th>地址</th>
+						{#}<th>状态</th>{#}
+						<th>日期</th>
+						<th>审视</th>
+						<th>审核</th>
+					</tr>
+				</thead>
+					<tbody>
+					{% for key,v in homestayList %}
+					<tr>
+						<td style="padding-left: 30px;"><input  id-val="{{ v.id }}" class='hsort' maxlength="9" style="width: 45px;height: 30px;padding: 5px;" type="text" value="{{ v.sort }}"></td> 
+						<td>{{ v.id}}</td> 
+						 <td >{{ v.homestay_name }}</td>
+{# 						 {{ v.true_name }} | #}
+							<td>{{ v.nickname }}{% if v.is_owner ==1 %}&nbsp;&nbsp;&nbsp;<font  color="red">*</font>{% endif %}</td>
+							<td>{{ v.homestay_type_name }}</td>
+{# 							<td>{{ v.bottom_price }}</td>#}
+							<td>{{ v.homestay_phone }}</td>
+							<td title="{{ v.homestay_addr }}">{% if v.homestay_addr|length >25 %}{{ v.homestay_addr |slice(0,24)}}...{% else %}{{ v.homestay_addr }}{% endif %}</td>
+					{#	<td>{% if v.state == 0 %}未审核{% elseif v.state == 1 %}通过{% elseif v.state ==2 %}不通过{% elseif v.state ==3 %}用户删除{% endif %}</td>#}
+							
+							<td>{{ v.NewAddTime }}</td>
+							<td><button class="green"  onclick="location='{{ path('homestayDetail_',{'hid':v.id}) }}'">详情</button>
+							</td>
+							<td>
+							{% if v.state == 0 %}
+							<button class="green agreeBtn" type='button' id-val="{{ v.id }}"  state-vale="1">通过</button>
+{# 							<button class="red disagreeBtn"  type='button'  id-val="{{ v.id }}" state-vale="2">不通过</button>#}
+							<button class="red showReason" data-toggle="modal" data-target="#myModal_disagree" id-val="{{ v.id }}">不通过</button>
+							{% elseif v.state == 1 %}<font color='green'>已通过</font>
+							<!-- 用户新建不用审核逻辑 -->
+							<button class="red showReason" data-toggle="modal" data-target="#myModal_disagree" id-val="{{ v.id }}">屏蔽</button>
+							{% elseif v.state ==2 %}<font color='red'>不通过</font>
+							<button class="green agreeBtn" type='button' id-val="{{ v.id }}"  state-vale="1">开启</button>
+							{% elseif v.state ==3 %}
+								<font color="red">用户删除</font>
+							{% endif %}
+							
+							</td>
+						</tr>
+					{% endfor %}
+						
+					</tbody>
+				</table>
+		</div>
+		<div class="page-dis">
+			<div class="meneame">
+				<a href="{{ path('homestay_', {'page': 1}) }}">首页</a>
+				<a href="{{ path('homestay_', {'page': prePage}) }}"> < </a>
+				{% if totalPage >= 7 %}
+					{% if page <= 4 %}
+						{% for i in 1..7 %}
+							<a href="{{ path('homestay_', {'page': i}) }}">{{ i }}</a>
+						{% endfor %}
+					{% elseif page > (totalPage - 4) %}
+						{% for k in (totalPage-7)..(totalPage) %}
+							<a href="{{ path('homestay_', {'page': k}) }}">{{ k }}</a>
+						{% endfor %}
+					{% else %}
+						{% for j in (page-3)..(page+3) %}
+							<a href="{{ path('homestay_', {'page': j}) }}">{{ j }}</a>
+						{% endfor %}
+					{% endif %}
+				{% else %}
+					{% if totalPage != 0 %}
+						{% for m in 1..totalPage %}
+							<a href="{{ path('homestay_', {'page': m}) }}">{{ m }}</a>
+						{% endfor %}
+					{% endif %}
+				{% endif %}
+				<a href="{{ path('homestay_', {'page': nextPage}) }}"> > </a>
+				<a href="{{ path('homestay_', {'page': totalPage}) }}">尾页</a>
+			</div>
+		</div>
+	</section>
+</section>
+
+<div class="modal fade" id="myModal_disagree" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="flase">
+  <div class="modal-dialog" style="margin-top:180px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel" style="font-family: '微软雅黑';font-size: 16px;font-weight: 600;">不通过的理由</h4>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+      <textarea  name='HomeStayReason' id="HomeStayReason" rows="" cols="" style="height: 100px;"></textarea>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary disagreeBtn"  id-val="" state-vale="2" >提 交</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+{% endblock%}

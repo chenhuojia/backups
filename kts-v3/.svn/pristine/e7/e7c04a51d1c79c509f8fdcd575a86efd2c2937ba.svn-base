@@ -1,0 +1,273 @@
+<?php
+/**
+ * 公开接口API
+ * 城市，版本，更新等
+ *
+ */
+namespace Home\Controller;
+use Home\Util;
+use Think\Controller;
+use Common\Controller\ApiController;
+class IndexController extends Controller{
+
+    /**
+     * 获取七牛的token
+     */
+    public function getQiniuToken()
+    {
+       import('Home/Util/Util');
+       $data = \Home\Util\Util::uploadImg();
+       if ($data){
+           $this->myApiPrint(200,'获取成功',$data);
+       }else {
+           $this->myApiPrint(300,'获取失败');
+       }
+    }   
+   public function index(){
+       GetRedisConn()->select(1);
+       GetRedisConn()->hMSet('can',array('as'=>12,'ll'=>333));
+      $r= GetRedisConn()->hGetAll('can');
+      var_dump($r);
+   }
+    /**
+     * 获取七牛的token
+     */
+    public function getShopQiniuToken()
+    {
+        import('Home/Util/Util');
+        $data = \Home\Util\Util::uploadShopImg();
+        if ($data){
+            $this->myApiPrint(200,'获取成功',$data);
+        }else {
+            $this->myApiPrint(300,'获取失败');
+        }
+    }
+    
+    
+    /**
+     *国家地区表(图书筛选适用)
+     */
+    public function country()
+    {   
+        $skip = I('get.skip',0);
+        $take = I('get.take',10);
+        $data=M('country')
+                ->where(array('is_show'=>1,'is_book_set'=>1))
+                ->field('country_id,code,name_chinese,name_english')
+                ->order('sorts desc')
+                ->limit($skip,$take)
+                ->order("is_book_set DESC")
+                ->select(); 
+        $data[] = array('country_id'=>'0','code'=>'none','name_chinese'=>'其他','name_english'=>'none');
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试');
+    }
+    
+    /**
+     *图书适用年龄表
+     */
+    public function bookAplicAge()
+    {   
+        $data=M('book_aplic_age')
+                ->where(array('is_show'=>1))
+                ->field('id as age_id,name')
+                ->order('sort desc')
+                ->select();
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试');
+    }
+
+    /**
+     *退款说明
+     */
+    public function returnReason()
+    {   
+        $result= array('七天无理由退款','该订单与描述不符','付款后卖家没发货或按时发货','商品变质','其他原因' );
+        if ($result){
+            $this->myApiPrint('success',200,$result);
+        }else{
+            $this->myApiPrint('系统繁忙，请稍后再试',300);
+        } 
+
+    }
+
+    /**
+    * 规则说明表
+    * **/ 
+    public function rulesList(){
+        $type=I('get.type',1);
+        $skip=I('get.skip',0);
+        $take=I('get.take',10);
+        $data = M('rules')
+            ->where(array('is_show'=>1))
+            ->field('rules_id,type,title,content,addtime,url,click_time')
+            ->limit($skip,$take)
+            ->order('sorts desc')
+            ->select();
+        foreach ($data as $key => $value) {
+            $data[$key]['addtime']=date('m月d日 H:i:s',$value['addtime']);
+        }
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试',300);        
+    }
+
+    /**
+     *首页引导页面
+     */
+    public function getGuidePage()
+    {   
+        $data = M('guide_page')
+            ->where(array('is_show'=>1))
+            ->field('title,imageurl')
+            ->order('sorts desc')
+            ->select();
+        foreach ($data as $key => $value) {
+            $data[$key]['imageurl']=C("QINIU_IMG_PATH").$value['imageurl'];
+        }
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试',300);  
+
+    }
+
+    /**
+     *公元年年不重复列表
+     */
+    public function adYearList()
+    {   
+        $skip = I('get.skip',0);
+        $take = I('get.take',10);
+        $data=M('history')
+                ->where(array('is_show'=>1))
+                ->field('history_id,ad_year,lunar_year,calendar_name,dynasty,posthumous,era')
+                ->limit($skip,$take)
+                ->group('ad_year')
+                ->select(); 
+        foreach ($data as &$value) {
+            $value['calendar'] = $value['dynasty'].$value['posthumous'].$value['era'];
+        }
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试');
+    }
+
+    public function adYearSeek()
+    {
+        $ad_year = I('get.ad_year','');
+        if(empty($ad_year)) $this->myApiPrint(300,'请输入公元年份');
+        $data=M('history')
+                ->where(array('ad_year'=>$ad_year))
+                ->field('history_id,ad_year,lunar_year,calendar_name,dynasty,posthumous,era')
+                ->select(); 
+        foreach ($data as &$value) {
+            $value['calendar'] = $value['dynasty'].$value['posthumous'].$value['era'];
+        }
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试');
+    }
+   
+    public function calendarNameSeek()
+    {
+        $calendar_name = I('get.calendar_name','');
+        if(empty($calendar_name)) $this->myApiPrint(300,'请输入纪年');
+        $data=M('history')
+                ->where(array('calendar_name'=>$calendar_name))
+                ->field('history_id,ad_year,lunar_year,calendar_name,dynasty,posthumous,era')
+                ->select(); 
+        foreach ($data as &$value) {
+            $value['calendar'] = $value['dynasty'].$value['posthumous'].$value['era'];
+        }
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试');
+    }
+    //筛选皇帝在位的统治年份
+    public function calendarReignSeek()
+    {
+        $dynasty = I('get.dynasty','');
+        $posthumous = I('get.posthumous','');
+        $era = I('get.era','');
+        if(empty($dynasty)) $this->myApiPrint(300,'请输入朝代');
+        $data=M('history')
+                ->where(array('dynasty'=>$dynasty,'posthumous'=>$posthumous,'era'=>$era))
+                ->field('history_id,ad_year,lunar_year,calendar_name,dynasty,posthumous,era')
+                ->select(); 
+        foreach ($data as &$value) {
+            $value['calendar'] = $value['dynasty'].$value['posthumous'].$value['era'];
+        }
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试');
+    }
+
+   /**
+     *纪年不重复列表
+     */
+    public function calendarNameList()
+    {   
+        $skip = I('get.skip',0);
+        $take = I('get.take',10);
+        $data=M('history')
+                ->where(array('is_show'=>1))
+                ->field('history_id,ad_year,lunar_year,calendar_name,dynasty,posthumous,era')
+                ->select(); 
+        $tmp = array();
+        foreach ($data as &$v) {
+            $v['calendar'] = $v['dynasty'].$v['posthumous'].$v['era'];
+            if (in_array($v['dynasty'], $tmp)) {
+                unset($v);
+            } else {
+                $tmp[] = $v['dynasty'];
+            }
+        }
+        if(!empty($tmp)){
+            $tmp=array_filter($tmp);
+            $p = array();
+            $data=assoc_unique($data,'calendar');
+            foreach ($data as &$v1) {
+                //$v1['calendar'] = $v1['posthumous'].$v1['era'];
+                foreach ($tmp as $k => $v2) {
+                   if($v2 == $v1['dynasty']){
+                       $p[$k]['dynasty'] =$v2;
+                       $p[$k]['data'][] = $v1;
+                       
+                   }
+                }
+            }
+            $this->myApiPrint(200,'success',$p);
+        }else{
+            $this->myApiPrint(202,'暂无数据');
+        }
+    }
+
+    public function getShippingList()
+    {
+        $skip = I('get.skip',0);
+        $take = I('get.take',10);
+        $data=M('shipping')
+                ->where(array('enabled'=>1))
+                ->field('shipping_id,shipping_code,shipping_name,shipping_desc')
+                ->limit($skip,$take)
+                ->select(); 
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试');
+    }
+
+    public function shippingAreaSelect()
+    {
+        $shipping_id = I('get.shipping_id',0);
+        $data=M('shipping_area')
+                ->where(array('shipping_id'=>$shipping_id))
+                ->field('shipping_area_id,shipping_id,shipping_area_name,shipping_code,config,suggested_price')
+                ->select(); 
+        if ($data) $this->myApiPrint(200,'success',$data);
+        else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+        else  $this->myApiPrint(300,'系统繁忙，请稍后再试');
+    }
+    
+}

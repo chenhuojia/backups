@@ -1,0 +1,114 @@
+<include file="./APP/Admin/View/Common/Public_header_v1.html"/>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/static/ueditor1.4.3/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/static/ueditor1.4.3/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/static/ueditor1.4.3/lang/zh-cn/zh-cn.js"></script>
+
+<style>
+    .form-horizontal{width:850px;}
+    .form-horizontal>.form-group{border-top: 1px solid #ccc;padding-top:20px;margin-left:15px;margin-right:0px;}
+    .form-horizontal>.form-group:first-child{border-top:none;}
+    .form-group>.col-sm-2{width: 110px;}
+    .form-group>.col-sm-10{width: 700px;}
+    .noHand{cursor: not-allowed;}
+    select.form-control{width: auto !important;}
+</style>
+<ol class="breadcrumb">
+    <li>{:C('CONTROL_MENU')}</li>
+    <li>小组设置</li>
+    <li class="active"><a href="{:U('Admin/Groups/groupsTypeList')}"> 小组类型列表</a></li>
+    <li>添加小组类型</li>
+</ol>
+<form class="form-horizontal" action="{:U('Admin/Groups/groupsTypeAdd')}" method="post">
+    <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">标题：</label>
+        <div class="col-sm-8">
+            <!-- <input type="hidden" name="groups_id" class="form-control" id="groups_id" value="{$classType.groups_id}" /> -->
+            <input type="text" name="name" class="form-control" id="name" datatype="*1-10" nullmsg="请输入小组标题！" errormsg="长度10个字以内" value="" />
+            <div class="Validform_checktip">请输入10字以内的小组标题</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="introduce" class="col-sm-2 control-label">介绍：</label>
+        <div class="col-sm-8">
+            <input type="text" name="introduce" class="form-control" id="introduce" datatype="*1-100" nullmsg="请输入描述！" errormsg="长度100个字以内" value="" ignore="ignore"/>
+            <div class="Validform_checktip">请输入100字以内的介绍</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">缩略图：</label>
+        <div class="col-sm-10">
+            <img id="show_imgurl" width="300px" height="150px" src="">
+        </div>
+        <div class="clearfix"></div>
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+            <input type="button" onclick="upImage()"  class="btn btn-info" value="上传小组图片"/>
+            <input type="hidden" name="imageurl" id="groups_imgurl" value=""  datatype="*" nullmsg="请设置缩略图！"/>
+            <div class="Validform_checktip">支持jpg、gif、png、jpeg(4种格式)，规格为：**px***px</div>
+        </div>
+    </div>
+   
+    <div class="form-group">
+        <label for="is_show" class="col-sm-2 control-label">是否有效：</label>
+        <div class="col-sm-8">
+            <select name="is_show" id="is_show" class="form-control">
+                <option value="1">有效</option>
+                <option value="0">无效</option>
+            </select>          
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">提交</button>
+        </div>
+    </div>
+</form>
+<link href="__PUBLIC__/static/Validform/css/style.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/static/Validform/Validform_v5.3.2_min.js?t=20150112"></script>
+<script type="text/javascript" language="javascript">
+    $(function(){
+
+        $(".form-horizontal").Validform({
+            tiptype:function(msg,o,cssctl){
+                if(!o.obj.is("form")){
+                    var objtip=o.obj.next(".Validform_checktip");
+                    cssctl(objtip,o.type);
+                    objtip.text(msg);
+                }
+            },
+            beforeCheck:function(curform){
+                if(!confirm('确定提交本次操作吗？'))
+                {
+                    return false;
+                }
+            },
+            beforeSubmit:function(curform){
+                //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
+                //这里明确return false的话表单将不会提交;
+            }
+        });
+    });
+
+    //重新实例化一个编辑器，防止在上面的editor编辑器中显示上传的图片或者文件
+    var _editor = UE.getEditor('myEditor');
+    _editor.ready(function () {
+        //设置编辑器不可用
+        //_editor.setDisabled();
+        //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+        _editor.hide();
+        //侦听图片上传
+        _editor.addListener('beforeInsertImage', function (t, arg) {
+            //将地址赋值给相应的input
+            $("#groups_imgurl").attr("value", arg[0].src);
+            //图片预览
+            $("#groups_imgurl").attr("src", arg[0].src);
+        })
+    });
+    //弹出图片上传的对话框
+    function upImage() {
+        var myImage = _editor.getDialog("insertimage");
+        myImage.open();
+    }
+</script>
+<script type="text/plain" id="myEditor"></script>
+<include file="./APP/Admin/View/Common/Public_footer_v1.html"/>

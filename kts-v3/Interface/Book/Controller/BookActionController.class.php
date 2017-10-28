@@ -1,0 +1,587 @@
+<?php
+namespace Book\Controller;
+
+use Common\Controller\ApiController;
+use User\Util;
+use Book\Util\Geohash;
+
+
+class BookActionController extends ApiController
+{
+    /**
+     * 添加新书
+     * @param json data  
+     * @return boolean  
+     */
+    public function addNewBook(){
+       $data=isset($_POST['data'])?$_POST['data']:$this->myApiPrint(300, '非法参数');
+       $data=json_decode($data,true)?json_decode($data,true):$this->myApiPrint(300, '非法参数');        
+       $user_id=session("user_id");  
+       $shop=M('shop')->where(array('user_id'=>$user_id,'is_show'=>1))->find();
+       if ($shop){
+           $bookModel=D('book');           
+           $book=$bookModel->checkData($data,$shop['shop_id']);
+           if ($book['error']==300) $this->myApiPrint(300,$book['msg']);
+           self::checkBook($data['book_number'],3,0,$shop['shop_id']);
+           $bookModel->startTrans();
+           $book_id=$bookModel->add($book['msg']);          
+           if ($book_id){
+               $cover_explain=$book['msg']['cover_explain'];
+               $a=self::addCommon(1, $book_id, $data,$cover_explain);               
+               $b=M('shop')->where(array('shop_id'=>$shop['shop_id']))->save(array('book_num'=>($shop['book_num']+1),'on_book'=>($shop['on_book']+1)));             
+               $c=M('book_inventory')->add(array('book_id'=>$book_id,'inventory'=>$data['inventory']));
+               $d=M('shop_books')->add(array('book_id'=>$book_id,'book_number'=>$data['book_number'],'shop_id'=>$shop['shop_id'],'shop_logo'=>isset($shop['shop_logo'])?$shop['shop_logo']:'','addtime'=>$_SERVER['REQUEST_TIME']));
+               if ($a && $b && $c && $d){
+                   $bookModel->commit();
+                   $g=add_book_log($user_id,'发布新书','book',$book_id,$data['book_number']);
+                   //if(!empty($data['address']) && !empty($data['longitude']) && !empty($data['latitude'])) D('Book','Logic')->addBookshelfBook($user_id,$book_id,1,$data['address'],$data['longitude'],$data['latitude'],$data['press']);
+                   $this->myApiPrint(200,'添加成功',$book_id);
+               }
+               $bookModel->rollback();
+           }
+           $this->myApiPrint(300,'添加失败');
+       }
+       $this->myApiPrint(300,'你还没有开通店铺');  
+    }
+
+    
+    /**
+     * 添加二手书
+     * @param json data
+     * @return boolean
+     */  
+    public function addOldBook(){
+        $data=isset($_POST['data'])?$_POST['data']:$this->myApiPrint(300, '非法参数');
+        $data=json_decode($data,true)?json_decode($data,true):$this->myApiPrint(300, '非法参数');    
+        $user_id=session('user_id');
+        $user=getUserAvater($user_id);
+        $user_name=$user['name'];
+        //$data=self::tmp();
+        $shipping_price=isset($data['shipping_price'])?$data['shipping_price']:0;
+        $degree=isset($data['extent'])?$data['extent']:'';       
+        $book=self::checkCommon2($data,0,$user_id);       
+        $book_number=$data['book_number'];
+        $book_name=$data['book_name'];
+        $cover_img=$book['cover_img'];
+        $cover_explain=$book['cover_explain'];
+        $author=$data['author'];
+        //self::checkBook($book_number,2,$user_id);
+        $books=M('book');
+        $books->startTrans();
+        $book_id=$books->add($book);
+        if ($book_id){
+            $a=M('book_old')->add(array('book_id'=>$book_id,'book_number'=>$book_number,'book_name'=>$book_name,'cover_img'=>$cover_img,'author'=>$author,'user_id'=>$user_id,'user_name'=>$user_name,'sell_time'=>$_SERVER['REQUEST_TIME'],'description'=>$degree,'shipping_price'=>$shipping_price));
+            $c=self::addCommon(0, $book_id, $data,$cover_explain);
+            if ($a && $c){
+                $books->commit();
+                M('user_xq')->where(array('user_id'=>$user_id))->setInc('sell_num');//跟新出售的二手书 
+                $g=add_book_log($user_id,'发布新书','book',$book_id,$book_number);
+                if(!empty($data['address']) && !empty($data['longitude']) && !empty($data['latitude'])) D('Book','Logic')->addBookshelfBook($user_id,$book_id,0,$data['address'],$data['longitude'],$data['latitude'],$data['press']);
+                $this->myApiPrint(200,'添加成功',$book_id);
+            }
+               $books->rollback();
+        }     
+        $this->myApiPrint(300,'添加失败');
+    }
+    
+    /***
+     * 分享书和二手书检查
+     * @param array data
+     * @param internal type
+     * @param internal user_id
+     * @return array
+     * **/
+    private function  checkCommon2($data,$type,$user_id){
+        $book_number=$data['book_number'];
+        $book_name= $data['book_name'];
+        $press=$data['press'];
+        $cate_id=$data['cate_id'];
+        $author=$data['author'];
+        //$inventory=$data['inventory'];
+        if (!$cover=$data['cover_img']) $this->myApiPrint(300,'请上传封面');
+        if (!$copyright=$data['copyright']) $this->myApiPrint(300,'请上传版权');
+        if ($book_name =="" || $book_name ==null){$this->myApiPrint(300,'请填写书名');}        
+        if (!$cate_id) $this->myApiPrint(300,'请选择分类');
+        if ($type==0){
+            if ($book_number =="" || $book_number ==null){$this->myApiPrint(300,'请填写书号');}
+            if ($author=="" || $author ==null){$this->myApiPrint(300,'请填写作者');}
+        }
+        $cover=explode('=',$cover);
+        $book=array(
+            'name'=>$book_name,
+            'author'=>$author?$author:0,
+            'book_number'=>$book_number?$book_number:0,
+            'price'=>$data['price']?$data['price']:0,
+            'type'=>$type,
+            'time'=>$_SERVER['REQUEST_TIME'],
+            'cover_img'=>$cover[0],
+            'cover_explain'=>isset($cover[1])?$cover[1]:'gg',
+            'user_id'=>$user_id,
+            'time'=>$_SERVER['REQUEST_TIME'],
+            'category_path'=>$cate_id,
+            'press'=>$press, 
+        );        
+        return $book;
+    }
+    
+    /***
+     * 添加公共属性
+     * @param internal type
+     * @param internal book_id
+     * @param array data
+     * @param string cover_explain
+     * @return boolean
+     * **/
+    private function addCommon($type,$book_id,$data,$cover_explain){
+        if (isset($data['tag']) && !empty($data['tag'])){
+            $tag=explode('>',$data['tag']);
+            $t=array(
+                'book_id'=>$book_id,
+                'one'=>$tag[0],
+                'two'=>isset($tag[1])?$tag[1]:'',
+                'three'=>isset($tag[2])?$tag[2]:'',
+               );
+            $id=M('book_tag')->add($t);
+        
+        }
+        $att=array(
+            'type'=>$type,
+            'book_id'=>$book_id,
+            'press'=>$data['press'],
+            'cover_explain'=>$cover_explain,
+            'publishing_place'=>isset($data['publish_place'])?$data['publish_place']:'',
+            'publish_time'=>date('Y-m-d',strtotime($data['time']['common_era'])),
+            'lunar_calendar'=>$data['time']['lunar_calendar'],
+            'calendar'=>$data['time']['calendar'],
+            'publish_price'=>$data['price'],
+            'edition'=>isset($data['edition'])?$data['edition']:0,
+            'impression'=>isset($data['impression'])?$data['impression']:0,
+            'page'=>isset($data['page'])?$data['page']:0,
+            'words'=>isset($data['words'])?$data['words']:0,
+            'format'=>isset($data['format'])?$data['format']:0,
+            'sheet'=>isset($data['sheet'])?$data['sheet']:0,
+            'clc'=>isset($data['clc'])?$data['clc']:0,
+            'paper'=>isset($data['paper'])?$data['paper']:0,
+            'binding'=>isset($data['binding'])?$data['binding']:0,
+            'language'=>isset($data['language'])?$data['language']:0,
+            'introduce'=>isset($data['desc']['book_desc'])?$data['desc']['book_desc']:0,
+            'desc_images'=>isset($data['desc']['picture'])?$data['desc']['picture']:0,
+            'author_area'=>isset($data['author_area'])?$data['author_area']:1,
+            'author_desc'=>isset($data['author_desc'])?$data['author_desc']:0,
+            'applicable_age'=>isset($data['applicable_age'])?$data['applicable_age']:0,
+            'copyright'=>$data['copyright'],
+            'other'=>isset($data['other'])?$data['other']:null,
+            'translator'=>isset($data['translator'])?$data['translator']:'',
+            'cate_name'=>isset($data['cate_name'])?$data['cate_name']:'',                              
+            );         
+        if (isset($data['desc']['video']) && !empty($data['desc']['video_cover'])){
+           $att['desc_video']=$data['desc']['video_cover'].';'.$data['desc']['video'];
+        }
+        if (isset($data['video']) && !empty($data['video'])){
+            $att['video']=$data['video']['cover'].';'.$data['video']['url'];
+        }
+        if(!empty($data['video']['cover']) && !empty($data['video']['url'])){
+            D('Book','Logic')->addBookVideo(session('user_id'),$book_id,$data['book_name'],$data['video']['url'],$data['video']['cover']);
+        }
+        if (isset($data['address']) && !empty($data['address'])){
+            $att['address']=$data['address'];
+            $att['longitude']=$data['longitude'];
+            $att['latitude']=$data['latitude'];
+            $att['geohash']=addGeohash($data['longitude'],$data['latitude']);
+        }
+        if (isset($data['catalog']) && !empty($data['catalog'])){
+            $att['catalog']=$data['catalog'];
+        }
+        M('book_add')->add(array('book_id'=>$book_id,'book_number'=>$data['book_number']));
+        return  M('book_attr')->add($att);
+    }
+    
+    /**
+     * 添加分享书
+     * @param json data
+     * @return boolean
+     */
+    public function addShareBook(){
+        $data=isset($_POST['data'])?$_POST['data']:$this->myApiPrint(300, '非法参数');
+        $data=json_decode($data,true)?json_decode($data,true):$this->myApiPrint(300, '非法参数');    
+        $user_id=session('user_id');
+        $user=getUserAvater($user_id);
+        $book=self::checkCommon2($data,2,$user_id);        
+        $book_number=$data['book_number']?$data['book_number']:0;
+        $books=M('book');        
+        //self::checkBook($book_number,1,$user_id);
+        $books->startTrans();
+        $book_id=$books->add($book);                      
+        if ($book_id){           
+            $book_name=$data['book_name'];
+            $cover_img=$book['cover_img'];
+            $cover_explain=$book['cover_explain'];
+            $author=$data['author']?$data['author']:0;            
+            $b=M('book_share')->add(array('user_id'=>$user_id,'user_name'=>$user['name'],'book_id'=>$book_id,'book_number'=>$book_number,'book_name'=>$book_name,'author'=>$author,'cover_img'=>$cover_img,'share_time'=>$_SERVER['REQUEST_TIME']));
+            $c=self::addCommon(2, $book_id, $data,$cover_explain);            
+            $a=1;            
+            if ($book_number){
+                $count= D('Book','Logic');
+                $a=$count->changeBookCount($book_id,$book_number,1);
+            }
+            if ($book_id && $b && $c && $a){
+                $books->commit();
+                $g=add_book_log($user_id,'发布新书','book',$book_id,$book_number);
+                //$g=integral_log($user_id,'分享了图书',$book_name,2,1,1);
+                M('user_xq')->where(array('user_id'=>$user_id))->setInc('share_num'); //跟新分享的书
+                if(!empty($data['address']) && !empty($data['longitude']) && !empty($data['latitude'])) D('Book','Logic')->addBookshelfBook($user_id,$book_id,2,$data['address'],$data['longitude'],$data['latitude'],$data['press']);
+                $this->myApiPrint(200,'添加成功',$book_id);
+            }
+            $books->rollback();
+            $this->myApiPrint(300,'添加失败');
+        }  
+        $this->myApiPrint(300,'添加失败');
+    }
+    
+    
+    
+    /**
+     * 收藏|取消收藏 图书
+     * **/
+    public function collectBook(){
+        $user_id=session('user_id');
+        $book_id=I('post.book_id');
+        $book=M('book')->find($book_id);
+        $count= D('Book','Logic');
+        if ($book){
+            $result=0;
+            if ($book['type']==1){$result=check_myself($user_id,$book_id,2,$book['shop_id']);}
+            elseif($book['user_id']==$user_id){$result=1;} 
+            if ($result) $this->myApiPrint(300,'不能收藏自己的书');
+            $collect=M('collect')->where(array('book_id'=>$book_id,'user_id'=>$user_id))->find();
+            if ($collect){
+                $data=M('collect')->delete($collect['id']);
+                $count->changeBookCount($book_id,$book['book_number'],3,0); 
+            }else{
+                $data=M('collect')->add(array('book_id'=>$book_id,'book_number'=>$book['book_number'],'user_id'=>$user_id,'collect_time'=>$_SERVER['REQUEST_TIME']));
+                $count->changeBookCount($book_id,$book['book_number'],3);
+            }
+            if($data) $this->myApiPrint(200,'收藏成功');
+            $this->myApiPrint(300,'收藏失败');
+        }
+        $this->myApiPrint(300,'图书不存在');
+    }
+    
+    /**
+     * 收藏|取消收藏 书评
+     * **/
+    public function collectBookDiscuss(){
+        $user_id=session('user_id');
+        $comment_id=I('post.comment_id');
+        $comment=M('book_comment')->find($comment_id);
+        $count= D('Book','Logic');
+        if ($comment){
+            if ($comment['user_id']==$user_id) $this->myApiPrint(300,'不能收藏自己的书评');
+            $collect=M('collect')->where(array('topic_id'=>$comment_id,'user_id'=>$user_id))->find();
+            if ($collect){
+                $data=M('collect')->delete($collect['id']);
+            }else{
+                $data=M('collect')->add(array('type'=>2,'user_id'=>$user_id,'topic_id'=>$comment_id,'collect_time'=>$_SERVER['REQUEST_TIME']));
+            }
+            if($data) $this->myApiPrint(200,'收藏成功');
+            $this->myApiPrint(300,'收藏失败');
+        }
+        $this->myApiPrint(300,'书评不存在');
+    }
+    
+    /**
+     * 点赞|取消点赞 评论
+     * **/
+    public function commentClick2(){
+         $user_id=session('user_id');
+         $user=getUserAvater($user_id);
+         $comment_id=I('post.comment_id');
+         $comment=M('book_comment')->find($comment_id);
+         if ($comment){
+            //if ($comment['user_id']==$user_id) $this->myApiPrint(300,'不能点赞自己的评论');
+            $click=M('book_comment_click')->where(array('comment_id'=>$comment_id,'user_id'=>$user_id))->find();
+            if ($click){
+                $this->myApiPrint(200,'你已经点赞过了');
+             }else{
+                  $data=M('book_comment_click')->add(array('book_id'=>$comment['book_id'],'user_id'=>$user_id,'username'=>$user['name'],'book_number'=>$comment['book_number'],'type'=>$comment['type'],'comment_id'=>$comment_id,'addtime'=>$_SERVER['REQUEST_TIME']));
+                  M('book_comment')->where(array('comment_id'=>$comment_id))->setInc('likes');
+             }
+            if($data) $this->myApiPrint(200);
+            $this->myApiPrint(300,'点赞失败');
+        }else{
+            $this->myApiPrint(300,'评论不存在');
+        }
+    }
+    
+    /**
+     * 点赞|取消点赞 回复点赞
+     * **/
+    public function replyClick(){
+        $user_id=session('user_id');
+        $reply_id=I('post.reply_id');
+        $comment=M('book_comment_reply')->find($reply_id);
+        if ($comment){           
+            $click=M('book_reply_like')->where(array('reply_id'=>$reply_id,'user_id'=>$user_id))->find();
+            if ($click){
+                $this->myApiPrint(200,'你已经点赞过了');
+            }else{
+                $data=M('book_reply_like')->add(array('reply_id'=>$reply_id,'user_id'=>$user_id,'addtime'=>$_SERVER['REQUEST_TIME']));
+                if ($comment['fid'] != 0){
+                    M('book_comment_reply')->where(array('reply_id'=>$comment['fid']))->setInc('likes');
+                }else{
+                    M('book_comment_reply')->where(array('reply_id'=>$reply_id))->setInc('likes');
+                }                 
+            }
+            if($data) $this->myApiPrint(200);
+            $this->myApiPrint(300,'点赞失败');
+        }else{
+            $this->myApiPrint(300,'评论不存在');
+        }
+    }
+    
+     public function commentClick(){
+        $user_id=session('user_id');
+        $user_name=session('name');
+        $comment_id=I('post.comment_id');
+        $comment=M('book_comment')->find($comment_id);
+        if ($comment){
+            if ($comment['user_id']==$user_id) $this->myApiPrint(300,'不能点赞自己的评论');
+            $click=M('book_comment_click')->where(array('comment_id'=>$comment_id,'user_id'=>$user_id))->find();
+            if ($click){
+                if ($click['is_click']==1){
+                    $data=M('book_comment_click')->where(array('id'=>$click['id']))->save(array('is_click'=>0,'addtime'=>$_SERVER['REQUEST_TIME']));
+                    M('book_comment')->where(array('comment_id'=>$comment_id))->setDec('likes');
+                }elseif ($click['is_click']==0){
+                    $data=M('book_comment_click')->where(array('id'=>$click['id']))->save(array('is_click'=>1,'addtime'=>$_SERVER['REQUEST_TIME']));
+                    M('book_comment')->where(array('comment_id'=>$comment_id))->setInc('likes');
+                }                
+            }else{
+                $data=M('book_comment_click')->add(array('book_id'=>$comment['book_id'],'user_id'=>$user_id,'username'=>$user_name,'book_number'=>$comment['book_number'],'type'=>$comment['type'],'comment_id'=>$comment_id,'addtime'=>$_SERVER['REQUEST_TIME']));
+                M('book_comment')->where(array('comment_id'=>$comment_id))->setInc('likes');
+            }
+            if($data) $this->myApiPrint(200);
+            $this->myApiPrint(300,'点赞失败');
+        }else{
+            $this->myApiPrint(300,'评论不存在');
+        }   
+    }
+    
+    
+    /**
+     * 写书评
+     * **/
+    public function Addcomment(){
+        $count= D('Book','Logic');
+        $user_id=session('user_id');
+        $user_name=session('name');
+        $book_id=I('post.book_id');
+        $grade=I('post.grade',4);
+        $content=I('post.content');
+        if(empty($content))  $this->myApiPrint(300,'评论内容不为空');
+        $book=M('book')->find($book_id);
+        if ($book){
+            $result=0;
+           /*  if ($book['type']==1){$result=check_myself($user_id,$book_id,2,$book['shop_id']);}
+            elseif($book['user_id']==$user_id){$result=1;}
+            if ($result) $this->myApiPrint(300,'不能评论自己的书'); */
+            $arr=$count->checkBookType($book_id, $user_id, $user_name, $book, $content, $grade);
+            if ($arr==300) $this->myApiPrint(300,'你还没有购买该产品，请先购买后 再评价，谢谢！');
+             $data=M('book_comment')->add($arr);
+            if($data) {
+                $count->changeBookCount($book_id,$book['book_number'],5);
+                $this->myApiPrint(200);
+            }
+            $this->myApiPrint(300,'评论失败',$arr);
+        }else{
+            $this->myApiPrint(300,'图书不存在');
+        }
+    }
+    
+    /**
+     * 回复书评
+     * **/
+    public function replyComment1(){
+        $user_id=session('user_id');
+        $user_name=session('name');
+        $comment_id=I('post.comment_id',0);
+        $content=I('post.content');
+        if(empty($content))  $this->myApiPrint(300,'评论内容不为空');
+        $data=M('book_comment')->find($comment_id);
+        if ($data){
+            //if ($data['user_id']==$user_id) $this->myApiPrint(300,'不能回复自己的书评');
+            $arr=array(
+                'type'=>$data['type'],
+                'book_id'=>$data['book_id'],
+                'user_id'=>$user_id,
+                'username'=>$user_name,
+                'comment_time'=>$_SERVER['REQUEST_TIME'],
+                'content'=>$content,
+                'book_number'=>$data['book_number'],
+                'book_name'=>$data['book_name'],
+                'author'=>$data['author'],
+                'image'=>$data['image'],
+                'fid'=>$comment_id,
+                'order_id'=>$data['order_id'],
+                'shop_id'=>$data['shop_id'],
+            );
+            $result=M('book_comment')->add($arr);
+            if($result) {
+                M('book_comment')->where(array('comment_id'=>$comment_id))->setInc('sums');
+                if($data['fid']==0)  answer(1,$result,$data['user_id'],$data['username'],$data['content'],$user_id,$user_name,$content,2);
+                else comment_answer(1,$result,$comment_id,$user_id,$user_name,$content,2);
+                $this->myApiPrint(200);
+            }
+            $this->myApiPrint(300,'评论失败');
+        }else{
+            $this->myApiPrint(300,'评论不存在');
+        }
+    }
+    
+    
+
+    /**
+     * 回复书评
+     * **/
+    public function replyComment(){        
+        $user_id=session('user_id');
+        $user=getUserAvater($user_id);
+        $comment_id=I('post.comment_id',0);
+        $fid=I('post.fid',0);
+        $content=I('post.content');
+        if(empty($content))  $this->myApiPrint(300,'评论内容不为空');
+        $data=M('book_comment')->find($comment_id);
+        if ($data){
+            //if ($data['user_id']==$user_id) $this->myApiPrint(300,'不能回复自己的书评');
+           $arr=array(
+               'comment_id'=>$comment_id,
+               'user_id'=>$user_id,
+               'comment_time'=>$_SERVER['REQUEST_TIME'],
+               'content'=>$content,
+               'fid'=>$fid,
+           );
+            $result=M('book_comment_reply')->add($arr);
+            if($result) {
+                if (empty($fid)){M('book_comment')->where(array('comment_id'=>$comment_id))->setInc('sums');}
+                else
+                {                    
+                    M('book_comment_reply')->where(array('reply_id'=>$fid))->setInc('sums');
+                } 
+                //if($data['fid']==0)  answer(1,$result,$data['user_id'],$data['username'],$data['content'],$user_id,$user['name'],$content,2);
+                comment_answer(1,$result,$comment_id,$user_id,$user['name'],$content,2);
+                $this->myApiPrint(200);
+            }
+            $this->myApiPrint(300,'评论失败');
+        }else{
+            $this->myApiPrint(300,'评论不存在');
+        }
+    }
+
+      /**
+     * 最近浏览的书
+     */
+     public function bookView(){
+        $user_id= session("user_id"); //用户id
+        $data=M('book_view')->alias('u')
+                   ->join('left join kts_book x on u.book_id = x.book_id')
+                   ->field('x.book_id,x.name,x.author,x.type,x.cover_img')
+                   ->where(array('u.user_id'=>$user_id))
+                   ->select();
+       foreach ($data as $key => $value) {
+         $data[$key]['cover_img'] = C("QINIU_IMG_PATH").$value['cover_img'];
+       }
+       if ($data) $this->myApiPrint(200,'success',$data);
+       else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+       else  $this->myApiPrint(300,'系统繁忙，请稍后再试',300);
+    }
+
+
+   /**
+    * 检查是否已分享图书
+    * @param unknown $user_id
+    * @param unknown $shop_id
+    * @param unknown $type
+    * @param unknown $book_number***/
+    private function checkBook($book_number,$type=1,$user_id=0,$shop_id=0){
+      switch ($type){
+          case 1:
+              if (M('book_share')->where(array('book_number'=>$book_number,'user_id'=>$user_id))->find()){
+                  $this->myApiPrint(300,'这本图书你已经上传过了，请换一本再分享吧');
+              }
+              break;
+          case 2:
+              if (M('book_old')->where(array('book_number'=>$book_number,'user_id'=>$user_id))->find()){
+                  $this->myApiPrint(300,'这本图书你已经上传过了，请换一本再分享吧');
+              }
+              break;
+              
+          case 3:
+              if (M('book')->where(array('book_number'=>$book_number,'shop_id'=>$shop_id))->find()){
+                  $this->myApiPrint(300,'这本图书你已经上传过了，请换一本再分享吧');
+              }
+              break;
+      } 
+      
+    }
+    
+    /**
+     * 检查是否已分享图书
+     * @param unknown $user_id
+     * @param unknown $book_number***/
+    private function checkShare($user_id,$book_number){
+        if (M('book_share')->where(array('book_number'=>$book_number,'user_id'=>$user_id))->find()){
+            $this->myApiPrint(300,'这本图书你已经分享过了，请换一本再分享吧');
+        }
+    }
+
+
+    
+    
+    /**
+     * 保存编辑图书
+     * ***/
+    public function saveEditBook(){
+        $data=$_POST['data'];
+        $book_id=I('post.book_id');
+        $totype=I('post.totype',0);
+        $data=json_decode($data,true);       
+        if (empty($data)) $this->myApiPrint(300,'解析错误');
+        //$data=self::tmp();
+        if ($bookData = M('book')->find($book_id)){
+            $book=D('Book','Logic');
+            if ($totype){
+                $result=$book->saveEditBook($data,$book_id,$bookData['type'],0);
+            }else{
+                $result=$book->saveEditBook($data,$book_id,$bookData['type']);
+            } 
+            if ($result['code']==300) $this->myApiPrint(300,$result['msg']);
+            if ($bookData['type']==1){               
+                if ($bookData['isdelete'] == 1){
+                    M('shop_books')->where(array('book_id'=>$book_id))->save(array('is_show'=>0,'addtime'=>$_SERVER['REQUEST_TIME']));
+                    M('shop')->where(array('shop_id'=>$bookData['shop_id']))->setInc('on_book');
+                    M('shop')->where(array('shop_id'=>$bookData['shop_id']))->setDec('under_book');
+                }
+            }
+            $this->myApiPrint(200,'success');
+        }
+        $this->myApiPrint(300,'不合法操作');
+    }
+
+   
+    
+    /**
+     * 根据经纬度得出的值
+     * @param [type] $longitude 经度
+     * @param [type] $latitude  纬度
+     */
+    protected function addGeohash($longitude,$latitude)
+    {   
+        $geohash = new Geohash();
+        //得到这点的hash值
+        $hash = $geohash->encode($latitude, $longitude);
+        return $hash;
+    }
+    
+    
+
+}
+

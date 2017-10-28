@@ -1,0 +1,57 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+})
+</script>
+{% endblock %}
+
+{% block content%}<section class="alert">
+{# 		  <button type="button" val=''onclick="javascript:history.go(-1)" class="green stateBtn">返  回</button>#}
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>赠送积分</h1>
+			</hgroup>
+		</header>
+	<div class="content">
+	<form method="post" action="{{ path('save_add_points_') }}">
+			<div class="field-wrap">		
+		<table width="100%" style="font-size: 16px;font-family: '微软雅黑';">
+			<tr>
+			<th width="15%" >会员</th>
+			<td><select name="memberId" class="form-select" style="padding: 5px;height: 35px; margin-bottom: 13px;width: 30%;">
+						{% for v in meb %}
+						<option value="{{ v.id }}">{{v.nickname}} ( {{ v.account }} )</option>
+						{% endfor %}
+						
+						</select></td>
+			</tr>
+			
+			<tr>
+			<th width="15%">积分</th>
+			<td><input name="points" type="text" value="" required style="width: 30%;"maxlength="16"></td>
+			</tr>
+			
+			<tr>
+			<th width="15%">加分描述</th>
+			<td><input  name="desc" type="text" style="width: 30%;" value="用户活跃，系统加分。"  required maxlength="20"></td>
+			</tr>
+
+			</table>
+			</div>
+			
+		
+		<div class="roomSerBtnDiv"><button type="submit" class="green">保  存</button> <button type="button" onclick="javascript:history.go(-1)" class="red">取  消</button></div>	
+	
+	</form>
+	</div>
+	</section>
+</section>
+
+{% endblock%}

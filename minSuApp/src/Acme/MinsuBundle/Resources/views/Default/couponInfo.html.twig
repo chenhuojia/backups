@@ -1,0 +1,54 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+})
+</script>
+{% endblock %}
+
+{% block content%}<section class="alert">
+{# 		  <button type="button" val=''onclick="javascript:history.go(-1)" class="green stateBtn">返  回</button>#}
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>新增优惠券</h1>
+			</hgroup>
+		</header>
+	<div class="content">
+	<form method="post" action="{% if v!='' %}{{ path('EditSaveCoupon_') }}{% else %}{{ path("SaveCoupon_") }}{% endif %}">
+			<div class="field-wrap">
+				<span class="roomServerTitleSpan">优惠券面额：</span><input type="text"  value="{% if v != ''%}{{ v.coupon_value }}{% endif %}" name='couponValue' style="width: 25%;" placeholder="请输入优惠券面额" maxlength="10" required oninvalid="setCustomValidity('面额不能為空')" oninput="setCustomValidity('')"/>
+			</div>
+			<div class="field-wrap">
+				<span class="roomServerTitleSpan">需兑换积分：</span><input type="text"  value="{% if v != ''%}{{ v.convert_points }}{% endif %}" name='couponPoints' style="width: 25%;" placeholder="请输入需兑换积分" maxlength="10" required oninvalid="setCustomValidity('积分不能為空')" oninput="setCustomValidity('')"/>
+			</div>
+			<div class="field-wrap">
+				<span class="roomServerTitleSpan">最低消费额：</span><input type="text"  value="{% if v != ''%}{{ v.min_amount }}{% endif %}" name='minAmount' style="width: 25%;" placeholder="请输入最低消费额" maxlength="10" required oninvalid="setCustomValidity('消费额不能為空')" oninput="setCustomValidity('')"/>
+			</div>
+			<div class="field-wrap">
+				<span class="roomServerTitleSpan">优惠券描述：</span><input type="text"  value="{% if v != ''%}{{ v.coupon_dscp }}{% endif %}" name='couponDscp' style="width: 25%;" placeholder="请输入优惠券描述"  required oninvalid="setCustomValidity('优惠券描述不能為空')" oninput="setCustomValidity('')"/>
+			</div>
+			
+			<div class="field-wrap">
+				<span class="roomServerTitleSpan">优惠有效期：</span><input type="text"  value="{% if v != ''%}{{ v.qouta_day }}{% endif %}" name='qouta_day' style="width: 25%;" placeholder="请输入有效期"  required oninvalid="setCustomValidity('有效期述不能為空')" oninput="setCustomValidity('')"/>
+			</div>
+			<div class="field-wrap">
+				<span class="roomServerTitleSpan">优惠券状态：</span><input type="text"  value="{% if v != ''%}{{ v.state }}{% else %}1{% endif %}" name='state'  style="width: 25%;" placeholder="0:下线   /  1:上线"  required oninvalid="setCustomValidity('有效期述不能為空')" oninput="setCustomValidity('')"/>
+			</div>
+			
+			<div class="field-wrap">
+				<span class="roomServerTitleSpan">排  序&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span><input  name='couponSort' type="text"  style="width: 25%;" value="{% if v != ''%}{{ v.sort }}{%else%}0{% endif %}"  maxlength="10"/>
+			</div>
+		<div class="roomSerBtnDiv"><button type="submit" class="green">保  存</button> <button type="button" onclick="javascript:history.go(-1)" class="red">取  消</button></div>	
+	{% if v!='' %}<input name='couponId' type='hidden' value="{{ v.id }}">{% endif %}
+	</form>
+	</div>
+	</section>
+</section>
+
+{% endblock%}

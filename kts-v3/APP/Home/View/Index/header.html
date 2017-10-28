@@ -1,0 +1,78 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content={$keywords} name=keywords> 
+    <meta content={$description} name=description>
+    <title>{$title}</title>
+    <link href="__PUBLIC__/home/css/header.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+<div class="top">
+    <div class="top_box">
+        <div class="top_box_fl">
+            <ul>
+                <a><li><i class="ci-left1"></i><span>移动端下载</span></li></a>
+                <a><li><i class="ci-left2"></i><span>联系客服</span></li></a>
+                <a><li><i class="ci-left3"></i><span>我要开店</span></li></a>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div class="top_box_fr">
+            <a href="{:U('Home/User/reg')}">注册</a>
+            <a href="{:U('Home/User/login')}">登陆</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="header_center">
+    <h1 class="logo"><a><img src="__PUBLIC__/home/images/logo.png" alt="快图书"/></a></h1>
+    <div class="slogan "><img src="__PUBLIC__/home/images/slogan.png" alt="世界上有多少种书，都在哪~"/></div>
+    <div class="search-form">
+        <div id="search-bd" class="search-bd">
+            <ul>
+                <li class="selected">图书</li>
+                <li>作者</li>
+                <li>出版社</li>
+            </ul>
+        </div>
+        <div id="search-hd" class="search-hd">
+            <div class="search-bg"></div>
+            <input type="text" id="s1" class="search-input">
+            <input type="text" id="s2" class="search-input">
+            <input type="text" id="s3" class="search-input">
+            <span class="s1 pholder">图书</span>
+            <span class="s2 pholder">作者</span>
+            <span class="s3 pholder">出版社</span>
+            <button id="submit" class="btn-search" value="搜索">搜索</button>
+        </div>
+    </div>
+    <div class="cart_box">
+        <a>
+            <div class="cart_link">
+                <i class="cart_icon1"></i><span>购物车（0）</span>
+            </div>
+        </a>
+        <a href="share.html">
+            <div class="cart_link">
+                <i class="cart_icon2"></i><span>上传图书</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="clear"></div>
+</div>
+
+<div class="header">
+    <ul>
+        <a href="{:U('Home/Index/index')}"><li class="header_bt">首  页</li></a>
+        <a href="{:U('Home/Book/index')}"><li>书  城</li></a>
+        <a><li>书  评</li></a>
+        <a><li>话  题</li></a>
+        <a><li>排  行  榜</li></a>
+        <div class="clear"></div>
+    </ul>
+</div>

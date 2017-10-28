@@ -1,0 +1,228 @@
+<include file="./APP/Admin/View/Common/Public_header_v1.html"/>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/static/ueditor1.4.3/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/static/ueditor1.4.3/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/static/ueditor1.4.3/lang/zh-cn/zh-cn.js"></script>
+
+<style>
+    .form-horizontal{width:850px;}
+    .form-horizontal>.form-group{border-top: 1px solid #ccc;padding-top:20px;margin-left:15px;margin-right:0px;}
+    .form-horizontal>.form-group:first-child{border-top:none;}
+    .form-group>.col-sm-2{width: 110px;}
+    .form-group>.col-sm-10{width: 700px;}
+    .noHand{cursor: not-allowed;}
+    select.form-control{width: auto !important;}
+</style>
+<ol class="breadcrumb">
+    <li>{:C('CONTROL_MENU')}</li>
+    <li>栏目设置</li>
+    <li class="active"><a href="{:U('Admin/Book/categoryList')}"> 栏目列表</a></li>
+    <li>编辑栏目</li>
+</ol>
+<form class="form-horizontal" action="{:U('Admin/Book/categoryEdit?cg_id='.$classType['cg_id'])}" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="introduce" class="col-sm-2 control-label">栏目位置：</label>
+        <div class="col-sm-8">
+           <button type="button" class="btn btn-warning" id='d1'>改变栏目地址</button>
+        </div>
+    </div>
+    <div class="form-group" id='d2'>
+        <label for="father_id" class="col-sm-2 control-label">新类型：</label>
+        <div class="col-sm-2">
+            <select name="father_id" id="father_id" class="form-control">
+                <option value="0">请选择</option>
+                <volist name="typeList" id="vo">
+                    <option value="{$vo['cg_id']}">{$vo.name}</option>
+                </volist>
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <select name="class_id" id="class_id" class="form-control" >
+                <option value="0">请选择</option>
+            </select>
+            <div class="Validform_checktip"></div>
+        </div>
+        <div class="col-sm-2">
+            <select name="three_id" id="three_id" class="form-control" >
+                <option value="0">请选择</option>
+            </select>
+            <div class="Validform_checktip"></div>
+        </div>
+    </div>
+
+    <!-- <div class="form-group">
+        <label for="father_id" class="col-sm-2 control-label">栏目类型</label>
+        <div class="col-sm-2">
+            <select name="father_id" id="father_id" class="form-control">
+                <option value="0">请选择</option>
+                <volist name="typeList" id="vo">
+                    <option value="{$vo['cg_id']}">{$vo.name}</option>
+                </volist>
+            </select>
+        </div>
+        <div class="col-sm-5">
+            <select name="class_id" id="class_id" class="form-control" >
+                <option value="0">请选择</option>
+            </select>
+            <div class="Validform_checktip"></div>
+        </div>
+        <div class="col-sm-5">
+            <select name="three_id" id="three_id" class="form-control" >
+                <option value="0">请选择</option>
+            </select>
+            <div class="Validform_checktip"></div>
+        </div>
+    </div> -->
+
+    <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">栏目标题：</label>
+        <div class="col-sm-8">
+            <!-- <input type="hidden" name="groups_id" class="form-control" id="groups_id" value="{$classType.groups_id}" /> -->
+            <input type="text" name="name" class="form-control" id="name" datatype="*1-10" nullmsg="请输入栏目标题！" errormsg="长度10个字以内" value="{$classType.name}" />
+            <div class="Validform_checktip">请输入10字以内的栏目标题</div>
+        </div>
+    </div>
+    <!-- <div class="form-group">
+        <label for="introduce" class="col-sm-2 control-label">介绍：</label>
+        <div class="col-sm-8">
+            <input type="text" name="introduce" class="form-control" id="introduce" datatype="*1-100" nullmsg="请输入描述！" errormsg="长度100个字以内" value="{$classType.introduce}" ignore="ignore"/>
+            <div class="Validform_checktip">请输入100字以内的介绍</div>
+        </div>
+    </div> -->
+    <div class="form-group">
+        <label class="col-sm-2 control-label">该图标：</label>
+        <div class="col-sm-10">
+            <img id="show_imgurl" width="300px" height="150px" src="{$classType.imageurl}">
+        </div>
+        <label for="imageurl" class="col-sm-2 control-label">新图标</label>
+        <div class="col-sm-10">
+            <input type="file" name="imageurl" multiple="multiple"  />
+            <input type="hidden" name="imageurl1" value="{$classType.imageurl}"  />
+            <div class="Validform_checktip">相应新的图片</div>
+        </div>
+    </div>
+    <!-- <div class="form-group">
+        <label class="col-sm-2 control-label">缩略图：</label>
+        <div class="col-sm-10">
+            <img id="show_imgurl" width="300px" height="150px" src="{$classType.imageurl}">
+        </div>
+        <div class="clearfix"></div>
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+            <input type="button" onclick="upImage()"  class="btn btn-info" value="上传栏目图片"/>
+            <input type="hidden" name="imageurl" id="groups_imgurl" value="{$classType.imageurl}"  datatype="*" nullmsg="请设置缩略图！"/>
+            <div class="Validform_checktip">支持jpg、gif、png、jpeg(4种格式)，规格为：**px***px</div>
+        </div>
+    </div> -->
+   
+    <div class="form-group">
+        <label for="is_show" class="col-sm-2 control-label">是否有效：</label>
+        <div class="col-sm-8">
+            <select name="is_show" id="is_show" class="form-control">
+               <if condition='$classType.is_show == 0'>
+                         <option value="0" selected=true>隐藏</option>
+                         <option value="1" >显示</option>
+                <else/>
+                         <option value="1" selected=true>显示</option>
+                         <option value="0" >隐藏</option>
+                </if>
+            </select>
+            
+
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">保存编辑</button>
+        </div>
+    </div>
+</form>
+<link href="__PUBLIC__/static/Validform/css/style.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/static/Validform/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" language="javascript">
+    $(function(){
+        $('#d2').hide();
+        $('#d1').click(function(){
+              $div1=$('#d2');
+
+                    if($div1.is(':hidden')){
+                        
+                        $div1.show();
+                    }else if($div1.is(':visible')){
+                        
+                        $div1.hide();
+                    }
+              });
+    });
+
+    $('#father_id').change(function(){
+        var objectModel = {};
+        var value = $(this).val();
+        var type = $(this).attr('id');
+        objectModel[type] =value;
+        $.ajax({
+            cache:false,
+            type:"POST",
+            url:"{:U('Admin/Book/childTypeList')}",
+            dataType:"json",
+            data:objectModel,
+            success:function(data){
+                $("#class_id").empty();
+                var count = data.length;
+                var i = 0;
+                var b="<option value=''>请选择</option>";
+                for(i=0;i<count;i++){
+                    b+="<option value='"+data[i].cg_id+"'>"+data[i].name+"</option>";
+                }
+                $("#class_id").append(b);
+            }
+        });
+    });
+
+       $('#class_id').change(function(){
+        var objectModel = {};
+        var value = $(this).val();
+        var type = $(this).attr('id');
+        objectModel[type] =value;
+        $.ajax({
+            cache:false,
+            type:"POST",
+            url:"{:U('Admin/Book/childTypeList1')}",
+            dataType:"json",
+            data:objectModel,
+            success:function(data){
+                $("#three_id").empty();
+                var count = data.length;
+                var i = 0;
+                var b="<option value=''>请选择</option>";
+                for(i=0;i<count;i++){
+                    b+="<option value='"+data[i].cg_id+"'>"+data[i].name+"</option>";
+                }
+                $("#three_id").append(b);
+            }
+        });
+    });
+
+    
+
+    $(function(){
+        $(".form-horizontal").Validform({
+            tiptype:function(msg,o,cssctl){
+                if(!o.obj.is("form")){
+                    var objtip=o.obj.nextAll(".Validform_checktip");
+                    cssctl(objtip,o.type);
+                    objtip.text(msg);
+                }
+            },
+            beforeCheck:function(curform){
+                if(!confirm('确定提交本次操作吗？'))
+                {
+                    return false;
+                }
+            }
+        });
+
+    });
+
+</script>
+
+<include file="./APP/Admin/View/Common/Public_footer_v1.html"/>

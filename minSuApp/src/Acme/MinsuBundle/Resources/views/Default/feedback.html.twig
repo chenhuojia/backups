@@ -1,0 +1,176 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+    <script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('bundles/msk/public/js/layer.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".page-dis [href]").each(function () {
+                if (this.href == window.location.href) {
+                    if (!isNaN($(this).html())) {
+                        $(this).addClass("active");
+                    }
+                }
+            })
+        });
+
+        function changeFBState(obj) {
+            var id = $.trim($(obj).attr('name'));
+            var state = $.trim($(obj).attr('state'));
+            if (state == 0) {
+                var feedbackState = 1;
+            } else if (state == 1) {
+                feedbackState = 0;
+            }
+            $.ajax({
+                type: "POST",
+                url: "{{ path('changeFBState_') }}",
+                data: {'id': id, 'feedbackState': feedbackState},
+                success: function (data) {
+                    if (data == 1) {
+                        location.reload();
+                    }
+                }
+            })
+        }
+    </script>
+{% endblock %}
+
+{% block stylesheet %} {{ parent() }}
+    <link href="{{ asset('bundles/msk/public/css/msg.css') }}" rel="stylesheet" type="text/css" media="all"/>
+    <style>
+        html {
+            background-color: #E3E3E3;
+            font-size: 14px;
+            color: #000;
+            font-family: '微软雅黑'
+        }
+
+        a, a:hover {
+            text-decoration: none;
+        }
+
+        pre {
+            font-family: '微软雅黑'
+        }
+
+        .box {
+            width: 250px;
+            height: 100px;
+            border-radius: 5px;
+        }
+
+        .imgs img {
+            width: 80px;
+            height: 80px;
+        }
+
+        #myTable {
+            table-layout: fixed;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <section class="alert">
+        {#<button type="button"  onclick="location='{{ path('addSystemMsg_') }}'" class="green stateBtn">新  增</button>#}
+    </section>
+    <section class="content">
+        <section class="widget">
+            <header>
+                <span class="icon homstay-detail"><span>&#128196;</span></span>
+                <hgroup>
+                    <h1>消息</h1>
+                </hgroup>
+            </header>
+            <div class="content">
+                <table id="myTable" border="0" width="100">
+                    <thead>
+                    <tr>
+                        <th>反馈会员</th>
+                        <th>反馈文字</th>
+                        <th style="width: 450px">图片</th>
+                        {#<th style="width: 150px">状态</th>#}
+                        <th style="width: 200px">时间</th>
+                        <th style="width: 200px">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for v in msg %}
+                        <tr>
+                            <td class="avatar" style="padding-left: 50px;"><img src="{{ v.avatar_url }}"
+                                                                                style="height: 60px; width: 60px">{{ v.nickname }}
+                            </td>
+                            <td style="line-height: 1.5em">{{ v.text }}</td>
+                            <td>
+                                <div class="box">
+                                    <div id="imgs" class="imgs">
+                                        {% if v.image is not empty %}
+                                        {% for s in 0..v.image|length-1 %}
+                                            <img src="{{ cycle(v.image, s) }}" alt=""/>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                            {#<td>{% if v.state == 0 %}收到{% elseif v.state == 1 %}已回复{% endif %}</td>#}
+                            <td>{{ v.addtime|date("Y-m-d H:i:s") }}</td>
+                            <td>
+                                {% if v.state == 0 %}
+                                <button type='button' name="{{ v.id }}" state="{{ v.state }}" class="green" onclick="changeFBState(this)">更改状态</button>
+                                {% elseif v.state == 1 %}
+                                已回复
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="page-dis">
+                <div class="meneame">
+                    {% if totalPage != 0 %}
+                        <a href="{{ path('feedbackMsg_', {'page': 1}) }}">首页</a>
+                        <a href="{{ path('feedbackMsg_', {'page': prePage}) }}"> < </a>
+                        {% if totalPage > 7 %}
+                            {% if page <= 4 %}
+                                {% for i in 1..7 %}
+                                    <a href="{{ path('feedbackMsg_', {'page': i}) }}">{{ i }}</a>
+                                {% endfor %}
+                            {% elseif page > (totalPage - 4) %}
+                                {% for k in (totalPage-7)..(totalPage) %}
+                                    <a href="{{ path('feedbackMsg_', {'page': k}) }}">{{ k }}</a>
+                                {% endfor %}
+                            {% else %}
+                                {% for j in (page-3)..(page+3) %}
+                                    <a href="{{ path('feedbackMsg_', {'page': j}) }}">{{ j }}</a>
+                                {% endfor %}
+                            {% endif %}
+                        {% else %}
+                            {% if totalPage != 0 %}
+                                {% for m in 1..totalPage %}
+                                    <a href="{{ path('feedbackMsg_', {'page': m}) }}">{{ m }}</a>
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                        <a href="{{ path('feedbackMsg_', {'page': nextPage}) }}"> > </a>
+                        <a href="{{ path('feedbackMsg_', {'page': totalPage}) }}">尾页</a>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </section>
+    <script>
+       !function () {
+           layer.use('layer.ext.js', function () {
+               layer.ext = function () {
+                   layer.photosPage({
+                       id: 100, //相册id，可选
+                       parent: $('.box #imgs')
+                   });
+               };
+           });
+       }();
+    </script>
+{% endblock %}
+

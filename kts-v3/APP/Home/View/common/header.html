@@ -1,0 +1,98 @@
+<div class="top">
+    <div class="top_box">
+        <div class="top_box_fl">
+            <ul>
+                <a><li><i class="ci-left1"></i><span>移动端下载</span></li></a>
+                <a><li href="{:U('Home/User/Logout',array('user_id'=>$user['user_id']))}"><i class="ci-left2"></i><span>联系客服</span></li></a>
+                <a><li href="{:U('Home/User/Logout',array('user_id'=>$user['user_id']))}"><i class="ci-left3"></i><span>我要开店</span></li></a>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div class="top_box_fr">
+            <if condition="$user['user_id'] gt 0">
+             <div class="nav">
+                <ul class="nav-main">
+                    <li id="li-1" class="li-1"><a><img src="{$user['imageurl']}" alt=""/></a></li>
+                    <li id="li-2"><a href="{:U('Home/User/Logout',array('user_id'=>$user['user_id']))}">我的订单</a><span></span></li>
+                    <li id="li-3"><a href="{:U('Home/User/Logout',array('user_id'=>$user['user_id']))}">我的消息</a><span></span></li>
+                    <div class="clear"></div>
+                </ul>
+                <div id="box-1" class="hidden-box hidden-loc-info">
+                    <ul>
+                        <li><a>我的店铺</a></li>
+                        <li><a href="{:U('Home/User/sharedbook')}">个人中心</a></li>
+                        <li><a href="{:U('Home/User/Logout',array('user_id'=>$user['user_id']))}">我的收藏</a></li>
+                        <li><a href="{:U('Home/User/Logout',array('user_id'=>$user['user_id']))}">发布图书</a></li>
+                        <li><a href="{:U('Home/User/Logout',array('user_id'=>$user['user_id']))}">退出账号</a></li>
+                    </ul>
+                </div>
+                <div id="box-2" class="hidden-box hidden-loc-info box02">
+                    <ul>
+                        <li><a href="{:U('Home/User/Logout',array('user_id'=>$user['user_id']))}">我的订单</a></li>
+                        <li><a href="{:U('Home/User/Logout',array('user_id'=>$user['user_id']))}">我的订单</a></li>
+                    </ul>
+                </div>
+                <div id="box-3" class="hidden-box hidden-loc-info box03">
+                    <ul>
+                        <li><a href="{:U('Home/User/Logout',array('user_id'=>$user['user_id']))}">我的消息</a></li>
+                        <li><a href="{:U('Home/User/Logout',array('user_id'=>$user['user_id']))}">我的消息</a></li>
+                    </ul>
+                </div>
+             </div>
+            <else/>
+                <a href="{:U('Home/User/reg')}">注册</a>
+                <a href="{:U('Home/User/login')}">登陆</a>
+            </if>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="header_center">
+    <h1 class="logo"><a><img src="__PUBLIC__/home/images/logo.png" alt="快图书"/></a></h1>
+    <div class="slogan "><img src="__PUBLIC__/home/images/slogan.png" alt="世界上有多少种书，都在哪~"/></div>
+    <div class="search-form">
+        <div id="search-bd" class="search-bd">
+            <ul>
+                <li class="selected">图书</li>
+                <li>作者</li>
+                <li>出版社</li>
+            </ul>
+        </div>
+        <div id="search-hd" class="search-hd">
+            <div class="search-bg"></div>
+            <input type="text" id="s1" class="search-input">
+            <input type="text" id="s2" class="search-input">
+            <input type="text" id="s3" class="search-input">
+            <span class="s1 pholder">图书</span>
+            <span class="s2 pholder">作者</span>
+            <span class="s3 pholder">出版社</span>
+            <button id="submit" class="btn-search" value="搜索">搜索</button>
+        </div>
+    </div>
+    <div class="cart_box">
+        <a>
+            <div class="cart_link">
+                <i class="cart_icon1"></i><span>购物车（0）</span>
+            </div>
+        </a>
+        <a href="share.html">
+            <div class="cart_link">
+                <i class="cart_icon2"></i><span>上传图书</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="clear"></div>
+</div>
+
+<div class="header">
+    <ul>
+        <a href="{:U('Home/Index/index')}"><li class="header_bt">首  页</li></a>
+        <a href="{:U('Home/Book/index')}"><li>书  城</li></a>
+        <a><li>书  评</li></a>
+        <a><li>话  题</li></a>
+        <a><li>排  行  榜</li></a>
+        <div class="clear"></div>
+    </ul>
+</div>

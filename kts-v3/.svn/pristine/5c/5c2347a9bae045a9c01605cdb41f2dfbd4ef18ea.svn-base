@@ -1,0 +1,142 @@
+<include file="./APP/Admin/View/Common/Public_header_v1.html"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/bt.datepicker/daterangepicker-bs3.css" />
+<script type="text/javascript" src="__PUBLIC__/static/bt.datepicker/moment.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/bt.datepicker/daterangepicker.js"></script>
+<!-- <script type="text/javascript">
+    var search_url="{:U('Admin/Note/noteList')}";
+    function search(){
+        var className = $("#className").val();
+        if (className.length > 0)
+            search_url = search_url + "&name="+className;
+
+        window.location=search_url;
+    }
+</script> -->
+<script type="text/javascript">
+    var search_url="{:U('Admin/Note/noteList')}";
+    function search(){
+        var groupType = $("#groupType").val();
+        var userName = $("#userName").val();
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
+        if (groupType.length > 0)
+            search_url = search_url + "&groupType="+groupType;
+        if (userName.length > 0)
+            search_url = search_url + "&userName="+userName;
+        if (startTime.length > 0)
+            search_url = search_url + "&startTime="+startTime;
+        if (endTime.length > 0)
+            search_url = search_url + "&endTime="+endTime;
+
+        window.location=search_url;
+    }
+    $(function(){
+        var sd = "{:I('get.groupType','all')}";
+        $("#groupType").val(sd);
+        $("[data-toggle='popover']").popover();
+    })
+</script>
+<ol class="breadcrumb">
+    <li>{:C('CONTROL_MENU')}</li>
+    <li>帖子设置</li>
+    <li class="active"><a href="{:U('Admin/Note/noteList')}">帖子管理</a></li>
+</ol>
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="javascript:void(0);">帖子管理</a></li>
+    <li><a href="{:U('Admin/Note/noteAdd')}">添加帖子</a></li>
+</ul>
+<div class="tab-content">
+    <!-- <div class="form-inline" role="form">
+        <div class="input-group">
+            <input type="text" id="className" name="className" placeholder="帖子名称" value="" class="form-control"/>
+            <input type="text" id="className" name="className" placeholder="帖子名称" value="" class="form-control"/>
+            <span class="input-group-btn">
+                <button type="button" onclick="search()" class="btn btn-primary">搜索</button>
+            </span>
+        </div>
+    </div> -->
+    <div class="form-inline" role="form">
+            <div class="input-group">
+            <label class="input-group-addon" for="groupType">小组名：</label>
+                <div class="input-group-btn">
+                    <select name="groupType" id="groupType" class="form-control" data-live-search="false">
+                        <option value="all">全部</option>
+                        <volist name="info" id="vo">
+                            <option value="{$vo.group_id}">{$vo.name}</option>
+                        </volist>
+                    </select>
+                </div>
+            </div>
+        <div class="input-group">
+            <label class="input-group-addon" for="userName">添加人：</label>
+            <input type="text" id="userName" name="userName" placeholder="" value="{$_GET['userName']}" class="form-control"/>
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" for="inputDate">添加日期：</label>
+            <input type="text" readonly name="inputDate" id="inputDate" class="form-control noHand" value="" />
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#inputDate').daterangepicker({separator:' 到 '}, function(start, end, label) {
+                        var vTsplit = $('#inputDate').val();
+                        var dateArr = vTsplit.split(' 到 ');
+                        $('#inputDate').next().text('有效期从'+dateArr[0]+' 0点 到 '+dateArr[1]+' 0点结束');
+                        $("#startTime").val(dateArr[0]);
+                        $("#endTime").val(dateArr[1]);
+                    });
+                });
+            </script>
+        </div>
+        <input type="text" readonly name="startTime" id="startTime" class="form-control noHand" value="" style="display: none;"/>
+        <input type="text" readonly name="endTime" id="endTime" class="form-control noHand" value="" style="display: none;"/>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#startTime').daterangepicker({singleDatePicker: true});
+                $('#endTime').daterangepicker({singleDatePicker: true});
+            });
+        </script>
+        <button type="button" onclick="search()" class="btn btn-primary">搜索</button>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>分组名称</th>
+            <th>添加人</th>
+            <th>内容缩影</th>
+            <th>点赞数</th>
+            <th>评论数</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="list" id="s">
+            <tr>
+                <td>{$i+$num}</td>
+                <td>{$s.group_name}</td>
+                <td>{$s.username}</td>
+                <td>{$s.content|mb_substr=###,0,15,'utf-8'}</td>
+                <td>{$s.click_number}</td>
+                <td>{$s.critics_number}</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-success" href="{:U('Admin/Note/noteDet?note_id='.$s['note_id'])}">帖子详情</a>
+                        <a class="btn btn-warning" href="{:U('Admin/Note/noteEdit?note_id='.$s['note_id'])}">修改</a>
+                        <if condition='$s.is_show == 0'>
+                           <a class="btn btn-danger disabled" href="#')">删除</a>
+                        <else/>
+                            <a class="btn btn-danger" href="javascript:showYesOrNo('确定要删除吗？','{:U('Admin/Note/noteDel?note_id='.$s['note_id'])}')">删除</a>
+                        </if>
+
+
+                      <!--   <a class="btn btn-danger" href="javascript:showYesOrNo('确定要删除吗？','{:U('Admin/Note/noteDel?group_id='.$s['group_id'])}')">删除</a> -->
+                    </div>
+                </td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+</div>
+<div class="page">{$Page}</div>
+<include file="./APP/Admin/View/Common/Public_footer_v1.html"/>

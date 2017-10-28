@@ -1,0 +1,166 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/pic/jssor.slider.min.js') }}"></script>
+<script src="{{ asset('bundles/msk/public/js/pic/jquery.scrollfollow.js') }}"></script>
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script src="{{ asset('bundles/msk/public/js/pic/slidePic.js') }}"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2AFGg6DCpGbCg48f2mOFNnGLAh02ZQHU"></script>
+
+{% endblock %}
+{% block stylesheet %} {{ parent() }}
+{# <link href="{{ asset('bundles/msk/public/css/details_new.css') }}" rel="stylesheet" type="text/css" media="all"/>#}
+	<style type="text/css">
+		.video {
+			position: absolute;
+				right: 15%;
+		}
+		.img {
+			position: absolute;
+		
+			
+			right: 20%;
+		}
+		#allmap {height:400px; width: 100%;}
+		#control{width:100%;}
+	</style>
+{% endblock %}
+{% block content%}<section class="alert">
+	 	 <button type="button"class="green stateBtn" onclick='javascript:history.go(-1);'>返回</button>
+{# 	 	 <button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>#}
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>团游信息</h1>
+			</hgroup>
+		</header>
+
+		<div class="content no-padding timeline">
+			<div class="homestay_box_left">
+				<div class="detailform"><span>团游名字</span>：<span>{{ v.tour_title }}</span></div>
+				<div class="detailform"><span>创建人</span>：<span>{{ v.member_name }}</span></div>
+				<div class="detailform"><span>创建时间</span>：<span>{{ v.NewAddTime }}</span></div>
+				<div class="detailform"><span>成人价格</span>：<span>{{ v.adult_price }}</span></div>
+				<div class="detailform"><span>截止日期</span>：<span>{{ v.end_time|date("Y-m-d H:i:s") }}</span></div>
+				<div class="detailform"><span>状态</span>：<span>{% if v.state ==0  %}删除{% elseif  v.state==1 %}上线{% else %}下线{% endif %}</span></div>
+				<div class="detailform"><span>儿童年龄设置</span>：<span>{{ v.age_line }}岁</span></div>
+				<div class="detailform"><span>团期</span>：<span class="badge">{{ v.period }}</span>期</div>
+				<div class="detailform"><span>出发日期</span>：<span>{{ v.NewStartingTime }}</span></div>
+				<div class="detailform"><span>出发地址</span>：<span>{{ v.starting_place }}</span></div>
+				<div class="detailform"><span>订购须知</span>：<span>{{ v.booking_notice }}</span></div>
+				<div class="detailform"><span>报名人数</span>：<span style="font-size: 14px;">{{ v.entered }}</span></div>
+			</div>
+			<div style="width:600px;height:100px;float:right;margin-right:130px;"> 
+              
+			   <div class="panel-group" id="accordion">
+			          
+			        <div class="demo_main">
+				        <div class="demo_content">
+				            <div id="allmap"></div>
+				            {#<div id="control">
+								<button onclick = "polyline.enableEditing();polygon.enableEditing();">开启线、面编辑功能</button>
+								<button onclick = "polyline.disableEditing();polygon.disableEditing();">关闭线、面编辑功能</button>
+							</div>#}
+				            <script type="text/javascript">
+								// 百度地图API功能
+								var map = new BMap.Map("allmap");
+								map.centerAndZoom(new BMap.Point({{ public_longitude }}, {{ public_latitude }}), 15);
+								map.enableScrollWheelZoom();
+								var polyline = new BMap.Polyline([
+								    {% if detail != null %}
+                                        {% for k in detail %}
+									       new BMap.Point({{ k.longitude }}, {{ k.latitude }}),
+									    {% endfor %}
+								    {% endif %}
+								    
+								], {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5});   //创建折线
+								map.addOverlay(polyline);   //增加折线
+								//旅程详情
+                                var data_info = [
+		                            {% for k in trip %}
+										       new BMap.Point({{ k.longitude }}, {{ k.latitude }}),
+										       [{{ k.longitude }},{{ k.latitude }},"第{{ k.num }}站 地址：{{ k.title }}"],
+									{% endfor %}
+								];
+								var opts = {
+											width : 250,     // 信息窗口宽度
+											height: 80,     // 信息窗口高度
+											title : "信息窗口" , // 信息窗口标题
+											enableMessage:true//设置允许信息窗发送短息
+										   };
+								for(var i=0;i<data_info.length;i++){
+									var marker = new BMap.Marker(new BMap.Point(data_info[i][0],data_info[i][1]));  // 创建标注
+									var content = data_info[i][2];
+									map.addOverlay(marker);               // 将标注添加到地图中
+									addClickHandler(content,marker);
+								}
+								function addClickHandler(content,marker){
+									marker.addEventListener("click",function(e){
+										openInfo(content,e)}
+									);
+								}
+								function openInfo(content,e){
+									var p = e.target;
+									var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+									var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象 
+									map.openInfoWindow(infoWindow,point); //开启信息窗口
+								}
+
+							</script>
+				        </div>
+				    </div>
+
+			   </div>
+
+
+			</div>
+
+		    <!-- 房间信息 -->
+			<div class="roomTable">
+				<table id="myTable" border="0" >
+						<thead>
+							<tr>
+								<th class="avatar" style="padding-left: 90px;">报名列表</th>
+							
+								<th>其他</th>
+							</tr>
+						</thead>
+						<thead>
+							<tr>
+							   <th class="avatar" style="padding-left: 90px;"><a href="{{ path('groupTourEnroll_',{'tour_id':v.tour_id}) }}">{{ v.entered }}</a></th>
+							   
+							   <th><a href="#">0</a></th>
+
+							</tr>
+						<thead>
+				</table>   
+			</div>
+				
+	</section>
+</section>
+
+
+
+<div class="modal fade" id="myModal_disagree" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="flase">
+  <div class="modal-dialog" style="margin-top:180px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel" style="font-family: '微软雅黑';font-size: 16px;font-weight: 600;">不通过的理由</h4>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+      <textarea  name='HomeStayReason' id="HomeStayReason" rows="" cols="" style="height: 100px;"></textarea>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary disagreeBtn"  id-val="2" state-vale="2" >提 交</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+
+{% endblock%}

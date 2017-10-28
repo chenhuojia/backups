@@ -1,0 +1,77 @@
+<?php
+namespace Order\Controller;
+
+use Think\Controller;
+use Common\Vendor\alipay\Alipayment;
+
+class PayNotiyController extends Controller
+{   
+  
+    /**
+     * 商品支付宝回调
+     **/
+    public function BookAlipayNotify(){   
+        $config=load_config(COMMON_PATH.'Conf/alipayconfig.php');
+        $alipay=new Alipayment($config);
+        $verify_result = $alipay->verifyCallback(TRUE);
+        $verify_result=1;
+        if($verify_result)
+        {            
+            $order_sn =trim($_POST['out_trade_no']); //商户订单号
+            //$trade_no = $_POST['trade_no'];//支付宝交易号
+             //$trade_status = $_POST['trade_status'];//交易状态 */
+            $pay_sn=trim($_POST['trade_no']);
+            $pay_time=strtotime(isset($_POST['gmt_payment'])?$_POST['gmt_payment']:0);
+            if($_POST['trade_status'] == 'TRADE_FINISHED')
+            {
+                $b=update_pay_status($order_sn,$pay_time,$pay_sn,1); // 修改订单支付状态
+                echo 'success';exit;
+            }
+            elseif ($_POST['trade_status'] == 'TRADE_SUCCESS')
+            {
+                update_pay_status($order_sn,$pay_time,$pay_sn,1); // 修改订单支付状态
+                echo 'success';exit;
+            } 
+        }
+        else
+        {
+            echo 'fail';exit; //验证失败
+        }
+    }
+    
+    
+    /**
+     * 保证金支付宝回调
+     **/
+    public function shopAlipayNotify(){
+        $config=load_config(COMMON_PATH.'Conf/alipayconfig.php');
+        $alipay=new Alipayment($config);
+        $verify_result = $alipay->verifyCallback(TRUE);
+        $verify_result=1;
+        if($verify_result)
+        {
+            $order_sn =trim($_POST['out_trade_no']); //商户订单号
+            /*  $trade_no = $_POST['trade_no'];//支付宝交易号
+             //$trade_status = $_POST['trade_status'];//交易状态 */
+            $pay_sn=trim($_POST['trade_no']);
+            $pay_time=strtotime(isset($_POST['gmt_payment'])?$_POST['gmt_payment']:0);
+            if($_POST['trade_status'] == 'TRADE_FINISHED')
+            {
+                echo 'success';exit;
+            }
+            elseif ($_POST['trade_status'] == 'TRADE_SUCCESS')
+            {
+                echo 'success';exit;
+            }
+        }
+        else
+        {
+            echo 'fail';exit; //验证失败
+        }
+    }
+
+
+
+
+}
+

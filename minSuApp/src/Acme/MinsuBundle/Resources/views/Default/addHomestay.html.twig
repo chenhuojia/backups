@@ -1,0 +1,232 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script type="text/javascript" src="{{ asset('bundles/msk/public/js/jquery-1.7.1.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/msk/public/js/ajaxfileupload.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$("#adr").click(function(){
+		var addr  =$("#homestay_addr").val();
+		console.log(addr)
+		$("#rightMain").attr("src",'{{ path('map_')}}'+'?adr='+addr);
+	})
+
+		$(".filenamebutton").live("click",function(){$("#uploadImage").click();})
+
+//选择默认图
+$("[name='imradeflt']").live('click',function(){
+
+var n = $(this).attr('num');
+var test =	$(".filename_"+n).val();
+	//alert(test);
+
+	$("#imgdefauledd").val(test);
+	});
+
+//删除图片
+
+$(".delManyimg").live('click',function(){
+	var id  = $(this).attr("num");
+	$(".divmupload_"+id).remove();
+	$('.uploadimgName_'+id).remove();
+})
+	
+	
+	
+$("#submitbtn").click(function(){		
+	var num =$("#imgNumber").val();
+	var def =$("#imgdefauledd").val();
+	if(num  == 0){
+		alert("请选择上传的图片！");  
+		return false;
+		}
+	if(def == ""){
+		alert("请选择默认封面图片！"); 
+		return false;
+		}
+	})
+
+$("[name='artImage']").live("change",function(){
+	console.log($(this).val())
+	/*$.ajax({
+		url:'{{ path('upload_many_img') }}',
+		dataType: 'json',
+		type:'POST',		
+		success: function(data){
+			console.log(data)
+		}
+	})*/
+	
+})
+	function getObjectURL(file) {
+		var url = null ; 
+		if (window.createObjectURL!=undefined) { // basic
+			url = window.createObjectURL(file) ;
+		} else if (window.URL!=undefined) { // mozilla(firefox)
+			url = window.URL.createObjectURL(file) ;
+		} else if (window.webkitURL!=undefined) { // webkit or chrome
+			url = window.webkitURL.createObjectURL(file) ;
+		}
+		return url ;
+	}
+		
+	$("[name='artImage']").live("change",function(){
+		  var uimebid = $("[name='member_id']").val();
+		  var num =$("#imgNumber").val();
+		  var filepath=$("#uploadImage").val();
+		  var extStart=filepath.lastIndexOf(".");
+		  var ext=filepath.substring(extStart,filepath.length).toUpperCase();
+		  if(ext!=".BMP"&&ext!=".PNG"&&ext!=".GIF"&&ext!=".JPG"&&ext!=".JPEG"){
+		  		alert("图片限于bmp,png,gif,jpeg,jpg格式");
+		  		return false;
+		  }else{
+		 		$.ajaxFileUpload({
+					url:'{{ path('upload_many_img') }}'+'?&memberid='+uimebid,
+					secureuri:false,
+					fileElementId:'uploadImage',
+					//fileElementId:type,
+					dataType: 'json',
+					success: function(data){
+						console.log(data);
+						var name=data.fileName;
+	 				    var accName=data.accName;
+						var imgurl=data.img;
+					  $("[name='img_"+num+"']").attr('src',name);
+					  $("#hidimggroup").append("<input type='hidden' name='uploadimgName[]' class='uploadimgName_"+num+"' value='"+imgurl+"'>");
+					  $(".filename_"+num).val(imgurl)
+					  //数字加1.
+					 var n = parseInt(num)+parseInt(1);
+					$("#imgNumber").val(n);
+					$(".divmupload_"+num).append("<input type='radio' name='imradeflt' num='"+num+"' class='imradeflt '> <button type='button' num='"+num+"' class='delManyimg'>X</button>");
+					 $("#ifuploaddiv").append("<div class='uploader divmupload_"+n+"'><img name='img_"+n+"'  class='manyuploadImg' src='{{ asset('bundles/msk/public/none.jpg') }}'><input type='text' class='filename filename_"+n+"' readonly value='请选择图片' style='width: 100%;'><button type='button' name='file' class='filenamebutton green' style='position: absolute;left: 100%; width: 80%;'>选择图片</button><input type='file' size='30' name='artImage' id='uploadImage'  style='width: 180%;'></div>"); 
+					}
+				})                                
+			  }		  	
+	});  	
+		
+
+});
+
+
+
+</script>
+
+{% endblock %}
+
+{% block content%}<section class="alert">
+	<form method="post" action="{{ path('save_homestay_data') }}">
+	
+	<div  id="hidimggroup">
+	
+	</div>	
+	<input  type ="hidden" id='imgNumber'  value="0">
+	
+	<input  type ="hidden" id='imgdefauledd' name="imgdefauledd" >
+
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>新增民宿</h1>
+			</hgroup>
+		</header>
+		<div style="min-height: 900px;position: relative;">
+			<table border="0" class="addhtable" >
+					<tr>
+						<td>发布者</td>
+						<td><select name="member_id" class="form-select" style="padding: 5px;height: 35px; margin-bottom: 13px;">
+						{% for v in meb %}
+						<option value="{{ v.id }}">{{v.nickname}} ( {{ v.account }} )</option>
+						{% endfor %}
+						
+						</select></td>
+					</tr>
+					
+					<tr>
+						<td>名称</td>
+						<td><input name="homestay_name" type="text" class="form-input" required /></td>
+					</tr>
+					
+					<tr>
+						<td>描述</td>
+						<td><input name="homestay_title" type="text" class="form-input" required /></td>
+					</tr>
+					
+					<tr>
+						<td>类型</td>
+						<td><select name="homestay_type_id" class="form-select" style="padding: 5px;height: 35px;margin-bottom: 13px;">
+						{% for v in ht %}
+						<option value="{{ v.id }}">{{v.homestay_type_name}}</option>
+						{% endfor %}
+						</select></td>
+					</tr>
+					
+					<tr>
+						<td>价格</td>
+						<td><input name="bottom_price" type="text" class="form-input" required/></td>
+					</tr>
+					
+					
+					<tr>
+						<td>电话</td>
+						<td><input name="homestay_phone" type="text" class="form-input" required/></td>
+					</tr>
+					
+					<tr>
+						<td>地址</td>
+						<td><input name="homestay_addr" id="homestay_addr" type="text" class="form-input" required style="width: 78%;"/>&nbsp;&nbsp;&nbsp;<button type='button'  id ='adr'  >搜 索</button></td>
+					</tr>
+					
+					<tr>
+						<td>经度</td>
+						<td><input name="longitude" id ='longitude'  type="text" class="form-input" required/></td>
+					</tr>
+					
+					<tr>
+						<td>纬度</td>
+						<td><input name="latitude" id='latitude'  type="text" class="form-input" required/></td>
+					</tr>
+					
+					<tr>
+						<td>省</td>
+						<td><input name="province"  id="province"  type="text" class="form-input"  required/></td>
+					</tr>
+					
+					<tr>
+						<td>城市</td>
+						<td><input name="city" id="city" type="text" class="form-input" required/></td>
+					</tr>
+					
+					<tr>
+						<td>区</td>
+						<td><input name="district" id="district" type="text" class="form-input" required/></td>
+					</tr>
+		
+				</table>
+				
+				 <button type='submit'  id="submitbtn" class="green" style="width: 200px;font-weight: 600;margin-left: 40px;position: absolute;left:700px;bottom: 50px;"> 保  存</button> 
+		</div>
+	</section>
+	<div  id="ifdiv">
+      	<iframe name="rightMain" id="rightMain" src="{{ path('map_')}}" frameborder="no" style="height: 560px;" width="100%"  allowtransparency="true"/>  </iframe>
+  	</div>
+
+</section>
+
+ 	
+<div  id="ifuploaddiv"> 
+	<div class="uploader divmupload_0">
+		<img name="img_0"  class='manyuploadImg' src="{{ asset('bundles/msk/public/none.jpg') }}"> 
+        <input type="text" class="filename filename_0" readonly value="请选择图片" style="width: 100%;">
+        <button type="button" name="file" class="filenamebutton green" style="position: absolute;left: 100%; width: 80%;">选择图片</button>
+        <input type="file" size="30" name="artImage" id="uploadImage"  style=" width: 180%;">        
+        <!-- multiple="multiple"<input type="radio" name="imradeflt" class="imradeflt">
+        <button type="button" class='delManyimg'>X</button> -->                   
+	</div>
+ </div> 
+	 
+		</form>
+{% endblock%}

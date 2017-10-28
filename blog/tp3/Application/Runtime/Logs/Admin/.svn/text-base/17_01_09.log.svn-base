@@ -1,0 +1,1439 @@
+[ 2017-01-09T11:22:16+08:00 ] 127.0.0.1 /dsd/tp3/admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:22:17+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-09T11:22:25+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.005000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.005000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:22:26+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:24:22+08:00 ] 127.0.0.1 /dsd/tp3/admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:24:22+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-09T11:24:27+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:24:28+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-09T11:25:45+08:00 ] 127.0.0.1 /dsd/tp3/admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-09T11:25:45+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:25:48+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:25:48+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:25:49+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:25:57+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Ajax/upload.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given D:\UPUPW_NP7.0\htdocs\dsd\tp3\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2017-01-09T11:26:16+08:00 ] 127.0.0.1 /dsd/tp3/admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:26:16+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:26:19+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:26:20+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:26:31+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Ajax/upload.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given D:\UPUPW_NP7.0\htdocs\dsd\tp3\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2017-01-09T11:26:31+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/Public/Upload/blog/images/2017-01-09/587302e79e728.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:26:56+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/Public/Upload/blog/images/2017-01-09/587302e79e728.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:27:35+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Public/Upload/blog/images/2017-01-09/587302e79e728.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:27:48+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/Public/Upload/blog/images/2017-01-09/587302e79e728.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:28:43+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/Public/Upload/blog/images/2017-01-09/587302e79e728.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:29:35+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/Public/Upload/blog/images/2017-01-09/587302e79e728.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:29:35+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/tp3/Public/Upload/blog/images/2017-01-09/587302e79e728.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:29:35+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Public/Upload/blog/images/2017-01-09/587302e79e728.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:29:38+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Public/Upload/blog/images/2017-01-09/587302e79e728.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:29:38+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/Public/Upload/blog/images/2017-01-09/587302e79e728.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:29:38+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/tp3/Public/Upload/blog/images/2017-01-09/587302e79e728.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:29:48+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/Public/Upload/blog/images/2017-01-09/587302e79e728.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:29:48+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Public/Upload/blog/images/2017-01-09/587302e79e728.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:29:50+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/Public/Upload/blog/images/2017-01-09/587302e79e728.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:29:50+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Public/Upload/blog/images/2017-01-09/587302e79e728.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:44:14+08:00 ] 127.0.0.1 /dsd/tp3/admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:44:14+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:44:15+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-09T11:44:17+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:44:48+08:00 ] 127.0.0.1 /dsd/tp3/admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:44:48+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:45:35+08:00 ] 127.0.0.1 /dsd/tp3/admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:45:36+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:45:37+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:45:38+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:51:11+08:00 ] 127.0.0.1 /dsd/tp3/admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-09T11:51:11+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:51:13+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.005000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.005000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:51:14+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:51:38+08:00 ] 127.0.0.1 /dsd/tp3/admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:51:39+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:51:41+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:51:42+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:54:22+08:00 ] 127.0.0.1 /dsd/tp3/admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:54:22+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:54:24+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-09T11:54:25+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:55:31+08:00 ] 127.0.0.1 /dsd/tp3/admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:55:31+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:55:33+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:55:34+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T11:56:17+08:00 ] 127.0.0.1 /dsd/tp3/admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-09T11:56:17+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T12:00:35+08:00 ] 127.0.0.1 /dsd/tp3/admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T12:00:35+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T12:00:37+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-09T12:00:38+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T12:00:54+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0020s ]
+NOTIC: [8] Undefined index: validate D:\UPUPW_NP7.0\htdocs\dsd\tp3\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\UPUPW_NP7.0\htdocs\dsd\tp3\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `bk_article` (`title`,`cate_id`,`introduction`,`content`) VALUES ('wo de','4','咩死','') [ RunTime:0.0370s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.005000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.001000s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.005000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T12:00:55+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T12:04:53+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Ajax/upload.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given D:\UPUPW_NP7.0\htdocs\dsd\tp3\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2017-01-09T12:04:53+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/Public/Upload/blog/images/2017-01-09/58730be5dee68.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T12:04:55+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0020s ]
+NOTIC: [8] Undefined index: validate D:\UPUPW_NP7.0\htdocs\dsd\tp3\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\UPUPW_NP7.0\htdocs\dsd\tp3\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `bk_article` (`title`,`cate_id`,`introduction`,`content`) VALUES ('啊傻傻的就看见看来是大家快乐','1','啊双卡双待快乐吗， ','&lt;p&gt;撒旦教考虑建立撒大大理解家里的撒jl&lt;/p&gt;&lt;p&gt;撒大大看&lt;/p&gt;&lt;p&gt;asdhkadspo】【都是阿萨德&lt;/p&gt;&lt;p&gt;】 四大会计师ad】【萨迪克是多久哦ia萨达红isa的萨迪克哈撒d】【&lt;/p&gt;&lt;p&gt;破 sad&lt;br/&gt;SDA泼洒的&lt;/p&gt;&lt;p&gt;萨达哦加大&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;＼&lt;/p&gt;') [ RunTime:0.1040s ]
+SQL: SHOW COLUMNS FROM `bk_article_images` [ RunTime:0.0020s ]
+SQL: INSERT INTO `bk_article_images` (`art_id`,`image_url`) VALUES ('6','Public/Upload/blog/images/2017-01-09/58730be5dee68.jpg') [ RunTime:0.1970s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.005000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.001000s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.004000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-09T12:04:56+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T13:22:36+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0020s ]
+NOTIC: [8] Undefined index: validate D:\UPUPW_NP7.0\htdocs\dsd\tp3\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\UPUPW_NP7.0\htdocs\dsd\tp3\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `bk_article` (`title`,`cate_id`,`introduction`,`content`) VALUES ('nginx的编译安装','3','nginx的编译安装','&lt;h2 id=&quot;articleHeader1&quot; style=&quot;box-sizing: border-box; font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-weight: 500; line-height: 1.2; color: rgb(51, 51, 51); margin: 1.5em 0px 0px; font-size: 1.75em; border-bottom: 1px solid rgb(238, 238, 238); padding-bottom: 10px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;编译环境&lt;/h2&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;在linux使用make方式安装，需要保证linux已经具备比较OK的编译环境，例如gcc等编译工具。一般而言，服务器提供商在安装的系统中已经默认集成了这些软件，但是为了保险起见，我们还是通过一些较为基础的方式，把这些依赖包都跑一遍，以防在之后的编译中出差错。&lt;/p&gt;&lt;pre class=&quot;hljs sql&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;yum&amp;nbsp;-y&amp;nbsp;install&amp;nbsp;gcc&amp;nbsp;gcc-c++&amp;nbsp;autoconf&amp;nbsp;automake&amp;nbsp;libtool&amp;nbsp;make&amp;nbsp;cmake
+$&amp;nbsp;yum&amp;nbsp;-y&amp;nbsp;install&amp;nbsp;zlib&amp;nbsp;zlib-devel&amp;nbsp;openssl&amp;nbsp;openssl-devel&amp;nbsp;pcre-devel&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;zlib: 为nginx提供gzip模块，需要zlib库支持&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;openssl: 为nginx提供ssl功能&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;pcre: 为支持地址重写rewrite功能&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;&lt;strong style=&quot;box-sizing: border-box;&quot;&gt;确保pcre已正确安装&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;在上面的基础环境安装中，我们已经yum安装了pcre，但是部分服务器上并没有pcre的安装包，所以我们可以通过下载tar包自行编译安装pcre。&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;搜索pcre，进入其官网，找到最新的版本，复制tar.gz的下载连接，执行如下操作：&lt;/p&gt;&lt;pre class=&quot;hljs ruby&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;wget&amp;nbsp;http://pcre/xxx/xxx/xxx最新版xxx.tar.gz$&amp;nbsp;tar&amp;nbsp;zxvf&amp;nbsp;xxxx.tar.gz$&amp;nbsp;cd&amp;nbsp;xxxx$&amp;nbsp;./configure$&amp;nbsp;make&amp;nbsp;install&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;这样就可以保证安装pcre了。&lt;/p&gt;&lt;h2 id=&quot;articleHeader2&quot; style=&quot;box-sizing: border-box; font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-weight: 500; line-height: 1.2; color: rgb(51, 51, 51); margin: 1.5em 0px 0px; font-size: 1.75em; border-bottom: 1px solid rgb(238, 238, 238); padding-bottom: 10px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;创建用来运行nginx的用户及组&lt;/h2&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;我们创建一个新的用户和用户组来运行nginx，这样可以把nginx和root分开，保证nginx不具备root权限。但是，我们并不希望nginx成为一个真实的可以登陆到远程进行操作的用户，所以，我们并不给它创建家目录，在useradd的时候，用-M参数：&lt;/p&gt;&lt;pre class=&quot;hljs ruby&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;groupadd&amp;nbsp;nginx$&amp;nbsp;useradd&amp;nbsp;-g&amp;nbsp;nginx&amp;nbsp;-M&amp;nbsp;nginx&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;-g参数为nginx用户指定了一个组。-M参数保证其不自动生成home目录。&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;但通过上面的用户创建之后，nginx用户可以通过设置一个密码登陆到服务器，这个不是我们想要的，我们禁用它的ssh登陆权限.禁止用户登陆也很方便，只需要修改配置文件中有关用户和用户组的信息即可。&lt;/p&gt;&lt;pre class=&quot;hljs ruby&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;vi&amp;nbsp;/etc/passwd&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;找到nginx，将后面的&lt;code style=&quot;box-sizing: border-box; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 2px 4px; color: rgb(199, 37, 78); background-color: rgb(249, 242, 244); border-radius: 3px;&quot;&gt;/bin/bash&lt;/code&gt;改为&lt;code style=&quot;box-sizing: border-box; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 2px 4px; color: rgb(199, 37, 78); background-color: rgb(249, 242, 244); border-radius: 3px;&quot;&gt;/sbin/nologin&lt;/code&gt;即可。&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;OK，用户处理完毕。&lt;/p&gt;&lt;h2 id=&quot;articleHeader3&quot; style=&quot;box-sizing: border-box; font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-weight: 500; line-height: 1.2; color: rgb(51, 51, 51); margin: 1.5em 0px 0px; font-size: 1.75em; border-bottom: 1px solid rgb(238, 238, 238); padding-bottom: 10px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;编译安装Nginx&lt;/h2&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;前面讲了这么多，都还没有说到重点，接下来我们来编译安装nginx。先进入nginx的官方网站，找到最新版本的tar.gz包的链接，复制链接，然后执行下面的动作：&lt;/p&gt;&lt;pre class=&quot;hljs ruby&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;wget&amp;nbsp;http://xxxxxxxxxx/nginx1.7.x.tar.gz$&amp;nbsp;tar&amp;nbsp;zxvf&amp;nbsp;nginx1.7.x.tar.gz$&amp;nbsp;cd&amp;nbsp;nginx1.7.x&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;接下来我们需要执行./configure，不同的开发者有不同的习惯，对于刚入门的用户而言，不是很喜欢麻烦的去进行配置，总是希望默认就是最好的，但是实际情况恰好相反，走上linux的道，就请热爱折腾，既然选择编译安装，就请热爱make。&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;我希望把软件安装在/user/local下面，一个软件一个目录，在以后卸载的时候也比较方便清理。软件的目录也按照linux的目录形式，用conf、etc、sbin、run等进行归类管理，所以，我最终的./configure配置如下：&lt;/p&gt;&lt;pre class=&quot;hljs sql&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;./configure&amp;nbsp;--prefix=/usr/local/nginx&amp;nbsp;\\--pid-path=/usr/local/nginx/run/nginx.pid&amp;nbsp;\\--with-http_ssl_module&amp;nbsp;\\--user=nginx&amp;nbsp;\\
+&amp;nbsp;--group=nginx&amp;nbsp;\\--with-pcre&amp;nbsp;\\--without-mail_pop3_module&amp;nbsp;\\--without-mail_imap_module&amp;nbsp;\\--without-mail_smtp_module&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;末尾三个是禁用nginx作为邮件代理服务器，我一般只用服务器作为网站或数据库的服务器，所以这里把它们禁用掉，你如果想搭建的是邮件服务器，那么就应该去阅读nginx搭建邮件服务器的教程。&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;你可以认真阅读一下./configure的结果，看看有没有报错，或者加载的模块是不是都齐全，如果一切OK，那么往下继续，如果感觉不对，可以用./configure --help认真阅读一下。&lt;/p&gt;&lt;pre class=&quot;hljs ruby&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;make$&amp;nbsp;make&amp;nbsp;install&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;make的地方有一个小技巧，如果服务器是双核，可以通过-j2来指定用双核进行编译，-j4代表4核编译。&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;安装到这里就结束了，但是，安装完可没完事儿，nginx还没有运行起来，你可以先去看看安装的结果，并且运行nginx服务器：&lt;/p&gt;&lt;pre class=&quot;hljs ruby&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;cd&amp;nbsp;/usr/local/nginx$&amp;nbsp;ls$&amp;nbsp;sbin/nginx&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;这样就运行起来了，访问你的服务器ip，看看能否看到ngin的欢迎页面吧。（不要让其他软件占用80端口哦）默认情况下网页文件放在/usr/local/nginx/html下，不符合我们的使用习惯，这个需要修改nginx的配置文件来修改，不过即使不修改，我们也是可以正常使用的，我们就不详细解释nginx的配置了。&lt;/p&gt;&lt;h2 id=&quot;articleHeader4&quot; style=&quot;box-sizing: border-box; font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-weight: 500; line-height: 1.2; color: rgb(51, 51, 51); margin: 1.5em 0px 0px; font-size: 1.75em; border-bottom: 1px solid rgb(238, 238, 238); padding-bottom: 10px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;nginx服务的载入&lt;/h2&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;但是，make编译安装的软件，可不像yum安装的服务，我们熟悉的service命令并不起效，不然你用service nginx restart试试看。这是因为service调用/etc/ini.d/目录下的程序完成，而该目录下并不存在nginx这个程序。那么这个时候怎么重启nginx呢？如下操作：&lt;/p&gt;&lt;pre class=&quot;hljs bash&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;/usr/local/nginx/sbin/nginx&amp;nbsp;-s&amp;nbsp;reload&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;这个操作可以重新加载nginx的配置文件，相当于重启(当配置文件出错时，不会重启)。如果一定要重启整个服务，那只能通过杀死nginx进程，然后在运行程序了。&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;不过为了使用我们熟悉的service操作，这里提供一个&lt;a href=&quot;http://pan.baidu.com/s/1jGZuqfO&quot; target=&quot;_blank&quot; style=&quot;box-sizing: border-box; background: transparent; color: rgb(0, 154, 97); text-decoration: none; outline: 0px;&quot;&gt;程序&lt;/a&gt;，放到/etc/ini.d/目录下，并执行：&lt;/p&gt;&lt;pre class=&quot;hljs ruby&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;chmod&amp;nbsp;+x&amp;nbsp;/etc/init.d/nginx&amp;nbsp;
+$&amp;nbsp;chkconfig&amp;nbsp;--add&amp;nbsp;nginx$&amp;nbsp;chkconfig&amp;nbsp;nginx&amp;nbsp;on&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;这样就可以通过service nginx restart等方法来操作nginx了。你可以把程序下载下来，简单研究一下，如果你的nginx安装路径和我的不同，还要修改程序开头的变量设置。&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;') [ RunTime:0.0370s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.001000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.005000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.005000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-09T13:22:37+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T13:23:08+08:00 ] 127.0.0.1 /dsd/tp3/admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T13:23:08+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Index/welcome.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T13:23:11+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.005000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.005000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T13:23:13+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T13:24:26+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/img/codeTools.svg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载控制器:Img
+
+[ 2017-01-09T13:24:44+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_article` [ RunTime:0.0020s ]
+NOTIC: [8] Undefined index: validate D:\UPUPW_NP7.0\htdocs\dsd\tp3\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\UPUPW_NP7.0\htdocs\dsd\tp3\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `bk_article` (`title`,`cate_id`,`introduction`,`content`) VALUES ('nginx的编译安装','3','nginx的编译安装','&lt;h2 id=&quot;articleHeader1&quot; style=&quot;box-sizing: border-box; font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-weight: 500; line-height: 1.2; color: rgb(51, 51, 51); margin: 1.5em 0px 0px; font-size: 1.75em; border-bottom: 1px solid rgb(238, 238, 238); padding-bottom: 10px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;编译环境&lt;/h2&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;在linux使用make方式安装，需要保证linux已经具备比较OK的编译环境，例如gcc等编译工具。一般而言，服务器提供商在安装的系统中已经默认集成了这些软件，但是为了保险起见，我们还是通过一些较为基础的方式，把这些依赖包都跑一遍，以防在之后的编译中出差错。&lt;/p&gt;&lt;pre class=&quot;hljs sql&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;yum&amp;nbsp;-y&amp;nbsp;install&amp;nbsp;gcc&amp;nbsp;gcc-c++&amp;nbsp;autoconf&amp;nbsp;automake&amp;nbsp;libtool&amp;nbsp;make&amp;nbsp;cmake
+$&amp;nbsp;yum&amp;nbsp;-y&amp;nbsp;install&amp;nbsp;zlib&amp;nbsp;zlib-devel&amp;nbsp;openssl&amp;nbsp;openssl-devel&amp;nbsp;pcre-devel&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;zlib: 为nginx提供gzip模块，需要zlib库支持&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;openssl: 为nginx提供ssl功能&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;pcre: 为支持地址重写rewrite功能&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;&lt;strong style=&quot;box-sizing: border-box;&quot;&gt;确保pcre已正确安装&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;在上面的基础环境安装中，我们已经yum安装了pcre，但是部分服务器上并没有pcre的安装包，所以我们可以通过下载tar包自行编译安装pcre。&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;搜索pcre，进入其官网，找到最新的版本，复制tar.gz的下载连接，执行如下操作：&lt;/p&gt;&lt;pre class=&quot;hljs ruby&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;wget&amp;nbsp;http://pcre/xxx/xxx/xxx最新版xxx.tar.gz$&amp;nbsp;tar&amp;nbsp;zxvf&amp;nbsp;xxxx.tar.gz$&amp;nbsp;cd&amp;nbsp;xxxx$&amp;nbsp;./configure$&amp;nbsp;make&amp;nbsp;install&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;这样就可以保证安装pcre了。&lt;/p&gt;&lt;h2 id=&quot;articleHeader2&quot; style=&quot;box-sizing: border-box; font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-weight: 500; line-height: 1.2; color: rgb(51, 51, 51); margin: 1.5em 0px 0px; font-size: 1.75em; border-bottom: 1px solid rgb(238, 238, 238); padding-bottom: 10px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;创建用来运行nginx的用户及组&lt;/h2&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;我们创建一个新的用户和用户组来运行nginx，这样可以把nginx和root分开，保证nginx不具备root权限。但是，我们并不希望nginx成为一个真实的可以登陆到远程进行操作的用户，所以，我们并不给它创建家目录，在useradd的时候，用-M参数：&lt;/p&gt;&lt;pre class=&quot;hljs ruby&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;groupadd&amp;nbsp;nginx$&amp;nbsp;useradd&amp;nbsp;-g&amp;nbsp;nginx&amp;nbsp;-M&amp;nbsp;nginx&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;-g参数为nginx用户指定了一个组。-M参数保证其不自动生成home目录。&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;但通过上面的用户创建之后，nginx用户可以通过设置一个密码登陆到服务器，这个不是我们想要的，我们禁用它的ssh登陆权限.禁止用户登陆也很方便，只需要修改配置文件中有关用户和用户组的信息即可。&lt;/p&gt;&lt;pre class=&quot;hljs ruby&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;vi&amp;nbsp;/etc/passwd&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;找到nginx，将后面的&lt;code style=&quot;box-sizing: border-box; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 2px 4px; color: rgb(199, 37, 78); background-color: rgb(249, 242, 244); border-radius: 3px;&quot;&gt;/bin/bash&lt;/code&gt;改为&lt;code style=&quot;box-sizing: border-box; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 2px 4px; color: rgb(199, 37, 78); background-color: rgb(249, 242, 244); border-radius: 3px;&quot;&gt;/sbin/nologin&lt;/code&gt;即可。&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;OK，用户处理完毕。&lt;/p&gt;&lt;h2 id=&quot;articleHeader3&quot; style=&quot;box-sizing: border-box; font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-weight: 500; line-height: 1.2; color: rgb(51, 51, 51); margin: 1.5em 0px 0px; font-size: 1.75em; border-bottom: 1px solid rgb(238, 238, 238); padding-bottom: 10px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;编译安装Nginx&lt;/h2&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;前面讲了这么多，都还没有说到重点，接下来我们来编译安装nginx。先进入nginx的官方网站，找到最新版本的tar.gz包的链接，复制链接，然后执行下面的动作：&lt;/p&gt;&lt;pre class=&quot;hljs ruby&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;wget&amp;nbsp;http://xxxxxxxxxx/nginx1.7.x.tar.gz$&amp;nbsp;tar&amp;nbsp;zxvf&amp;nbsp;nginx1.7.x.tar.gz$&amp;nbsp;cd&amp;nbsp;nginx1.7.x&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;接下来我们需要执行./configure，不同的开发者有不同的习惯，对于刚入门的用户而言，不是很喜欢麻烦的去进行配置，总是希望默认就是最好的，但是实际情况恰好相反，走上linux的道，就请热爱折腾，既然选择编译安装，就请热爱make。&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;我希望把软件安装在/user/local下面，一个软件一个目录，在以后卸载的时候也比较方便清理。软件的目录也按照linux的目录形式，用conf、etc、sbin、run等进行归类管理，所以，我最终的./configure配置如下：&lt;/p&gt;&lt;pre class=&quot;hljs sql&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;./configure&amp;nbsp;--prefix=/usr/local/nginx&amp;nbsp;\\--pid-path=/usr/local/nginx/run/nginx.pid&amp;nbsp;\\--with-http_ssl_module&amp;nbsp;\\--user=nginx&amp;nbsp;\\
+&amp;nbsp;--group=nginx&amp;nbsp;\\--with-pcre&amp;nbsp;\\--without-mail_pop3_module&amp;nbsp;\\--without-mail_imap_module&amp;nbsp;\\--without-mail_smtp_module&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;末尾三个是禁用nginx作为邮件代理服务器，我一般只用服务器作为网站或数据库的服务器，所以这里把它们禁用掉，你如果想搭建的是邮件服务器，那么就应该去阅读nginx搭建邮件服务器的教程。&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;你可以认真阅读一下./configure的结果，看看有没有报错，或者加载的模块是不是都齐全，如果一切OK，那么往下继续，如果感觉不对，可以用./configure --help认真阅读一下。&lt;/p&gt;&lt;pre class=&quot;hljs ruby&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;make$&amp;nbsp;make&amp;nbsp;install&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;make的地方有一个小技巧，如果服务器是双核，可以通过-j2来指定用双核进行编译，-j4代表4核编译。&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;安装到这里就结束了，但是，安装完可没完事儿，nginx还没有运行起来，你可以先去看看安装的结果，并且运行nginx服务器：&lt;/p&gt;&lt;pre class=&quot;hljs ruby&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;cd&amp;nbsp;/usr/local/nginx$&amp;nbsp;ls$&amp;nbsp;sbin/nginx&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;这样就运行起来了，访问你的服务器ip，看看能否看到ngin的欢迎页面吧。（不要让其他软件占用80端口哦）默认情况下网页文件放在/usr/local/nginx/html下，不符合我们的使用习惯，这个需要修改nginx的配置文件来修改，不过即使不修改，我们也是可以正常使用的，我们就不详细解释nginx的配置了。&lt;/p&gt;&lt;h2 id=&quot;articleHeader4&quot; style=&quot;box-sizing: border-box; font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-weight: 500; line-height: 1.2; color: rgb(51, 51, 51); margin: 1.5em 0px 0px; font-size: 1.75em; border-bottom: 1px solid rgb(238, 238, 238); padding-bottom: 10px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;nginx服务的载入&lt;/h2&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;但是，make编译安装的软件，可不像yum安装的服务，我们熟悉的service命令并不起效，不然你用service nginx restart试试看。这是因为service调用/etc/ini.d/目录下的程序完成，而该目录下并不存在nginx这个程序。那么这个时候怎么重启nginx呢？如下操作：&lt;/p&gt;&lt;pre class=&quot;hljs bash&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;/usr/local/nginx/sbin/nginx&amp;nbsp;-s&amp;nbsp;reload&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;这个操作可以重新加载nginx的配置文件，相当于重启(当配置文件出错时，不会重启)。如果一定要重启整个服务，那只能通过杀死nginx进程，然后在运行程序了。&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;不过为了使用我们熟悉的service操作，这里提供一个&lt;a href=&quot;http://pan.baidu.com/s/1jGZuqfO&quot; target=&quot;_blank&quot; style=&quot;box-sizing: border-box; background: transparent; color: rgb(0, 154, 97); text-decoration: none; outline: 0px;&quot;&gt;程序&lt;/a&gt;，放到/etc/ini.d/目录下，并执行：&lt;/p&gt;&lt;p&gt;&lt;span class=&quot;selectCode code-tool&quot; data-toggle=&quot;tooltip&quot; data-placement=&quot;top&quot; title=&quot;&quot; data-original-title=&quot;全选&quot; style=&quot;box-sizing: border-box; cursor: pointer; display: block; float: left; background-image: url(&amp;quot;../img/codeTools.svg&amp;quot;); height: 16px; width: 16px; background-size: auto 16px; margin: 4px 5px; opacity: 0.5;&quot;&gt;&lt;/span&gt;&lt;span type=&quot;button&quot; class=&quot;copyCode code-tool&quot; data-toggle=&quot;tooltip&quot; data-placement=&quot;top&quot; data-clipboard-text=&quot;$ chmod +x /etc/init.d/nginx 
+$ chkconfig --add nginx
+$ chkconfig nginx on
+&quot; title=&quot;&quot; data-original-title=&quot;复制&quot; style=&quot;box-sizing: border-box; cursor: pointer; display: block; float: left; background-image: url(&amp;quot;../img/codeTools.svg&amp;quot;); height: 16px; width: 16px; background-size: auto 16px; margin: 4px 5px; opacity: 0.5; background-position: -16px 0px !important;&quot;&gt;&lt;/span&gt;&lt;span type=&quot;button&quot; class=&quot;saveToNote code-tool&quot; data-toggle=&quot;tooltip&quot; data-placement=&quot;top&quot; title=&quot;&quot; data-original-title=&quot;放进笔记&quot; style=&quot;box-sizing: border-box; cursor: pointer; display: block; float: left; background-image: url(&amp;quot;../img/codeTools.svg&amp;quot;); height: 16px; width: 16px; background-size: auto 16px; margin: 4px 5px; opacity: 0.5; background-position: -31px 0px !important;&quot;&gt;&lt;/span&gt;&lt;/p&gt;&lt;pre class=&quot;hljs ruby&quot; style=&quot;box-sizing: border-box; overflow: auto; font-family: &amp;quot;Source Code Pro&amp;quot;, Consolas, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.3; word-break: break-all; word-wrap: break-word; color: rgb(51, 51, 51); border: none; border-radius: 3px; max-height: 35em; position: relative; margin-top: 0px !important;&quot;&gt;$&amp;nbsp;chmod&amp;nbsp;+x&amp;nbsp;/etc/init.d/nginx&amp;nbsp;
+$&amp;nbsp;chkconfig&amp;nbsp;--add&amp;nbsp;nginx$&amp;nbsp;chkconfig&amp;nbsp;nginx&amp;nbsp;on&lt;/pre&gt;&lt;p style=&quot;box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;PingFang SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;WenQuanYi Micro Hei&amp;quot;, &amp;quot;Microsoft Yahei&amp;quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;这样就可以通过service nginx restart等方法来操作nginx了。你可以把程序下载下来，简单研究一下，如果你的nginx安装路径和我的不同，还要修改程序开头的变量设置。&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;') [ RunTime:0.0850s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.005000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002000s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.005000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-09T13:24:46+08:00 ] 127.0.0.1 /dsd/tp3/admin.php/Blog/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `bk_category` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `bk_category`  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+

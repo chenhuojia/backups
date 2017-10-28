@@ -1,0 +1,335 @@
+<include file="./APP/Admin/View/Common/Public_header_v1.html"/>
+<script type="text/javascript" src="__PUBLIC__/static/bt.typeahead/bootstrap3-typeahead.js"></script>
+<!-- http://www.daimabiji.com/formtable/2589.html
+ --><style type="text/css">
+    body { overflow: hidden; } 
+    .form-horizontal{width:60%;margin-left: auto;margin-right: auto;}
+    .form-group{margin-top:120px; margin-bottom: 430px;}
+    .grouplist{list-style-type:none;margin-left: -40px; height: 400px; overflow:auto; }
+    .grouplist li{margin-top:6px;text-align:center;line-height:35px;background-color:#CCC; width:250px; height: 35px;padding:0; }
+     #firstlist{margin-top: 3px;}
+    
+</style>
+<ol class="breadcrumb">
+    <li>{:C('CONTROL_MENU')}</li>
+    <li>地域设置</li>
+    <li class="active"><a href="{:U('Admin/Information/regionList')}"> 地域列表</a></li>
+    <li>添加地域</li>
+</ol>
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="javascript:void(0);">添加地域</a></li>
+</ul>
+<div  class="form-horizontal" >
+   
+    <div class="form-group">
+        <div class="col-md-4">
+            <div class="btn btn-default btn-lg" style="width:250px;">省名称
+              <div class="glyphicon glyphicon-plus-sign" onclick="addOpt1()" style="margin-left:15px;"></div>
+            </div>
+            <div id="optOne" style="margin-top:6px;display:none;">
+                 <input type='text' id="number1" placeholder='请输入6位数字' style='margin-right:10px; width:100px; height:35px;'/><input type='text' id="typevalue1" placeholder='请输入省名称' style='margin-right:10px; width:95px; height:35px;'/><button style='height:35px;' onclick="saveOpt1(0)">保存</span>
+                 <input type="hidden" id="oneid" value="">
+            </div>
+            <ul class="grouplist" id="firstlist">
+                <volist name="provinceList" id="vo">
+                  <li class="firstli"><a href="javascript:void(0)" firstid="{$vo['province_id']}">{$vo.province_id}-{$vo.province}</a></li>
+                </volist>
+            </ul>
+        </div>
+         <div class="col-md-4">
+            <div class="btn btn-default btn-lg" style="width:250px;">市名称
+              <div class="glyphicon glyphicon-plus-sign" id="cityadd" onclick="addOpt2()" style="margin-left:15px;"></div>
+            </div>
+            <div id="optTwo" style="margin-top:6px;display:none;">
+                <input type='text' id="number2" placeholder='请输入6位数字' style='margin-right:10px; width:100px; height:35px;margin-bottom: 2px;'/><input type='text' id="typevalue2" placeholder='请输入市名称' style='margin-right:10px; width:140px; height:35px;margin-bottom: 2px;'/><input type='text' id="code" placeholder='请输入市名首拼,如广州为:G' style='margin-right:10px; width:185px; height:35px;'/><button style='height:35px;margin-left:12px;' onclick="saveOpt2(0)">保存</span>
+                 <input type="hidden" id="twoid" value="">
+            </div>
+            <ul class="grouplist" id="secondlist">
+        
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <div class="btn btn-default btn-lg" style="width:250px;">区名称
+              <div class="glyphicon glyphicon-plus-sign" onclick="addOpt3()" style="margin-left:15px;"></div>
+            </div>
+            <div id="optThree" style="margin-top:6px;display:none;">
+                 <input type='text' id="number3" placeholder='请输入6位数字' style='margin-right:10px; width:100px; height:35px;'/><input type='text' id="typevalue3" placeholder='请输入区名称' style='margin-right:10px; width:95px; height:35px;'/><button style='height:35px;'onclick="saveOpt3(0)">保存</span>
+            </div>
+            <ul class="grouplist" id="thirdlist" >
+                
+            </ul>
+        </div>
+    </div>
+    
+  
+</div>
+<script type="text/javascript">
+        //切换添加栏目
+        function addOpt1()
+        {  
+            if($("#optOne").css("display")=="none"){
+                $("#optOne").show();
+                
+                $("#number1").blur(function(){
+                    var number =$("#number1").val();
+                    var position = 1;
+                    if((/^\d{6}$/.test($("#number1").val().trim()))){  
+                        //return true;
+                         $.ajax({
+                        cache:false,
+                        type:"POST",
+                        url:"{:U('Admin/Information/checkNumber')}",
+                        dataType:"json",
+                        data: {"position":position,"number":number}, 
+                        success:function(data){
+                            if (data == 0) {  
+                                alert('该编号已经存在！');
+                                $("#number1").css("background-color","#FFFFCC");
+                                //$("#optOne").hide();//关闭添加   
+                                $("#number1").focus();
+                            }  
+                            
+                        }
+                    });
+                    }else{  
+                        alert('请输入6位的数字！'); 
+                        //return false;  
+                        $("#number2").css("background-color","#FFFFCC");
+                    }  
+                    
+
+                });
+  
+            }else{
+                $("#optOne").hide();
+            }           
+        }  
+         function addOpt2()
+        {  
+            if($("#optTwo").css("display")=="none" && $("#oneid").val()!=""){
+                $("#optTwo").show();
+                $("#number2").blur(function(){
+                    var number =$("#number2").val();
+                    var position = 2;
+                    if((/^\d{6}$/.test($("#number2").val().trim()))){  
+                        //return true;
+                        $.ajax({
+                        cache:false,
+                        type:"POST",
+                        url:"{:U('Admin/Information/checkNumber')}",
+                        dataType:"json",
+                        data: {"position":position,"number":number}, 
+                        success:function(data){
+                            if (data == 0) {  
+                                alert('该编号已经存在！');
+                                $("#number2").css("background-color","#FFFFCC");
+                                //$("#optOne").hide();//关闭添加   
+                            }  
+                            
+                        }
+                    }); 
+                    }else{  
+                        alert('请输入6位的数字！'); 
+                        //return false;  
+                        $("#number2").css("background-color","#FFFFCC");
+                    }  
+                    
+                       
+
+                });
+            }else{
+                $("#optTwo").hide();
+            }           
+        }  
+         function addOpt3()
+        {  
+            if($("#optThree").css("display")=="none" && $("#twoid").val()!=""){
+                $("#optThree").show();
+                $("#number3").blur(function(){
+                    var number =$("#number3").val();
+                    var position = 3;
+                    if((/^\d{6}$/.test($("#number3").val().trim()))){  
+                        //return true;
+                        $.ajax({
+                        cache:false,
+                        type:"POST",
+                        url:"{:U('Admin/Information/checkNumber')}",
+                        dataType:"json",
+                        data: {"position":position,"number":number}, 
+                        success:function(data){
+                            if (data == 0) {  
+                                alert('该编号已经存在！');
+                                $("#number3").css("background-color","#FFFFCC");
+                                //$("#optOne").hide();//关闭添加   
+                            }  
+                            
+                        }
+                    }); 
+                    }else{  
+                        alert('请输入6位的数字！'); 
+                        //return false;  
+                        $("#number3").css("background-color","#FFFFCC");
+                    }  
+                    
+                });
+            }else{
+                $("#optThree").hide();
+            }           
+        } 
+      
+
+
+        //ajax提交页面与栏目 
+        function saveOpt1(a) {
+                var oneid = a;
+                var number =$("#number1").val();
+                var name = $("#typevalue1").val();
+                var class_id = 0;
+                // alert(twoid);
+                 //alert(name);
+                $.ajax({
+                    cache:false,
+                    type:"POST",
+                    url:"{:U('Admin/Information/regionPost')}",
+                    dataType:"json",
+                    data: {"province_id":oneid,"number":number,"name":name}, 
+                    success:function(data){
+                        if (data.status == 1) {  
+                            alert('恭喜您，信息添加成功！');
+                            $("#optOne").hide();//关闭添加
+                            
+                        }  
+                        
+                    }
+                });
+
+        }
+
+        function saveOpt2(a) {
+                var oneid = $("#oneid").val();
+                var twoid = a;
+                var name = $("#typevalue2").val();
+                var number =$("#number2").val();
+                var code = $("#code").val();
+
+                $.ajax({
+                    cache:false,
+                    type:"POST",
+                    url:"{:U('Admin/Information/regionPost')}",
+                    dataType:"json",
+                    data: {"province_id":oneid,"city_id":twoid,"number":number,"code":code,"name":name}, 
+                    success:function(data){
+                         if (data.status == 1) {  
+                            alert('恭喜您，信息添加成功！');
+                            $("#optTwo").hide();//关闭添加
+                            
+                        }  
+
+                    }
+                });
+
+        }
+
+        function saveOpt3(a) {
+                var oneid = $("#oneid").val();
+                var twoid = $("#twoid").val();
+                var number =$("#number3").val();
+                var name = $("#typevalue3").val();
+                $.ajax({
+                    cache:false,
+                    type:"POST",
+                    url:"{:U('Admin/Information/regionPost')}",
+                    dataType:"json",
+                    data: {"province_id":oneid,"city_id":twoid,"number":number,"name":name}, 
+                    success:function(data){
+                         if (data.status == 1) {  
+                            alert('恭喜您，信息添加成功！');
+                            $("#optThree").hide();//关闭添加
+                            
+                        }  
+
+                    }
+                });
+
+        }
+
+</script>
+
+<script type="text/javascript" language="javascript">
+   
+ $(document).ready(function()
+  {
+        
+    // $("#cityadd").css('display','none');
+    $("#firstlist li a").on("click", function(){
+        var objectModel = {};
+        var firstid = ($(this).attr("firstid"));
+        if(firstid){//有值得时候就显示
+            alert("有");
+            $("#cityadd").css('display','none'); 
+        }
+        $(this).parent().css({"background-color":"#f0ad4e","font-size":"120%"}).siblings().css({"background-color":"#CCC","font-size":"100%"}); ;
+        $("#oneid").attr("value",firstid);
+        //alert(firstid);
+        $.ajax({
+            cache:false,
+            type:"POST",
+            url:"{:U('Admin/Information/CityInfo')}",
+            dataType:"json",
+            data: {"province_id":firstid}, 
+            success:function(data){
+                $("#secondlist").empty();
+                //console.log(data);
+                var count = data.length;
+                var i = 0;
+                var b="";
+                for(i=0;i<count;i++){
+                    
+                    b+="<li ><a href='javascript:void(0)' secondid='"+data[i].city_id+"'>"+data[i].city_id+'-'+data[i].city+"</a></li>";
+                }
+                 
+                 $("#secondlist").append(b);
+
+                //第三级选完后才能选择这个
+                $("[secondid]").click(function(){
+                var objectModel = {};
+                var secondid = ($(this).attr("secondid"));
+                $(this).parent().css({"background-color":"#f0ad4e","font-size":"120%"}).siblings().css({"background-color":"#CCC","font-size":"100%"}); ;
+                $("#twoid").attr("value",secondid);
+                $.ajax({
+                    cache:false,
+                    type:"POST",
+                    url:"{:U('Admin/Information/AreaInfo')}",
+                    dataType:"json",
+                    data: {"city_id":secondid}, 
+                    success:function(data){
+                        $("#thirdlist").empty();
+                        console.log(data);
+                        var count = data.length;
+                        var i = 0;
+                        var b="";
+                        for(i=0;i<count;i++){
+                            //b+="<li href='javascript:void(0)' threeid='"+data[i].cg_id+"'>"+data[i].name+"</li>";
+                            b+="<li ><a href='javascript:void(0)' threeid='"+data[i].area_id+"'>"+data[i].area_id+'-'+data[i].area+"</a></li>";
+                        }
+                        
+                        $("#thirdlist").append(b);
+                    }
+                });
+              });
+
+
+
+            }
+        });
+      });
+                                       
+
+
+ })
+
+
+     
+
+</script>
+<include file="./APP/Admin/View/Common/Public_footer_v1.html"/>

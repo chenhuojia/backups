@@ -1,0 +1,14 @@
+.section-focus-pic{margin:20px auto 0 auto;height:458px;width:1200px;overflow:hidden;position:relative;}
+.section-focus-pic ul li{position:absolute;top:0;left:1200px;width:1200px;height:458px;}
+.section-focus-pic .pages1{width:1200px;height:458px;}
+.section-focus-pic .controler{position:absolute;bottom:20px;right:50%;}
+.section-focus-pic .controler b{cursor:pointer;width:20px;height:3px;display:block;overflow:hidden; background: #fff; float:left;margin:0 0 0 5px;}
+.section-focus-pic .controler b.down{ background: #FD7A40;}
+.section-focus-pic .controler2 a{display:block; width:40px;position:absolute;top:180px;height:40px;}
+.section-focus-pic .controler2 a i{cursor:pointer;display:block;width: 42px; height: 58px; background:url(../images/bg.png) no-repeat;}
+.section-focus-pic .controler2 .prev{left:10px;}
+.section-focus-pic .controler2 .prev i{background-position: 0px -410px;}
+.section-focus-pic .controler2 .prev:hover i{left:10px;_background:none;background:url(../images/bg.png) no-repeat; background-position: 0px -230px;}
+.section-focus-pic .controler2 .next{right:15px;}
+.section-focus-pic .controler2 .next i{background:url(../images/bg.png) no-repeat;background-position: 0px -464px; margin-right: 15px;}
+.section-focus-pic .controler2 .next:hover i{right:10px;background-position: 0px -294px;}

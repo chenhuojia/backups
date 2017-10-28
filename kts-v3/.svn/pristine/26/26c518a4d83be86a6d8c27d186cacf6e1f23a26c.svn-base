@@ -1,0 +1,86 @@
+<include file="./APP/Admin/View/Common/Public_header_v1.html"/>
+<style type="text/css">
+    .popover-title{font-weight: 600 !important;}
+    .thumbnail .badge{position:absolute;z-index: 99;}
+    .play_layout{position:absolute;z-index: 99;top:0;width:90%;height:180px;line-height:180px;text-align:center;background-color:#fff;
+        filter:alpha(opacity=30);
+        -moz-opacity:0.3;
+        -khtml-opacity: 0.3;
+        opacity: 0.3;  }
+    .play_layout .glyphicon-play{font-size:36px;color:#000;}
+</style>
+<ol class="breadcrumb">
+    <li>{:C('CONTROL_MENU')}</li>
+    <li>用户管理</li>
+    <li class="active"><a href="{:U('Admin/User/userList')}">用户列表</a></li>
+    <li>用户优惠卷</li>
+</ol>
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="javascript:void(0);">优惠卷列表</a></li>
+    <li><a href="javascript:add();">添加优惠卷</a></li>    
+</ul>
+<hr>
+    <div class="form-inline" role="form">
+        <div class="input-group">
+            <div class="input-group-btn">
+                <button type="button" id="searchType" name="searchType" value="0" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"><font>选择优惠卷类型</font><span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                	<li><a href="javascript:changeSearchType(0);">全部优惠卷</a></li>
+                	<if condition="all_coupon">
+                		<volist name="all_coupon" id='v'>
+                			<li><a href="javascript:changeSearchType({$v.c_id});">{$v.name}</a></li>
+                		</volist>
+                	</if>
+                </ul>
+            </div>
+          <!-- <input type="text" id="searchKey" name="searchKey" placeholder="" value="{$_GET['searchKey']}" class="form-control"/> -->            
+        </div>
+    </div>
+<hr>
+<div class="row">
+  <if condition="$all_coupon neq false">
+    <volist name="all_coupon" id="v">          
+       		 <div class="col-md-2" data-toggle="popover" data-trigger="hover" data-placement="left" title="{$v.num}张" data-content="{$s.name}">
+            <div class="thumbnail">
+                <span class="badge">{$v.name}</span>
+                    <img src=".{$v.imageurl}" style="height: 180px; width: 100%; display: block;" title="缩略图" />
+                </a>
+                <div class="caption">
+                    <div class="btn-group">
+                        <a class="btn btn-success" href="{:U('Admin/Coupon/couponDet?user_id='.$v['user_id'].'&c_id='.$v['c_id'])}">优惠卷详情</a>
+                        <a class="btn btn-danger" href="javascript:showYesOrNo('您确定取消收藏吗？','{:U("Admin/User/collectDel?collect_id=".$v["collect_id"]."&type=".$v["type"])}');">取消收藏</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </volist>
+  <else/>
+        <p style="width:80%;padding:10px;font-size:16px;color:#EC7A7A;text-align: center;"><i class="glyphicon glyphicon-search"></i> 没有找到匹配的数据！</p>
+  </if>
+</div>
+<div class="page">{$Page}</div>
+<script type="text/javascript">
+    $(function(){
+        $("[data-toggle='popover']").popover();
+    });   
+    function changeSearchType(i)
+    {	
+    	var search_url="{:U('Admin/Coupon/couponList')}";        	
+    	if(i>=0){
+    		window.location=search_url+'&user_id='+'{$_GET['user_id']}'+'&c_id='+i;
+    		
+    	}
+    }
+	
+    function add()
+    {	
+    	var search_url="{:U('Admin/Coupon/couponDet')}";        	
+    	
+    		search_url=search_url+"&user_id="+'{$_GET['user_id']}';
+    		window.location=search_url;
+    	
+    }
+    
+</script>
+<include file="./APP/Admin/View/Common/Public_footer_v1.html"/>

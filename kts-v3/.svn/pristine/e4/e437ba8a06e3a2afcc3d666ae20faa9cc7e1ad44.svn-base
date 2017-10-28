@@ -1,0 +1,98 @@
+<?php
+namespace User\Model;
+use Think\Model;
+/**
+ * ModelName
+ */
+class BooklistBookModel extends Model{
+   
+    // 自动验证
+    protected $_validate=array(     
+      array('book_id','require','请选择图书'),
+      array('book_id','','图书已经存在！',1,'unique',1),
+      array('booklist_id','require','请选择书单',1),
+     );
+   // 自动完成
+    protected $_auto=array(
+        array('addtime','time',3,'function'),
+        array('book_name','addBookName',3,'callback'),
+        array('book_cover','addBookCover',3,'callback'),
+    );
+    
+   protected function checkBook(){
+        $book_id=I('post.book_id');
+        return M()->execute('select book_id from kts_book where book_id ='.$book_id);      
+    }
+    
+   protected function addBookName(){
+       $book_id=I('post.book_id');
+       $name=M()->query('select name from kts_book where book_id ='.$book_id);
+       return $name[0]['name'];
+   }
+   
+   protected function addBookCover(){
+       $book_id=I('post.book_id');
+       $cover=M()->query('select cover_img from kts_book where book_id ='.$book_id);
+       return $cover[0]['cover_img'];
+   }
+
+   /**
+    * 添加图书
+    * @param unknown $user_id
+    * @param unknown $booklist_id
+    * @param unknown $book_id
+    * @return number[]|string[]***/
+   public function addBookListBook($user_id,$booklist_id,$book_id){
+       $total=1;
+       if (empty($book_id) || empty($booklist_id)) return array('code'=>300,'msg'=>'参数有误');
+       if (!is_array($book_id)){
+           $book_id='('.$book_id.')';
+       }else{
+           $total=count($book_id);
+           $book_id='('.implode(',', $book_id).')';
+       }       
+       $data=M()->query('select book_id,book_name,cover_img as book_cover from kts_book_share where is_show = 1 and book_id in '.$book_id);
+       if (empty($data)) return array('code'=>300,'msg'=>'图书不存在');
+       $is_have=M()->query('select book_id from kts_booklist_book where booklist_id = '.$booklist_id.' and user_id = '.$user_id.' and book_id in '.$book_id);
+       $deleteTotal=0;
+       if (!empty($is_have)){
+           $deleteTotal=count($is_have);
+           $delete='(';
+           foreach ($is_have as $k=>$v){
+               $delete .=$v['book_id'].',';
+           }
+           $delete=substr($delete,0,-1).')';
+           M()->execute('delete from kts_booklist_book where book_id in '.$delete.' and booklist_id='.$booklist_id.' and user_id = '.$user_id);
+       }
+       $lastTotal=$deleteTotal?($total-$deleteTotal):$total;
+       M()->execute('update kts_booklist set books_num = '."books_num+$lastTotal".' where id ='.$booklist_id.' and user_id = '.$user_id);
+       $sql= 'insert into `kts_booklist_book` (`id`,`booklist_id`,`book_id`,`book_cover`,`book_name`,`addtime`) values ';
+       foreach ($data as $k=>$v){
+           $sql .='( null,'.$booklist_id.','.$v['book_id'].','."'{$v['book_cover']}'".','."'{$v['book_name']}'".','.time().'),';
+       }
+       $sql=substr($sql,0,-1);
+       return array('code'=>200,'msg'=>$sql);
+   }
+   
+
+   /**
+    * 移除图书
+    * @param unknown $user_id
+    * @param unknown $booklist_id
+    * @param unknown $book_id
+    * @return number[]|string[]***/
+   public function delBookListBook($user_id,$booklist_id,$book_id){
+       if (empty($book_id) || empty($booklist_id)) return array('code'=>300,'msg'=>'参数有误');
+       $count=count($book_id);
+       if (!is_array($book_id)){
+           $book_id='('.$book_id.')';
+       }else{
+           $book_id='('.implode(',', $book_id).')';
+       }  
+       $result=M()->execute('delete from kts_booklist_book where book_id in '.$book_id.' and booklist_id = '.$booklist_id);
+       if ($result){
+           M()->execute('update kts_booklist set books_num = '."books_num-$count".' where id ='.$booklist_id.' and user_id = '.$user_id);
+       }
+       return array('code'=>200,'msg'=>'success');
+   }
+}

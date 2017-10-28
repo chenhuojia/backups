@@ -1,0 +1,256 @@
+<include file="./APP/Admin/View/Common/Public_header_v1.html"/>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/static/ueditor1.4.3/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/static/ueditor1.4.3/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/static/ueditor1.4.3/lang/zh-cn/zh-cn.js"></script>
+<style type="text/css">
+    .form-horizontal{width:850px;}
+    .form-horizontal>.form-group{border-top: 1px solid #ccc;padding-top:20px;margin-left:15px;margin-right:0px;}
+    .form-horizontal>.form-group:first-child{border-top:none;}
+    .form-group>.col-sm-2{width: 110px;}
+    .form-group>.col-sm-10{width: 700px;}
+	#header{display:none;}
+	#change{cursor:pointer;}
+</style>
+<ol class="breadcrumb">
+    <li>{:C('CONTROL_MENU')}</li>
+    <li>用户管理</li>
+    <li class="active"><a href="{:U('Admin/User/userList')}"> 用户列表</a></li>
+    <li>编辑用户</li>
+</ol>
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="javascript:void(0);">编辑用户</a></li>
+</ul>
+<form action="{:U('Admin/User/userEdit?user_id='.$user['user_id'])}" class="form-horizontal" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="user_user" class="col-sm-2 control-label">头像</label>
+        <if condition="$user['imageurl'] !=null">
+        	<div id="ima"><div id='change'><img style="width:150px;height:150px" src="{$user['imageurl']}"></div></div>
+        	
+        	<input type="text" value="{$user['imageurl']}" style="display:none" name="oldimg">
+        <else/>
+        	<div id='change'><img style="width:150px;height:150px" src="Public/Upload/User/10016.gif"></div>
+        </if>
+        <div class="col-sm-10">
+            <input type="file" name="imageurl"  id="header" style="display:none"/>
+        </div>        
+    </div>
+	 <div class="form-group">
+        <label for="user_nickname" class="col-sm-2 control-label">用户昵称</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" id="user_nickname" autocomplete="off" value="{$user.name}" name="name" datatype="s" nullmsg="请输入讲师姓名" errormsg="请填写正确的学生昵称"/>
+            <div for="tea_name" class="Validform_checktip">请输入昵称</div>
+        </div>
+    </div>
+    <style>
+    	#father_id{padding:0}
+		#class_id{padding:0;margin:0}
+    </style>
+    <if condition="$user['city'] eq null">
+	<div class="form-group">
+	        <label for="father_id" class="col-sm-2 control-label">城市</label>
+	        <div class="col-sm-2">      
+	            <select name="father_id" id="father_id" class="form-control">
+	            	<option value='9999'>请选择</option>              
+	                <volist name="province" id="vo">               	
+	                    <option value="{$vo.province_id}">{$vo.province}</option>                   
+	                </volist>
+	            </select>
+	        </div>
+	        <div class="col-sm-5">	        
+	        </div>
+	    </div>
+	<else />
+	<div class="form-group">
+        <label for="father_id" class="col-sm-2 control-label">城市</label>
+        <div class="col-sm-2">      
+            <select name="father_id" id="father_id" class="form-control">               
+                <volist name="province" id="vo">
+                	<option value='9999'>请选择</option>               	
+                    <option value="{$vo.province_id}">{$vo.province}</option>                   
+                </volist>
+            </select>
+        </div>
+        <div class="col-sm-5">
+    	</div>
+	</div>
+	</if>
+   	<div class="form-group">
+        <label for="user_nickname" class="col-sm-2 control-label">QQ</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" id="user_nickname" autocomplete="off" value="{$user.bind_qq}" name="bind_qq" />
+            
+        </div>
+    </div> 
+    <div class="form-group">
+        <label for="user_nickname" class="col-sm-2 control-label">微信</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" id="user_nickname" autocomplete="off" value="{$user.bind_wechat}" name="bind_wechat" />
+            
+        </div>
+    </div>
+  	<div class="form-group">
+        <label for="user_nickname" class="col-sm-2 control-label">简介</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" id="user_nickname" autocomplete="off" value="{$user.introduce}" name="introduce" />
+            
+        </div>
+    </div>
+    <if condition="$user.type eq 1">
+    <div class="form-group">
+        <label for="user_nickname" class="col-sm-2 control-label">店铺名称</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" id="user_nickname" autocomplete="off" value="{$user.shop_name}" name="shop_name" />
+            <input type="hidden" value="{$user.type}" name='type'>
+        </div>
+    </div>
+    <else />
+    	<div class="form-group">
+        <label for="user_nickname" class="col-sm-2 control-label">添加店铺</label>
+        <div class="col-sm-10">            
+            <input type="text" value="" name='shop_name'>
+        </div>
+    	</div>
+    </if>
+    <div class="form-group">
+        <label for="user_phone" class="col-sm-2 control-label">手机号</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" id="user_phone" autocomplete="off" value="{$user.phone}" name="phone" datatype="m" nullmsg="请输入用户手机号" errormsg="请输入正确的手机号"/>
+            <div class="Validform_checktip">请输入用户手机号</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">性别</label>
+        <div class="col-sm-10">
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary <eq name="user.sex" value="男">active</eq>">
+                    <input type="radio" name="sex" value="男" <eq name="sex" value="男">checked</eq>>男
+                </label>
+                <label class="btn btn-primary <eq name="user.sex" value="女">active</eq>">
+                    <input type="radio" name="sex" value="女" <eq name="sex" value="女">checked</eq>>女
+                </label>
+                <label class="btn btn-primary <eq name="user.sex" value="其他">active</eq>">
+                    <input type="radio" name="sex" value="其他" <eq name="sex" value="其他">checked</eq>>其他
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class= "col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">保存编辑</button>
+        </div>
+    </div>
+</form>
+<link href="__PUBLIC__/static/Validform/css/style.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/static/Validform/Validform_v5.3.2_min.js"></script>
+
+<script type="text/javascript" language="javascript">
+var provice="{$user.father}";
+var city="{$user.city}";
+if(provice){
+	$("#father_id").val(provice).attr("selected",true);	
+}
+
+$(function(){
+	$('#ima').bind("click",function(){
+		$('#header').click();
+		console.log(1);
+		$('#header').change(function(){
+			var file = this.files[0]; //选择上传的文件
+			var r = new FileReader();
+			r.readAsDataURL(file); //Base64
+			$(r).load(function(){
+			$('#change').html('');
+			$('#change').html('<img src="'+ this.result +'" alt="" style="width:150px;height:150px"/>');
+			});
+		});
+	})	
+}) ;
+
+
+    $(function(){
+        $(".form-horizontal").Validform({
+            tiptype:function(msg,o,cssctl){
+                if(!o.obj.is("form")){
+                    var objtip=o.obj.nextAll(".Validform_checktip");
+                    cssctl(objtip,o.type);
+                    objtip.text(msg);
+                }
+            },
+            beforeCheck:function(curform){
+                if(!confirm('确定提交本次操作吗？'))
+                {
+                    return false;
+                }
+            }
+        });
+
+    });
+    
+    $(function(){
+	    var objectModel = {};
+	    var value = $('#father_id').val();
+	    var type = $("#father_id").attr('id');
+	    objectModel[type] =value;
+	    if(value !=null & value !=''){
+	    	$.ajax({
+	            cache:false,
+	            type:"POST",
+	            url:"{:U('Admin/Attr/getCity')}",
+	            dataType:"json",
+	            data:objectModel,
+	            success:function(data){
+	            	if(data.length>0){
+	                    var count = data.length;
+	                    var i = 0;
+	                    var b="<select name=\"class_id\" id=\"class_id\" class=\"form-control\">";
+	                    for(i=0;i<count;i++){
+	                        b+="<option>"+data[i].city+"</option>";
+	                    }
+	                    b +="</select>"+"<div class=\"Validform_checktip\"></div>";
+	                    b +="<div id='last'></div>";
+	                    $(".col-sm-5").html(b);
+	                    if(city){
+	                    	$("#class_id").val(city).attr("selected",true);
+	                    }   
+	            	}else{
+	            		$("#class_id").remove();
+	            	}                    
+	            }
+	        });
+	    }; 
+
+})
+
+$('#father_id').change(function(){
+    var objectModel = {};
+    var value = $(this).val();
+    var type = $(this).attr('id');
+    objectModel[type] =value;
+    if(value !=null & value !=''){
+    	$.ajax({
+            cache:false,
+            type:"POST",
+            url:"{:U('Admin/Attr/getCity')}",
+            dataType:"json",
+            data:objectModel,
+            success:function(data){
+            	if(data.length>0){
+                    var count = data.length;
+                    var i = 0;
+                    var b="<select name=\"class_id\" id=\"class_id\" class=\"form-control\">";
+                        b +="<option value=''>请选择</option>";
+                    for(i=0;i<count;i++){
+                        b+="<option>"+data[i].city+"</option>";
+                    }
+                    b +="</select>"+"<div class=\"Validform_checktip\"></div>";
+                    b +="<div id='last'></div>";
+                    $(".col-sm-5").html(b);
+            	}else{
+            		$("#class_id").remove();
+            	}                    
+            }
+        });
+    }; 
+});
+</script>
+<include file="./APP/Admin/View/Common/Public_footer_v1.html"/>

@@ -1,0 +1,107 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+{% block javascript %} {{ parent() }}
+<script type="text/javascript" src="{{ asset('bundles/msk/public/js/jquery-1.7.1.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$("#hostCC").change(function(){
+		var type=$(this).val();
+		var val='';
+		if(type>0){
+			if(type==1){
+				val ="民宿";
+			}if(type==2){
+				val ="景点";
+			}if(type==3){
+				val ="义工";
+			}if(type==4){
+				val ="导游";
+			}if(type==5){
+				val ="驴友团";
+			}
+			$.ajax({
+				url:"{{path('ajaxgetlvyoubang_')}}",
+				type:'post',
+				data:'type='+type,
+				datatype:'json',
+				success:function(e){
+					console.log(e);
+				  var html ="<option value=\"0\">请选择帖子</option>";
+					$.each(e,function(i,v){
+						html +="<option value="+v.id+"># 序号"+v.id+"  标题-("+v.title+")- 发帖人{"+v.nickname+"}</option>";
+					})
+				   $('#recd').html(html);
+				   $('#see').html(val+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：");				   
+				}
+			});
+		}else{
+			$('#recd').html("<option value=\"\">请选择</option>");
+		}
+	});
+
+	
+})
+</script>
+{% endblock %}
+
+{% block content%}<section class="alert">
+{# 		  <button type="button" val=''onclick="javascript:history.go(-1)" class="green stateBtn">返  回</button>#}
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>添加热门</h1>
+			</hgroup>
+		</header>
+	<div class="content">
+	<form method="post" action="">
+			<div class="field-wrap">
+			<span class="roomServerTitleSpan">类型&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>
+				<select  name="type" id="hostCC" class='form-select hotCityS'>
+					<option value="0">请选择类型</option>
+					<option value="1">民宿</option>
+					<option value="2">景点</option>
+					<option value="3">义工</option>
+					<option value="4">导游</option>
+					<option value="5">驴友团</option>	
+				</select>	
+			<div id="minsu_div">
+				<br><br>
+					<span class="roomServerTitleSpan" id='see'>民宿&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>
+				<select class='form-select hotCityS' id='recd' name="for_id">
+				
+					<option value="">请选择</option>
+				
+				</select>
+			</div>
+		</div>
+			<br><br>
+			<div class="field-wrap">
+				<span class="roomServerTitleSpan">排  序&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>&nbsp;<input  name='sort' type="text"  style="width: 20%;" value="0"  maxlength="10"/>
+		</div>
+		<div class="roomSerBtnDiv"><button type='button' class="green" onclick="javascript:check()">保  存</button> <button type="button" onclick="javascript:history.go(-1)" class="red">取  消</button></div>	
+		<script>						
+			function check(){
+				var type=$('#hostCC').val();
+				var for_id=$('#recd').val();
+				if(type!=0 && for_id!=0){
+					$("form").submit();
+					return false;
+				}if(type==0){
+					alert('请选择类型');
+					return false;
+				}if(for_id==0){
+					alert('请选择帖子');
+					return false;
+				}
+					
+			}
+		</script>
+	</form>
+	</div>
+	</section>
+</section>
+{% endblock%}
+

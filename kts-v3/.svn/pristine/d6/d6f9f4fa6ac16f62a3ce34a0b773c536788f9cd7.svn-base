@@ -1,0 +1,39 @@
+<link href="__PUBLIC__/home/css/footer.css" rel="stylesheet" type="text/css" />
+<div class="footer">
+    <div class="footer_box">
+        <div class="foot_fl">
+            <div class="foot_fl_code">
+                <img src="__PUBLIC__/home/images/qrcode1.png" alt=""/><br/>扫描下载APP
+            </div>
+            <div class="foot_fl_kf">
+                <ul>
+                    <li>客服电话<br/>020-87381467</li>
+                    <li>联系邮箱<br/>3356544144@qq.com</li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="foot_fr">
+            <ul>
+                <li>
+                    <img src="__PUBLIC__/home/images/icon_wechat.png" alt=""/>
+                </li>
+                <li>
+                    <img src="__PUBLIC__/home/images/icon_qq2.png" alt=""/>
+                </li>
+                <li>
+                    <img src="__PUBLIC__/home/images/icon_weibo2.png" alt=""/>
+                </li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <p class="copyright">Copyright © 2014 广州市士加堡网络技术有限公司 sjbwangluo.com 版权所有 | 粤ICP备13089237号</p>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+{% block javascript %} {{ parent() }}
+<script type="text/javascript">
+$(document).ready(function(){
+
+
+
+
+})
+</script>
+{% endblock %}
+
+{% block content%}<section class="alert">
+		  <button type="button" val=''onclick="javascript:history.go(-1)" class="green stateBtn">返  回</button>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>团购订单详情</h1>
+			</hgroup>
+		</header>
+	<div class="content">
+			<div class="field-wrap">
+	       <div class="ncsc-order-info">
+                    <div class="ncsc-order-details">
+                      <div class="title">订单信息</div>
+                      <div class="content">
+                        <dl>
+                          <dt>购&nbsp;&nbsp;买&nbsp;&nbsp;人：</dt>
+                          <dd>{{ v.consignee }}&nbsp; {{ v.mobile }} &nbsp;</dd>
+                        </dl>
+                      
+                        <dl class="line">
+                          <dt>订单编号：</dt>
+                          <dd>{{ v.order_sn }}<i class="icon-angle-down"></i>
+                            <div class="more"><span class="arrow"></span>
+                              <ul>
+                                  <li>支付方式：<span>{% if v.pay_status == 1 and v.pay_code == 'weixinpay' and v.pay_name!= NULL%}微信{% elseif v.pay_status == 1 and v.pay_code == 'alipay' and v.pay_name!= NULL%}支付宝 {% else %}未支付{% endif %}</span></li>
+                                
+                                	<li>支付时间：<span>{% if  v.pay_time >0 %}{{ v.NewPayTime }}{% else %}Null{% endif %}</span></li>
+                                
+                                  <li>下单时间：<span>{{ v.NewAddTime }}</span></li>
+                                  
+                                  {#<li>账号ID：<span>{{ v.member_id }}</span></li>#}
+                                  
+                                  {#<li>下单账号：<span>{{ v.goods_name }}</span></li>#}
+                                   
+                                  <li>账号昵称：<span>{{ v.member_name }}</span></li>
+                              </ul>
+                            </div>
+                           </dd>
+                         </dl>
+
+                        <dl>
+                          <dt>团&nbsp;&nbsp;&nbsp;&nbsp;名：</dt>
+                          <dd>{{ v.goods_name }}</dd>
+                        </dl>
+                        <dl>
+                          <dt>旅&nbsp;&nbsp;行&nbsp;&nbsp;社：</dt>
+                          <dd>{{ v.agency_name }}</dd>
+                        </dl>
+                        <dl>
+                          <dt>出&nbsp;&nbsp;发&nbsp;&nbsp;地：</dt>
+                          <dd>{{ v.starting_place }}</dd>
+                        </dl>
+                         <dl>
+                           <dt>出&nbsp;&nbsp;发&nbsp;&nbsp;时：</dt>
+                          <dd>{{ v.NewStartingTime }}点</dd>
+                        </dl>
+                        
+                        <dl>
+                          <dt>身&nbsp;&nbsp;份&nbsp;&nbsp;证：</dt>
+                          <dd>{{ v.identity_card }}</dd>
+                        </dl>
+                        <dl>
+                          <dt>手&nbsp;&nbsp;机&nbsp;&nbsp;号：</dt>
+                          <dd>{{ v.mobile }}</dd>
+                        </dl>
+                        <dl>
+                          <dt>紧急联系人：</dt>
+                          <dd>{{ v.emergency_contact }}</dd>
+                        </dl>
+                        <dl>
+                          <dt>儿&nbsp;&nbsp;童&nbsp;&nbsp;价：</dt>
+                          <dd>{{ v.child_price }}</dd>
+                        </dl>
+                        <dl>
+                          <dt>成&nbsp;&nbsp;人&nbsp;&nbsp;价：</dt>
+                          <dd>{{ v.adult_price }}</dd>
+                        </dl>
+                        <dl>
+                          <dt>儿&nbsp;&nbsp;童&nbsp;&nbsp;数：</dt>
+                          <dd>{{ v.child_num }}</dd>
+                        </dl>
+                        <dl>
+                          <dt>成&nbsp;&nbsp;人&nbsp;&nbsp;数：</dt>
+                          <dd>{{ v.adult_num }}</dd>
+                        </dl>
+                        
+                        <dl>
+                          <dt>总&nbsp;&nbsp;价&nbsp;&nbsp;格：</dt>
+                          <dd><span style="font: bold 15px/20px Verdana; color: #C00;">{{ v.goods_price }}</span></dd>
+                        </dl>
+                      </div>
+                    </div>
+                    <div class="ncsc-order-condition">
+                        <dl>
+                          <dt><i class="icon-ok-circle green"></i>订单状态：</dt>
+                              <dd>
+                                   {{ v.common_status}}
+                              </dd>
+                        </dl>
+                        <ul>
+                          {% for a in action %}
+                            <li>{{ a.NewLogTime }}   ————   {{ a.status_desc }}</li>
+                          {% endfor %}       
+                        </ul>
+                    </div>
+         </div>
+			</div>			
+	</div>
+	</section>
+</section>
+{% endblock%}
+

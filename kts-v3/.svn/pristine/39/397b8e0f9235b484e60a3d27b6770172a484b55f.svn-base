@@ -1,0 +1,11 @@
+/*footer*/
+.footer{ width: 100%;background: #333333;}
+.footer_box{ width: 800px; margin: 0 auto; padding-top: 50px; padding-bottom: 35px;}
+.foot_fl{ width: 400px; float: left; font-size: 14px; color: #999999;}
+.foot_fr{ width: 400px; float: right; padding-top: 20px;}
+.foot_fl_code{ width: 100px; float: left; text-align: center;}
+.foot_fl_kf{ width: 270px; float: right;}
+.foot_fl_kf ul li{ padding-bottom: 20px;}
+.foot_fl_code img{ width: 98px;}
+.foot_fr ul li{ width: 130px; float: left; text-align: center;}
+.copyright{ width: 100%; text-align: center; font-size: 14px; color: #565555; padding-top: 20px;}

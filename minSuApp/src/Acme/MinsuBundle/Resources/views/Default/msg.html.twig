@@ -1,0 +1,172 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+    <script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".page-dis [href]").each(function () {
+                if (this.href == window.location.href) {
+                    if (!isNaN($(this).html())) {
+                        $(this).addClass("active");
+                    }
+                }
+            })
+        });
+    </script>
+    <script>
+        /*$(document).ready(function () {
+            $('#myModal').on('shown.bs.modal', function (event) {
+                var button = $(event.relatedTarget);// Button that triggered the modal
+                var recipient = button.data('id'); // Extract info from data-* attributes
+                var modal = $(this);
+                modal.find('#dlt-btn').attr('name', recipient);
+            });
+        });
+        $(document).ready(function () {
+            $(document).ready(function () {
+                $('#dlt-btn').click(function () {
+                    var id = $(this).attr('name');
+                    alert(id);
+                });
+            });
+        });*/
+        function dltMsg(obj) {
+            if (confirm("是否删除") == true) {
+                var id = $(obj).attr('vid');
+                $.ajax({
+                    type: "Post",
+                    data: {"id": id},
+                    url: "{{ path('deleteMsg_') }}",
+                    success: function (data) {
+                        if (data == 1) {
+                            location.reload();
+                        }
+                    }
+                });
+            } else {
+                alert(1);
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block stylesheet %} {{ parent() }}
+    <link href="{{ asset('bundles/msk/public/css/msg.css') }}" rel="stylesheet" type="text/css" media="all"/>
+    <style rel="stylesheet">
+        #myTable {
+            table-layout: fixed;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <section class="alert">
+    <button type="button" onclick="location='{{ path('addSystemMsg_') }}'" class="green stateBtn">新 增</button>
+    </section>
+    <section class="content">
+        <section class="widget">
+            <header>
+                <span class="icon homstay-detail"><span>&#128196;</span></span>
+                <hgroup>
+                    <h1>消息</h1>
+                </hgroup>
+            </header>
+            <div class="content">
+                <table id="myTable" border="0" width="100">
+                    <thead>
+                    <tr>
+                        {# 						<th>编号</th>#}
+                        <th>发布者</th>
+                        <th style="width: 30%">消息</th>
+                        <th style="width: 25%">连接</th>
+                        <th style="width: 5%;">类型</th>
+                        <th>已读会员</th>
+                        <th>添加时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for v in msg %}
+                        <tr>
+                            <td style="padding-left: 50px;">{{ v.adminName }}</td>
+                            <td style="line-height: 1.5em">{{ v.msg }}</td>
+                            <td title="{{ v.url }}">
+                                {% if v.url|length > 45 %}
+                                {{ v.url|slice(0, 45) }}...
+                                {% else %}
+                                {{ v.url }}
+                                {% endif %}
+                            </td>
+                            <td>{% if v.type == 0 %}官方{% elseif v.type == 1 %}系统{% elseif v.type == 4 %}<font color="red">已删除</font>{% endif %}</td>
+                            <td>{#<a href="{{ path('memberHasCheck_', {'id': v.id}) }}">查看</a>#}
+                                <button type='button' class="green"
+                                        onclick="location='{{ path('memberHasCheck_', {'id': v.id}) }}'">查看
+                                </button>
+                            </td>
+                            <td>{{ v.addtime|date("Y:m:d H:i:s") }}</td>
+                            <td>{#<a href="{{ path("editMsg_", {'id': v.id}) }}">编辑</a>#}
+                                <button type='button' class="green"
+                                        onclick="location='{{ path('editMsg_', {'id': v.id}) }}'">编辑
+                                </button>
+                                {#<button type="button" class="btn btn-primary red" data-id="{{ v.id }}" data-toggle="modal"
+                                        data-target="#myModal">删除</button>#}
+                                {% if v.type != 4 %}
+                                <button type='button' class="red" vid="{{ v.id }}"
+                                        onclick="dltMsg(this)">删除
+                                </button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {#<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            是否删除？
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" name="" id="dlt-btn">删除</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>#}
+            <div class="page-dis">
+                <div class="meneame">
+                    {% if totalPage != 0 %}
+                        <a href="{{ path('systemMsg_', {'page': 1}) }}">首页</a>
+                        <a href="{{ path('systemMsg_', {'page': prePage}) }}"> < </a>
+                        {% if totalPage > 7 %}
+                            {% if page <= 4 %}
+                                {% for i in 1..7 %}
+                                    <a href="{{ path('systemMsg_', {'page': i}) }}">{{ i }}</a>
+                                {% endfor %}
+                            {% elseif page > (totalPage - 4) %}
+                                {% for k in (totalPage-7)..(totalPage) %}
+                                    <a href="{{ path('systemMsg_', {'page': k}) }}">{{ k }}</a>
+                                {% endfor %}
+                            {% else %}
+                                {% for j in (page-3)..(page+3) %}
+                                    <a href="{{ path('systemMsg_', {'page': j}) }}">{{ j }}</a>
+                                {% endfor %}
+                            {% endif %}
+                        {% else %}
+                            {% if totalPage != 0 %}
+                                {% for m in 1..totalPage %}
+                                    <a href="{{ path('systemMsg_', {'page': m}) }}">{{ m }}</a>
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                        <a href="{{ path('systemMsg_', {'page': nextPage}) }}"> > </a>
+                        <a href="{{ path('systemMsg_', {'page': totalPage}) }}">尾页</a>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </section>
+
+{% endblock %}
+

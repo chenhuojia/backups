@@ -1,0 +1,112 @@
+<include file="./APP/Admin/View/Common/Public_header_v1.html"/>
+<script type="text/javascript" src="__PUBLIC__/static/bt.typeahead/bootstrap3-typeahead.js"></script>
+<style type="text/css">
+    .form-horizontal{width:850px;}
+    .form-horizontal>.form-group{border-top: 1px solid #ccc;padding-top:20px;margin-left:15px;margin-right:0px;}
+    .form-horizontal>.form-group:first-child{border-top:none;}
+    .form-group>.col-sm-2{width: 110px;}
+    .form-group>.col-sm-10{width: 700px;}
+    select.form-control{width: auto !important;}
+</style>
+<ol class="breadcrumb">
+    <li>{:C('CONTROL_MENU')}</li>
+    <li>地域设置</li>
+    <li class="active"><a href="{:U('Admin/Information/regionList')}"> 地域列表</a></li>
+    <li>添加地域</li>
+</ol>
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="javascript:void(0);">添加省</a></li>
+    <li><a href="javascript:void(0);">添加市</a></li>
+    <li><a href="javascript:void(0);">添加区</a></li>
+</ul>
+<form action="{:U('Admin/Information/messagePush')}" class="form-horizontal" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="province_id" class="col-sm-2 control-label">地域类型</label>
+        <div class="col-sm-3">
+            <select name="province_id" id="province_id" class="form-control">
+                <option value="0">请选择</option>
+                <volist name="provinceList" id="vo">
+                    <option value="{$vo['province_id']}">{$vo.province}</option>
+                </volist>
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <select name="city_id" id="city_id" class="form-control" >
+           <!--  <select name="city_id" id="city_id" class="form-control" datatype="*|select" nullmsg="请选择地域类型"> -->
+                
+            </select>
+            <div class="Validform_checktip"></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">地域标题</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" value="" id="name" name="name" datatype="*1-20" nullmsg="请输入地域标题！" errormsg="标题长度应在20个字以内" />
+            <div class="Validform_checktip">标题长度应在20个字以内</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="code" class="col-sm-2 control-label">标识码</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" value="" id="code" name="code" datatype="*1-20" nullmsg="请输入标识码！" errormsg="标题长度应在20个字以内" />
+            <div class="Validform_checktip">标识码应在20个数字以内</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">新增地域</button>
+        </div>
+    </div>
+  
+</form>
+<link href="__PUBLIC__/static/Validform/css/style.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/static/Validform/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" language="javascript">
+   
+   $('#province_id').change(function(){
+        var objectModel = {};
+        var value = $(this).val();
+        var type = $(this).attr('id');
+        objectModel[type] =value;
+        $.ajax({
+            cache:false,
+            type:"POST",
+            url:"{:U('Admin/Information/CityInfo')}",
+            dataType:"json",
+            data:objectModel,
+            success:function(data){
+                $("#city_id").empty();
+                var count = data.length;
+                var i = 0;
+                var b="<option value=''>请选择</option>";
+                for(i=0;i<count;i++){
+                    b+="<option value='"+data[i].city_id+"'>"+data[i].city+"</option>";
+                }
+                $("#city_id").append(b);
+            }
+        });
+    });
+
+    
+
+    $(function(){
+        $(".form-horizontal").Validform({
+            tiptype:function(msg,o,cssctl){
+                if(!o.obj.is("form")){
+                    var objtip=o.obj.nextAll(".Validform_checktip");
+                    cssctl(objtip,o.type);
+                    objtip.text(msg);
+                }
+            },
+            beforeCheck:function(curform){
+                if(!confirm('确定提交本次操作吗？'))
+                {
+                    return false;
+                }
+            }
+        });
+
+    });
+
+</script>
+<include file="./APP/Admin/View/Common/Public_footer_v1.html"/>

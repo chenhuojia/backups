@@ -1,0 +1,240 @@
+/**
+ * Created by Administrator on 2016/9/18 0018.
+ */
+
+//分类图书切换
+$(function() {
+    $(".min_box_ul1 li").click(function(event) {
+        var fenlei1 = $(this).index();
+        $(this).addClass('con_fenlei1').siblings().removeClass('con_fenlei1');
+        $(".min_box_fr .fenlei_ul_wenxue").eq(fenlei1).show().siblings().hide();
+    });
+});
+$(function() {
+    $(".min_box_ul2 li").click(function(event) {
+        var fenlei1 = $(this).index();
+        $(this).addClass('con_fenlei2').siblings().removeClass('con_fenlei2');
+        $(".min_box_fr .fenlei_ul_shaoer").eq(fenlei1).show().siblings().hide();
+    });
+});
+$(function() {
+    $(".min_box_ul3 li").click(function(event) {
+        var fenlei1 = $(this).index();
+        $(this).addClass('con_fenlei3').siblings().removeClass('con_fenlei3');
+        $(".min_box_fr .fenlei_ul_jiaoyu").eq(fenlei1).show().siblings().hide();
+    });
+});
+$(function() {
+    $(".min_box_ul4 li").click(function(event) {
+        var fenlei1 = $(this).index();
+        $(this).addClass('con_fenlei4').siblings().removeClass('con_fenlei4');
+        $(".min_box_fr .fenlei_ul_shenghuo").eq(fenlei1).show().siblings().hide();
+    });
+});
+$(function() {
+    $(".min_box_ul5 li").click(function(event) {
+        var fenlei1 = $(this).index();
+        $(this).addClass('con_fenlei5').siblings().removeClass('con_fenlei5');
+        $(".min_box_fr .fenlei_ul_yishu").eq(fenlei1).show().siblings().hide();
+    });
+});
+$(function() {
+    $(".min_box_ul6 li").click(function(event) {
+        var fenlei1 = $(this).index();
+        $(this).addClass('con_fenlei6').siblings().removeClass('con_fenlei6');
+        $(".min_box_fr .fenlei_ul_renwensk").eq(fenlei1).show().siblings().hide();
+    });
+});
+$(function() {
+    $(".min_box_ul7 li").click(function(event) {
+        var fenlei1 = $(this).index();
+        $(this).addClass('con_fenlei7').siblings().removeClass('con_fenlei7');
+        $(".min_box_fr .fenlei_ul_keji").eq(fenlei1).show().siblings().hide();
+    });
+});
+$(function() {
+    $(".min_box_ul8 li").click(function(event) {
+        var fenlei1 = $(this).index();
+        $(this).addClass('con_fenlei8').siblings().removeClass('con_fenlei8');
+        $(".min_box_fr .fenlei_ul_lizhi").eq(fenlei1).show().siblings().hide();
+    });
+});
+$(function() {
+    $(".min_box_ul9 li").click(function(event) {
+        var fenlei1 = $(this).index();
+        $(this).addClass('con_fenlei9').siblings().removeClass('con_fenlei9');
+        $(".min_box_fr .fenlei_ul_jingguan").eq(fenlei1).show().siblings().hide();
+    });
+});
+
+//简介/目录
+$(function() {
+    $(".jianjie_ul li").click(function(event) {
+        var index2 = $(this).index();
+        $(this).addClass('jianjie_li').siblings().removeClass('jianjie_li');
+        $(".text_box .textarea_ts").eq(index2).show().siblings().hide();
+    });
+});
+
+//个人中心
+$(function() {
+    $(".jifen_lu li").click(function(event) {
+        var fenleili = $(this).index();
+        $(this).addClass('jifen_li').siblings().removeClass('jifen_li');
+        $(".my_jifen_min .my_jifen_min_rw").eq(fenleili).show().siblings().hide();
+    });
+});
+
+$(function() {
+    $(".dingdan_lu li").click(function(event) {
+        var dingdan = $(this).index();
+        $(this).addClass('dingdan_li').siblings().removeClass('dingdan_li');
+        $(".my_dingdan_min .my_dingdan_min_box").eq(dingdan).show().siblings().hide();
+    });
+});
+
+$(function() {
+    $(".dizhi_lu li").click(function(event) {
+        var address = $(this).index();
+        $(this).addClass('dizhi_li').siblings().removeClass('dizhi_li');
+        $(".receipt_address .receipt_address_box").eq(address).show().siblings().hide();
+    });
+});
+
+//我的收藏
+$(function() {
+    $(".my_collection_ul li").click(function(event) {
+        var mycoll = $(this).index();
+        $(this).addClass('my_collection_li').siblings().removeClass('my_collection_li');
+        $(".my_coll .my_collection_box").eq(mycoll).show().siblings().hide();
+    });
+});
+
+
+
+//搜索切换
+$(function(){
+    $('#search-hd .search-input').on('input propertychange',function(){
+        var val = $(this).val();
+        if(val.length > 0){
+            $('#search-hd .pholder').hide(0);
+        }else{
+            var index = $('#search-bd li.selected').index();
+            $('#search-hd .pholder').eq(index).show().siblings('.pholder').hide(0);
+        }
+    })
+    $('#search-bd li').click(function(){
+        var index = $(this).index();
+        $('#search-hd .pholder').eq(index).show().siblings('.pholder').hide(0);
+        $('#search-hd .search-input').eq(index).show().siblings('.search-input').hide(0);
+        $(this).addClass('selected').siblings().removeClass('selected');
+        $('#search-hd .search-input').val('');
+    });
+});
+
+$(function() {
+    $(".xq_ul li").click(function(event) {
+        var index1 = $(this).index();
+        $(this).addClass('xq_bt').siblings().removeClass('xq_bt');
+        $(".xq_min .xq_min_box").eq(index1).show().siblings().hide();
+    });
+});
+
+//适合年龄
+$(function(){
+    $(".yListr li").click(function(){
+        $(this).addClass("yListrclickem").siblings().removeClass("yListrclickem");
+    })
+});
+
+$(document).ready(function(){
+    $(".ck_quanbu").click(function(){
+        $(".p_cp_yc").slideToggle("slow");
+    });
+});
+
+//写书评
+$(document).ready(function(){
+    $(".xie_shuping").click(function(){
+        $(".shuping_box").slideToggle("slow");
+    });
+});
+
+
+$(document).ready(function(){
+    $("#more_zk").click(function(){
+        $(".sp_p_2").slideToggle("slow");
+    });
+});
+
+
+
+//侧边导航
+$(window).scroll(function() {
+    var scroll_len = $(window).scrollTop();
+    if (scroll_len > 900) {
+        $('.side_bar').fadeIn();
+    } else {
+        $('.side_bar').fadeOut();
+    };
+});
+
+//添加
+$(function(){
+    $('.tianjia').click(function(e) {
+        var $html=$("<tr><td><select class='select_1'><option value ='选择一级分类'>选择一级分类</option><option value ='选择一级分类1'>选择一级分类1</option><option value='选择一级分类2'>选择一级分类2</option><option value='选择一级分类3'>选择一级分类3</option></select></td><td><select class='select_1'><option value ='选择二级分类'>选择二级分类</option><option value ='选择二级分类1'>选择二级分类1</option><option value='选择二级分类2'>选择二级分类2</option><option value='选择二级分类3'>选择二级分类3</option></select></td><td><select class='select_1'><option value ='选择三级分类'>选择三级分类</option><option value ='选择三级分类1'>选择三级分类1</option><option value='选择三级分类2'>选择三级分类2</option><option value='选择三级分类3'>选择三级分类3</option></select></td><td><a class='shanchu' onclick=\'sc()\'><i></i></a></td></tr>");
+        $('.select_box table ').append($html);
+    });
+
+});
+function sc(){
+    $(" .select_box table tr").eq($(this).index()).remove();
+}
+
+$(function(){
+    $('.video_lj').click(function(e) {
+        var $html=$("<div class='video_vi1 box_vi'><div class='video_vi1_box'><input class='input_vibt' type='text'  placeholder='请输入视频标题'  /><input class='input_vilj' type='text'  placeholder='请粘贴视频链接' /><a class='shanchu_vi sc_bq1' onclick=\'sc1()\'><i></i></a><div class='clear'></div></div></div>");
+        $('.video_box .shipin ').append($html);
+    });
+
+});
+function sc1(){
+    $(" .video_box .box_vi ").eq($(this).index()).remove();
+}
+
+
+
+$(document).ready(function () {
+    //参数{input类名，选择类型(单选or多选)}
+    $(".chklist").labelauty("chklist", "check");
+});
+
+
+
+//分享图书
+$(document).ready(function(){
+    $("#zhankai_more").click(function(){
+        $(".zhank").slideToggle("slow");
+        var t=$(this).text();
+        if(t=="展开选填信息"){
+            $(".zhank").addClass("show");
+            $(this).text("收起选填信息");
+        }else{
+            $(".zhank").removeClass("show");
+            $(this).text("展开选填信息");
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+

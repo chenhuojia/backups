@@ -1,0 +1,98 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+	
+	     function calendarStateChange(obj) {
+			var calendar_id = $(obj).attr('calendar_id');
+			var state = $(obj).attr('state');
+			$.ajax({
+				type: "POST",
+				url: "{{ path('calendarStateChange_') }}",
+				data: {'calendar_id': calendar_id, "state": state},
+				dataType: "json",
+				success: function (data) {
+					location.reload();
+				}
+			});
+		}
+
+</script>
+{% endblock %}
+{# onclick="location='{{ path('AjaxCHomeStay_',{'hid':v.id}) }}'"#}
+{% block content%}<section class="alert">
+	<form method="post" action="">
+	<input type ="hidden" name ="is_checked">
+		 <button type="button" val='3' class="green stateBtn">全部</button>
+	</form>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>团游日历</h1>
+{# 				<h2 style="font-family: '微软雅黑';font-size: 12px;color: #ccc;">注:带<font color="red">&nbsp;*&nbsp;</font>是房东用户</h2>#}
+			</hgroup>
+{# 			<aside>#}
+{# 				<span>#}
+{# 					<a href="#">&#9881;</a>#}
+{# 					<ul class="settings-dd">#}
+{# 						<li><label>Option a</label><input type="checkbox" /></li>#}
+{# 						<li><label>Option b</label><input type="checkbox" checked="checked" /></li>#}
+{# 						<li><label>Option c</label><input type="checkbox" /></li>#}
+{# 					</ul>#}
+{# 				</span>#}
+{# 			</aside>#}
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>  
+						<th>#</th>
+						<th>出发时间</th>
+						<th>成人价格</th>
+						<th>儿童价格</th>
+						<th>团长名称</th>
+						<th>预报名人数</th>
+						<th>添加时间</th>
+						<th>审视</th>
+						<th>审核</th>
+					</tr>
+				</thead>
+					<tbody>
+							{% for v in calendar %}
+								<tr>
+									<td style="padding-left: 50px;">{{v.calendar_id}}</td>
+								 	<td>{{v.the_date}}</td>
+									<td>{{v.adult_price}}</td>
+									<td>{{v.child_price}}</td>
+									<td>{{v.chief_name}}</td>
+									<td><a href="{{ path('tourDataEnroll',{'calendar_id':v.calendar_id}) }}">{{v.entered}}</a></td>
+									<td>{%if v.addtime==0%}0{% else %} {{v.addtime|date('Y-m-d H:i:s')}}{% endif %}</td>
+									<td>{% if v.state ==0  %}已删除{% elseif  v.state==1 %}在集合{% elseif  v.state==2 %}出团中{% elseif  v.state==3 %}已完成{% else %}参数错误{% endif %}</td>
+									<td>
+										<div class="btn-group">
+										  <button type="button" class="btn btn-success">更改状态</button>
+										  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+										    <span class="caret"></span>
+										    <span class="sr-only">Toggle Dropdown</span>
+										  </button>
+										  <ul class="dropdown-menu" role="menu">
+										    <li><a state="0" calendar_id="{{ v.calendar_id }}" onclick="calendarStateChange(this)">删除</a></li>
+										    <li><a state="1" calendar_id="{{ v.calendar_id }}" onclick="calendarStateChange(this)">在集合</a></li>
+										    <li><a state="2" calendar_id="{{ v.calendar_id }}" onclick="calendarStateChange(this)">出团中</a></li>
+										    <li><a state="3" calendar_id="{{ v.calendar_id }}" onclick="calendarStateChange(this)">完成</a></li>
+										  </ul>
+										</div>
+									</td>
+								</tr>
+							{% endfor %}
+					</tbody>
+				</table>
+		</div>
+	</section>
+</section>
+
+{% endblock%}

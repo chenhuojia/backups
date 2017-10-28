@@ -1,0 +1,549 @@
+<?php
+
+use Common\Controller\ApiController;
+/**
+ * 浮点数舍去指定位数小数点部分。全舍不入
+ * @param $n float浮点值
+ * @param $len 截取长度字数
+ * @return string 截取后的值
+ */
+    function sub_float($n,$len)
+    {
+        stripos($n, '.') && $n= (float)substr($n,0,stripos($n, '.')+$len+1);
+        return $n;
+    }
+
+/**
+ * 系统缓存缓存管理
+ * @param mixed $name 缓存名称
+ * @param mixed $value 缓存值
+ * @param mixed $options 缓存参数
+ * @return mixed
+ */
+function cache($name, $value = '', $options = null) {
+    static $cache = '';
+    if (empty($cache)) {
+        $cache = \Think\Cache::getInstance();
+    }
+    // 获取缓存
+    if ('' === $value) {
+        if (false !== strpos($name, '.')) {
+            $vars = explode('.', $name);
+            $data = $cache->get($vars[0]);
+            return is_array($data) ? $data[$vars[1]] : $data;
+        } else {
+            return $cache->get($name);
+        }
+    } elseif (is_null($value)) {//删除缓存
+        return $cache->remove($name);
+    } else {//缓存数据
+        if (is_array($options)) {
+            $expire = isset($options['expire']) ? $options['expire'] : NULL;
+        } else {
+            $expire = is_numeric($options) ? $options : NULL;
+        }
+        return $cache->set($name, $value, $expire);
+    }
+}
+
+/**
+ * 生成随机字符串
+ * @param int       $length  要生成的随机字符串长度
+ * @param string    $type    随机码类型：0，数字+大小写字母；1，数字；2，小写字母；3，大写字母；4，特殊字符；-1，数字+大小写字母+特殊字符
+ * @return string
+ */
+function randCode($length = 5, $type = 0) {
+    $arr = array(1 => "0123456789", 2 => "abcdefghijklmnopqrstuvwxyz", 3 => "ABCDEFGHIJKLMNOPQRSTUVWXYZ", 4 => "~@#$%^&*(){}[]|");
+    if ($type == 0) {
+        array_pop($arr);
+        $string = implode("", $arr);
+    } elseif ($type == "-1") {
+        $string = implode("", $arr);
+    } else {
+        $string = $arr[$type];
+    }
+    $count = strlen($string) - 1;
+    $code = '';
+    for ($i = 0; $i < $length; $i++) {
+        $code .= $string[mt_rand(0, $count)];
+    }
+    return $code;
+}
+
+/*
+ * 产生随机字符
+ * $length  int 生成字符传的长度
+ * $numeric  int  , = 0 随机数是大小写字符+数字 , = 1 则为纯数字
+*/
+function randCodeM($length, $numeric = 0)
+{
+    $seed = base_convert(md5(print_r($_SERVER, 1) . microtime()), 16, $numeric ? 10 : 35);
+    $seed = $numeric ? (str_replace('0', '', $seed) . '012340567890') : ($seed . 'zZ' . strtoupper($seed));
+    $hash = '';
+    $max = strlen($seed) - 1;
+    for ($i = 0; $i < $length; $i++) {
+        $hash .= $seed[mt_rand(0, $max)];
+    }
+    return $hash;
+}
+
+/**
+ * 简单对称加密算法之加密
+ * @param String $string 需要加密的字串
+ * @param String $skey 加密EKY
+ * @return String
+ */
+function myEncode($string = '')
+{
+    if(empty($string)) return '';
+    $strArr = str_split(base64_encode($string));
+    $strCount = count($strArr);
+    foreach (str_split(C('PASS_KEY')) as $key => $value)
+        $key < $strCount && $strArr[$key] .= $value;
+    return str_replace(array('+','/'), array('-','_'), join('', $strArr));
+}
+
+/**
+ * 简单对称加密算法之解密
+ * @param String $string 需要解密的字串
+ * @param String $skey 解密KEY
+ * @return String
+ */
+function myDecode($string = '')
+{
+    if(empty($string)) return '';
+    $strArr = str_split(str_replace(array('-','_'),array('+','/'),  $string), 2);
+    $strCount = count($strArr);
+    foreach (str_split(C('PASS_KEY')) as $key => $value)
+        $key <= $strCount && $strArr[$key][1] === $value && $strArr[$key] = $strArr[$key][0];
+    return base64_decode(join('', $strArr));
+}
+
+/**
+ * 用户数据 DES加密
+ * @param String $str 需要加密的字串
+ * @param String $skey 加密EKY
+ * @return String
+ */
+function myDes_encode($str, $key)
+{
+    $va = \Think\Crypt\Driver\Des::encrypt($str, $key.C('PASS_KEY'));
+    $va = base64_encode($va);
+    return str_replace(array('+','/'), array('-','_'), $va);
+}
+
+/**
+ * 用户数据 DES解密
+ * @param String $str 需要解密的字串
+ * @param String $skey 解密KEY
+ * @return String
+ */
+function myDes_decode($str, $key)
+{
+    $str = str_replace(array('-','_'), array('+','/'), $str);
+    $str = base64_decode($str);
+    $va = \Think\Crypt\Driver\Des::decrypt($str, $key.C('PASS_KEY'));
+    return trim($va);
+}
+
+//订单状态
+function checkorderstatus($ordid){
+    $Ord=M('Orderlist');
+    $ordstatus=$Ord->where('ordid='.$ordid)->getField('ordstatus');
+    if($ordstatus==1){
+        return true;
+    }else{
+        return false;
+    }
+}
+//处理订单函数
+//更新订单状态，写入订单支付后返回的数据
+function orderhandle($parameter){
+    $ordid=$parameter['out_trade_no'];
+    $data['payment_trade_no']      =$parameter['trade_no'];
+    $data['payment_trade_status']  =$parameter['trade_status'];
+    $data['payment_notify_id']     =$parameter['notify_id'];
+    $data['payment_notify_time']   =$parameter['notify_time'];
+    $data['payment_buyer_email']   =$parameter['buyer_email'];
+    $data['ordstatus']             =1;
+    $Ord=M('Orderlist');
+    $Ord->where('ordid='.$ordid)->save($data);
+}
+
+
+    function check_mobile($mobile){
+        if(preg_match('/1[34578]\d{9}$/',$mobile))
+            return true;
+        return false;
+    }
+    
+    /**
+     * 查看某个用户购物车中商品的数量
+     * @param type $user_id
+     * @param type $session_id
+     * @return type 购买数量
+     */
+    function cart_goods_num($user_id = 0)
+    {
+        $where= "user_id = $user_id ";
+        // 查找购物车数量
+        $cart_count =  M('cart')->where($where)->count();
+        $cart_count = $cart_count ? $cart_count : 0;
+        return $cart_count;
+    }
+    
+    function get_arr_column($arr, $key_name)
+    {
+        $arr2 = array();
+        foreach($arr as $key => $val){
+            $arr2[] = $val[$key_name];
+        }
+        return $arr2;
+    }
+    
+    
+    function get_user_info($user_id_or_name,$type = 0,$oauth=''){
+        $map = array();
+        if($type == 0)
+            $map['user_id'] = $user_id_or_name;
+        if($type == 1)
+            $map['email'] = $user_id_or_name;
+        if($type == 2)
+            $map['mobile'] = $user_id_or_name;
+        if($type == 3){
+            $map['openid'] = $user_id_or_name;
+            $map['oauth'] = $oauth;
+        }
+        $user = M('users_address')->where($map)->find();
+        return $user;
+    }
+    
+    /**
+     * 计算订单金额
+     * @param type $user_id  用户id
+     * @param type $order_goods  购买的商品
+     * @param type $shipping  物流code
+     * @param type $shipping_price 物流费用, 如果传递了物流费用 就不在计算物流费
+     * @param type $province  省份
+     * @param type $city 城市
+     * @param type $district 县
+     * @param type $pay_points 积分
+     * @param type $user_money 余额
+     * @param type $coupon_id  优惠券
+     * @param type $couponCode  优惠码
+     */
+    
+    function calculate_price($user_id,$order_goods,$shipping_price,$goods_fee)
+    {   
+        //$user['pay_points'] = M('integral')->where("user_id = $user_id")->getField('num');
+        if(empty($order_goods))
+            return array('status'=>-9,'msg'=>'商品列表不能为空','result'=>'');
+    
+        $goods_id_arr = get_arr_column($order_goods,'book_id');
+        foreach($order_goods as $key => $val)
+        {          
+            $goods[] = array('book_name'=>$val['book_name'],'book_id'=>$val['book_id'],'goods_number'=>$val['goods_number']); //验证库存
+            $anum        += $val['goods_number']; // 购买数量
+        }
+        //库存处理
+        foreach ($goods as $k =>$v){
+            $data=M('book_inventory')->where(array('book_id'=>$v['book_id']))->getField('inventory');   
+            if ($data < $v['goods_number']){
+                $enough[]=$v['book_name'];
+            }
+        }
+        if ($enough){
+           foreach ($enough as $v){
+               $html .=$v.' ';
+           }
+           return array('status'=>-1,'msg'=> $html.',库存不足','result'=>'');
+        }
+        
+        $goods_price=bcsub($goods_fee, $shipping_price,2);
+        //订单总价  应付金额  物流费  商品总价 节约金额 共多少件商品 积分  余额  优惠券
+        $result = array(
+            'order_amount'      => $goods_fee, // 应付金额
+            'shipping_price'    => $shipping_price, // 物流费
+            'goods_price'       => $goods_price, // 商品总价
+            'anum'              => $anum, // 商品总共数量
+            'order_goods'       => $order_goods, // 商品列表 多加几个字段原样返回
+        );
+        return $result; // 返回结果状态
+    }
+    
+    
+    
+    /**
+     * 获取用户可以使用的优惠券
+     * @param type $user_id  用户id
+     * @param type $coupon_id 优惠券id
+     * $mode 0  返回数组形式  1 直接返回result
+     */
+    function getCouponMoney($user_id,$coupon_id)
+    {
+        $couponlist = M('coupon_list')->alias('cl')
+            ->join('left join kts_coupon c on c.id = cl.cid')
+            ->where(array('cl.uid'=>$user_id,'cl.cid'=>$coupon_id,'cl.use_time'=>0,'c.use_end_time'=>array('gt',time())))           
+            ->find(); // 获取用户的优惠券
+        if(empty($couponlist)) {
+            return 0;
+            //return array('status'=>1,'msg'=>'','result'=>0);
+        }
+        $couponlist['money'] = $couponlist['money'] ? $couponlist['money'] : 0;
+        return $couponlist['money'];
+    }
+    
+    
+    
+    /**
+     * 订单操作日志
+     * 参数示例
+     * @param type $order_id  订单id
+     * @param type $action_note 操作备注
+     * @param type $status_desc 操作状态  提交订单, 付款成功, 取消, 等待收货, 完成
+     * @param type $user_id  用户id 默认为管理员
+     * @return boolean
+     */
+    function logOrder($order_id,$action_note,$status_desc,$user_id = 0)
+    {
+        $status_desc_arr = array('提交订单', '付款成功', '取消', '等待收货', '完成','退货');
+        if(!in_array($status_desc, $status_desc_arr))
+          return false;
+    
+        $order = M('order_info')->where("order_id = $order_id")->find();
+        $action_info = array(
+            'order_id'        =>$order_id,
+            'action_user'     =>$user_id,
+            'order_status'    =>$order['order_status'],
+            'shipping_status' =>$order['shipping_status'],
+            'pay_status'      =>$order['pay_status'],
+            'action_note'     => $action_note,
+            'status_desc'     =>$status_desc, //''
+            'log_time'        =>time(),
+        );
+        return M('order_action')->add($action_info);
+    }
+    
+    
+    
+    
+    
+    /**
+     * 支付完成修改订单
+     * $order_sn 订单号
+     * $pay_status 默认1 为已支付
+     */
+    function update_pay_status($order_sn,$pay_status = 2)
+    {
+            // 如果这笔订单已经处理过了
+            $count = M('order_info')->where("order_sn = '$order_sn' and pay_status = 0")->count();   // 看看有没已经处理过这笔订单  支付宝返回不重复处理操作
+            if($count == 0) return false;
+            // 找出对应的订单
+            $order = M('order_info')->where("order_sn = '$order_sn'")->find();
+            // 修改支付状态  已支付
+            $a=M('order_info')->where("order_sn = '$order_sn'")->save(array('pay_status'=>$pay_status,'pay_time'=>time()));
+            if ($a)
+                $code=1;
+            // 减少对应商品的库存
+            minus_stock($order['order_id']);
+            // 记录订单操作日志
+            $tmp=logOrder($order['order_id'],'订单付款成功','付款成功',$order['user_id']);
+            if ($tmp>0){
+                return $code;
+            }
+            
+    }
+    
+
+    // 减少对应商品的库存
+     function minus_stock($order_id){
+         $orderGoodsArr = M('order_goods')->where("order_id = ". $order_id)->select();
+         foreach($orderGoodsArr as $key => $val)
+         {   
+             M('book_inventory')->where("book_id = {$val['book_id']}")->setDec('inventory',$val['goods_number']);
+         }
+     }
+     
+     function account_log($user_id,$order_id,$used){
+         $where=array(
+             'user_id'=>$user_id,
+             'order_id'=>$order_id,
+             'order_sn'=>$oreder_sn 
+         );
+         $data=M("user_account_log")->where($where)->find();
+         if ($data){
+           return  M("user_account_log")->where($where)->save(array('user_money'=>$used)); 
+         }else {
+             $data4['user_id'] = $user_id;
+             $data4['user_money'] = $used;
+             $data4['pay_points'] = 0;
+             $data4['change_time'] = time();
+             $data4['desc'] = '下单消费';
+             $data4['order_sn'] = $oreder_sn;
+             $data4['order_id'] = $order_id;
+             return M("user_account_log")->add($data4);
+         }
+     }
+     
+     function money_log($user_id,$order_id,$used){ 
+         $userinfo=M('user')->find($user_id);
+         $order=M('order_info')->find($order_id);
+         $data1=array(
+             'user_id'=>$user_id,
+             'update_time'=>time(),
+             'title' =>'商品买入',
+             'amount'  =>$used,
+             'is_inc' =>0,
+         );
+         $data2=array(
+             'user_id'=>$order['payee'],
+             'update_time'=>time(),
+             'title' =>'商品卖出',
+             'description' =>'来自'.$userinfo['name'].'的付款',
+             'amount'  =>$used,
+             'payee' =>$user_id,
+             'is_inc' =>1,
+         );
+         if ($order['payee']!=0){            
+             $sell=M('user')->where(array('user_id'=>$order['payee']))->getField('name'); 
+             $data1['description']='给'.$sell.'的付款';
+             $data1['payee']=$order['payee'];
+             $data2['user_id']=$order['payee'];
+             $data2['payee']=$user_id;
+             $tmp=M('money')->where(array('user_id'=>$order['payee']))->setInc('num',$used);
+             if (!$tmp) M('money')->add(array('user_id'=>$order['payee'],'num'=>$used));
+             
+         }if($order['payee_shop']!=0){
+             $shop_user=M('shop')
+                 ->where(array('shop_id'=>$order['payee_shop']))
+                 ->field('user_id,shop_name')
+                 ->find();
+             $tmp=M('money')->where(array('user_id'=>$shop_user['user_id']))->setInc('num',$used);
+             if (!$tmp) M('money')->add(array('user_id'=>$shop_user['user_id'],'num'=>$used));
+             
+             $data1['description']='给'.$shop_user['shop_name'].'店铺的付款';
+             $data1['shop_id']=$order['payee_shop'];
+             $data2['user_id']=$shop_user['user_id'];
+             $data2['payee']=$user_id;
+             $data2['shop_id']=$order['payee_shop'];
+         } 
+         $a=M('money_xq')->add($data1);
+         $a=M('money_xq')->add($data2);
+        return  $a;  
+     }
+     
+     function integral_log($user_id,$title,$description,$amount,$is_inc=1,$add=1){
+         $Integral=M('user');
+         $Integral->startTrans();
+         $data=$Integral->where(array('user_id'=>$user_id))->find();
+         if ($add){
+             $result=$Integral->where(array('user_id'=>$user_id))->setInc('integral',$amount);
+         }else {
+             if ($data['integral'] < $amount) return array('status'=>-1,'msg'=>'你的可用积分为'.$data['integral']);
+             $result=$Integral->where(array('user_id'=>$user_id))->setDec('integral',$amount);
+         }
+         if ($result){
+             $arr=array(
+                 'user_id'=>$user_id,
+                 'update_time'=>time(),
+                 'amount'=>$amount,
+                 'title'=>$title,
+                 'before_change'=>$data['integral'],
+                 'after_change'=>($data['integral']+$amount),
+                 'description'=>$description,
+                 'is_inc'=>$is_inc,
+             );
+             $data=M('integral_xq')->add($arr);
+         }
+         if ($data){ $Integral->commit();return 1;}
+         else{$Integral->rollback();return 0;}
+     }
+      
+     
+     
+     
+     function get_skipping($order_id){
+         $where=array(
+             'order_id'=>$order_id,
+             'type'=>0,
+         );
+         //$user_goods=M('order_goods')->where($where)->field('')->select();
+         
+     }
+
+     //二维数组去重  
+    function assoc_unique($arr, $key) {
+        $tmp_arr = array();
+        foreach ($arr as $k => $v) {
+            if (in_array($v[$key], $tmp_arr)) {//搜索$v[$key]是否在$tmp_arr数组中存在，若存在返回true
+                unset($arr[$k]);
+            } else {
+                $tmp_arr[] = $v[$key];
+            }
+        }
+        sort($arr); //sort函数对数组进行排序
+        return $arr;
+    }
+
+    /**
+     * 友好时间显示
+     * @param $time
+     * @return bool|string
+     */
+    function friend_date($time)
+    {
+        if (!$time)
+            return false;
+        $fdate = '';
+        $d = time() - intval($time);
+        $ld = $time - mktime(0, 0, 0, 0, 0, date('Y')); //得出年
+        $md = $time - mktime(0, 0, 0, date('m'), 0, date('Y')); //得出月
+        $byd = $time - mktime(0, 0, 0, date('m'), date('d') - 2, date('Y')); //前天
+        $yd = $time - mktime(0, 0, 0, date('m'), date('d') - 1, date('Y')); //昨天
+        $dd = $time - mktime(0, 0, 0, date('m'), date('d'), date('Y')); //今天
+        $td = $time - mktime(0, 0, 0, date('m'), date('d') + 1, date('Y')); //明天
+        $atd = $time - mktime(0, 0, 0, date('m'), date('d') + 2, date('Y')); //后天
+        if ($d == 0) {
+            $fdate = '刚刚';
+        } else {
+            switch ($d) {
+                case $d < $atd:
+                    $fdate = date('Y年m月d日', $time);
+                    break;
+                case $d < $td:
+                    $fdate = '后天' . date('H:i', $time);
+                    break;
+                case $d < 0:
+                    $fdate = '明天' . date('H:i', $time);
+                    break;
+                case $d < 60:
+                    $fdate = $d . '秒前';
+                    break;
+                case $d < 3600:
+                    $fdate = floor($d / 60) . '分钟前';
+                    break;
+                case $d < $dd:
+                    $fdate = floor($d / 3600) . '小时前';
+                    break;
+                case $d < $yd:
+                    $fdate = '昨天' . date('H:i', $time);
+                    break;
+                case $d < $byd:
+                    $fdate = '前天' . date('H:i', $time);
+                    break;
+                case $d < $md:
+                    $fdate = date('m月d日 H:i', $time);
+                    break;
+                case $d < $ld:
+                    $fdate = date('m月d日', $time);
+                    break;
+                default:
+                    $fdate = date('Y年m月d日', $time);
+                    break;
+            }
+        }
+        return $fdate;
+    }
+
+     
+ ?>

@@ -1,0 +1,119 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="keywords" content="{$config['keywords']}" > 
+    <meta name="description" content="{$config['description']}" >
+    <title>个人中心-$config['title']</title>
+    <link href="__PUBLIC__/home/css/header.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<include file="./APP/Home/View/Common/header.html"/>
+<link href="__PUBLIC__/home/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/home/css/banner.css" rel="stylesheet" type="text/css" />
+<script  type="text/javascript" src="__PUBLIC__/home/js/jquery-1-1.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/Popt.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/cityJson.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/citySet.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/main.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/qiehua.js"></script>
+
+<div class="min">
+    <div class="my_box">
+        <div class="min1_box_bt">
+            <span>图书分类>  个人中心</span>
+        </div>
+        <div class="my_box_nr">
+            <include file="./APP/Home/View/Common/left.html"/>
+            <div class="min_box_fr">
+                <div class="my_fenlei">
+                    <div class="my_bt_fr"><span>收货地址</span></div>
+                    <div class="my_jifen_box">
+                        <ul class="dizhi_lu">
+                            <li class="dizhi_li"><a href="JavaScript:;">管理收货地址</a></li>
+                            <li><a href="JavaScript:;">添加收货地址</a></li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+
+                    <div class="receipt_address">
+                        <div class="receipt_address_box">
+                            <table>
+                                <tr>
+                                    <th>收件人</th>
+                                    <th class="address_dq">所在地区</th>
+                                    <th class="address_xx">详细地址</th>
+                                    <th>邮编</th>
+                                    <th>手机</th>
+                                    <th>操作</th>
+                                    <th></th>
+                                </tr>
+                              <volist name="address" id="a" empty="$empty">
+                                <tr>
+                                    <td>{$a.consignee}</td>
+                                    <td>{$a.province} {$a.city} {$a.area} {$a.street}</td>
+                                    <td>{$a.province}{$a.city}{$a.area}{$a.street}{$a.address}</td>
+                                    <td>{$a.postcode}</td>
+                                    <td>{$a.mobile}</td>
+                                    <td><a>修改</a><a href="{:U('Home/User/del_address',array('id'=>$a['address_id']))}">/删除</a></td>
+                                    <if condition="$a.is_default eq 0">
+                                      <td><a class="swmr_address" href="{:U('Home/User/set_default',array('id'=>$a['address_id']))}">设为默认</a></td>
+                                    <else/>
+                                      <td class="mr_td"><a class="mor_address">默认地址</a></td>
+                                    </if>
+                                    
+                                </tr>
+                              </volist>
+                            </table>
+                        </div>
+                        <div class="receipt_address_box receipt_address_box1">
+                            <ul class="address_ul">
+                                <li>
+                                    <label>收货人</label><input type="text" class="address_input" />
+                                </li>
+                                <li>
+                                    <label>联系号码</label><input type="text" class="address_input" />
+                                </li>
+                                <li>
+                                    <label>邮编</label><input type="text" class="youbian_input" />
+                                </li>
+                                <li>
+                                    <label>所在地区</label>
+                                    <div class="address_sj">
+                                        <input type="text" id="city"  class="address_input" />
+                                    </div>
+                                </li>
+                                <li>
+                                    <label>所在街道</label><input type="text" class="address_input" />
+                                </li>
+                                <li>
+                                    <label>详细地址</label><textarea class="xiangxi_input"></textarea>
+                                </li>
+                                <li class="mr_che">
+                                    <input class="mr_checkbox" type="checkbox"/><span>设为默认地址</span>
+                                </li>
+                                <li>
+                                    <input type="button"  class="bc_address" value="保存地址" />
+                                    <input type="button"  class="sc_address" value="删除地址" />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#city").click(function (e) {
+        SelCity(this,e);
+        console.log("inout",$(this).val(),new Date())
+    });
+</script>
+<include file="./APP/Home/View/Index/footer.html"/>
+</body>
+</html>

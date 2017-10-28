@@ -1,0 +1,82 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+{% block javascript %} {{ parent() }}
+<script type="text/javascript" src="{{ asset('bundles/msk/public/js/jquery-1.7.1.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+$("#hostCC").change(function(){
+
+	var typ  =$(this).val();
+
+	if(typ == 0){
+$("#minsu_div").show();
+
+$("#tra_div").hide();
+
+		}else{
+
+			$("#minsu_div").hide();
+
+			$("#tra_div").show();
+			}
+});
+	
+})
+</script>
+{% endblock %}
+
+{% block content%}<section class="alert">
+{# 		  <button type="button" val=''onclick="javascript:history.go(-1)" class="green stateBtn">返  回</button>#}
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>添加热门</h1>
+			</hgroup>
+		</header>
+	<div class="content">
+	<form method="post" action="{{ path('_sav_rec_info_') }}">
+			<div class="field-wrap">
+			<span class="roomServerTitleSpan">类型&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>
+				<select  name="rec_type" id="hostCC" class='form-select hotCityS'>
+
+		
+<option value="0">民宿</option>
+	<option value="1">景点</option>
+
+	
+		</select>	
+		<div id="minsu_div">
+			<br><br>
+				<span class="roomServerTitleSpan">民宿&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>
+		<select class='form-select hotCityS' name="rec_id">
+		{% for v in v %}
+		<option value="{{ v.id }}">#{{ v.id }} - {{ v.homestay_name }} - {{ v.nickname }}</option>
+		{% endfor %}
+		</select>
+	</div>
+	
+	<div id="tra_div" style="display:none;">
+	
+		<br><br>
+				<span class="roomServerTitleSpan">景点&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>
+		<select class='form-select hotCityS' name="tra_rec_id">
+		{% for v in tra %}
+		<option value="{{ v.id }}">#{{ v.id }} - {{ v.travel_title }} - {{ v.nickname }}</option>
+		{% endfor %}
+		</select>
+	</div>
+			</div>
+			<br><br>
+			<div class="field-wrap">
+				<span class="roomServerTitleSpan">排  序&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>&nbsp;<input  name='Sort' type="text"  style="width: 20%;" value="0"  maxlength="10"/>
+		</div>
+		<div class="roomSerBtnDiv"><button  class="green">保  存</button> <button type="button" onclick="javascript:history.go(-1)" class="red">取  消</button></div>	
+	</form>
+	</div>
+	</section>
+</section>
+{% endblock%}
+

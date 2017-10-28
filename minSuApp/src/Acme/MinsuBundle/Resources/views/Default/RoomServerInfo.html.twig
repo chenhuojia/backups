@@ -1,0 +1,37 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+})
+</script>
+{% endblock %}
+
+{% block content%}<section class="alert">
+{# 		  <button type="button" val=''onclick="javascript:history.go(-1)" class="green stateBtn">返  回</button>#}
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>新增房间设施</h1>
+			</hgroup>
+		</header>
+	<div class="content">
+	<form method="post" action="{% if v!='' %}{{ path('EditSaveRSer_') }}{% else %}{{ path("SaveRoomServer_") }}{% endif %}">
+			<div class="field-wrap">
+				<span class="roomServerTitleSpan">房间设备名：</span><input type="text"  value="{% if v != ''%}{{ v.server_name }}{% endif %}" name='serName' style="width: 25%;" placeholder="请输入设备名称" maxlength="10" required oninvalid="setCustomValidity('设备名不能為空')" oninput="setCustomValidity('')"/>
+			</div>
+				<div class="field-wrap">
+				<span class="roomServerTitleSpan">排  序&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span><input  name='serSort' type="text"  style="width: 25%;" value="{% if v != ''%}{{ v.sort }}{%else%}0{% endif %}"  maxlength="10"/>
+			</div>
+		<div class="roomSerBtnDiv"><button type="submit" class="green">保  存</button> <button type="button" onclick="javascript:history.go(-1)" class="red">取  消</button></div>	
+	{% if v!='' %}<input name='serId' type='hidden' value="{{ v.id }}">{% endif %}
+	</form>
+	</div>
+	</section>
+</section>
+
+{% endblock%}

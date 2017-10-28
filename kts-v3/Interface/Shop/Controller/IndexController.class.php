@@ -1,0 +1,132 @@
+<?php
+namespace Shop\Controller;
+use Think\Controller;
+class IndexController extends Controller{
+    
+    
+     //店家详情
+    public function shopDetail(){
+        $shop_id=I('get.shop_id',0);
+        $user_id = session('user_id')?session('user_id'):0;//判断用户是否登录
+        $data=M('shop')->field('shop_id,user_id,username,shop_name,comment_num,shop_addr')->where(array('shop_id'=>$shop_id))->find();
+        if ($data){
+           M('shop_visit')->add(array('user_id'=>$user_id,'shop_id'=>$shop_id,'visit_time'=>$_SERVER['REQUEST_TIME']));
+           M('shop')->where(array('shop_id'=>$shop_id))->setField('visit_num');
+           $data['img'] = \User\Util\Util:: getShopLogoUrl($shop_id,C('SHOP_PATH'),C('WEB_PATH'));
+           $data['is_collect'] = 0;
+           $is_collect = M('collect')->where(array('user_id' =>$user_id,'shop_id'=>$data['shop_id'],'type'=>3))->find();
+           if($is_collect) $data['is_collect'] = 1;
+           $data['grade']=round(M('book_comment')->where(array('shop_id'=>$ret['shop_id'],'fid'=>0,'is_show'=>1))->avg('grade'));          //评分
+           $data['good']=99.3;        //好评率
+           $this->myApiPrint(200,'success',$data);
+        }else if(empty($data)){ $this->myApiPrint(202,'暂无数据');}
+        else{ $this->myApiPrint(300,'系统繁忙，请稍后再试');}
+    }
+
+    /**
+     * 某一商家的所有书
+     */
+    public function searchShopBook()
+    {
+          $search=I('post.search','');
+          $skip = I('post.skip',0);
+          $take = I('post.take',10);
+          $rule = I('post.rule','');
+          $shop_id=I('post.shop_id',1);
+          $cg_id=I('post.cg_id',0);
+          $sql="b.isdelete=0";
+          if($search!="") $sql=$sql." and b.name like "."'%$search%'";
+          if($cg_id!="" && $cg_id!=0) $sql=$sql." and b.category_path like "."'$cg_id|%'"." or b.category_path like "."'%|$cg_id'"." or b.category_path like "."'%|$cg_id|%'"." or b.category_path = $cg_id";
+          if($rule[0]==1) $order=$order."b.price desc, ";
+          if($rule[0]==2) $order=$order."b.price asc, ";
+          if($rule[1]==1) $order=$order."g.comment_num desc, ";
+          if($rule[1]==2) $order=$order."g.comment_num asc, ";
+          if($rule[2]==1) $order=$order."g.sell_num desc, ";
+          if($rule[2]==2) $order=$order."g.sell_num asc, ";
+          $order="b.book_id desc";
+          if($search!="") $sql=$sql." and b.name like "."'%$search%'";
+          $sql=$sql." and b.shop_id=$shop_id and b.type=1";
+          $data=M('book')
+            ->alias('b')
+            ->field('b.book_id,b.type,b.name,b.author,b.cover_img,b.price,b.shop_id,p.introduce,p.press,p.publish_time,p.publish_price')
+            ->join('LEFT JOIN kts_book_add as g ON g.book_number = b.book_number')
+            ->join('LEFT JOIN kts_book_attr as p ON p.book_id = b.book_id')
+            ->where($sql)
+            ->order($order)
+            ->group('b.book_id')
+            ->limit($skip,$take)
+            ->select();
+          foreach ($data as $k => $v) {
+              $data[$k]['cover_img'] = C("QINIU_IMG_PATH").$v['cover_img'];
+              $data[$k]['grade']=round(M('book_comment')->where(array('book_id'=>$v['book_id']))->avg('grade'));
+              $data[$k]['comment']=round(M('book_comment')->where(array('book_id'=>$v['book_id']))->count('comment_id'));
+          }
+         if ($data) $this->myApiPrint(200,'success',$data);
+         else if(empty($data)) $this->myApiPrint(202,'暂无数据');
+         else  $this->myApiPrint(300,'系统繁忙，请稍后再试',300);
+    }
+
+    
+    /**
+     * 审核店铺
+     * **/
+    public function checkShop(){
+        $id=I('post.id');
+        $type=I('post.type',1);
+        $shopApply=M('shop_apply')->find($id);
+        if ($shopApply){
+            $user=M('user')->find($shopApply['user_id']);
+            $data=array(
+                 'user_id'=>$shopApply['user_id'],
+                 'username'=>$user['name'],
+                 'phone'=>$shopApply['phone'],
+                 'shop_name'=>$shopApply['shop_name'],
+                 'shop_addr'=>$shopApply['shop_address'],
+                 'create_time'=>$_SERVER['REQUEST_TIME'],
+                 'apply_id'=>$shopApply['id'],
+                 'shop_logo'=>C('shop_logo_pic'),   
+            );
+           if ($type==1){ 
+               $shop=M('shop');            
+               $v=$shop->add($data);
+               M('shop_apply')->where(array('id'=>$id))->setField('is_checked',1);
+           }
+           $this->myApiPrint(200,'success',$v);
+        }
+    }
+
+    public function nearByShop()
+    {   
+        $latitude =I('post.latitude','23.115262');
+        $longitude = I('post.longitude','113.410505');
+        $skip = I('post.skip',0);
+        $take = I('post.take',10);
+        $squares=self::getnearBy($longitude,$latitude);
+        $data=M('shop')->alias('b')
+            ->field('b.shop_id,b.user_id,b.shop_addr,b.latitude,b.longitude')
+            ->where(array('latitude'=>$latitude,'longitude'=>$longitude))
+            ->limit($skip,$take)
+            ->order('shop_id')
+            ->group('b.shop_id')
+            ->select();
+        if($data)  $this->myApiPrint(200,'success',$data);
+        $this->myApiPrint(202,'暂无数据');
+    }
+
+     public function getnearBy($lng,$lat){
+         $distance = 1;//范围（单位千米）
+         $earth_radius = 6371;//地球半径，平均半径为6371km
+         $dlng = 2 * asin(sin($distance / (2 * $earth_radius)) / cos(deg2rad($lat)));
+         $dlng = rad2deg($dlng);
+         $dlat = $distance/$earth_radius;
+         $dlat = rad2deg($dlat);
+         $squares = array('left-top'=>array('lat'=>$lat + $dlat,'lng'=>$lng-$dlng),
+         'right-top'=>array('lat'=>$lat + $dlat, 'lng'=>$lng + $dlng),
+         'left-bottom'=>array('lat'=>$lat - $dlat, 'lng'=>$lng - $dlng),
+         'right-bottom'=>array('lat'=>$lat - $dlat, 'lng'=>$lng + $dlng)
+         );
+         return $squares;
+    }
+    
+}
+

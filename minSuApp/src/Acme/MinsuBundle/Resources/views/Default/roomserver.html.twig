@@ -1,0 +1,67 @@
+{% extends 'AcmeMinsuBundle::mainLayout.html.twig' %}
+
+{% block javascript %} {{ parent() }}
+<script src="{{ asset('bundles/msk/public/js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$(".delRoomSer").click(function(){
+		var id=$(this).attr('val-id');
+		$.ajax({
+			type:"POST",
+			data:"&RoomSerId="+id,
+			dataType: "json", 
+			url:"{{ path('deleteRoomServer_') }}",
+			success:function(msg){
+				if (msg === '1'){
+					alert("成功删除！");
+					}
+				  location.reload();
+			}
+		});
+	});
+
+	
+})
+</script>
+{% endblock %}
+
+{% block content%}<section class="alert">
+		  <button type="button"  onclick="location='{{ path('AddRoomServer_') }}'" class="green stateBtn">新  增</button>
+</section>
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon homstay-detail"><span>&#128196;</span></span>
+			<hgroup>
+				<h1>房间设施</h1>
+			</hgroup>
+		</header>
+		<div class="content">
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+{# 						<th>编号</th>#}
+						<th>排序</th>
+						<th>设施名称</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+					<tbody>
+					{% for v in rSerList %}
+						<tr>
+						 	<td style="padding-left: 50px;">{{ v.sort }}</td>
+							<td>{{ v.server_name }}</td>
+{# 							<td></td>#}
+							<td><button type='button'  val-id="{{ v.id }}"  class="green" onclick="location='{{ path('AddRoomServer_',{Serid:v.id}) }}'" >编辑</button><button type='button' class="red delRoomSer"  val-id="{{ v.id }}" >删除</button></td>
+						</tr>
+					{% endfor %}
+			
+
+					</tbody>
+				</table>
+		</div>
+	</section>
+</section>
+
+{% endblock%}
